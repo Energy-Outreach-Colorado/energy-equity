@@ -1,0 +1,127 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "energy-equity"
+version = "0.1.0"
+description = "Energy burden and utility affordability analysis from ACS PUMS microdata for any US service territory."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eric Nussbaumer", email = "ebaumer@gmail.com" },
+]
+keywords = [
+    "energy-equity",
+    "energy-burden",
+    "acs",
+    "pums",
+    "utility-affordability",
+    "ami",
+    "smi",
+    "liheap",
+    "pipp",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "pyyaml>=6.0",
+    "pydantic>=2.5",
+    "typer>=0.12",
+    "requests>=2.31",
+    "platformdirs>=4.0",
+    "geopandas>=0.14",
+    "shapely>=2.0",
+    "pyproj>=3.6",
+]
+
+[project.optional-dependencies]
+viz = [
+    "plotly>=5.18",
+    "kaleido>=0.2.1",
+]
+dev = [
+    "pytest>=7.4",
+    "pytest-regressions>=2.5",
+    "responses>=0.24",
+    "ruff>=0.4",
+    "mypy>=1.8",
+    "pre-commit>=3.6",
+    "types-PyYAML",
+    "types-requests",
+    "pandas-stubs",
+]
+
+[project.urls]
+Homepage = "https://github.com/ebaumer/energy-equity"
+Repository = "https://github.com/ebaumer/energy-equity"
+Issues = "https://github.com/ebaumer/energy-equity/issues"
+
+[project.scripts]
+ee = "energy_equity.cli:app"
+energy-equity = "energy_equity.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/energy_equity"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/energy_equity/data" = "energy_equity/data"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "network: tests that hit the live network; skipped by default",
+    "integration: end-to-end pipeline tests on fixture data",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long; handled by formatter
+    "B017",  # pytest.raises(Exception) is fine for "any validation error" assertions
+    "SIM105", # try/except/pass and contextlib.suppress are equivalent; allow both
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B011", "F841"]   # tests intentionally assign results without asserting
+"src/energy_equity/cli.py" = ["B008"]  # typer uses default-arg objects
+
+[tool.mypy]
+python_version = "3.10"
+strict_optional = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["geopandas.*", "shapely.*", "plotly.*"]
+ignore_missing_imports = true

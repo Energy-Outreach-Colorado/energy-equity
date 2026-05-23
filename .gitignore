@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# uv (per-user state; the lockfile is committed)
+.uv-cache/
+
+# Tests / coverage
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+htmlcov/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Type checkers / linters
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# IDEs / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Environment variables / secrets
+.env
+.env.local
+*.pem
+
+# Local data / outputs
+out/
+cache/
+notebooks/.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# Build artifacts of geo tooling
+*.gpkg-journal
+*.shp.bak
+
+# Jupyter (notebooks are kept under examples/ if any; ignore runtime artifacts only)
+.ipynb_checkpoints
+
+# Logs
+*.log
+
+# Claude Code (https://claude.ai/code) per-user artifacts
+# Project-level settings and any local skills/agents live under .claude/.
+# We do not ship those — each contributor has their own.
+.claude/
+CLAUDE.local.md
