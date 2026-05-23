@@ -1,0 +1,60 @@
+# Example config: Pueblo County, Colorado (PUMS 2024, HUD FY2025, TIGER 2024).
+#
+# Update the absolute paths below to match your local data layout. The shapefile
+# is a polygon for the analysis service territory (here, Pueblo County).
+#
+# Run with: ee run all --config examples/pueblo_county_2024/config.yaml
+
+project:
+  name: pueblo_county_2024
+  output_dir: ./out/pueblo_county_2024
+  cache_dir: null  # platformdirs default
+
+geography:
+  state_fips: "08"
+  state_abbr: CO
+  service_area:
+    shapefile: /data/eoc/geospatial/pueblo_county_08101_shapefile/pueblo_county_08101.shp
+
+vintages:
+  acs_year: 2024
+  pums_year: 2024
+  hud_ami_fy: 2025
+  tiger_year: 2024
+
+data_sources:
+  hud_ami_csv: /data/eoc/output/pums/pums_2024_1yr/income-limits-80-ami.csv
+  pums_housing_zip: /data/eoc/output/pums/pums_2024_1yr/csv_hco.zip
+  pums_person_zip: /data/eoc/output/pums/pums_2024_1yr/csv_pco.zip
+  tiger_puma_zip: /data/eoc/output/pums/pums_2024_1yr/tl_2024_08_puma20.zip
+  tiger_tract_zip: /data/eoc/output/pums/pums_2024_1yr/tl_2024_08_tract.zip
+
+thresholds:
+  ami_method: blended_threshold
+  smi_source: liheap_fy2025
+  energy_burden_threshold: 0.06
+  high_energy_burden_threshold: 0.10
+  rent_burden_threshold: 0.30
+  severe_rent_burden_threshold: 0.50
+  missing_cost_rule: zero
+  nonpos_income_rule: exclude
+
+weights:
+  compute_moe: true
+  replicate_count: 80
+
+pipelines:
+  puma_table:
+    export_replicates: true
+  service_allocation:
+    build_urban_rural_split: true
+  eligibility_analysis:
+    program_name: PIPP
+    current_threshold: 0.06
+    proposed_threshold: 0.025
+    demographic_dimensions: [race, ethnicity, age, tenure, language, hh_type]
+  fixed_charge:
+    monthly_increase: 5.47
+    apply_only_if_gas_positive: true
+    scenario_sweep: [0, 1, 2, 3, 4, 5, 5.47, 7.5, 10, 15]
+    delta_thresholds_pp: [0.25, 0.50, 1.00]
