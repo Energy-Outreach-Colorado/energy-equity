@@ -17,15 +17,15 @@ Writes:
 
 from __future__ import annotations
 
-import os
 from collections.abc import Sequence
 from pathlib import Path
 
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+from loguru import logger
 
-from ..census.api import CensusClient, fetch_with_year_fallback
+from ..census.api import resolve_tract_households
 from ..config import Config
 from ..geo.allocation import (
     allocate_puma_counts_to_service,
@@ -61,39 +61,8 @@ DEFAULT_ALLOCATE_METRICS: tuple[str, ...] = (
 
 def _write(df: pd.DataFrame, path: Path) -> Path:
     df.to_csv(path, index=False)
-    print(f"[OUT] {path.resolve()}")
+    logger.info("wrote {}", path.resolve())
     return path
-
-
-def _resolve_tract_households(cfg: Config, cache_dir: Path) -> pd.DataFrame:
-    """Load or fetch ACS tract-level household counts (B11001_001E).
-
-    Order of preference: local CSV cache -> Census API (with year fallback). The cache
-    is keyed at `cache_dir / acs_tract_households_{state_fips}.csv` so reruns are cheap.
-    """
-    local = cache_dir / f"acs_tract_households_{cfg.geography.state_fips}.csv"
-    if local.exists():
-        df = pd.read_csv(local, dtype={"tract_geoid": "string"})
-        df["households"] = pd.to_numeric(df["households"], errors="coerce").fillna(0.0)
-        return df
-
-    api_key = os.environ.get(cfg.census_api.key_env)
-    client = CensusClient(
-        api_key=api_key,
-        cache=__import__("energy_equity.census.cache", fromlist=["CensusCache"]).CensusCache(
-            cache_dir
-        ),
-        rate_limit_sec=cfg.census_api.rate_limit_sec,
-    )
-    df, year_used = fetch_with_year_fallback(
-        lambda y: client.fetch_tract_households(cfg.geography.state_fips, y, cfg.vintages.acs_span),
-        start_year=cfg.vintages.acs_year,
-        fallback_years=3,
-    )
-    df = df.rename(columns={"geoid": "tract_geoid"})
-    df[["tract_geoid", "households"]].to_csv(local, index=False)
-    print(f"[census] Cached ACS {year_used} tract households -> {local}")
-    return df[["tract_geoid", "households"]]
 
 
 def _load_puma_overall(out_dir: Path) -> tuple[pd.DataFrame, dict[str, np.ndarray]]:
@@ -142,7 +111,7 @@ def run(
             replicates = loaded_reps
 
     if tract_households is None:
-        tract_households = _resolve_tract_households(cfg, cache_dir)
+        tract_households = resolve_tract_households(cfg, cache_dir)
 
     tract_zip = cfg.data_sources.tiger_tract_zip
     puma_zip = cfg.data_sources.tiger_puma_zip
@@ -163,7 +132,7 @@ def run(
             uac_zip = ensure_urban_areas_zip(cache_dir, cfg.vintages.tiger_year)
             urban_areas = read_tiger_zip(uac_zip)
         except Exception as exc:
-            print(f"[geo] Skipping urban/rural split (could not load UAC20): {exc}")
+            logger.warning("skipping urban/rural split (could not load UAC20): {}", exc)
 
     puma_shares = compute_household_weighted_puma_shares(
         tracts_with_puma, tract_households, service_union, urban_areas

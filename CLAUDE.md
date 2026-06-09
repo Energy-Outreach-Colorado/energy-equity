@@ -169,6 +169,26 @@ inside config values, not source.
   per-request JSON caches under `census/`. Never default to a project-relative `./cache/`
   — that pollutes user repos.
 
+### Logging
+
+The package uses **loguru**, never `print()` (ruff `T20` enforces this). Conventions:
+
+- In any module that needs to emit a diagnostic: `from loguru import logger`, then
+  `logger.info("wrote {}", path)` / `logger.debug(...)` / `logger.warning(...)`. Use
+  loguru's `{}` brace style with lazy args, not f-strings, so formatting is skipped when
+  the level is suppressed. Don't add `[OUT]`/`[geo]`-style prefixes — loguru already
+  stamps the level and module name.
+- Level mapping in use: file-written / cache-written → `info`; path resolution detail →
+  `debug`; API year-fallback, unmatched tracts, skipped urban split → `warning`.
+- **Silent by default as a library**: `__init__.py` calls `logger.disable("energy_equity")`,
+  so importing the package emits nothing. `_logging.configure_logging(level)` calls
+  `logger.enable("energy_equity")` + adds a stderr sink; the CLI root callback invokes it.
+  A library consumer who wants output calls `energy_equity.configure_logging()`.
+- CLI verbosity: the root callback maps `--verbose/-v` → DEBUG, `--quiet/-q` → WARNING,
+  default INFO. **`--version` is `-V`** (not `-v`, which is now verbose). Genuine
+  user-facing CLI output (version string, config-validation result, cache info) stays as
+  `typer.echo()` to stdout — only diagnostics go through loguru to stderr.
+
 ### What the `build_table` function does
 
 `tables.core.build_table(microdata, group_cols, *, count_metrics, ratio_metrics, ...)`
@@ -232,6 +252,7 @@ Runtime:
 - `pandas`, `numpy` for data manipulation
 - `pyyaml` for config loading; `pydantic ≥ 2.5` for validation
 - `typer` for the CLI
+- `loguru` for logging (see the Logging section)
 - `requests` + `platformdirs` for HTTP + cache resolution
 - `geopandas`, `shapely`, `pyproj` for geospatial work — these are non-trivial to install
   on some platforms; uv resolves the binary wheels correctly via the lockfile
@@ -281,3 +302,6 @@ tests are skipped (no `/data/eoc/...` in CI).
   the parity tests were verified against.
 - Don't reintroduce raw DataFrames into pipeline signatures where `HouseholdMicrodata`
   fits — the dataclass is the contract.
+- Don't use `print()` in library or pipeline code — use loguru's `logger` (ruff `T20`
+  enforces this). Don't call `configure_logging()` / `logger.enable(...)` from inside
+  library code either; only the CLI entry point (or an explicit consumer) configures sinks.

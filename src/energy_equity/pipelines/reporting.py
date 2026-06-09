@@ -19,6 +19,7 @@ from pathlib import Path
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 from ..census.api import CensusClient
 from ..census.cache import CensusCache
@@ -38,7 +39,7 @@ DEFAULT_CUTOFFS: tuple[float, ...] = (15_000, 25_000, 50_000, 75_000, 100_000)
 
 def _write(df: pd.DataFrame, path: Path) -> Path:
     df.to_csv(path, index=False)
-    print(f"[OUT] {path.resolve()}")
+    logger.info("wrote {}", path.resolve())
     return path
 
 

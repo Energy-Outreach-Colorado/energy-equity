@@ -11,9 +11,26 @@ from energy_equity.thresholds.ami import (
     attach_ami_blended_threshold,
     attach_ami_expected_probability,
     build_ami80_by_puma,
+    build_county_name_to_fips3,
     compute_puma_county_household_weights,
     load_county_ami_limits_long_from_csv,
 )
+
+
+def test_build_county_name_to_fips3_parses_census_name() -> None:
+    counties = pd.DataFrame(
+        {
+            "name": [
+                "Pueblo County, Colorado",
+                "El Paso County, Colorado",
+                "Denver County, Colorado",
+            ],
+            "county_fips": ["101", "041", "031"],
+        }
+    )
+    out = build_county_name_to_fips3(counties)
+    assert out == {"pueblo": "101", "el paso": "041", "denver": "031"}
+
 
 COUNTY_NAME_TO_FIPS3 = {
     "pueblo": "101",

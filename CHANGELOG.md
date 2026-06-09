@@ -9,12 +9,32 @@ All notable changes to this project will be documented here. Format follows
 ### Added
 - `uv.lock` committed for reproducible builds (run `uv sync` to install).
 - `.python-version` pins development Python to 3.12.
+- Structured logging via **loguru** (new runtime dependency). The package is silent
+  when imported as a library (`logger.disable("energy_equity")` in `__init__`); call
+  `energy_equity.configure_logging(level)` to opt in. Diagnostics now go to stderr.
+- CLI verbosity flags: `--verbose/-v` (DEBUG) and `--quiet/-q` (WARNING), default INFO.
+- ruff `T20` (flake8-print) lint rule to prevent `print()` from creeping back in.
+- AMI bridge is now auto-built from config on the CLI path. `prepare_household_microdata`
+  builds the county→PUMA 80% AMI table via `pums.ami_bridge.build_ami80_bridge(cfg)` when
+  no `ami80_by_puma` is supplied and `ami_method="blended_threshold"`, caching it to
+  `{cache_dir}/ami80_by_puma_{state}_fy{fy}.csv`. `ee run puma-table` / `run all` now
+  produce correct `<=80% AMI` numbers end to end.
+- Shared `census.api.resolve_tract_households(cfg, cache_dir)` (used by both the AMI
+  bridge and the service-allocation pipeline) and `thresholds.ami.build_county_name_to_fips3`.
+
+### Fixed
+- `tables.metrics` no longer crashes (`AttributeError: 'int' object has no attribute
+  'astype'`) when the `ami_weight`/`smi_weight` columns are absent; the `hh_ami_valid`
+  and `hh_smi_valid` metrics use a new `_valid_col` helper that returns an all-zeros mask
+  for a missing column. This was the root cause of the `ee run puma-table` crash.
 
 ### Changed
 - CI now uses `astral-sh/setup-uv@v3` and `uv sync --all-extras` (≈10x faster
   than the previous pip-based job).
 - README quickstart updated to lead with `uv` commands (pip path kept as a
   fallback).
+- **Breaking (CLI):** `--version` is now `-V` (was `-v`); `-v` is `--verbose`.
+- All package diagnostics moved from `print()` (stdout) to loguru (stderr).
 
 ## [0.1.0] - 2026-05-22
 

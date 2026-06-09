@@ -237,6 +237,13 @@ def prepare_household_microdata(
         nonpos_income_rule=cfg.thresholds.nonpos_income_rule,
     )
 
+    if ami80_by_puma is None and cfg.thresholds.ami_method == "blended_threshold":
+        # Auto-build the county->PUMA AMI bridge from cfg when a prebuilt table wasn't
+        # supplied. Tests/notebooks pass `ami80_by_puma` explicitly and skip this (no network).
+        from .ami_bridge import build_ami80_bridge
+
+        ami80_by_puma = build_ami80_bridge(cfg)
+
     if ami80_by_puma is not None:
         if cfg.thresholds.ami_method == "blended_threshold":
             df = attach_ami_blended_threshold(df, ami80_by_puma)
