@@ -25,6 +25,7 @@ from pathlib import Path
 import typer
 
 from . import __version__
+from ._logging import configure_logging
 from .config import Config
 from .paths import default_cache_dir, resolve_cache_dir
 
@@ -45,8 +46,13 @@ app.add_typer(config_app, name="config")
 @app.callback(invoke_without_command=True)
 def root(
     ctx: typer.Context,
-    version: bool = typer.Option(False, "--version", "-v", help="Print version and exit."),
+    version: bool = typer.Option(False, "--version", "-V", help="Print version and exit."),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose (DEBUG) logging."),
+    quiet: bool = typer.Option(False, "--quiet", "-q", help="Quiet (WARNING and above only)."),
 ) -> None:
+    # Runs before every subcommand, so this configures logging for the whole invocation.
+    level = "DEBUG" if verbose else "WARNING" if quiet else "INFO"
+    configure_logging(level)
     if version:
         typer.echo(f"energy-equity {__version__}")
         raise typer.Exit()

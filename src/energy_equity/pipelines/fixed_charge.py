@@ -17,6 +17,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pandas as pd
+from loguru import logger
 
 from ..config import Config
 from ..paths import ensure_dir
@@ -32,7 +33,7 @@ from ..tables.summaries import attach_service_weights_and_eligibility_flags
 
 def _write(df: pd.DataFrame, path: Path) -> Path:
     df.to_csv(path, index=False)
-    print(f"[OUT] {path.resolve()}")
+    logger.info("wrote {}", path.resolve())
     return path
 
 

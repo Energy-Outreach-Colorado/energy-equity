@@ -14,6 +14,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 from ..config import Config
 from ..paths import ensure_dir, resolve_cache_dir
@@ -35,7 +36,7 @@ DEMOGRAPHIC_DIMENSIONS: tuple[tuple[str, str], ...] = (
 
 def _write(df: pd.DataFrame, path: Path) -> Path:
     df.to_csv(path, index=False)
-    print(f"[OUT] {path.resolve()}")
+    logger.info("wrote {}", path.resolve())
     return path
 
 
@@ -158,5 +159,5 @@ def _write_replicates(
         frames.append(pd.DataFrame(mat, columns=cols))
     out = pd.concat(frames, axis=1)
     out.to_csv(path, index=False, compression="gzip")
-    print(f"[OUT] {path.resolve()}")
+    logger.info("wrote {}", path.resolve())
     return path

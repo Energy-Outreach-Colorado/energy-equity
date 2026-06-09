@@ -42,6 +42,20 @@ def _normalize_county_name(name: str) -> str:
     return text
 
 
+def build_county_name_to_fips3(counties: pd.DataFrame) -> dict[str, str]:
+    """Map normalized county name -> 3-digit FIPS from a `CensusClient.fetch_counties` frame.
+
+    The Census `name` column looks like "Pueblo County, Colorado"; we take the part before
+    the first comma and normalize it so it matches the `County` values in a HUD AMI CSV
+    (e.g. "Pueblo"). Pass the result as `county_name_to_fips3` to
+    `load_county_ami_limits_long_from_csv`.
+    """
+    return {
+        _normalize_county_name(str(name).split(",")[0]): fips3
+        for name, fips3 in zip(counties["name"], counties["county_fips"], strict=False)
+    }
+
+
 def load_county_ami_limits_long_from_csv(
     path: str | Path,
     *,

@@ -18,30 +18,25 @@ package builds:
 4. **Fixed-charge / rate-increase impact scenarios**: how many households are newly
    energy-burdened at 6% and 10% under a proposed monthly bill increase, with demographic
    incidence and a sensitivity sweep.
-5. **Persuasive reporting metrics**: service vs statewide income distribution (ACS B19001),
+5. **Reporting metrics**: service vs statewide income distribution (ACS B19001),
    regressivity curves, double-burden (energy + rent) intersections, choropleth maps.
 
 ## Status
 
 Pre-release. v0.1 
 
+## Authors
+- [@e-baumer](https://github.com/e-baumer)
+- [@tfpgh](https://github.com/tfpgh)
+
 ## Install
 
-Recommended (with [uv](https://docs.astral.sh/uv/), which is dramatically faster and
-gives you a reproducible lockfile):
+Recommended (with [uv](https://docs.astral.sh/uv/)
 
 ```sh
 uv sync                                   # core deps
 uv sync --extra viz                       # adds Plotly + Kaleido for figures
 uv sync --all-extras                      # everything + dev tools
-```
-
-Or with plain pip:
-
-```sh
-pip install energy-equity                 # core
-pip install "energy-equity[viz]"
-pip install "energy-equity[dev]"
 ```
 
 Requires Python 3.10+. The committed `uv.lock` pins exact versions used in
@@ -59,6 +54,28 @@ uv run ee run all --config config.yaml
 
 Outputs land under `project.output_dir` from the config.
 
+## Logging
+
+The CLI logs progress to **stderr** at `INFO` by default (file-written confirmations,
+key steps). Control verbosity with global flags placed before the subcommand:
+
+```sh
+uv run ee -v run all --config config.yaml   # DEBUG: also shows path resolution
+uv run ee -q run all --config config.yaml   # WARNING and above only
+uv run ee -V                                 # print version (note: -V, not -v)
+```
+
+Diagnostics go to stderr, so stdout stays clean for piping.
+
+When you import the package as a library it is **silent by default** — it won't log
+unless you opt in:
+
+```python
+import energy_equity
+energy_equity.configure_logging("INFO")   # or: from loguru import logger; logger.enable("energy_equity")
+from energy_equity.pipelines import puma_table
+```
+
 ## Data you need to provide
 
 - A service-territory polygon (`.shp`, `.geojson`, or `.gpkg`)
@@ -66,6 +83,13 @@ Outputs land under `project.output_dir` from the config.
 - TIGER PUMA + tract shapefile ZIPs for your state (Census)
 - A county-level HUD 80% AMI limits CSV for the FY you want
 - A free Census API key in the `CENSUS_API_KEY` environment variable
+
+**Data Sources**
+- 2024 PUMS 1-year data - https://www2.census.gov/programs-surveys/acs/data/pums/2024/1-Year/
+- Obtain Census API key - https://api.census.gov/data/key_signup.html
+- TIGER PUMA + trac shapefile - https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
+- Colorado 80% AMI Income Limits (CHFA) - https://www.chfainfo.com/rental-housing/asset-management/rent-income-limits
+- An example CSV file for Colorado 80% AMI thresholds (2025) is provided in examples/
 
 The CLI prints concrete download URLs and Census API endpoints if a required file is missing.
 

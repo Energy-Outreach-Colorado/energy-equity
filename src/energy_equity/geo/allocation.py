@@ -33,6 +33,7 @@ from pathlib import Path
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+from loguru import logger
 from shapely.ops import unary_union
 
 from ..io.geo import CRS_EQUAL_AREA, get_first_existing_col, read_geofile
@@ -70,9 +71,10 @@ def assign_puma_to_tracts(tracts: gpd.GeoDataFrame, pumas: gpd.GeoDataFrame) -> 
 
     missing = int(out["PUMA"].isna().sum())
     if missing:
-        print(
-            f"[geo] {missing} tracts did not match a PUMA via representative-point join; "
-            "they will be excluded from PUMA-level allocation totals."
+        logger.warning(
+            "{} tracts did not match a PUMA via representative-point join; "
+            "they will be excluded from PUMA-level allocation totals.",
+            missing,
         )
     return out
 

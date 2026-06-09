@@ -26,7 +26,9 @@ from typing import TypeVar
 
 import pandas as pd
 import requests
+from loguru import logger
 
+from ..config import Config
 from ..io.pums import zfill_str
 from .cache import CensusCache
 
@@ -161,10 +163,46 @@ def fetch_with_year_fallback(
             return fetch_func(attempt_year), attempt_year
         except Exception as exc:
             last_exc = exc
-            print(f"[census] year {attempt_year} fetch failed ({exc!r}); falling back.")
+            logger.warning("year {} fetch failed ({!r}); falling back.", attempt_year, exc)
     raise RuntimeError(
         f"All year fallbacks exhausted ({start_year} down to {start_year - fallback_years})"
     ) from last_exc
+
+
+def resolve_tract_households(
+    cfg: Config, cache_dir: str | Path, *, client: CensusClient | None = None
+) -> pd.DataFrame:
+    """Load (from CSV cache) or fetch ACS B11001 tract household counts for the state.
+
+    Cache: ``{cache_dir}/acs_tract_households_{state_fips}.csv``. Returns columns
+    ``tract_geoid``, ``households``. Shared by the service-allocation pipeline and the AMI
+    bridge so a single fetch serves both. Pass an existing `client` to reuse its response
+    cache; otherwise one is built from `cfg.census_api`.
+    """
+    cache_dir = Path(cache_dir)
+    local = cache_dir / f"acs_tract_households_{cfg.geography.state_fips}.csv"
+    if local.exists():
+        df = pd.read_csv(local, dtype={"tract_geoid": "string"})
+        df["households"] = pd.to_numeric(df["households"], errors="coerce").fillna(0.0)
+        return df
+
+    if client is None:
+        client = CensusClient.from_env(
+            cache_dir,
+            key_env=cfg.census_api.key_env,
+            rate_limit_sec=cfg.census_api.rate_limit_sec,
+        )
+    df, year_used = fetch_with_year_fallback(
+        lambda y: client.fetch_tract_households(cfg.geography.state_fips, y, cfg.vintages.acs_span),
+        start_year=cfg.vintages.acs_year,
+        fallback_years=3,
+    )
+    df = df.rename(columns={"geoid": "tract_geoid"})
+    out = df[["tract_geoid", "households"]]
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    out.to_csv(local, index=False)
+    logger.info("cached ACS {} tract households -> {}", year_used, local)
+    return out
 
 
 # ------- Parsers (private) -------------------------------------------------------

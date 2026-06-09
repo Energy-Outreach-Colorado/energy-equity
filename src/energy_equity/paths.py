@@ -7,6 +7,7 @@ import os
 from collections.abc import Iterable
 from pathlib import Path
 
+from loguru import logger
 from platformdirs import user_cache_dir
 
 CACHE_ENV_VAR = "EE_CACHE_DIR"
@@ -78,7 +79,7 @@ def resolve_existing_path(
     """
     for p in unique_paths(candidates):
         if p.exists():
-            print(f"[paths] {description}: {p}")
+            logger.debug("resolved {}: {}", description, p)
             return p
 
     if glob_patterns:
@@ -87,7 +88,7 @@ def resolve_existing_path(
             matches.extend(Path(m) for m in glob.glob(pattern, recursive=True))
         for p in unique_paths(matches):
             if p.exists():
-                print(f"[paths] {description} (via glob): {p}")
+                logger.debug("resolved {} (via glob): {}", description, p)
                 return p
 
     msg = (
@@ -96,5 +97,5 @@ def resolve_existing_path(
     )
     if required:
         raise FileNotFoundError(msg)
-    print(f"[paths] (optional) {msg}")
+    logger.debug("optional path not found: {}", msg)
     return None

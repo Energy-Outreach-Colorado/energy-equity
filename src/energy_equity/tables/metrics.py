@@ -31,6 +31,17 @@ def _float_col(df: pd.DataFrame, col: str, default: float = 0.0) -> np.ndarray:
     return df[col].astype(float).fillna(default).to_numpy()
 
 
+def _valid_col(df: pd.DataFrame, col: str) -> np.ndarray:
+    """1.0 where `col` is present and non-NaN, else 0.0; all-zeros if the column is absent.
+
+    `df.get(col)` returns None for a missing column, and `~pd.isna(None)` evaluates to the
+    Python int -2 (no `.astype`) — this helper avoids that footgun.
+    """
+    if col not in df.columns:
+        return np.zeros(len(df), dtype=float)
+    return df[col].notna().astype(float).to_numpy()
+
+
 # -----------------------------------------------------------------------------
 # Baseline metrics — energy burden, AMI <=80%, SMI <=60%, rent burden, intersections.
 # -----------------------------------------------------------------------------
@@ -42,9 +53,7 @@ BASELINE_COUNT_METRICS: tuple[CountMetric, ...] = (
     CountMetric("hh_eb", lambda df: _bool_col(df, "energy_burdened")),
     CountMetric("hh_heb", lambda df: _bool_col(df, "high_energy_burdened")),
     # AMI <=80%. Uses ami_weight so the same metric handles binary and probabilistic flags.
-    CountMetric(
-        "hh_ami_valid", lambda df: (~pd.isna(df.get("ami_weight"))).astype(float).to_numpy()
-    ),
+    CountMetric("hh_ami_valid", lambda df: _valid_col(df, "ami_weight")),
     CountMetric("hh_le80", lambda df: _float_col(df, "ami_weight")),
     CountMetric(
         "hh_eb_le80",
@@ -55,9 +64,7 @@ BASELINE_COUNT_METRICS: tuple[CountMetric, ...] = (
         lambda df: _float_col(df, "ami_weight") * _bool_col(df, "high_energy_burdened"),
     ),
     # SMI <=60%. Uses smi_weight (binary).
-    CountMetric(
-        "hh_smi_valid", lambda df: (~pd.isna(df.get("smi_weight"))).astype(float).to_numpy()
-    ),
+    CountMetric("hh_smi_valid", lambda df: _valid_col(df, "smi_weight")),
     CountMetric("hh_le60_smi", lambda df: _float_col(df, "smi_weight")),
     CountMetric(
         "hh_eb_le60_smi",
