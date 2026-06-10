@@ -9,6 +9,19 @@ All notable changes to this project will be documented here. Format follows
 ### Added
 - `uv.lock` committed for reproducible builds (run `uv sync` to install).
 - `.python-version` pins development Python to 3.12.
+- PNG figure generation in the reporting pipeline (`reporting/figures.py` + wiring in
+  `pipelines/reporting.py`): income comparison, regressivity curve, fixed-charge scenario
+  sweep, energy-burden waterfall, demographic eligibility bars, burden-band charts, and
+  per-PUMA choropleth maps, written to `<output_dir>/figures/`. Controlled by
+  `pipelines.reporting.figures`; requires the `viz` extra (skips with a warning otherwise).
+- The `ee` CLI auto-loads a `.env` (searching up from the working directory) via
+  `python-dotenv`, so `CENSUS_API_KEY` set in `.env` is picked up without exporting it.
+  Real shell variables still take precedence.
+
+### Fixed
+- Removed a stray `ipdb.set_trace()` debugging breakpoint in `census.api.CensusClient._get`
+  (and dropped the accidental `ipdb` runtime dependency) that hard-stopped every live
+  Census API call and failed the census unit tests.
 - Structured logging via **loguru** (new runtime dependency). The package is silent
   when imported as a library (`logger.disable("energy_equity")` in `__init__`); call
   `energy_equity.configure_logging(level)` to opt in. Diagnostics now go to stderr.

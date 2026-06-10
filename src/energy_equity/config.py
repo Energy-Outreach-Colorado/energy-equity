@@ -185,9 +185,25 @@ class ReportingPipelineConfig(_StrictModel):
     income_bins_source: Literal["B19001"] = "B19001"
     figures: list[
         Literal[
-            "income_comparison", "regressivity_curve", "choropleth", "near_threshold", "waterfall"
+            "income_comparison",
+            "regressivity_curve",
+            "scenario_sweep",
+            "waterfall",
+            "demographic_bars",
+            "burden_bands",
+            "choropleth",
         ]
-    ] = Field(default_factory=lambda: ["income_comparison", "regressivity_curve", "choropleth"])
+    ] = Field(
+        default_factory=lambda: [
+            "income_comparison",
+            "regressivity_curve",
+            "scenario_sweep",
+            "waterfall",
+            "demographic_bars",
+            "burden_bands",
+            "choropleth",
+        ]
+    )
 
 
 class PipelinesConfig(_StrictModel):
