@@ -60,6 +60,9 @@ coverage.xml
 .env.local
 *.pem
 
+# Local configuration
+config.yaml
+
 # Local data / outputs
 out/
 cache/
@@ -81,3 +84,4 @@ notebooks/.ipynb_checkpoints/
 # We do not ship those — each contributor has their own.
 .claude/
 CLAUDE.local.md
+CLAUDE.md

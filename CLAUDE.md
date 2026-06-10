@@ -261,6 +261,13 @@ Optional:
 - `[viz]` extra: `plotly`, `kaleido`. Reporting figure builders gate `import plotly` so
   the rest of the package works without them. Don't add a hard plotly dep to any
   non-reporting module.
+  - Figure builders live in `reporting/figures.py` (pure `DataFrame[, geo] -> plotly Figure`,
+    plus `save_figure` → PNG via kaleido), behind a `HAS_PLOTLY` flag. `pipelines/reporting.py`
+    orchestrates: it renders the figures named in `cfg.pipelines.reporting.figures` to
+    `output_dir/figures/`, reading the *other* pipelines' CSVs from `output_dir` (so it runs
+    last in `run all`). Missing input or missing plotly → skip-with-warning, never fail the
+    run. Choropleths use plotly's tile-free `px.choropleth` (no Mapbox token); join key is
+    TIGER `PUMACE20` ↔ `puma_summary.PUMA`.
 
 Dev:
 - `pytest`, `pytest-regressions`, `responses` (HTTP mocking)

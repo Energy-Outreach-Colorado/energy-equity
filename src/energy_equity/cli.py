@@ -23,6 +23,7 @@ import shutil
 from pathlib import Path
 
 import typer
+from dotenv import find_dotenv, load_dotenv
 
 from . import __version__
 from ._logging import configure_logging
@@ -50,7 +51,9 @@ def root(
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose (DEBUG) logging."),
     quiet: bool = typer.Option(False, "--quiet", "-q", help="Quiet (WARNING and above only)."),
 ) -> None:
-    # Runs before every subcommand, so this configures logging for the whole invocation.
+    # Runs before every subcommand. Load a .env (searching up from the working directory)
+    # so CENSUS_API_KEY etc. are available; real shell vars take precedence (override=False).
+    load_dotenv(find_dotenv(usecwd=True))
     level = "DEBUG" if verbose else "WARNING" if quiet else "INFO"
     configure_logging(level)
     if version:
