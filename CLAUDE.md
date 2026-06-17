@@ -148,8 +148,21 @@ The original notebooks were Colorado-hardcoded. The package replaced this with:
 - **County FIPS lookup**: `census.api.CensusClient.fetch_counties(state_fips, year)` calls
   the ACS API. No `CO_COUNTY_FIPS3` dict.
 - **LIHEAP SMI thresholds**: shipped as `src/energy_equity/data/smi/liheap_smi_by_state_year.csv`.
-  Initial coverage: Colorado FY2025, sizes 1–10. Adding a new state-year means adding rows
-  to this CSV plus an entry to `provenance.csv`. Source: HHS LIHEAP IM annual notice.
+  Coverage: all 50 states + DC + PR, household sizes 1–12, for FY2025/FY2026/FY2027 — one
+  LIHEAP IM per mandatory fiscal year (FY2025←IM2024-02, FY2026←IM2025-02, FY2027←FY2027
+  Attachment 4), cited per state-year in `provenance.csv`. All IMs are published at the LIHEAP
+  Information Memoranda index: https://acf.gov/ocs/policy-guidance/liheap-information-memoranda
+  (see `data/smi/README.md`). The published
+  60% SMI values follow CFR 96.85: `base60 = floor(0.60 * SMI_4person)`, then
+  `value(size) = floor(base60 * pct(size))` (52/68/84/100/116/132% for sizes 1–6; +3 pts per
+  size to 150% at 12). `tests/unit/test_smi_data_integrity.py` re-derives every row from that
+  formula, so a hand-edit that breaks it fails CI. `thresholds.smi_source` is `"auto"` (pick
+  the packaged FY ≤ `vintages.hud_ami_fy`) or an explicit `"liheap_fy####"`;
+  `thresholds.compute_smi=false` skips SMI entirely; `data_sources.smi_csv` overrides the
+  packaged file. **No inflation adjustment** is applied — these are HHS's official FFY
+  program thresholds (already projected from the 2019–2023 ACS); household income (ADJINC-
+  adjusted) is compared to them as-is. The residual survey-year vs FFY dollar-vintage gap is
+  a documented minor limitation, not a correction.
 - **Configuration**: pydantic v2 models in `config.py` validate a single YAML per run.
   `extra="forbid"` so typos fail loudly. The `state_abbr` validator uppercases input.
 
@@ -221,10 +234,11 @@ is a known limitation worth fixing in a future minor version. Document, don't si
    allocation flags to distinguish the cases.
 
 2. **AMI/SMI clipping for large households**: Households with `NP` greater than the max
-   published household size in the AMI/SMI tables get clipped (CO SMI tops at hh_size=10).
-   Large families therefore use a smaller threshold than they should and are under-counted
-   as eligible. The LIHEAP IM publishes an "additional person" increment that could fix
-   this — add a column to `liheap_smi_by_state_year.csv` and update `thresholds.smi`.
+   published household size get clipped. SMI now ships sizes 1–12 (was 1–10), so SMI
+   clipping only affects 13+-person households; HUD AMI clipping depends on the supplied
+   CSV. Large families above the cap use a smaller threshold than they should and are
+   under-counted as eligible. The CFR 96.85 "additional person" rule (+3 pts/person) could
+   extend SMI further in code if needed.
 
 3. **Within-PUMA homogeneity**: The service-area allocator assumes the in-service portion
    of each PUMA has the same burden / income / demographic distribution as the full PUMA.
@@ -282,9 +296,10 @@ tests are skipped (no `/data/eoc/...` in CI).
 
 ## When adding a new state
 
-1. Add rows to `src/energy_equity/data/smi/liheap_smi_by_state_year.csv` for the
-   `(state_fips, fy, hh_size)` combinations you need; cite the LIHEAP IM in
-   `provenance.csv` in the same commit.
+1. SMI is already packaged for all states (FY2025/FY2026). For a later FY, add rows to
+   `src/energy_equity/data/smi/liheap_smi_by_state_year.csv` (cite the IM in `provenance.csv`)
+   or point `data_sources.smi_csv` at your own table; or set `thresholds.compute_smi=false`
+   to run without SMI. New SMI rows must satisfy the CFR-96.85 integrity test.
 2. Obtain a county-level HUD 80% AMI CSV for the state and FY you want (HUD publishes
    these annually). Point `data_sources.hud_ami_csv` at it.
 3. The Census API call for county FIPS works for any state — no code changes needed.
