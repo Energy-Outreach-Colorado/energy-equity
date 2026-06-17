@@ -88,6 +88,14 @@ class VintagesConfig(_StrictModel):
 
 class DataSourcesConfig(_StrictModel):
     hud_ami_csv: Path = Field(description="County-level HUD AMI limits CSV (long or wide).")
+    smi_csv: Path | None = Field(
+        default=None,
+        description=(
+            "Optional override for the LIHEAP SMI table (same schema as the packaged "
+            "data/smi CSV). When set, used instead of the packaged file — drop in a newer "
+            "IM or additional geographies without a code change."
+        ),
+    )
     pums_housing_zip: Path | None = Field(default=None, description="ACS PUMS housing ZIP.")
     pums_person_zip: Path | None = Field(default=None, description="ACS PUMS person ZIP.")
     tiger_puma_zip: Path | None = Field(default=None, description="TIGER PUMA shapefile ZIP.")
@@ -110,8 +118,20 @@ class ThresholdsConfig(_StrictModel):
         default=1.0, gt=0.0, description="Multiplier on the 80% AMI limit (e.g. 1.0, 1.25)."
     )
     smi_source: str = Field(
-        default="liheap_fy2025",
-        description='Identifier into the packaged LIHEAP SMI table; format: "liheap_fy{YEAR}".',
+        default="auto",
+        description=(
+            'Which LIHEAP SMI fiscal year to use. "auto" (default) picks the packaged FY '
+            "closest to (and not after) vintages.hud_ami_fy; or pin a year with "
+            '"liheap_fy{YEAR}" (e.g. "liheap_fy2026").'
+        ),
+    )
+    compute_smi: bool = Field(
+        default=True,
+        description=(
+            "Whether to compute the <=60% SMI eligibility flag. Set false to run without SMI "
+            "(e.g. for a state-year not in the packaged table); the <=60% SMI metrics then "
+            "report zero."
+        ),
     )
     energy_burden_threshold: float = Field(default=0.06, gt=0.0, lt=1.0)
     high_energy_burden_threshold: float = Field(default=0.10, gt=0.0, lt=1.0)

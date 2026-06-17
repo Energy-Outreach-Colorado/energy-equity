@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 from ..config import Config
 from ..io.pums import replicate_cols
@@ -255,12 +256,22 @@ def prepare_household_microdata(
 
     df["is_low_income"] = pd.Series(df.get("le_80_ami")).fillna(False).astype(bool)
 
-    attach_smi_statewide_threshold(
-        df,
-        state_fips=cfg.geography.state_fips,
-        smi_source=cfg.thresholds.smi_source,
-        table=smi_table,
-    )
+    if cfg.thresholds.compute_smi:
+        if smi_table is None and cfg.data_sources.smi_csv is not None:
+            from ..thresholds.smi import load_packaged_smi_table
+
+            smi_table = load_packaged_smi_table(cfg.data_sources.smi_csv)
+        attach_smi_statewide_threshold(
+            df,
+            state_fips=cfg.geography.state_fips,
+            smi_source=cfg.thresholds.smi_source,
+            anchor_year=cfg.vintages.hud_ami_fy,
+            table=smi_table,
+        )
+    else:
+        logger.warning(
+            "SMI disabled (thresholds.compute_smi=false); <=60% SMI metrics will be zero."
+        )
 
     rep_cols: list[str] = []
     if cfg.weights.compute_moe:

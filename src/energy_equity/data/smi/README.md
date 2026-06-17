@@ -14,21 +14,35 @@ year for the Low Income Home Energy Assistance Program (LIHEAP). These values ga
 | `hh_size` | int | household size, 1..N |
 | `smi60_annual` | int | annualized 60% of state median income, USD |
 
-For households larger than the highest `hh_size` row published for a state, callers should
-extrapolate using the LIHEAP IM "additional person" increment (also published per state-year).
-Future versions of this file will add an `addl_person` column.
+Values are published through household size 12. The per-size figures follow CFR 96.85:
+`base60 = floor(0.60 × SMI_4-person)`, then `value(size) = floor(base60 × pct(size))`, with
+`pct` = 52/68/84/100/116/132% for sizes 1–6 and +3 points per additional person
+(135/138/141/144/147/150% for 7–12). `tests/unit/test_smi_data_integrity.py` re-derives every
+row from that formula. For households above the published max, the same +3-points-per-person
+rule extends further if needed.
 
 ## Source
 
-The values come from the annual HHS LIHEAP Information Memorandum, "State Median Income
-Estimates for a Four-Person Family — Notice of the Federal Fiscal Year (FFY) [YEAR] State
-Median Income Estimates for Use Under the Low Income Home Energy Assistance Program."
+**All SMI values come from the HHS LIHEAP Information Memoranda, published at**
+<https://acf.gov/ocs/policy-guidance/liheap-information-memoranda>.
 
-Each row in this CSV cites the IM number, publication date, and a public URL in
-`provenance.csv` (sibling file). When transcribing values from new IMs, update both files in
-the same commit and add the IM PDF citation.
+Each year HHS issues an IM, "Attachment 4 — State Median Income (SMI) by Household Size,"
+designated for *optional use* in one federal fiscal year and *mandatory use* the next. This
+package labels each fiscal year by the IM that is **mandatory** for it:
 
-## Initial coverage (v0.1)
+| `fy` | Source IM (Attachment 4) | Underlying ACS 5-year vintage |
+|---|---|---|
+| 2025 | LIHEAP IM2024-02 (optional FY24 / mandatory FY25) | 2018–2022 ACS |
+| 2026 | LIHEAP IM2025-02 (optional FY25 / mandatory FY26) | 2019–2023 ACS |
+| 2027 | LIHEAP FY2027 Attachment 4 (optional FY26 / mandatory FY27) | 2020–2024 ACS |
 
-Colorado FY 2025, household sizes 1–10. Other states + years welcome — open a PR with the
-new rows plus the matching provenance entry.
+These are HHS's official program thresholds — compared to household income **without any
+inflation adjustment**. Per-row citations (IM number, publication date, source URL) are in
+`provenance.csv` (sibling file). When adding a new fiscal year, find its IM on the index page
+above, transcribe Attachment 4's 4-person SMI column, regenerate the per-size values, and add
+matching `provenance.csv` rows in the same commit.
+
+## Coverage
+
+All 50 states + DC + Puerto Rico, household sizes 1–12, for FY2025–FY2027. Additional
+state-years welcome — open a PR with the new rows plus the matching provenance entries.

@@ -25,7 +25,7 @@ easily:
 | `pct_*` | A **rate** (one weighted count ÷ another). |
 | `small_n_flag` | True when `n_unweighted` is below the suppression threshold; rates in that row are blanked. |
 | `*_eb*` / `*_heb*` | Energy-burdened (≥ burden threshold, default 6%) / highly energy-burdened (≥ high threshold, default 10%). |
-| `*_le80` / `*_le60_smi` | Restricted to the **≤80% AMI** pool / the **≤60% SMI** pool. |
+| `*_le80` / `*_le60_smi` | Restricted to the **≤80% AMI** pool / the **≤60% SMI** pool. SMI thresholds are the official LIHEAP FFY limits (all states, FY2025–FY2027, one IM per fiscal year; `thresholds.smi_source="auto"` picks the year). Set `thresholds.compute_smi=false` to skip SMI — the `*_le60_smi` columns then report 0. |
 | `*_rent_burdened` / `*_severe_*` | Gross rent ≥ 30% / ≥ 50% of income (renters). |
 | `*_in_service`, `*_in_service_urban`, `*_in_service_rural` | A statewide estimate **allocated into the service area** (and its urban/rural split). |
 | `share_households_in_service`, `urban_share_within_service` | Per-PUMA share of households inside the service area; urban share within that. |

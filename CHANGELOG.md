@@ -9,45 +9,51 @@ All notable changes to this project will be documented here. Format follows
 ### Added
 - `uv.lock` committed for reproducible builds (run `uv sync` to install).
 - `.python-version` pins development Python to 3.12.
-- PNG figure generation in the reporting pipeline (`reporting/figures.py` + wiring in
-  `pipelines/reporting.py`): income comparison, regressivity curve, fixed-charge scenario
-  sweep, energy-burden waterfall, demographic eligibility bars, burden-band charts, and
-  per-PUMA choropleth maps, written to `<output_dir>/figures/`. Controlled by
+- **All-state LIHEAP SMI data**: the packaged `data/smi` table covers all 50 states + DC +
+  Puerto Rico, household sizes 1–12, for FY2025, FY2026, and FY2027 — one LIHEAP IM per
+  mandatory fiscal year (FY2025←IM2024-02, FY2026←IM2025-02, FY2027←FY2027 Attachment 4),
+  cited per state-year in `provenance.csv`. A data-integrity test re-derives every value
+  from the CFR 96.85 formula.
+- `thresholds.smi_source: "auto"` (new default) selects the packaged SMI fiscal year closest
+  to (and not after) `vintages.hud_ami_fy`; an explicit `liheap_fy####` that diverges from the
+  analysis vintage now warns instead of silently mismatching.
+- `thresholds.compute_smi` (default true) to run without SMI for an uncovered state-year — the
+  `<=60% SMI` metrics report zero instead of erroring.
+- `data_sources.smi_csv` optional override to supply your own SMI table without a code change.
+- Structured logging via **loguru** (new runtime dependency). Silent when imported as a
+  library (`logger.disable("energy_equity")` in `__init__`); call
+  `energy_equity.configure_logging(level)` to opt in. Diagnostics go to stderr.
+- CLI verbosity flags `--verbose/-v` (DEBUG) and `--quiet/-q` (WARNING); the `ee` CLI
+  auto-loads a `.env` (via `python-dotenv`) so `CENSUS_API_KEY` is picked up without exporting.
+- ruff `T20` (flake8-print) lint rule to keep `print()` out of the package.
+- AMI bridge auto-built from config on the CLI path (`pums.ami_bridge.build_ami80_bridge`),
+  cached to `{cache_dir}/ami80_by_puma_{state}_fy{fy}.csv`, so `ee run puma-table` / `run all`
+  produce correct `<=80% AMI` numbers end to end. Shared helpers
+  `census.api.resolve_tract_households` and `thresholds.ami.build_county_name_to_fips3`.
+- PNG figures in the reporting pipeline (`reporting/figures.py`): income comparison,
+  regressivity curve, scenario sweep, energy-burden waterfall, demographic bars, burden
+  bands, and per-PUMA choropleths, written to `<output_dir>/figures/`. Controlled by
   `pipelines.reporting.figures`; requires the `viz` extra (skips with a warning otherwise).
-- The `ee` CLI auto-loads a `.env` (searching up from the working directory) via
-  `python-dotenv`, so `CENSUS_API_KEY` set in `.env` is picked up without exporting it.
-  Real shell variables still take precedence.
+- Documentation pages: `docs/cli.md` (CLI reference) and `docs/outputs.md` (tables + figures).
 
-### Fixed
-- Removed a stray `ipdb.set_trace()` debugging breakpoint in `census.api.CensusClient._get`
-  (and dropped the accidental `ipdb` runtime dependency) that hard-stopped every live
-  Census API call and failed the census unit tests.
-- Structured logging via **loguru** (new runtime dependency). The package is silent
-  when imported as a library (`logger.disable("energy_equity")` in `__init__`); call
-  `energy_equity.configure_logging(level)` to opt in. Diagnostics now go to stderr.
-- CLI verbosity flags: `--verbose/-v` (DEBUG) and `--quiet/-q` (WARNING), default INFO.
-- ruff `T20` (flake8-print) lint rule to prevent `print()` from creeping back in.
-- AMI bridge is now auto-built from config on the CLI path. `prepare_household_microdata`
-  builds the county→PUMA 80% AMI table via `pums.ami_bridge.build_ami80_bridge(cfg)` when
-  no `ami80_by_puma` is supplied and `ami_method="blended_threshold"`, caching it to
-  `{cache_dir}/ami80_by_puma_{state}_fy{fy}.csv`. `ee run puma-table` / `run all` now
-  produce correct `<=80% AMI` numbers end to end.
-- Shared `census.api.resolve_tract_households(cfg, cache_dir)` (used by both the AMI
-  bridge and the service-allocation pipeline) and `thresholds.ami.build_county_name_to_fips3`.
+### Changed
+- SMI uses HHS's official FFY thresholds with no inflation adjustment (documented), one IM
+  per mandatory fiscal year; max packaged household size raised 10 → 12, and per-size values
+  use HHS's floor (CFR 96.85) rather than round.
+- CI now uses `astral-sh/setup-uv@v3` and `uv sync --all-extras` (≈10x faster than the
+  previous pip-based job); README quickstart leads with `uv` commands (pip path kept).
+- **Breaking (CLI):** `--version` is now `-V` (was `-v`); `-v` is `--verbose`. All package
+  diagnostics moved from `print()` (stdout) to loguru (stderr).
 
 ### Fixed
 - `tables.metrics` no longer crashes (`AttributeError: 'int' object has no attribute
-  'astype'`) when the `ami_weight`/`smi_weight` columns are absent; the `hh_ami_valid`
-  and `hh_smi_valid` metrics use a new `_valid_col` helper that returns an all-zeros mask
-  for a missing column. This was the root cause of the `ee run puma-table` crash.
-
-### Changed
-- CI now uses `astral-sh/setup-uv@v3` and `uv sync --all-extras` (≈10x faster
-  than the previous pip-based job).
-- README quickstart updated to lead with `uv` commands (pip path kept as a
-  fallback).
-- **Breaking (CLI):** `--version` is now `-V` (was `-v`); `-v` is `--verbose`.
-- All package diagnostics moved from `print()` (stdout) to loguru (stderr).
+  'astype'`) when the `ami_weight`/`smi_weight` columns are absent — the `hh_ami_valid` /
+  `hh_smi_valid` metrics use a new `_valid_col` helper. Root cause of the `ee run puma-table`
+  crash.
+- `reporting.run` no longer raises `KeyError: 'tract_geoid'` — the B19001 frame's `geoid`
+  column is normalized to `tract_geoid` before the merge.
+- Removed a stray `ipdb.set_trace()` breakpoint in `census.api.CensusClient._get` (and the
+  accidental `ipdb` dependency) that hard-stopped every live Census API call.
 
 ## [0.1.0] - 2026-05-22
 
