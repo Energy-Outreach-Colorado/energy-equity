@@ -88,6 +88,34 @@ output table/figure means is documented in full under [Documentation](#documenta
   `ee config …`), the global verbosity flags, and pipeline prerequisites.
 - **[docs/outputs.md](docs/outputs.md)** — a column-naming key plus a description of every
   output table and figure the analysis produces.
+- **[docs/analysis.md](docs/analysis.md)** — the analysis methodology: what each metric
+  measures, the pipeline, and a detailed description of the error/margin-of-error analysis.
+- **[docs/eia861_normalization.md](docs/eia861_normalization.md)** — optional EIA-861
+  electric bill normalization: methodology, configuration, CSV schema, and caveats.
+
+## EIA-861 bill normalization (optional)
+
+PUMS electric costs are survey self-reports; EIA Form 861 reports each utility's actual
+residential revenue and customer count. The optional `calibration.electric` config block
+compares the PUMS-implied average annual electric bill in your service territory against
+the utility's EIA-861 average (the diagnostic, written to `calibration_electric.csv`),
+and with `apply: true` rescales each bill-paying household's electric cost by
+`target / observed` before energy burden is computed — anchoring the cost level to
+administrative data while preserving the PUMS distribution, as the DOE LEAD tool does.
+
+EIA-861 residential data for every US utility (2023 and 2024 final releases) ships with
+the package, so enabling it is just the utility selection:
+
+```yaml
+calibration:
+  electric:
+    utility_number: 15466   # EIA utility ID; row auto-filtered to your state + PUMS year
+    apply: false            # start with the diagnostic; set true to calibrate
+```
+
+Omit the block to disable entirely (the default — existing runs are unaffected). See
+[docs/eia861_normalization.md](docs/eia861_normalization.md) for the packaged data,
+custom-CSV override schema, and methodology caveats.
 
 ## Logging
 

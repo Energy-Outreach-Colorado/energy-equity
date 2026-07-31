@@ -124,6 +124,38 @@ def test_service_allocation_pipeline_end_to_end(cfg_with_geo) -> None:
     assert total_all == pytest.approx(0.25 * state_total, rel=1e-6)
 
 
+def test_precomputed_puma_shares_match_internal_build(cfg_with_geo) -> None:
+    cfg, geo = cfg_with_geo
+    ami80 = synthesize_ami80_by_puma()
+    md = prepare_household_microdata(cfg, ami80_by_puma=ami80)
+    pt = puma_table.run(cfg, microdata=md, write_demographics=False)
+
+    shares = service_allocation.build_service_puma_shares(
+        cfg, tract_households=make_tract_households()
+    )
+    with_precomputed = service_allocation.run(
+        cfg,
+        puma_overall=pt["puma_overall"],
+        replicates=pt["puma_overall_replicates"],  # type: ignore[arg-type]
+        puma_shares=shares,
+        service_label="precomputed",
+    )
+    internal = service_allocation.run(
+        cfg,
+        puma_overall=pt["puma_overall"],
+        replicates=pt["puma_overall_replicates"],  # type: ignore[arg-type]
+        tract_households=make_tract_households(),
+        service_label="internal",
+    )
+    for key in ("puma_shares", "by_puma"):
+        left = with_precomputed[key].reset_index(drop=True)
+        right = internal[key].reset_index(drop=True)
+        np.testing.assert_allclose(
+            left.select_dtypes("number").to_numpy(),
+            right.select_dtypes("number").to_numpy(),
+        )
+
+
 def test_service_allocation_moe_nonnegative(cfg_with_geo) -> None:
     cfg, geo = cfg_with_geo
     ami80 = synthesize_ami80_by_puma()
