@@ -96,6 +96,69 @@ def test_burden_threshold_ordering_enforced() -> None:
         Config.from_mapping(payload)
 
 
+def _base_payload() -> dict:
+    return {
+        "project": {"name": "x", "output_dir": "./out"},
+        "geography": {
+            "state_fips": "08",
+            "state_abbr": "CO",
+            "service_area": {"shapefile": "./x.shp"},
+        },
+        "vintages": {
+            "acs_year": 2024,
+            "pums_year": 2024,
+            "hud_ami_fy": 2025,
+            "tiger_year": 2024,
+        },
+        "data_sources": {"hud_ami_csv": "./hud.csv"},
+    }
+
+
+def test_calibration_defaults_off() -> None:
+    cfg = Config.from_mapping(_base_payload())
+    assert cfg.calibration.electric is None
+    assert cfg.data_sources.eia861_csv is None
+
+
+def test_calibration_with_direct_target() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"electric": {"target_annual_bill": 1150.0}}
+    cfg = Config.from_mapping(payload)
+    assert cfg.calibration.electric is not None
+    assert cfg.calibration.electric.target_annual_bill == pytest.approx(1150.0)
+    assert cfg.calibration.electric.apply is False
+
+
+def test_calibration_requires_target_or_utility() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"electric": {"apply": True}}
+    with pytest.raises(Exception, match="utility_number"):
+        Config.from_mapping(payload)
+
+
+def test_calibration_utility_without_csv_ok() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"electric": {"utility_number": 15466}}
+    cfg = Config.from_mapping(payload)
+    assert cfg.calibration.electric.utility_number == 15466
+    assert cfg.data_sources.eia861_csv is None
+
+
+def test_calibration_csv_with_utility_ok() -> None:
+    payload = _base_payload()
+    payload["data_sources"]["eia861_csv"] = "./eia861.csv"
+    payload["calibration"] = {"electric": {"utility_number": 15466, "eia861_year": 2023}}
+    cfg = Config.from_mapping(payload)
+    assert cfg.calibration.electric.utility_number == 15466
+
+
+def test_calibration_unknown_key_rejected() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"electric": {"target_annual_bill": 1150.0, "typo_key": 1}}
+    with pytest.raises(Exception):
+        Config.from_mapping(payload)
+
+
 def test_defaults_for_optional_sections() -> None:
     """census_api, thresholds, weights, pipelines all have working defaults."""
     cfg = Config.from_mapping(

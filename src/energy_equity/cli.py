@@ -71,6 +71,31 @@ def _load_cfg(path: Path) -> Config:
     return Config.from_yaml(path)
 
 
+def _prepare_microdata(cfg: Config):
+    """Prepare household microdata, running EIA-861 electric calibration when configured.
+
+    Calibration needs the service-area PUMA shares before burden is computed, so the
+    geography-only share builder runs first; the shares are returned for reuse by
+    `service_allocation.run` to avoid recomputing them. Returns (microdata, shares).
+    """
+    import pandas as pd
+    from loguru import logger
+
+    from .paths import ensure_dir
+    from .pipelines import service_allocation
+    from .pums.prepare import prepare_household_microdata
+
+    shares = None
+    if cfg.calibration.electric is not None:
+        shares = service_allocation.build_service_puma_shares(cfg)
+    md = prepare_household_microdata(cfg, service_shares=shares)
+    if md.electric_calibration is not None:
+        out_path = ensure_dir(cfg.project.output_dir) / "calibration_electric.csv"
+        pd.DataFrame([md.electric_calibration]).to_csv(out_path, index=False)
+        logger.info("wrote {}", out_path.resolve())
+    return md, shares
+
+
 @run_app.command("puma-table")
 def run_puma_table(
     config: Path = typer.Option(..., "--config", "-c", help="Path to YAML config."),
@@ -78,7 +103,8 @@ def run_puma_table(
     from .pipelines import puma_table
 
     cfg = _load_cfg(config)
-    puma_table.run(cfg)
+    md, _ = _prepare_microdata(cfg)
+    puma_table.run(cfg, microdata=md)
 
 
 @run_app.command("service-allocation")
@@ -93,23 +119,20 @@ def run_service_allocation(config: Path = typer.Option(..., "--config", "-c")) -
 def run_eligibility(config: Path = typer.Option(..., "--config", "-c")) -> None:
     """Eligibility (formerly PIPP) threshold comparison + demographic breakdowns."""
     from .pipelines import eligibility_analysis, service_allocation
-    from .pums.prepare import prepare_household_microdata
 
     cfg = _load_cfg(config)
-    # `eligibility_analysis.run` needs microdata + service shares; rebuild them.
-    md = prepare_household_microdata(cfg)
-    sa = service_allocation.run(cfg, puma_overall=None, replicates=None)
+    md, shares = _prepare_microdata(cfg)
+    sa = service_allocation.run(cfg, puma_overall=None, replicates=None, puma_shares=shares)
     eligibility_analysis.run(cfg, microdata=md, service_shares=sa["puma_shares"])
 
 
 @run_app.command("fixed-charge")
 def run_fixed_charge(config: Path = typer.Option(..., "--config", "-c")) -> None:
     from .pipelines import fixed_charge, service_allocation
-    from .pums.prepare import prepare_household_microdata
 
     cfg = _load_cfg(config)
-    md = prepare_household_microdata(cfg)
-    sa = service_allocation.run(cfg, puma_overall=None, replicates=None)
+    md, shares = _prepare_microdata(cfg)
+    sa = service_allocation.run(cfg, puma_overall=None, replicates=None, puma_shares=shares)
     fixed_charge.run(cfg, microdata=md, service_shares=sa["puma_shares"])
 
 
@@ -131,15 +154,15 @@ def run_all(config: Path = typer.Option(..., "--config", "-c")) -> None:
         reporting,
         service_allocation,
     )
-    from .pums.prepare import prepare_household_microdata
 
     cfg = _load_cfg(config)
-    md = prepare_household_microdata(cfg)
+    md, shares = _prepare_microdata(cfg)
     pt = puma_table.run(cfg, microdata=md)
     sa = service_allocation.run(
         cfg,
         puma_overall=pt["puma_overall"],
         replicates=pt.get("puma_overall_replicates"),  # type: ignore[arg-type]
+        puma_shares=shares,
     )
     eligibility_analysis.run(cfg, microdata=md, service_shares=sa["puma_shares"])
     fixed_charge.run(cfg, microdata=md, service_shares=sa["puma_shares"])
