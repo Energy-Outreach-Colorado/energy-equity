@@ -9,7 +9,7 @@ list all columns of every table (`puma_overall.csv` alone has ~126), it document
 > should be read — ELEP/GASP "included in rent" costs treated as $0, AMI/SMI thresholds
 > clipped for very large households, within-PUMA homogeneity in the service-area allocator,
 > and tract area-weighting assuming uniform density. See the "Methodology notes" section of
-> [`CLAUDE.md`](../CLAUDE.md) before publishing figures. Always disclose these in a
+> [`development.md`](development.md) before publishing figures. Always disclose these in a
 > methodology appendix.
 
 ## Column-naming key

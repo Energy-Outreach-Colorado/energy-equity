@@ -290,7 +290,7 @@ across PUMAs, per replicate) and then `sdr_moe` on the result. Service-area **ra
 handled the same way: the numerator and denominator are each allocated per replicate, the
 ratio is taken per replicate, and SDR is applied to the 80 replicate ratios.
 
-> **Do not replace this with RSS.** It is documented in the code and in `CLAUDE.md` as a
+> **Do not replace this with RSS.** It is documented in the code and in `docs/development.md` as a
 > hard rule, precisely because RSS is the natural-but-wrong shortcut.
 
 ### 6.3 Degenerate-rate guard
@@ -358,4 +358,4 @@ ships with published numbers.
 
 For the methodology rationale behind specific choices (e.g. why replicate propagation over
 RSS, why the full-precision `Z_90`), see the "Methodology notes" section of
-[`CLAUDE.md`](../CLAUDE.md).
+[`development.md`](development.md).
