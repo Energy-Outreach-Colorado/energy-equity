@@ -40,6 +40,16 @@ easily:
 
 ## Tables
 
+### From microdata preparation (any of `ee run puma-table`, `eligibility`, `fixed-charge`, `all`)
+
+**`calibration_electric.csv`** — one row; written only when the `calibration.electric`
+config block is set. The EIA-861 electric bill normalization diagnostic:
+`observed_avg_annual_bill`, `target_annual_bill`, `factor`, `n_payers_unweighted`,
+`payer_weighted_households`, `scope` (`service_area` or `state`), `target_source`
+(`config` or `eia861_csv`, with utility identifiers and `avg_rate_per_kwh` when derived
+from a CSV), and `applied` — whether the factor was applied to the microdata (`apply:
+true`) or reported only. See [eia861_normalization.md](eia861_normalization.md).
+
 ### From `ee run puma-table`
 
 **`state_overall.csv`** — one row; statewide totals for every baseline metric (energy

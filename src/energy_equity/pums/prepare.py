@@ -38,6 +38,7 @@ class HouseholdMicrodata:
     pums_year: int = 0
     has_post_scenario: bool = False
     puma_lookup: pd.DataFrame | None = None
+    electric_calibration: dict | None = None
 
     def __len__(self) -> int:
         return len(self.df)
@@ -187,6 +188,7 @@ def prepare_household_microdata(
     ami80_by_puma: pd.DataFrame | None = None,
     smi_table: pd.DataFrame | None = None,
     puma_lookup: pd.DataFrame | None = None,
+    service_shares: pd.DataFrame | None = None,
 ) -> HouseholdMicrodata:
     """End-to-end household preparation: load, label, compute burden, attach AMI/SMI.
 
@@ -225,6 +227,7 @@ def prepare_household_microdata(
 
     apply_income_adjustment(df)
     apply_energy_cost_adjustment(df, missing_cost_rule=cfg.thresholds.missing_cost_rule)
+    electric_calibration = _run_electric_calibration(cfg, df, service_shares)
     compute_energy_burden_pums(
         df,
         threshold=cfg.thresholds.energy_burden_threshold,
@@ -287,4 +290,67 @@ def prepare_household_microdata(
         pums_year=cfg.vintages.pums_year,
         has_post_scenario=False,
         puma_lookup=puma_lookup,
+        electric_calibration=electric_calibration,
     )
+
+
+def _run_electric_calibration(
+    cfg: Config, df: pd.DataFrame, service_shares: pd.DataFrame | None
+) -> dict | None:
+    """Run the EIA-861 electric diagnostic (and, when apply=true, the rescaling).
+
+    Returns the diagnostic dict, or None when `cfg.calibration.electric` is not
+    configured. Must be called after `apply_energy_cost_adjustment` and before
+    `compute_energy_burden_pums` so an applied factor flows into the burden flags.
+    """
+    settings = cfg.calibration.electric
+    if settings is None:
+        return None
+
+    from ..calibration import (
+        apply_electric_calibration,
+        compute_electric_calibration,
+        load_eia861_average_bill,
+    )
+
+    if settings.target_annual_bill is not None:
+        target = float(settings.target_annual_bill)
+        target_info: dict = {"target_source": "config"}
+    else:
+        year = settings.eia861_year
+        if year is None and cfg.data_sources.eia861_csv is None:
+            year = cfg.vintages.pums_year
+        eia = load_eia861_average_bill(
+            cfg.data_sources.eia861_csv,
+            utility_number=settings.utility_number,
+            utility_name=settings.utility_name,
+            state=cfg.geography.state_abbr,
+            year=year,
+        )
+        target = eia["target_annual_bill"]
+        target_info = {
+            "target_source": "eia861_csv" if cfg.data_sources.eia861_csv else "eia861_packaged",
+            "utility_number": eia["utility_number"],
+            "utility_name": eia["utility_name"],
+            "eia861_year": eia["year"],
+        }
+        if "avg_rate_per_kwh" in eia:
+            target_info["avg_rate_per_kwh"] = eia["avg_rate_per_kwh"]
+
+    diagnostic = compute_electric_calibration(
+        df, target_annual_bill=target, service_shares=service_shares
+    )
+    diagnostic.update(target_info)
+    diagnostic["applied"] = settings.apply
+    logger.info(
+        "electric calibration ({}): observed avg annual bill ${:.0f}, target ${:.0f}, "
+        "factor {:.4f}, applied={}",
+        diagnostic["scope"],
+        diagnostic["observed_avg_annual_bill"],
+        diagnostic["target_annual_bill"],
+        diagnostic["factor"],
+        settings.apply,
+    )
+    if settings.apply:
+        apply_electric_calibration(df, factor=diagnostic["factor"])
+    return diagnostic
