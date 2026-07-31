@@ -91,24 +91,19 @@ def _load_puma_overall(out_dir: Path) -> tuple[pd.DataFrame, dict[str, np.ndarra
     return puma, rep_estimates
 
 
-def run(
+def build_service_puma_shares(
     cfg: Config,
     *,
-    metrics: Sequence[str] = DEFAULT_ALLOCATE_METRICS,
-    puma_overall: pd.DataFrame | None = None,
-    replicates: dict[str, np.ndarray] | None = None,
     tract_households: pd.DataFrame | None = None,
-    service_label: str | None = None,
-) -> dict[str, pd.DataFrame]:
-    """Run the service-area allocation. Returns dict of (label -> DataFrame)."""
-    output_dir = ensure_dir(cfg.project.output_dir)
-    cache_dir = resolve_cache_dir(cfg.project.cache_dir)
-    label = service_label or Path(cfg.geography.service_area.shapefile).stem
+) -> pd.DataFrame:
+    """Compute per-PUMA service-area household shares from geography inputs alone.
 
-    if puma_overall is None:
-        puma_overall, loaded_reps = _load_puma_overall(output_dir)
-        if replicates is None:
-            replicates = loaded_reps
+    This is the geography-only half of the pipeline (no dependency on puma_table
+    outputs), so callers that need the shares early — e.g. EIA-861 electric calibration
+    in `prepare_household_microdata` — can build them first and pass the result back
+    into `run(..., puma_shares=...)` to avoid recomputing.
+    """
+    cache_dir = resolve_cache_dir(cfg.project.cache_dir)
 
     if tract_households is None:
         tract_households = resolve_tract_households(cfg, cache_dir)
@@ -134,9 +129,32 @@ def run(
         except Exception as exc:
             logger.warning("skipping urban/rural split (could not load UAC20): {}", exc)
 
-    puma_shares = compute_household_weighted_puma_shares(
+    return compute_household_weighted_puma_shares(
         tracts_with_puma, tract_households, service_union, urban_areas
     )
+
+
+def run(
+    cfg: Config,
+    *,
+    metrics: Sequence[str] = DEFAULT_ALLOCATE_METRICS,
+    puma_overall: pd.DataFrame | None = None,
+    replicates: dict[str, np.ndarray] | None = None,
+    tract_households: pd.DataFrame | None = None,
+    service_label: str | None = None,
+    puma_shares: pd.DataFrame | None = None,
+) -> dict[str, pd.DataFrame]:
+    """Run the service-area allocation. Returns dict of (label -> DataFrame)."""
+    output_dir = ensure_dir(cfg.project.output_dir)
+    label = service_label or Path(cfg.geography.service_area.shapefile).stem
+
+    if puma_overall is None:
+        puma_overall, loaded_reps = _load_puma_overall(output_dir)
+        if replicates is None:
+            replicates = loaded_reps
+
+    if puma_shares is None:
+        puma_shares = build_service_puma_shares(cfg, tract_households=tract_households)
 
     by_puma, totals, rates = allocate_puma_counts_to_service(
         puma_overall,
