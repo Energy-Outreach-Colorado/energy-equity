@@ -15,6 +15,9 @@ territory or other geography utilizing public US Census microdata:
 - **Affordability & program eligibility** — how many households fall under income
   thresholds (≤80% Area Median Income, ≤60% State Median Income) and burden thresholds, and
   how a *proposed* change in utility rates would expand or shrink the eligible population.
+- **Affordability Gap** - The total annual dollars needed to bring every
+  household's energy burden down to a target threshold, which sizes the budget for a
+  percentage-of-income payment plan (PIPP) or bill-assistance program.
 - **Rate-impact scenarios** — if a utility raises a fixed monthly charge, how many
   households get pushed over the burden thresholds, who they are, and how the impact scales
   with the size of the increase.
@@ -39,8 +42,10 @@ package builds:
    (energy burden, rent burden, AMI ≤80%, SMI ≤60%, demographic cuts).
 2. **Service-territory allocations** by tract-household-weighted PUMA shares, with optional
    urban/rural splits.
-3. **Eligibility analysis** comparing current vs proposed energy-burden thresholds
-   (configurable; default 6% / 2.5% for Colorado PIPP).
+3. **Eligibility analysis** comparing current vs proposed energy burden thresholds
+   (configurable; default 6% / 2.5% for Colorado PIPP), including affordability gap
+   sizing. Affordability gap sizing is the annual dollars required to bring households at or below a burden
+   threshold, reported by population segment and per PUMA.
 4. **Fixed-charge / rate-increase impact scenarios**: how many households are newly
    energy-burdened at 6% and 10% under a proposed monthly bill increase, with demographic
    incidence and a sensitivity sweep.

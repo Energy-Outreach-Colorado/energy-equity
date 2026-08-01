@@ -235,6 +235,25 @@ class EligibilityAnalysisPipelineConfig(_StrictModel):
         default_factory=lambda: ["race", "ethnicity", "age", "tenure", "language", "hh_type"]
     )
     collapse_top_n_categories: int = Field(default=20, ge=1)
+    gap_thresholds: list[float] | None = Field(
+        default=None,
+        description=(
+            "Burden thresholds for the affordability-gap tables (annual dollars needed "
+            "to bring each household down to the threshold). Null uses "
+            "thresholds.energy_burden_threshold and thresholds.high_energy_burden_threshold."
+        ),
+    )
+
+    @field_validator("gap_thresholds")
+    @classmethod
+    def _gap_thresholds_in_range(cls, value: list[float] | None) -> list[float] | None:
+        if value is not None:
+            if not value:
+                raise ValueError("gap_thresholds must be null or a non-empty list")
+            for t in value:
+                if not 0.0 < t < 1.0:
+                    raise ValueError(f"gap_thresholds entries must be in (0, 1), got {t}")
+        return value
 
 
 class FixedChargePipelineConfig(_StrictModel):
