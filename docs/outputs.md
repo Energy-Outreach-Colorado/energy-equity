@@ -111,6 +111,18 @@ universe (`energy_burdened_households`, `highly_energy_burdened_households`, sha
 rollups (`service_households`, `current/proposed/newly_added_eligible`, `energy_burdened_*`,
 rates). Source for the choropleth maps.
 
+**`affordability_gap.csv`** — one row per (`segment`, `population`, `threshold`): the
+affordability gap, i.e. the annual dollars needed to bring every household's energy burden
+down to `threshold` (per household: `max(0, cost − threshold × income)`). Columns:
+`gap_valid_households` (positive income, non-missing cost), `households_in_gap` (burden
+strictly above the threshold), `total_gap_dollars`, `mean_gap_per_household_in_gap`,
+`households_in_gap_rate`, and replicate-based `*_moe90` for the two weighted estimates.
+Sizes a percentage-of-income plan or bill-assistance budget. Thresholds come from
+`pipelines.eligibility_analysis.gap_thresholds` (default: the 6% and 10% burden thresholds).
+
+**`affordability_gap_by_puma.csv`** — the same gap metrics per (`PUMA`, `threshold`) using
+`w_service` weights; input for gap choropleths.
+
 ### From `ee run fixed-charge`
 
 **`fixed_charge_headline_summary.csv`** — one row per (`segment`, `population`): baseline vs

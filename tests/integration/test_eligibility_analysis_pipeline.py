@@ -85,6 +85,8 @@ def test_eligibility_analysis_produces_all_outputs(cfg_with_geo: Config) -> None
         "demographics_tenure.csv",
         "demographics_race_energy_burden.csv",
         "puma_summary.csv",
+        "affordability_gap.csv",
+        "affordability_gap_by_puma.csv",
     ]
     for fname in expected_files:
         assert (out_dir / fname).exists(), f"missing output: {fname}"
@@ -114,3 +116,40 @@ def test_headline_summary_invariants(cfg_with_geo: Config) -> None:
     )
     # Low income >= proposed eligible (eligibility is gated by AMI).
     assert all_row["low_income_households"] >= all_row["proposed_eligible_households"]
+
+
+def test_affordability_gap_invariants(cfg_with_geo: Config) -> None:
+    ami80 = synthesize_ami80_by_puma()
+    md = prepare_household_microdata(cfg_with_geo, ami80_by_puma=ami80)
+    pt = puma_table.run(cfg_with_geo, microdata=md, write_demographics=False)
+    sa = service_allocation.run(
+        cfg_with_geo,
+        puma_overall=pt["puma_overall"],
+        replicates=pt["puma_overall_replicates"],  # type: ignore[arg-type]
+        tract_households=make_tract_households(),
+        service_label="test_service",
+    )
+    ea = eligibility_analysis.run(cfg_with_geo, microdata=md, service_shares=sa["puma_shares"])
+
+    gap = ea["affordability_gap"]
+    assert set(gap["threshold"].unique()) == {0.06, 0.10}
+    assert (gap["total_gap_dollars"] >= 0).all()
+    assert (gap["households_in_gap"] <= gap["gap_valid_households"] + 1e-9).all()
+    assert gap["households_in_gap_moe90"].notna().all()
+    assert gap["total_gap_dollars_moe90"].notna().all()
+
+    all_rows = gap[(gap["segment"] == "all")].set_index(["population", "threshold"])
+    assert (
+        all_rows.loc[("All households", 0.10), "total_gap_dollars"]
+        <= all_rows.loc[("All households", 0.06), "total_gap_dollars"]
+    )
+    assert (
+        all_rows.loc[("<=80% AMI", 0.06), "total_gap_dollars"]
+        <= all_rows.loc[("All households", 0.06), "total_gap_dollars"]
+    )
+
+    by_puma = ea["affordability_gap_by_puma"]
+    t6 = by_puma[by_puma["threshold"] == 0.06]
+    assert t6["total_gap_dollars"].sum() == pytest.approx(
+        all_rows.loc[("All households", 0.06), "total_gap_dollars"]
+    )

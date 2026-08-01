@@ -152,6 +152,32 @@ def test_calibration_csv_with_utility_ok() -> None:
     assert cfg.calibration.electric.utility_number == 15466
 
 
+def test_gap_thresholds_accepted() -> None:
+    payload = _base_payload()
+    payload["pipelines"] = {"eligibility_analysis": {"gap_thresholds": [0.03, 0.06]}}
+    cfg = Config.from_mapping(payload)
+    assert cfg.pipelines.eligibility_analysis.gap_thresholds == [0.03, 0.06]
+
+
+def test_gap_thresholds_default_none() -> None:
+    cfg = Config.from_mapping(_base_payload())
+    assert cfg.pipelines.eligibility_analysis.gap_thresholds is None
+
+
+def test_gap_thresholds_out_of_range_rejected() -> None:
+    payload = _base_payload()
+    payload["pipelines"] = {"eligibility_analysis": {"gap_thresholds": [0.06, 1.5]}}
+    with pytest.raises(Exception, match="0, 1"):
+        Config.from_mapping(payload)
+
+
+def test_gap_thresholds_empty_rejected() -> None:
+    payload = _base_payload()
+    payload["pipelines"] = {"eligibility_analysis": {"gap_thresholds": []}}
+    with pytest.raises(Exception, match="non-empty"):
+        Config.from_mapping(payload)
+
+
 def test_calibration_unknown_key_rejected() -> None:
     payload = _base_payload()
     payload["calibration"] = {"electric": {"target_annual_bill": 1150.0, "typo_key": 1}}

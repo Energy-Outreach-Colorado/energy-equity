@@ -145,6 +145,28 @@ segment rows are deliberately omitted rather than defaulted to rural.
   It sweeps a range of dollar increases and produces a delta-sensitivity table (how many
   households see their burden rise by at least N percentage points).
 
+### 3.4b Affordability-gap sizing
+
+Alongside the eligibility counts, the pipeline sizes the **affordability gap**: for each
+household with positive income and a non-missing energy cost,
+
+```
+gap(t) = max(0, annual_energy_cost − t × annual_income)
+```
+
+is the annual dollar reduction that would bring its energy burden down to threshold `t`.
+The service-weighted sum of `gap(t)` is the total program cost of a
+percentage-of-income-style intervention at that threshold, and the weighted count with
+`gap(t) > 0` is the household universe it would serve. Both carry replicate-based 90%
+MOEs (the gap is a fixed per-household dollar amount, so each replicate estimate is a
+re-weighted sum — the same SDR machinery as every other count).
+
+Interpretation notes: households with non-positive income are excluded (no meaningful
+payment target exists), including under `nonpos_income_rule: treat_as_high`; and because
+gaps are denominated in self-reported dollars, they inherit the cost level bias that
+EIA-861 normalization measures and corrects — run the calibration before publishing gap
+totals ([eia861_normalization.md](eia861_normalization.md)).
+
 ### 3.5 Reporting & regressivity
 
 `reporting` joins the B19001 income distribution for the service area against the statewide

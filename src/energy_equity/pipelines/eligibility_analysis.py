@@ -11,6 +11,8 @@ state's analogous program). Writes:
   - demographics_<dim>.csv         PIPP eligibility breakdown by each demographic
   - demographics_<dim>_energy_burden.csv
   - puma_summary.csv               PUMA-level rollup within service area
+  - affordability_gap.csv          dollars needed to reach burden thresholds
+  - affordability_gap_by_puma.csv  the same, per PUMA, for mapping
 
 This is the renamed `pipp_analysis` from the plan — "PIPP" is a CO-specific program
 acronym; the cosmetic label is `cfg.pipelines.eligibility_analysis.program_name`.
@@ -26,6 +28,10 @@ from loguru import logger
 from ..config import Config
 from ..paths import ensure_dir
 from ..pums.prepare import HouseholdMicrodata
+from ..tables.affordability_gap import (
+    build_affordability_gap_by_puma,
+    build_affordability_gap_summary,
+)
 from ..tables.summaries import (
     attach_service_weights_and_eligibility_flags,
     build_burden_band_summary,
@@ -123,6 +129,25 @@ def run(
         puma_summary = puma_summary.merge(microdata.puma_lookup, on="PUMA", how="left")
     _write(puma_summary, output_dir / "puma_summary.csv")
     written["puma_summary"] = puma_summary
+
+    gap_thresholds = eligibility.gap_thresholds or [
+        cfg.thresholds.energy_burden_threshold,
+        cfg.thresholds.high_energy_burden_threshold,
+    ]
+    gap_summary = build_affordability_gap_summary(
+        hh,
+        thresholds=gap_thresholds,
+        replicate_weight_cols=microdata.replicate_weight_cols,
+        point_weight_col=microdata.point_weight_col,
+    )
+    _write(gap_summary, output_dir / "affordability_gap.csv")
+    written["affordability_gap"] = gap_summary
+
+    gap_by_puma = build_affordability_gap_by_puma(hh, thresholds=gap_thresholds)
+    if microdata.puma_lookup is not None:
+        gap_by_puma = gap_by_puma.merge(microdata.puma_lookup, on="PUMA", how="left")
+    _write(gap_by_puma, output_dir / "affordability_gap_by_puma.csv")
+    written["affordability_gap_by_puma"] = gap_by_puma
 
     written["households_weighted"] = hh
     return written
