@@ -1,20 +1,20 @@
 # energy-equity
-
-Energy burden, utility affordability, and rate-impact analysis from ACS PUMS microdata,
-HUD AMI limits, and LIHEAP SMI thresholds. Parameterized by US state and service-territory
-shapefile, so the same pipelines work for any utility, county, or program footprint.
+The purpose of this code base is to provide a standardized methodology to calculate energy affordability
+for across a specified geospatial area. The metrics include energy burden, utility affordability, and 
+rate-impact analysis from ACS PUMS microdata, HUD AMI limits, and LIHEAP SMI thresholds. Geospatial areas
+are defined using US state and service-territory shapefiles.
 
 ## Analysis overview
 
 At a high level, the repository answers five kinds of questions about a utility service
-territory or other geography, all from public US Census microdata:
+territory or other geography utilizing public US Census microdata:
 
-- **Energy burden** — what share of household income goes to home energy, who is
+- **Energy burden** — what share or percentage of household income goes to home energy, who is
   "energy-burdened" (≥6%) or "highly burdened" (≥10%), and how that varies across the
-  population. Every estimate carries a 90% margin of error from the ACS replicate weights.
+  population.
 - **Affordability & program eligibility** — how many households fall under income
   thresholds (≤80% Area Median Income, ≤60% State Median Income) and burden thresholds, and
-  how a *proposed* program-rule change would expand or shrink the eligible population.
+  how a *proposed* change in utility rates would expand or shrink the eligible population.
 - **Rate-impact scenarios** — if a utility raises a fixed monthly charge, how many
   households get pushed over the burden thresholds, who they are, and how the impact scales
   with the size of the increase.
@@ -22,12 +22,12 @@ territory or other geography, all from public US Census microdata:
   and language; the service area's income distribution vs the statewide distribution; and
   the regressivity of a flat charge (it costs lower-income households a larger share of
   income).
-- **Geographic / service-territory estimation** — because microdata is only published at
-  the coarse PUMA level, the package allocates PUMA estimates into an arbitrary service-area
+- **Geographic / service-territory estimation** — because Census microdata is only published at
+  the coarse PUMA level, this code allocates PUMA estimates into an user provided service-area
   polygon using tract-household-weighted small-area estimation, with optional urban/rural
   splits and PUMA-level maps.
 
-The sections below describe the concrete pipelines and their outputs; see
+The sections below describe the concrete pipelines and their outputs. See
 [Documentation](#documentation) for the full command and output reference.
 
 ## What it does
@@ -95,16 +95,16 @@ output table/figure means is documented in full under [Documentation](#documenta
 
 ## EIA-861 bill normalization (optional)
 
-PUMS electric costs are survey self-reports; EIA Form 861 reports each utility's actual
+PUMS electric costs are derived from self reported survey data. The EIA Form 861 reports each utility's actual
 residential revenue and customer count. The optional `calibration.electric` config block
 compares the PUMS-implied average annual electric bill in your service territory against
 the utility's EIA-861 average (the diagnostic, written to `calibration_electric.csv`),
 and with `apply: true` rescales each bill-paying household's electric cost by
-`target / observed` before energy burden is computed — anchoring the cost level to
-administrative data while preserving the PUMS distribution, as the DOE LEAD tool does.
+`target / observed` before energy burden is computed. This normalizes the cost level to
+administrative data while preserving the PUMS distribution similar to the DOE LEAD tool.
 
-EIA-861 residential data for every US utility (2023 and 2024 final releases) ships with
-the package, so enabling it is just the utility selection:
+EIA-861 residential data for every US utility (2023 and 2024 final releases) is included in the
+repository. You can enable the normalization by including the utility selection:
 
 ```yaml
 calibration:
@@ -113,7 +113,7 @@ calibration:
     apply: false            # start with the diagnostic; set true to calibrate
 ```
 
-Omit the block to disable entirely (the default — existing runs are unaffected). See
+Omit the block to disable the normalization. See
 [docs/eia861_normalization.md](docs/eia861_normalization.md) for the packaged data,
 custom-CSV override schema, and methodology caveats.
 
@@ -144,7 +144,7 @@ from energy_equity.pipelines import puma_table
 - A service-territory polygon (`.shp`, `.geojson`, or `.gpkg`)
 - ACS PUMS housing + person ZIPs for your state (Census)
 - TIGER PUMA + tract shapefile ZIPs for your state (Census)
-- A county-level HUD 80% AMI limits CSV for the FY you want
+- A county-level HUD 80% AMI limits CSV for the FY you want - Colorado's HUD 80% AMI limits is already included in the repository
 - A free Census API key in the `CENSUS_API_KEY` environment variable
 
 ### Census API key (`.env`)
