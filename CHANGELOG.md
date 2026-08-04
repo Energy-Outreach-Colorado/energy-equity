@@ -6,6 +6,10 @@ All notable changes to this project will be documented here. Format follows
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.2.0] - 2026-08-04
+
 ### Added
 - `uv.lock` committed for reproducible builds (run `uv sync` to install).
 - `.python-version` pins development Python to 3.12.
