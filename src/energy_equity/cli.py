@@ -72,7 +72,7 @@ def _load_cfg(path: Path) -> Config:
 
 
 def _prepare_microdata(cfg: Config):
-    """Prepare household microdata, running EIA-861 electric calibration when configured.
+    """Prepare household microdata, running bill calibration when configured.
 
     Calibration needs the service-area PUMA shares before burden is computed, so the
     geography-only share builder runs first; the shares are returned for reuse by

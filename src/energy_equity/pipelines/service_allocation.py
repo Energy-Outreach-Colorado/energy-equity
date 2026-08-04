@@ -99,7 +99,7 @@ def build_service_puma_shares(
     """Compute per-PUMA service-area household shares from geography inputs alone.
 
     This is the geography-only half of the pipeline (no dependency on puma_table
-    outputs), so callers that need the shares early — e.g. EIA-861 electric calibration
+    outputs), so callers that need the shares early — e.g. bill calibration
     in `prepare_household_microdata` — can build them first and pass the result back
     into `run(..., puma_shares=...)` to avoid recomputing.
     """
