@@ -13,8 +13,9 @@ Gaps are defined only for households with positive income and a non-missing ener
 households with non-positive income are excluded regardless of `nonpos_income_rule`
 (no meaningful payment target exists at zero income), matching the population whose
 burden the thresholds describe. Because the gap is denominated in dollars of
-self-reported cost, estimates inherit the level bias EIA-861 calibration corrects —
-run calibration when gap totals will be published.
+self-reported cost, estimates inherit the level bias that bill normalization
+(EIA-861 electric, EIA-176 gas) corrects — run calibration when gap totals will be
+published.
 
 Margins of error use the standard SDR replicate machinery: the gap is a fixed
 per-household dollar amount, so each replicate estimate is a re-weighted sum.

@@ -165,7 +165,7 @@ re-weighted sum — the same SDR machinery as every other count).
 Interpretation notes: households with non-positive income are excluded (no meaningful
 payment target exists), including under `nonpos_income_rule: treat_as_high`; and because
 gaps are denominated in self-reported dollars, they inherit the cost level bias that
-EIA-861 normalization measures and corrects — run the calibration before publishing gap
+bill normalization measures and corrects — run the calibration for both fuels before publishing gap
 totals ([bill_normalization.md](bill_normalization.md)).
 
 ### 3.4c Multi-year trends
