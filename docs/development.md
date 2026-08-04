@@ -67,10 +67,13 @@ The five pipelines form a strict dependency chain:
 prepare_household_microdata --> puma_table --> service_allocation --> eligibility_analysis
                                                                   \--> fixed_charge
 reporting (consumes B19001 + service-area shapes; reads no pipeline output directly)
+trends (consumes completed per-year run OUTPUT DIRS via pipelines.trends.runs; not part
+        of `ee run all` -- each year's run must finish first)
 ```
 
 Every pipeline lives in `src/energy_equity/pipelines/<name>.py` and exposes a single
-`run(cfg: Config, ...)` entry point. The CLI's `ee run all` chains them in this order.
+`run(cfg: Config, ...)` entry point. The CLI's `ee run all` chains the five core
+pipelines in this order.
 
 ### Central data object: `HouseholdMicrodata`
 

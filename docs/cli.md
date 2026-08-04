@@ -47,7 +47,8 @@ prerequisites already exist in `output_dir`.
 | `ee run eligibility -c …` | Program-eligibility comparison (current vs proposed burden threshold) + demographic breakdowns. | PUMS, service shares | `headline_summary`, burden-band tables, `demographics_*`, `puma_summary` |
 | `ee run fixed-charge -c …` | Rate-increase scenario: who becomes newly energy-burdened, plus a sweep over increase amounts. | PUMS, service shares | `fixed_charge_headline_summary`, `delta_sensitivity_summary`, `scenario_sweep` |
 | `ee run reporting -c …` | Service-vs-statewide income comparison, regressivity, and **all PNG figures**. | Census B19001, TIGER tracts, service shapefile, sibling CSVs from the above | `income_distribution_service_vs_state`, `income_cutpoint_shares`, `regressivity_table`, `figures/*.png` |
-| `ee run all -c …` | Runs the five pipelines in dependency order. | all of the above | all of the above |
+| `ee run trends -c …` | Compares completed per-year runs (`pipelines.trends.runs`) into trend tables and figures with 90% MOE bands. | each listed run's `affordability_gap.csv`, `<service>_totals.csv`, `<service>_rates.csv` | `trends_affordability_gap`, `trends_energy_burden`, `trends_deltas`, `figures/trend_*.png` |
+| `ee run all -c …` | Runs the five core pipelines in dependency order (`trends` is separate; it needs completed runs first). | all of the above | all of the above |
 
 ## `ee cache` — on-disk cache
 

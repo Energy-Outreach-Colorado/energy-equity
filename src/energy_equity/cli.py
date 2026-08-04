@@ -144,6 +144,15 @@ def run_reporting(config: Path = typer.Option(..., "--config", "-c")) -> None:
     reporting.run(cfg)
 
 
+@run_app.command("trends")
+def run_trends(config: Path = typer.Option(..., "--config", "-c")) -> None:
+    """Compare completed per-year runs (pipelines.trends.runs) into trend tables and figures."""
+    from .pipelines import trends
+
+    cfg = _load_cfg(config)
+    trends.run(cfg)
+
+
 @run_app.command("all")
 def run_all(config: Path = typer.Option(..., "--config", "-c")) -> None:
     """Run every pipeline in dependency order: puma-table -> service-allocation -> eligibility -> fixed-charge -> reporting."""

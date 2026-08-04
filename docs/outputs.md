@@ -151,6 +151,26 @@ below it, service vs statewide, and `diff_pp`.
 share of that bin's midpoint income (`increase_as_pct_of_income`) — lower-income bins carry a
 larger share, which is the regressivity story.
 
+### From `ee run trends`
+
+Compares completed per-year runs listed in `pipelines.trends.runs`. Each year must have
+its own finished run (matching PUMS, ACS, and TIGER vintages) in its own output
+directory. Dollar values stay in each survey year's own dollars, marked by the
+`dollar_basis` column (`nominal_survey_year`).
+
+**`trends_affordability_gap.csv`** — the per-year `affordability_gap.csv` rows stacked
+with a `year` column: one row per (`year`, `segment`, `population`, `threshold`) with the
+gap metrics and their `*_moe90`.
+
+**`trends_energy_burden.csv`** — one row per (`year`, `segment`): `energy_burdened_households`
+(+ `_moe90`) from the allocation totals and `energy_burden_rate` (+ `_moe90`) from the
+allocation rates, plus the `service` label.
+
+**`trends_deltas.csv`** — year-over-year changes: one row per (`table`, identity columns,
+`metric`, `year_from`, `year_to`) with `value_from`, `value_to`, `delta`, and `delta_moe90`.
+The change MOE is the root sum of squares of the two years' MOEs, which is valid for
+independent 1-year PUMS samples; it is NaN when either year's MOE is missing.
+
 ---
 
 ## Figures
@@ -172,6 +192,16 @@ controlled by `pipelines.reporting.figures` in the config (default: all).
 | `energy_burden_bands.png` | All service-area households by burden band. | `energy_burden_bands.csv` | `burden_bands` |
 | `choropleth_current_eligible.png` | Current-eligible households by PUMA (map). | `puma_summary.csv` + TIGER PUMA layer | `choropleth` |
 | `choropleth_newly_added.png` | Newly-added eligible households by PUMA (map). | `puma_summary.csv` + TIGER PUMA layer | `choropleth` |
+
+`ee run trends` writes its own figures (config `pipelines.trends.figures`, default all).
+Lines carry 90% MOE bands as shaded regions; years with a missing MOE keep their point
+but get no band.
+
+| File | Shows | Built from | Config name |
+|---|---|---|---|
+| `trend_affordability_gap.png` | Total affordability gap per year, All households vs ≤80% AMI. | `trends_affordability_gap.csv` | `gap_trend` |
+| `trend_households_in_gap.png` | Households above the burden threshold per year. | `trends_affordability_gap.csv` | `households_in_gap_trend` |
+| `trend_energy_burden_rate.png` | Energy burden rate in the territory per year. | `trends_energy_burden.csv` | `burden_rate_trend` |
 
 Choropleths use plotly's tile-free `px.choropleth` (no Mapbox token required); PUMAs outside
 the service area render empty.
