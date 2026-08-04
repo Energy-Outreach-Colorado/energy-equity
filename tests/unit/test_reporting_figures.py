@@ -88,3 +88,48 @@ def test_fig_puma_choropleth_returns_figure() -> None:
     )
     fig = F.fig_puma_choropleth(gdf, values, value_col="current_eligible_households", title="test")
     assert isinstance(fig, go.Figure)
+
+
+def trend_frame() -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "year": [2022, 2023, 2024, 2022, 2023, 2024],
+            "population": ["All"] * 3 + ["<=80% AMI"] * 3,
+            "value": [100.0, 120.0, 110.0, 60.0, 70.0, 65.0],
+            "moe": [10.0, 12.0, 11.0, 8.0, None, 7.0],
+        }
+    )
+
+
+def test_fig_trend_lines_returns_figure() -> None:
+    fig = F.fig_trend_lines(
+        trend_frame(),
+        value_col="value",
+        moe_col="moe",
+        group_col="population",
+        title="Trend",
+        y_title="Households",
+    )
+    assert isinstance(fig, go.Figure)
+
+
+def test_fig_trend_lines_without_moe_or_groups() -> None:
+    df = trend_frame()
+    df = df[df["population"] == "All"]
+    fig = F.fig_trend_lines(df, value_col="value", title="Trend", y_title="Households")
+    assert isinstance(fig, go.Figure)
+    assert fig.layout.showlegend is False
+
+
+def test_fig_trend_lines_all_nan_moe() -> None:
+    df = trend_frame()
+    df["moe"] = None
+    fig = F.fig_trend_lines(
+        df,
+        value_col="value",
+        moe_col="moe",
+        group_col="population",
+        title="Trend",
+        y_title="Households",
+    )
+    assert isinstance(fig, go.Figure)

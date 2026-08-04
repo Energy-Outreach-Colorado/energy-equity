@@ -167,6 +167,31 @@ gaps are denominated in self-reported dollars, they inherit the cost level bias 
 EIA-861 normalization measures and corrects — run the calibration before publishing gap
 totals ([eia861_normalization.md](eia861_normalization.md)).
 
+### 3.4c Multi-year trends
+
+A single run describes one PUMS survey year. The `trends` pipeline compares several
+completed runs, one per year, to show whether burden and the affordability gap are
+improving or worsening in a territory. It stacks each year's gap and burden outputs
+into long tables, computes year-over-year changes, and draws trend lines with shaded
+90% MOE bands.
+
+Comparability rules the pipeline and its outputs follow:
+
+- **Change MOEs.** The margin of error of a year-over-year change is the root sum of
+  squares of the two years' MOEs. This is valid because 1-year PUMS samples are drawn
+  independently. Overlapping 5-year samples must not be compared this way; configure
+  the pipeline with 1-year runs only.
+- **Dollars stay nominal.** Costs and incomes are inflation-adjusted to each survey's
+  own year, so dollar metrics carry a `dollar_basis` column set to
+  `nominal_survey_year` and figure axes say so. Burden and gap *rates* are ratios and
+  comparable across years as they stand.
+- **Hold thresholds constant.** Use the same HUD AMI fiscal year and SMI vintage for
+  every year in the comparison so eligibility populations do not drift for program
+  reasons rather than economic ones. Disclose the held-constant vintage.
+- **Stay on one PUMA boundary set.** The 2010 to 2020 PUMA boundary change lands
+  between the 2021 and 2022 vintages. Years 2022 onward compare cleanly; mixing
+  boundary eras keeps each year internally valid but breaks PUMA-level comparisons.
+
 ### 3.5 Reporting & regressivity
 
 `reporting` joins the B19001 income distribution for the service area against the statewide

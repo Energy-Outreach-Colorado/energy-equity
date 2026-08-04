@@ -176,6 +176,101 @@ def fig_burden_bands(
     return fig
 
 
+# ---- Multi-year trends ----------------------------------------------------------------
+
+_TREND_COLORS = ("#636EFA", "#EF553B", "#00CC96", "#AB63FA")
+_TREND_MARKERS = ("circle", "square", "diamond", "triangle-up")
+_BAND_ALPHA = 0.18
+
+
+def _hex_to_rgba(hex_color: str, alpha: float) -> str:
+    r = int(hex_color[1:3], 16)
+    g = int(hex_color[3:5], 16)
+    b = int(hex_color[5:7], 16)
+    return f"rgba({r},{g},{b},{alpha})"
+
+
+def fig_trend_lines(
+    df: pd.DataFrame,
+    *,
+    value_col: str,
+    moe_col: str | None = None,
+    group_col: str | None = None,
+    year_col: str = "year",
+    title: str,
+    y_title: str,
+    y_tickformat: str | None = None,
+) -> go.Figure:
+    """Line chart of a metric across survey years, with shaded 90% MOE bands.
+
+    One line per `group_col` value (colors and marker symbols assigned in order of
+    first appearance, never re-cycled on filtering). When `moe_col` is given, each
+    group gets a translucent band spanning estimate ± MOE; years with a missing MOE
+    keep their line point but get no band. X ticks are exactly the survey years.
+    """
+    data = df.copy()
+    groups = list(dict.fromkeys(data[group_col])) if group_col else [None]
+    fig = go.Figure()
+    any_band = False
+
+    for i, group in enumerate(groups):
+        sub = data if group is None else data[data[group_col] == group]
+        sub = sub.sort_values(year_col)
+        color = _TREND_COLORS[i % len(_TREND_COLORS)]
+        symbol = _TREND_MARKERS[i % len(_TREND_MARKERS)]
+
+        if moe_col is not None:
+            moe = pd.to_numeric(sub[moe_col], errors="coerce")
+            band = sub[moe.notna()]
+            if len(band) >= 2:
+                any_band = True
+                upper = band[value_col] + band[moe_col]
+                lower = (band[value_col] - band[moe_col]).clip(lower=0.0)
+                fig.add_scatter(
+                    x=band[year_col],
+                    y=upper,
+                    mode="lines",
+                    line={"width": 0},
+                    showlegend=False,
+                    hoverinfo="skip",
+                )
+                fig.add_scatter(
+                    x=band[year_col],
+                    y=lower,
+                    mode="lines",
+                    line={"width": 0},
+                    fill="tonexty",
+                    fillcolor=_hex_to_rgba(color, _BAND_ALPHA),
+                    showlegend=False,
+                    hoverinfo="skip",
+                )
+
+        fig.add_scatter(
+            x=sub[year_col],
+            y=sub[value_col],
+            mode="lines+markers",
+            name=y_title if group is None else str(group),
+            line={"color": color, "width": 2},
+            marker={"color": color, "size": 8, "symbol": symbol},
+        )
+
+    full_title = title
+    if any_band:
+        full_title = f"{title}<br><sup>Shaded bands show the 90% margin of error</sup>"
+    fig.update_layout(
+        title=full_title,
+        xaxis_title="ACS PUMS survey year",
+        yaxis_title=y_title,
+        showlegend=len(groups) > 1,
+        legend_title_text="",
+    )
+    if y_tickformat is not None:
+        fig.update_layout(yaxis_tickformat=y_tickformat)
+    years = sorted({int(y) for y in data[year_col]})
+    fig.update_xaxes(tickmode="array", tickvals=years)
+    return fig
+
+
 # ---- PUMA choropleth -----------------------------------------------------------------
 
 

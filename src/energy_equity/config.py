@@ -277,6 +277,35 @@ class FixedChargePipelineConfig(_StrictModel):
     )
 
 
+class TrendRunConfig(_StrictModel):
+    year: int = Field(description="PUMS survey year of this completed run.")
+    output_dir: Path = Field(description="Output directory of the completed run for this year.")
+    service_label: str | None = Field(
+        default=None,
+        description=(
+            "Service-area label prefixing that run's allocation CSVs. Null autodetects "
+            "from the single *_rates.csv in the directory."
+        ),
+    )
+
+
+class TrendsPipelineConfig(_StrictModel):
+    runs: list[TrendRunConfig] = Field(
+        default_factory=list,
+        description=(
+            "Completed per-year runs to compare. Each year needs its own prior run "
+            "(matching PUMS, ACS, and TIGER vintages) written to its own output_dir."
+        ),
+    )
+    figures: list[Literal["gap_trend", "households_in_gap_trend", "burden_rate_trend"]] = Field(
+        default_factory=lambda: [
+            "gap_trend",
+            "households_in_gap_trend",
+            "burden_rate_trend",
+        ]
+    )
+
+
 class ReportingPipelineConfig(_StrictModel):
     income_bins_source: Literal["B19001"] = "B19001"
     figures: list[
@@ -312,6 +341,7 @@ class PipelinesConfig(_StrictModel):
     )
     fixed_charge: FixedChargePipelineConfig = Field(default_factory=FixedChargePipelineConfig)
     reporting: ReportingPipelineConfig = Field(default_factory=ReportingPipelineConfig)
+    trends: TrendsPipelineConfig = Field(default_factory=TrendsPipelineConfig)
 
 
 class Config(_StrictModel):
