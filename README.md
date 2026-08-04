@@ -95,31 +95,38 @@ output table/figure means is documented in full under [Documentation](#documenta
   output table and figure the analysis produces.
 - **[docs/analysis.md](docs/analysis.md)** — the analysis methodology: what each metric
   measures, the pipeline, and a detailed description of the error/margin-of-error analysis.
-- **[docs/eia861_normalization.md](docs/eia861_normalization.md)** — optional EIA-861
-  electric bill normalization: methodology, configuration, CSV schema, and caveats.
+- **[docs/bill_normalization.md](docs/bill_normalization.md)** — optional electric
+  (EIA-861) and natural gas (EIA-176) bill normalization: methodology, configuration,
+  packaged data, and caveats.
 
-## EIA-861 bill normalization (optional)
+## Utility bill normalization (optional)
 
-PUMS electric costs are derived from self reported survey data. The EIA Form 861 reports each utility's actual
-residential revenue and customer count. The optional `calibration.electric` config block
-compares the PUMS-implied average annual electric bill in your service territory against
-the utility's EIA-861 average (the diagnostic, written to `calibration_electric.csv`),
-and with `apply: true` rescales each bill-paying household's electric cost by
-`target / observed` before energy burden is computed. This normalizes the cost level to
-administrative data while preserving the PUMS distribution similar to the DOE LEAD tool.
+PUMS energy costs are derived from self reported survey data. EIA Form 861 reports each
+electric utility's actual residential revenue and customer count, and EIA Form 176
+reports the same for natural gas companies. The optional `calibration.electric` and
+`calibration.gas` config blocks compare the PUMS-implied average annual bill in your
+service territory against the administrative average per fuel (the diagnostics, written
+to `calibration_electric.csv` and `calibration_gas.csv`), and with `apply: true` rescale
+each bill-paying household's cost by `target / observed` before energy burden is
+computed. This normalizes the cost level to administrative data while preserving the
+PUMS distribution, similar to the DOE LEAD tool.
 
-EIA-861 residential data for every US utility (2023 and 2024 final releases) is included in the
-repository. You can enable the normalization by including the utility selection:
+Residential data for every US electric utility (EIA-861) and gas company (EIA-176) for
+2022 through 2024 is included in the repository. You can enable the normalization by
+including the utility and company selection:
 
 ```yaml
 calibration:
   electric:
-    utility_number: 15466   # EIA utility ID; row auto-filtered to your state + PUMS year
+    utility_number: 15466   # EIA-861 utility ID; row auto-filtered to your state + PUMS year
     apply: false            # start with the diagnostic; set true to calibrate
+  gas:
+    company_id: 17611459    # EIA-176 company ID (independent of the EIA-861 number)
+    apply: false
 ```
 
-Omit the block to disable the normalization. See
-[docs/eia861_normalization.md](docs/eia861_normalization.md) for the packaged data,
+Omit a block to disable that fuel's normalization. See
+[docs/bill_normalization.md](docs/bill_normalization.md) for the packaged data,
 custom-CSV override schema, and methodology caveats.
 
 ## Logging

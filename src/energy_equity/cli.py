@@ -86,13 +86,17 @@ def _prepare_microdata(cfg: Config):
     from .pums.prepare import prepare_household_microdata
 
     shares = None
-    if cfg.calibration.electric is not None:
+    if cfg.calibration.electric is not None or cfg.calibration.gas is not None:
         shares = service_allocation.build_service_puma_shares(cfg)
     md = prepare_household_microdata(cfg, service_shares=shares)
-    if md.electric_calibration is not None:
-        out_path = ensure_dir(cfg.project.output_dir) / "calibration_electric.csv"
-        pd.DataFrame([md.electric_calibration]).to_csv(out_path, index=False)
-        logger.info("wrote {}", out_path.resolve())
+    for fuel, diagnostic in (
+        ("electric", md.electric_calibration),
+        ("gas", md.gas_calibration),
+    ):
+        if diagnostic is not None:
+            out_path = ensure_dir(cfg.project.output_dir) / f"calibration_{fuel}.csv"
+            pd.DataFrame([diagnostic]).to_csv(out_path, index=False)
+            logger.info("wrote {}", out_path.resolve())
     return md, shares
 
 

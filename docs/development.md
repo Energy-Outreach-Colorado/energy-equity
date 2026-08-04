@@ -169,37 +169,46 @@ The original notebooks were Colorado-hardcoded. The package replaced this with:
 - **Configuration**: pydantic v2 models in `config.py` validate a single YAML per run.
   `extra="forbid"` so typos fail loudly. The `state_abbr` validator uppercases input.
 
-### EIA-861 electric bill normalization (calibration)
+### Utility bill normalization (calibration)
 
 `calibration.py` (top-level library module, sibling of `burden.py`) implements
-LEAD-style normalization of PUMS electric costs against EIA-861 administrative averages
-(see `docs/eia861_normalization.md`). Rules that matter when touching it:
+LEAD-style normalization of PUMS energy costs against administrative averages:
+electric (`calibration.electric`, EIA-861 per utility) and natural gas
+(`calibration.gas`, EIA-176 per company). The generic core is
+`compute_bill_calibration` / `apply_bill_calibration`; the fuel-named functions are
+thin wrappers. See `docs/bill_normalization.md`. Rules that matter when touching it:
 
 - **Off by default.** The `calibration:` config block absent → no behavior change at all.
   Parity tests depend on this; never make calibration (or its diagnostic) run implicitly.
-- Two stages: with `calibration.electric` configured, the diagnostic (observed vs target
-  average bill → `calibration_electric.csv` + log line) always runs; costs are rescaled
-  only when `apply: true`.
+- Two stages per fuel: with a fuel's block configured, the diagnostic (observed vs
+  target average bill → `calibration_electric.csv` / `calibration_gas.csv` + log line)
+  always runs; costs are rescaled only when `apply: true`.
 - The rescale happens inside `prepare_household_microdata` *between*
   `apply_energy_cost_adjustment` and `compute_energy_burden_pums` — it must precede
   burden thresholding (a level shift moves households across the 6%/10% cutoffs
-  nonlinearly). Only households with raw `ELEP` present are averaged or rescaled;
-  NaN-cost households (included-in-rent / no-charge) are excluded on both sides,
-  matching EIA-861's customer denominator.
+  nonlinearly). Only households with the fuel's raw cost present (`ELEP` / `GASP`) are
+  averaged or rescaled; NaN-cost households are excluded on both sides, matching the
+  administrative customer denominators. `apply_bill_calibration` re-sums totals from
+  current components, so applying both fuels is order-independent (tested).
+- Trend runs must calibrate all years or none per fuel; `pipelines/trends.py` records
+  each run's basis (`electric_calibration` / `gas_calibration` columns, detected from
+  the calibration CSVs in each run dir) and warns on a mix.
 - The observed mean is service-weighted: the CLI calls
   `service_allocation.build_service_puma_shares(cfg)` (the geography-only half of that
   pipeline, no puma_table dependency) before prepare and passes the shares to both
   `prepare_household_microdata(service_shares=...)` and
   `service_allocation.run(puma_shares=...)` so they're computed once. Without shares the
   mean falls back to statewide with a warning (`scope: "state"`).
-- EIA-861 residential data ships packaged at `data/eia861/eia861_residential.csv`
-  (per utility-state-year, 2023+2024 final releases; rebuilt via
-  `scripts/build_eia861_residential_csv.py`, provenance in `provenance.csv`,
-  integrity-tested by `tests/unit/test_eia861_data_integrity.py` — same pattern as
-  `data/smi/`). Selection: `calibration.electric.utility_number`/`utility_name`, with
-  `geography.state_abbr` applied automatically and the year defaulting to
-  `vintages.pums_year`. `data_sources.eia861_csv` overrides the packaged file;
-  `calibration.electric.target_annual_bill` bypasses the table entirely. Config
+- Administrative data ships packaged: `data/eia861/eia861_residential.csv` (electric,
+  per utility-state-year, 2022–2024 final releases, rebuilt via
+  `scripts/build_eia861_residential_csv.py`) and `data/eia176/eia176_residential.csv`
+  (gas, per company-state-year, 2022–2024, rebuilt via
+  `scripts/build_eia176_residential_csv.py` from the EIA NGQS RP4 JSON API); both with
+  provenance files and integrity tests — same pattern as `data/smi/`. Selection:
+  `utility_number`/`utility_name` (electric) or `company_id`/`company_name` (gas, no
+  shared key with EIA-861), with `geography.state_abbr` applied automatically and the
+  year defaulting to `vintages.pums_year`. `data_sources.eia861_csv`/`eia176_csv`
+  override the packaged files; `target_annual_bill` bypasses the tables entirely. Config
   validation lives in a `Config` model_validator.
 
 ### "PIPP" was renamed to "eligibility_analysis"

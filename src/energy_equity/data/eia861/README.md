@@ -3,7 +3,7 @@
 `eia861_residential.csv` holds residential-class electricity revenue, sales, and customer
 counts per utility, state, and data year, derived from the EIA Form 861 "Sales to
 Ultimate Customers" workbooks. It is the packaged default for the optional
-`calibration.electric` EIA-861 bill normalization (see `docs/eia861_normalization.md`);
+`calibration.electric` EIA-861 bill normalization (see `docs/bill_normalization.md`);
 `data_sources.eia861_csv` overrides it.
 
 ## Schema

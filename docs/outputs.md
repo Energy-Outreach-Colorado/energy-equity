@@ -42,13 +42,14 @@ easily:
 
 ### From microdata preparation (any of `ee run puma-table`, `eligibility`, `fixed-charge`, `all`)
 
-**`calibration_electric.csv`** — one row; written only when the `calibration.electric`
-config block is set. The EIA-861 electric bill normalization diagnostic:
-`observed_avg_annual_bill`, `target_annual_bill`, `factor`, `n_payers_unweighted`,
-`payer_weighted_households`, `scope` (`service_area` or `state`), `target_source`
-(`config` or `eia861_csv`, with utility identifiers and `avg_rate_per_kwh` when derived
-from a CSV), and `applied` — whether the factor was applied to the microdata (`apply:
-true`) or reported only. See [eia861_normalization.md](eia861_normalization.md).
+**`calibration_electric.csv` / `calibration_gas.csv`** — one row each; written only when
+the matching `calibration.electric` / `calibration.gas` config block is set. The bill
+normalization diagnostics: `observed_avg_annual_bill`, `target_annual_bill`, `factor`,
+`n_payers_unweighted`, `payer_weighted_households`, `scope` (`service_area` or `state`),
+`target_source` and the matched utility or company identifiers (plus `avg_rate_per_kwh`
+or `avg_price_per_mcf` when volume data is available), and `applied` — whether the
+factor was applied to the microdata (`apply: true`) or reported only. See
+[bill_normalization.md](bill_normalization.md).
 
 ### From `ee run puma-table`
 
@@ -165,6 +166,12 @@ gap metrics and their `*_moe90`.
 **`trends_energy_burden.csv`** — one row per (`year`, `segment`): `energy_burdened_households`
 (+ `_moe90`) from the allocation totals and `energy_burden_rate` (+ `_moe90`) from the
 allocation rates, plus the `service` label.
+
+Both trend tables carry `electric_calibration` and `gas_calibration` columns recording
+each year's bill-normalization basis (`calibrated`, `diagnostic`, or `uncalibrated`).
+Within one comparison every year must share the same basis per fuel; the pipeline warns
+loudly when they are mixed, because a level correction applied to only some years
+manufactures a fake trend.
 
 **`trends_deltas.csv`** — year-over-year changes: one row per (`table`, identity columns,
 `metric`, `year_from`, `year_to`) with `value_from`, `value_to`, `delta`, and `delta_moe90`.

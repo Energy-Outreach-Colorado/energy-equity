@@ -157,3 +157,49 @@ def test_target_from_eia861_csv(tmp_path: Path) -> None:
     assert diag["target_source"] == "eia861_csv"
     assert diag["target_annual_bill"] == pytest.approx(1200.0)
     assert diag["utility_name"] == "Public Service Co of Colorado"
+
+
+def test_gas_target_from_packaged_eia176_table(tmp_path: Path) -> None:
+    cfg = make_cfg(tmp_path, calibration={"gas": {"company_id": 17611459, "eia176_year": 2023}})
+    md = prepare_household_microdata(
+        cfg, ami80_by_puma=synthesize_ami80_by_puma(), service_shares=SERVICE_SHARES
+    )
+
+    diag = md.gas_calibration
+    assert diag is not None
+    assert md.electric_calibration is None
+    assert diag["target_source"] == "eia176_packaged"
+    assert diag["company_name"] == "PUB SERVICE CO OF COLORADO"
+    assert 600 <= diag["target_annual_bill"] <= 1100
+    assert diag["applied"] is False
+
+
+def test_both_fuels_applied_land_on_targets(tmp_path: Path) -> None:
+    cfg = make_cfg(
+        tmp_path,
+        calibration={
+            "electric": {"target_annual_bill": 1000.0, "apply": True},
+            "gas": {"target_annual_bill": 700.0, "apply": True},
+        },
+    )
+    md = prepare_household_microdata(
+        cfg, ami80_by_puma=synthesize_ami80_by_puma(), service_shares=SERVICE_SHARES
+    )
+    df = md.df
+    shares = df["PUMA"].map(SERVICE_SHARES.set_index("PUMA")["share_households_in_service"])
+
+    for raw_col, cost_col, target in (
+        ("ELEP", "annual_electric_cost_adj", 1000.0),
+        ("GASP", "annual_gas_cost_adj", 700.0),
+    ):
+        payers = df[raw_col].notna()
+        weights = (df["WGTP"] * shares)[payers]
+        observed = (df.loc[payers, cost_col] * weights).sum() / weights.sum()
+        assert observed == pytest.approx(target)
+
+    resummed = (
+        df["annual_electric_cost_adj"]
+        + df["annual_gas_cost_adj"]
+        + df["annual_other_fuel_cost_adj"]
+    )
+    assert np.allclose(df["annual_energy_cost_adj"], resummed)

@@ -16,6 +16,12 @@ Writes (to the current config's output_dir):
 Dollar amounts stay in each survey year's own dollars (`dollar_basis` column set to
 "nominal_survey_year"). Change MOEs assume independent samples, which holds for
 1-year PUMS vintages; do not feed overlapping 5-year runs to this pipeline.
+
+Each run's bill-normalization treatment is recorded per fuel in the
+`electric_calibration` and `gas_calibration` columns (calibrated / diagnostic /
+uncalibrated, detected from the calibration CSVs in the run directory). Mixing bases
+across years draws a warning: a level correction applied to only some years
+manufactures a fake trend.
 """
 
 from __future__ import annotations
@@ -55,6 +61,41 @@ def _sorted_runs(cfg: Config) -> list[TrendRunConfig]:
     if len(set(years)) != len(years):
         raise ValueError(f"pipelines.trends.runs has duplicate years: {sorted(years)}")
     return sorted(runs, key=lambda run: run.year)
+
+
+def _calibration_basis(run_dir: Path, fuel: str) -> str:
+    """How a run treated one fuel: calibrated, diagnostic (computed, not applied), or uncalibrated."""
+    path = run_dir / f"calibration_{fuel}.csv"
+    if not path.exists():
+        return "uncalibrated"
+    df = pd.read_csv(path)
+    if len(df) and bool(df.iloc[0].get("applied", False)):
+        return "calibrated"
+    return "diagnostic"
+
+
+def _calibration_bases(runs: list[TrendRunConfig]) -> pd.DataFrame:
+    rows = [
+        {
+            "year": int(run.year),
+            "electric_calibration": _calibration_basis(Path(run.output_dir), "electric"),
+            "gas_calibration": _calibration_basis(Path(run.output_dir), "gas"),
+        }
+        for run in runs
+    ]
+    return pd.DataFrame(rows)
+
+
+def _warn_on_mixed_bases(bases: pd.DataFrame) -> None:
+    for col in ("electric_calibration", "gas_calibration"):
+        if bases[col].nunique() > 1:
+            detail = ", ".join(f"{r.year}={getattr(r, col)}" for r in bases.itertuples())
+            logger.warning(
+                "trend runs mix {} bases ({}); a level correction applied to some years "
+                "but not others manufactures a fake trend. Calibrate all years or none.",
+                col.replace("_", " "),
+                detail,
+            )
 
 
 def _resolve_service_label(run_dir: Path, override: str | None) -> str | None:
@@ -172,13 +213,18 @@ def run(cfg: Config) -> dict[str, pd.DataFrame]:
 
     written: dict[str, pd.DataFrame] = {}
 
+    bases = _calibration_bases(runs)
+    _warn_on_mixed_bases(bases)
+
     gap = _load_gap_years(runs)
     if not gap.empty:
+        gap = gap.merge(bases, on="year", how="left")
         _write(gap, output_dir / "trends_affordability_gap.csv")
         written["trends_affordability_gap"] = gap
 
     burden = _load_burden_years(runs)
     if not burden.empty:
+        burden = burden.merge(bases, on="year", how="left")
         _write(burden, output_dir / "trends_energy_burden.csv")
         written["trends_energy_burden"] = burden
 

@@ -191,3 +191,56 @@ def test_missing_inputs_tolerated(tmp_path: Path) -> None:
     written = trends.run(cfg)
     assert written["trends_affordability_gap"]["year"].tolist() == [2022]
     assert written["trends_energy_burden"]["year"].tolist() == [2022]
+
+
+def test_calibration_basis_columns_default_uncalibrated(tmp_path: Path) -> None:
+    d22 = write_run_dir(tmp_path, 2022, total_gap=1.0, gap_moe=1.0, burden_rate=0.1)
+    cfg = make_cfg(tmp_path, [{"year": 2022, "output_dir": str(d22)}])
+    written = trends.run(cfg)
+    gap = written["trends_affordability_gap"]
+    assert (gap["electric_calibration"] == "uncalibrated").all()
+    assert (gap["gas_calibration"] == "uncalibrated").all()
+    burden = written["trends_energy_burden"]
+    assert (burden["electric_calibration"] == "uncalibrated").all()
+
+
+def test_calibration_basis_detected(tmp_path: Path) -> None:
+    d22 = write_run_dir(tmp_path, 2022, total_gap=1.0, gap_moe=1.0, burden_rate=0.1)
+    pd.DataFrame([{"factor": 0.6, "applied": True}]).to_csv(
+        d22 / "calibration_electric.csv", index=False
+    )
+    pd.DataFrame([{"factor": 0.7, "applied": False}]).to_csv(
+        d22 / "calibration_gas.csv", index=False
+    )
+    cfg = make_cfg(tmp_path, [{"year": 2022, "output_dir": str(d22)}])
+    written = trends.run(cfg)
+    gap = written["trends_affordability_gap"]
+    assert (gap["electric_calibration"] == "calibrated").all()
+    assert (gap["gas_calibration"] == "diagnostic").all()
+
+
+def test_mixed_calibration_basis_warns(tmp_path: Path) -> None:
+    from loguru import logger
+
+    d22 = write_run_dir(tmp_path, 2022, total_gap=1.0, gap_moe=1.0, burden_rate=0.1)
+    d23 = write_run_dir(tmp_path, 2023, total_gap=2.0, gap_moe=1.0, burden_rate=0.1)
+    pd.DataFrame([{"factor": 0.6, "applied": True}]).to_csv(
+        d22 / "calibration_electric.csv", index=False
+    )
+    cfg = make_cfg(
+        tmp_path,
+        [
+            {"year": 2022, "output_dir": str(d22)},
+            {"year": 2023, "output_dir": str(d23)},
+        ],
+    )
+    messages: list[str] = []
+    handler_id = logger.add(lambda m: messages.append(str(m)), level="WARNING")
+    logger.enable("energy_equity")
+    try:
+        trends.run(cfg)
+    finally:
+        logger.remove(handler_id)
+        logger.disable("energy_equity")
+    assert any("mix electric calibration bases" in m for m in messages)
+    assert not any("mix gas calibration bases" in m for m in messages)

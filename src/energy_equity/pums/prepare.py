@@ -39,6 +39,7 @@ class HouseholdMicrodata:
     has_post_scenario: bool = False
     puma_lookup: pd.DataFrame | None = None
     electric_calibration: dict | None = None
+    gas_calibration: dict | None = None
 
     def __len__(self) -> int:
         return len(self.df)
@@ -228,6 +229,7 @@ def prepare_household_microdata(
     apply_income_adjustment(df)
     apply_energy_cost_adjustment(df, missing_cost_rule=cfg.thresholds.missing_cost_rule)
     electric_calibration = _run_electric_calibration(cfg, df, service_shares)
+    gas_calibration = _run_gas_calibration(cfg, df, service_shares)
     compute_energy_burden_pums(
         df,
         threshold=cfg.thresholds.energy_burden_threshold,
@@ -291,27 +293,63 @@ def prepare_household_microdata(
         has_post_scenario=False,
         puma_lookup=puma_lookup,
         electric_calibration=electric_calibration,
+        gas_calibration=gas_calibration,
     )
+
+
+def _finish_fuel_calibration(
+    df: pd.DataFrame,
+    service_shares: pd.DataFrame | None,
+    *,
+    fuel: str,
+    target: float,
+    target_info: dict,
+    apply: bool,
+    cost_col: str,
+    raw_col: str,
+    apply_fn,
+) -> dict:
+    """Shared diagnostic + optional rescale step for one fuel.
+
+    Must run after `apply_energy_cost_adjustment` and before
+    `compute_energy_burden_pums` so an applied factor flows into the burden flags.
+    """
+    from ..calibration import compute_bill_calibration
+
+    diagnostic = compute_bill_calibration(
+        df,
+        target_annual_bill=target,
+        cost_col=cost_col,
+        raw_col=raw_col,
+        service_shares=service_shares,
+        fuel=fuel,
+    )
+    diagnostic.update(target_info)
+    diagnostic["applied"] = apply
+    logger.info(
+        "{} calibration ({}): observed avg annual bill ${:.0f}, target ${:.0f}, "
+        "factor {:.4f}, applied={}",
+        fuel,
+        diagnostic["scope"],
+        diagnostic["observed_avg_annual_bill"],
+        diagnostic["target_annual_bill"],
+        diagnostic["factor"],
+        apply,
+    )
+    if apply:
+        apply_fn(df, factor=diagnostic["factor"])
+    return diagnostic
 
 
 def _run_electric_calibration(
     cfg: Config, df: pd.DataFrame, service_shares: pd.DataFrame | None
 ) -> dict | None:
-    """Run the EIA-861 electric diagnostic (and, when apply=true, the rescaling).
-
-    Returns the diagnostic dict, or None when `cfg.calibration.electric` is not
-    configured. Must be called after `apply_energy_cost_adjustment` and before
-    `compute_energy_burden_pums` so an applied factor flows into the burden flags.
-    """
+    """EIA-861 electric diagnostic (and, when apply=true, the rescaling)."""
     settings = cfg.calibration.electric
     if settings is None:
         return None
 
-    from ..calibration import (
-        apply_electric_calibration,
-        compute_electric_calibration,
-        load_eia861_average_bill,
-    )
+    from ..calibration import apply_electric_calibration, load_eia861_average_bill
 
     if settings.target_annual_bill is not None:
         target = float(settings.target_annual_bill)
@@ -337,20 +375,61 @@ def _run_electric_calibration(
         if "avg_rate_per_kwh" in eia:
             target_info["avg_rate_per_kwh"] = eia["avg_rate_per_kwh"]
 
-    diagnostic = compute_electric_calibration(
-        df, target_annual_bill=target, service_shares=service_shares
+    return _finish_fuel_calibration(
+        df,
+        service_shares,
+        fuel="electric",
+        target=target,
+        target_info=target_info,
+        apply=settings.apply,
+        cost_col="annual_electric_cost_adj",
+        raw_col="ELEP",
+        apply_fn=apply_electric_calibration,
     )
-    diagnostic.update(target_info)
-    diagnostic["applied"] = settings.apply
-    logger.info(
-        "electric calibration ({}): observed avg annual bill ${:.0f}, target ${:.0f}, "
-        "factor {:.4f}, applied={}",
-        diagnostic["scope"],
-        diagnostic["observed_avg_annual_bill"],
-        diagnostic["target_annual_bill"],
-        diagnostic["factor"],
-        settings.apply,
+
+
+def _run_gas_calibration(
+    cfg: Config, df: pd.DataFrame, service_shares: pd.DataFrame | None
+) -> dict | None:
+    """EIA-176 gas diagnostic (and, when apply=true, the rescaling)."""
+    settings = cfg.calibration.gas
+    if settings is None:
+        return None
+
+    from ..calibration import apply_gas_calibration, load_eia176_average_bill
+
+    if settings.target_annual_bill is not None:
+        target = float(settings.target_annual_bill)
+        target_info: dict = {"target_source": "config"}
+    else:
+        year = settings.eia176_year
+        if year is None and cfg.data_sources.eia176_csv is None:
+            year = cfg.vintages.pums_year
+        eia = load_eia176_average_bill(
+            cfg.data_sources.eia176_csv,
+            company_id=settings.company_id,
+            company_name=settings.company_name,
+            state=cfg.geography.state_abbr,
+            year=year,
+        )
+        target = eia["target_annual_bill"]
+        target_info = {
+            "target_source": "eia176_csv" if cfg.data_sources.eia176_csv else "eia176_packaged",
+            "company_id": eia["company_id"],
+            "company_name": eia["company_name"],
+            "eia176_year": eia["year"],
+        }
+        if "avg_price_per_mcf" in eia:
+            target_info["avg_price_per_mcf"] = eia["avg_price_per_mcf"]
+
+    return _finish_fuel_calibration(
+        df,
+        service_shares,
+        fuel="gas",
+        target=target,
+        target_info=target_info,
+        apply=settings.apply,
+        cost_col="annual_gas_cost_adj",
+        raw_col="GASP",
+        apply_fn=apply_gas_calibration,
     )
-    if settings.apply:
-        apply_electric_calibration(df, factor=diagnostic["factor"])
-    return diagnostic
