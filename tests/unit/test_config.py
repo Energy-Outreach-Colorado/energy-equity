@@ -208,3 +208,29 @@ def test_defaults_for_optional_sections() -> None:
     assert cfg.census_api.key_env == "CENSUS_API_KEY"
     assert cfg.weights.compute_moe is True
     assert cfg.pipelines.fixed_charge.monthly_increase == pytest.approx(4.00)
+
+
+def test_gas_calibration_with_company_ok() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"gas": {"company_id": 17611459}}
+    cfg = Config.from_mapping(payload)
+    assert cfg.calibration.gas.company_id == 17611459
+    assert cfg.calibration.gas.apply is False
+
+
+def test_gas_calibration_requires_target_or_company() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"gas": {"apply": True}}
+    with pytest.raises(Exception, match="company_id"):
+        Config.from_mapping(payload)
+
+
+def test_both_fuel_blocks_accepted() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {
+        "electric": {"utility_number": 15466},
+        "gas": {"company_id": 17611459},
+    }
+    cfg = Config.from_mapping(payload)
+    assert cfg.calibration.electric is not None
+    assert cfg.calibration.gas is not None

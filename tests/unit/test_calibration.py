@@ -1,4 +1,4 @@
-"""Unit tests for energy_equity.calibration (EIA-861 electric bill normalization)."""
+"""Unit tests for energy_equity.calibration (EIA-861 electric and EIA-176 gas normalization)."""
 
 from __future__ import annotations
 
@@ -10,7 +10,9 @@ import pytest
 
 from energy_equity.calibration import (
     apply_electric_calibration,
+    apply_gas_calibration,
     compute_electric_calibration,
+    load_eia176_average_bill,
     load_eia861_average_bill,
 )
 from energy_equity.pums.energy_cost import (
@@ -232,3 +234,83 @@ class TestApplyElectricCalibration:
         compute_energy_burden_pums(df)
         assert df.loc[0, "energy_burden"] == pytest.approx(0.066)
         assert df.loc[0, "energy_burdened"]
+
+
+class TestLoadEia176AverageBill:
+    def test_packaged_psco_row(self) -> None:
+        result = load_eia176_average_bill(company_id=17611459, state="CO", year=2023)
+        assert result["company_name"] == "PUB SERVICE CO OF COLORADO"
+        assert result["target_annual_bill"] == pytest.approx(823, abs=2)
+        assert result["avg_price_per_mcf"] > 0
+
+    def test_selection_required(self) -> None:
+        with pytest.raises(ValueError, match="company_id"):
+            load_eia176_average_bill()
+
+    def test_company_name_and_state(self) -> None:
+        result = load_eia176_average_bill(
+            company_name="pub service co of colorado", state="co", year=2024
+        )
+        assert result["company_id"] == 17611459
+        assert result["target_annual_bill"] == pytest.approx(685, abs=2)
+
+    def test_ambiguous_without_year(self) -> None:
+        with pytest.raises(ValueError, match="narrow the selection"):
+            load_eia176_average_bill(company_id=17611459, state="CO")
+
+    def test_custom_csv_missing_columns(self, tmp_path: Path) -> None:
+        path = tmp_path / "gas.csv"
+        pd.DataFrame([{"company_id": 1, "state": "CO"}]).to_csv(path, index=False)
+        with pytest.raises(ValueError, match="missing required columns"):
+            load_eia176_average_bill(path, company_id=1)
+
+
+def two_fuel_frame() -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "PUMA": ["00800"] * 4,
+            "WGTP": [10.0] * 4,
+            "ELEP": [100.0, np.nan, 100.0, np.nan],
+            "GASP": [50.0, 50.0, np.nan, np.nan],
+            "FULP": [0.0] * 4,
+            "adjhsg_factor": [1.0] * 4,
+        }
+    )
+
+
+class TestApplyGasCalibration:
+    def test_scales_gas_payers_only(self) -> None:
+        df = two_fuel_frame()
+        apply_energy_cost_adjustment(df, missing_cost_rule="zero")
+        apply_gas_calibration(df, factor=0.5)
+        assert df.loc[0, "annual_gas_cost_adj"] == pytest.approx(300.0)
+        assert df.loc[0, "annual_energy_cost_adj"] == pytest.approx(1500.0)
+        assert df.loc[2, "annual_gas_cost_adj"] == pytest.approx(0.0)
+        assert df.loc[2, "annual_energy_cost_adj"] == pytest.approx(1200.0)
+
+    def test_both_fuels_any_order(self) -> None:
+        df_a = two_fuel_frame()
+        apply_energy_cost_adjustment(df_a, missing_cost_rule="zero")
+        apply_electric_calibration(df_a, factor=0.6)
+        apply_gas_calibration(df_a, factor=0.5)
+
+        df_b = two_fuel_frame()
+        apply_energy_cost_adjustment(df_b, missing_cost_rule="zero")
+        apply_gas_calibration(df_b, factor=0.5)
+        apply_electric_calibration(df_b, factor=0.6)
+
+        pd.testing.assert_frame_equal(df_a, df_b)
+        assert df_a.loc[0, "annual_energy_cost_adj"] == pytest.approx(0.6 * 1200 + 0.5 * 600)
+        assert df_a.loc[1, "annual_energy_cost_adj"] == pytest.approx(0.5 * 600)
+        assert df_a.loc[2, "annual_energy_cost_adj"] == pytest.approx(0.6 * 1200)
+        assert df_a.loc[3, "annual_energy_cost_adj"] == pytest.approx(0.0)
+
+    def test_both_fuels_nan_rule(self) -> None:
+        df = two_fuel_frame()
+        df["FULP"] = np.nan
+        apply_energy_cost_adjustment(df, missing_cost_rule="nan")
+        apply_electric_calibration(df, factor=2.0)
+        apply_gas_calibration(df, factor=3.0)
+        assert df.loc[0, "annual_energy_cost_adj"] == pytest.approx(2.0 * 1200 + 3.0 * 600)
+        assert df.loc[1, "annual_energy_cost_adj"] == pytest.approx(3.0 * 600)
+        assert np.isnan(df.loc[3, "annual_energy_cost_adj"])

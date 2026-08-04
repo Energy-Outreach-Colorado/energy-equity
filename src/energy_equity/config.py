@@ -106,7 +106,15 @@ class DataSourcesConfig(_StrictModel):
         description=(
             "Optional override for the packaged EIA-861 residential table "
             "(data/eia861/eia861_residential.csv) used by calibration.electric — same "
-            "schema; see docs/eia861_normalization.md. Null uses the packaged file."
+            "schema; see docs/bill_normalization.md. Null uses the packaged file."
+        ),
+    )
+    eia176_csv: Path | None = Field(
+        default=None,
+        description=(
+            "Optional override for the packaged EIA-176 residential gas table "
+            "(data/eia176/eia176_residential.csv) used by calibration.gas — same "
+            "schema; see docs/bill_normalization.md. Null uses the packaged file."
         ),
     )
 
@@ -197,12 +205,59 @@ class ElectricCalibrationConfig(_StrictModel):
     )
 
 
+class GasCalibrationConfig(_StrictModel):
+    target_annual_bill: float | None = Field(
+        default=None,
+        gt=0.0,
+        description=(
+            "Explicit target average annual residential gas bill in USD. When set, "
+            "the EIA-176 table is not consulted."
+        ),
+    )
+    company_id: int | None = Field(
+        default=None,
+        description=(
+            "EIA-176 company identifier selecting the row in the packaged EIA-176 table "
+            "(or data_sources.eia176_csv when set). Unrelated to EIA-861 utility numbers."
+        ),
+    )
+    company_name: str | None = Field(
+        default=None,
+        description=(
+            "Company name (case-insensitive) selecting the EIA-176 row. Names are often "
+            "abbreviated; check the packaged table for the exact spelling."
+        ),
+    )
+    eia176_year: int | None = Field(
+        default=None,
+        description=(
+            "EIA-176 data year. Null with the packaged table defaults to "
+            "vintages.pums_year (the survey end-year)."
+        ),
+    )
+    apply: bool = Field(
+        default=False,
+        description=(
+            "False (default) runs the observed-vs-target diagnostic only; true rescales "
+            "each gas-paying household's gas cost by target/observed before burden is "
+            "computed."
+        ),
+    )
+
+
 class CalibrationConfig(_StrictModel):
     electric: ElectricCalibrationConfig | None = Field(
         default=None,
         description=(
             "EIA-861 electric bill normalization (LEAD-style). Omit the block to disable "
-            "entirely; see docs/eia861_normalization.md."
+            "entirely; see docs/bill_normalization.md."
+        ),
+    )
+    gas: GasCalibrationConfig | None = Field(
+        default=None,
+        description=(
+            "EIA-176 natural gas bill normalization. Omit the block to disable entirely; "
+            "see docs/bill_normalization.md."
         ),
     )
 
@@ -358,7 +413,7 @@ class Config(_StrictModel):
     pipelines: PipelinesConfig = Field(default_factory=PipelinesConfig)
 
     @model_validator(mode="after")
-    def _check_electric_calibration_target(self) -> Config:
+    def _check_calibration_targets(self) -> Config:
         electric = self.calibration.electric
         if (
             electric is not None
@@ -369,6 +424,17 @@ class Config(_StrictModel):
             raise ValueError(
                 "calibration.electric requires target_annual_bill, or utility_number/"
                 "utility_name to look up the EIA-861 average bill"
+            )
+        gas = self.calibration.gas
+        if (
+            gas is not None
+            and gas.target_annual_bill is None
+            and gas.company_id is None
+            and gas.company_name is None
+        ):
+            raise ValueError(
+                "calibration.gas requires target_annual_bill, or company_id/"
+                "company_name to look up the EIA-176 average bill"
             )
         return self
 

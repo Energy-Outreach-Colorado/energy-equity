@@ -1,4 +1,2011 @@
 utility_number,utility_name,state,customer_class,revenue_thousand_dollars,sales_mwh,customers,ownership,year
+213,Alaska Electric Light & Power Co.,AK,residential,20081.7,162982.0,15159,Investor Owned,2022
+219,Alaska Power and Telephone Co,AK,residential,9950.0,26750.0,5627,Investor Owned,2022
+221,"Alaska Village Elec Coop, Inc",AK,residential,23512.0,44102.0,7770,Cooperative,2022
+3522,Chugach Electric Assn Inc,AK,residential,117980.8,591397.0,96750,Cooperative,2022
+7353,Golden Valley Elec Assn Inc,AK,residential,80932.3,282672.0,40277,Cooperative,2022
+10210,Ketchikan Public Utilities,AK,residential,9099.9,77190.0,6540,Municipal,2022
+10433,Kodiak Electric Assn Inc,AK,residential,6591.0,37778.0,4943,Cooperative,2022
+10451,Kotzebue Electric Assn Inc,AK,residential,2934.1,7722.0,1215,Cooperative,2022
+11824,Matanuska Electric Assn Inc,AK,residential,99099.0,450988.0,62094,Cooperative,2022
+19558,Homer Electric Assn Inc,AK,residential,49034.7,171896.0,28994,Cooperative,2022
+195,Alabama Power Co,AL,residential,2853361.0,18413315.0,1314594,Investor Owned,2022
+241,Albertville Municipal Utilities Board,AL,residential,13259.0,122198.0,8185,Municipal,2022
+604,City of Andalusia,AL,residential,6074.0,41457.0,3613,Municipal,2022
+750,Arab Electric Coop Inc,AL,residential,24796.0,202278.0,13565,Cooperative,2022
+944,City of Athens - (AL),AL,residential,82715.0,729092.0,45984,Municipal,2022
+1149,Baldwin County El Member Corp,AL,residential,132914.0,1043914.0,77977,Cooperative,2022
+1640,City of Bessemer Utilities,AL,residential,14148.0,115164.0,9557,Municipal,2022
+1780,Black Warrior Elec Member Corp,AL,residential,32651.9,270829.0,20198,Cooperative,2022
+3222,Central Alabama Electric Coop,AL,residential,89660.0,613337.0,44255,Cooperative,2022
+3426,Cherokee Electric Coop,AL,residential,36971.0,247723.0,18319,Cooperative,2022
+4327,Coosa Valley Electric Coop Inc,AL,residential,31989.0,223062.0,15278,Cooperative,2022
+4430,"Covington Electric Coop, Inc",AL,residential,49118.3,312074.0,22854,Cooperative,2022
+4617,Cullman Power Board,AL,residential,11559.0,89631.0,6889,Municipal,2022
+4618,"Cullman Electric Coop, Inc",AL,residential,74923.0,572651.0,38566,Cooperative,2022
+4958,Decatur Utilities,AL,residential,36103.0,325812.0,22726,Municipal,2022
+5204,Dixie Electric Coop,AL,residential,42109.0,309434.0,21448,Cooperative,2022
+5309,City of Dothan - (AL),AL,residential,41334.0,369093.0,26435,Municipal,2022
+6422,City of Florence - (AL),AL,residential,75476.2,635209.0,41368,Municipal,2022
+6491,Foley Board of Utilities,AL,residential,86532.0,695713.0,47726,Municipal,2022
+6612,Fort Payne Improvement Authority,AL,residential,11630.0,96914.0,6790,Municipal,2022
+6717,Franklin Electric Coop - (AL),AL,residential,10996.0,79543.0,5904,Cooperative,2022
+7827,Guntersville Electric Board,AL,residential,8874.0,70282.0,4841,Municipal,2022
+8226,City of Hartselle,AL,residential,7558.0,61895.0,4385,Municipal,2022
+9094,City of Huntsville - (AL),AL,residential,311177.0,2651084.0,172205,Municipal,2022
+9739,Joe Wheeler Elec Member Corp,AL,residential,80325.0,595054.0,36202,Cooperative,2022
+11714,Marshall-De Kalb Electric Coop,AL,residential,31471.0,249600.0,16864,Cooperative,2022
+13144,City of Muscle Shoals,AL,residential,12346.0,102882.0,6997,Municipal,2022
+13669,North Alabama Electric Coop,AL,residential,25069.0,197871.0,13030,Cooperative,2022
+14146,City of Opelika - (AL),AL,residential,18860.0,149690.0,12452,Municipal,2022
+14602,Pea River Electric Coop,AL,residential,29985.3,206358.0,14902,Cooperative,2022
+16458,City of Russellville - (AL),AL,residential,6898.0,51390.0,3957,Municipal,2022
+16629,Sand Mountain Electric Coop,AL,residential,48545.0,384061.0,26593,Cooperative,2022
+16829,City of Scottsboro,AL,residential,12901.0,99020.0,6879,Municipal,2022
+17033,Sheffield Utilities,AL,residential,29220.0,236660.0,15493,Municipal,2022
+17252,Singing River Elec Cooperative,AL,residential,559.9,4739.0,330,Cooperative,2022
+17534,"South Alabama Elec Coop, Inc",AL,residential,32861.0,231939.0,16525,Cooperative,2022
+17646,"Southern Pine Elec Coop, Inc",AL,residential,33121.0,260189.0,20333,Cooperative,2022
+18203,Tallapoosa River Elec Coop Inc,AL,residential,49029.5,389540.0,28460,Cooperative,2022
+18472,City of Tarrant,AL,residential,4106.0,29523.0,2106,Municipal,2022
+19219,Diverse Power Incorporated,AL,residential,1356.7,7742.0,577,Cooperative,2022
+19225,City of Troy - (AL),AL,residential,9412.5,97606.0,7671,Municipal,2022
+19307,City of Tuscumbia,AL,residential,6641.0,54623.0,4065,Municipal,2022
+20841,"Wiregrass Electric Coop, Inc",AL,residential,43638.0,314897.0,21595,Cooperative,2022
+40127,Clarke-Washington E M C,AL,residential,30929.0,220519.0,18703,Cooperative,2022
+40364,City of Courtland,AL,residential,876.0,7637.0,552,Municipal,2022
+814,Entergy Arkansas LLC,AR,residential,946715.7,8024677.0,602731,Investor Owned,2022
+817,Arkansas Valley Elec Coop Corp,AR,residential,98291.3,770820.0,53096,Cooperative,2022
+1581,City of Benton - (AR),AR,residential,15384.0,155357.0,12802,Municipal,2022
+1586,City of Bentonville - (AR),AR,residential,32073.0,281021.0,23548,Municipal,2022
+2678,C & L Electric Coop Corp,AR,residential,36250.0,256435.0,20000,Cooperative,2022
+3093,Carroll Electric Coop Corp - (AR),AR,residential,160222.0,1343474.0,94425,Cooperative,2022
+3705,Clarksville Connected Utilities,AR,residential,5132.3,46278.0,3811,Municipal,2022
+3712,Clay County Electric Coop Corp,AR,residential,17863.8,116688.0,10468,Cooperative,2022
+4280,Conway Corporation,AR,residential,34768.0,363289.0,30051,Municipal,2022
+4509,Craighead Electric Coop Corp,AR,residential,48538.0,392644.0,24548,Cooperative,2022
+5860,Empire District Electric Co,AR,residential,6938.9,52903.0,4508,Investor Owned,2022
+6342,First Electric Coop Corp,AR,residential,168936.0,1341211.0,92346,Cooperative,2022
+8840,City of Hope,AR,residential,9099.0,65991.0,5827,Municipal,2022
+9879,City Water and Light Plant,AR,residential,43910.0,516374.0,34116,Municipal,2022
+12681,Mississippi County Electric Co,AR,residential,5463.0,58276.0,3261,Cooperative,2022
+13676,"North Arkansas Elec Coop, Inc",AR,residential,62370.0,445775.0,35460,Cooperative,2022
+13718,City of North Little Rock - (AR),AR,residential,46010.0,380762.0,34599,Municipal,2022
+14063,Oklahoma Gas & Electric Co,AR,residential,94570.6,774073.0,57451,Investor Owned,2022
+14238,Ouachita Electric Coop Corp,AR,residential,11689.0,93212.0,8467,Cooperative,2022
+14289,Ozarks Electric Coop Corp - (AR),AR,residential,118776.4,876358.0,67414,Cooperative,2022
+14446,Paragould Light & Water Comm,AR,residential,19319.0,209012.0,12298,Municipal,2022
+14864,Petit Jean Electric Coop Corp,AR,residential,30765.0,226982.0,18663,Cooperative,2022
+17184,City of Siloam Springs - (AR),AR,residential,10379.0,81218.0,7636,Municipal,2022
+17540,"South Central Ark El Coop, Inc",AR,residential,15927.0,113703.0,9271,Cooperative,2022
+17671,Southwest Arkansas E C C,AR,residential,47002.1,374771.0,24515,Cooperative,2022
+17698,Southwestern Electric Power Co,AR,residential,156216.8,1216126.0,106455,Investor Owned,2022
+20382,City of West Memphis - (AR),AR,residential,13339.0,141599.0,10141,Municipal,2022
+20963,Woodruff Electric Coop Corp,AR,residential,22317.3,179383.0,12153,Cooperative,2022
+176,Ajo Improvement Co,AZ,residential,584.5,5294.0,824,Investor Owned,2022
+803,Arizona Public Service Co,AZ,residential,2046110.7,14756798.0,1202975,Investor Owned,2022
+6957,"Garkane Energy Coop, Inc",AZ,residential,2459.0,24432.0,1265,Cooperative,2022
+12351,City of Mesa - (AZ),AZ,residential,20366.4,151663.0,14760,Municipal,2022
+12919,Morenci Water and Electric,AZ,residential,1621.9,19475.0,2305,Investor Owned,2022
+13314,Navajo Tribal Utility Authority,AZ,residential,26796.0,169895.0,27096,State,2022
+13318,"Navopache Electric Coop, Inc",AZ,residential,40877.0,279490.0,39137,Cooperative,2022
+15048,Electrical Dist No2 Pinal County,AZ,residential,7869.0,63901.0,5034,Political Subdivision,2022
+16572,Salt River Project,AZ,residential,1725469.2,14521787.0,1009970,Political Subdivision,2022
+18280,Sulphur Springs Valley E C Inc,AZ,residential,63818.8,392791.0,45350,Cooperative,2022
+19189,Trico Electric Cooperative Inc,AZ,residential,77842.1,545157.0,49544,Cooperative,2022
+19604,USBIA-San Carlos Project,AZ,residential,13845.0,118935.0,11267,Federal,2022
+19728,"UNS Electric, Inc",AZ,residential,123503.7,1026987.0,92408,Investor Owned,2022
+21538,"Mohave Electric Cooperative, Inc.",AZ,residential,57029.0,460816.0,39670,Cooperative,2022
+24211,Tucson Electric Power Co,AZ,residential,532576.6,3878044.0,403028,Investor Owned,2022
+25866,Ak-Chin Electric Utility Authority,AZ,residential,483.8,5059.0,319,State,2022
+30518,Electrical Dist No3 Pinal County,AZ,residential,53107.0,355935.0,27889,Political Subdivision,2022
+40165,"Dixie Escalante R E A, Inc",AZ,residential,2701.9,33267.0,2626,Cooperative,2022
+65261,Gila River Indian Utility Authority (GRICUA),AZ,residential,5551.2,39422.0,2606,Cooperative,2022
+207,Alameda Municipal Power,CA,residential,27618.3,133445.0,32146,Municipal,2022
+590,City of Anaheim - (CA),CA,residential,100861.0,618231.0,104561,Municipal,2022
+1050,City of Azusa,CA,residential,15417.0,90894.0,14986,Municipal,2022
+2507,City of Burbank Water and Power,CA,residential,43974.0,274745.0,46290,Municipal,2022
+4003,City of Colton - (CA),CA,residential,18232.0,110736.0,17291,Municipal,2022
+4390,City of Corona - (CA),CA,residential,1369.2,8653.0,1288,Municipal,2022
+7294,City of Glendale - (CA),CA,residential,94963.3,407214.0,76929,Municipal,2022
+9216,Imperial Irrigation District,CA,residential,304217.0,1949606.0,139162,Political Subdivision,2022
+11124,City of Lodi - (CA),CA,residential,36060.0,167427.0,23232,Municipal,2022
+11208,Los Angeles Department of Water & Power,CA,residential,1892318.5,8508902.0,1389532,Municipal,2022
+12312,Merced Irrigation District,CA,residential,17051.2,83283.0,10814,Political Subdivision,2022
+12745,Modesto Irrigation District,CA,residential,177268.0,982856.0,102397,Political Subdivision,2022
+14328,Pacific Gas & Electric Co.,CA,residential,6709466.0,11983409.0,1828738,Investor Owned,2022
+14354,PacifiCorp,CA,residential,57980.3,392938.0,36303,Investor Owned,2022
+14401,City of Palo Alto - (CA),CA,residential,27418.0,157370.0,25761,Municipal,2022
+14534,City of Pasadena - (CA),CA,residential,74076.9,350158.0,57705,Municipal,2022
+14999,"Pilot Power Group, LLC",CA,residential,4067.0,30697.0,4549,Retail Power Marketer,2022
+15783,City of Redding - (CA),CA,residential,63382.0,381721.0,38196,Municipal,2022
+16088,City of Riverside - (CA),CA,residential,143611.0,795300.0,99639,Municipal,2022
+16295,City of Roseville - (CA),CA,residential,82089.3,503863.0,59755,Municipal,2022
+16534,Sacramento Municipal Util Dist,CA,residential,797797.4,4766334.0,574344,Political Subdivision,2022
+16609,San Diego Gas & Electric Co,CA,residential,1894970.9,3939825.0,838576,Investor Owned,2022
+16612,City & County of San Francisco,CA,residential,3591.8,18317.0,1618,Municipal,2022
+16655,City of Santa Clara - (CA),CA,residential,36361.9,261798.0,50889,Municipal,2022
+17609,Southern California Edison Co,CA,residential,6726361.0,22517867.0,3339257,Investor Owned,2022
+17612,Bear Valley Electric Service,CA,residential,26251.7,85587.0,23173,Investor Owned,2022
+18260,Surprise Valley Electrification,CA,residential,3607.2,35932.0,2828,Cooperative,2022
+19281,Turlock Irrigation District,CA,residential,130144.0,813781.0,78186,Political Subdivision,2022
+19798,City of Vernon,CA,residential,48.1,326.0,73,Municipal,2022
+19840,"Valley Electric Assn, Inc",CA,residential,18.3,117.0,12,Cooperative,2022
+21093,3 Phases Renewables Inc,CA,residential,36.0,399.0,65,Retail Power Marketer,2022
+55787,City of Moreno Valley - (CA),CA,residential,15352.1,48753.0,6859,Municipal,2022
+56692,Marin Clean Energy,CA,residential,286681.4,2797083.0,510940,Community Choice Aggregator,2022
+57483,Liberty Utilities,CA,residential,46741.5,294017.0,43856,Investor Owned,2022
+59126,Sonoma Clean Power Authority,CA,residential,121017.0,1085640.0,197960,Community Choice Aggregator,2022
+59625,Lancaster Choice Energy,CA,residential,37658.1,354992.0,45045,Community Choice Aggregator,2022
+60181,CleanPowerSF,CA,residential,136051.1,1221826.0,352968,Community Choice Aggregator,2022
+60402,Peninsula Clean Energy Authority,CA,residential,157815.0,1530250.0,277121,Community Choice Aggregator,2022
+60758,Apple Valley Choice Energy,CA,residential,17819.7,178267.0,23217,Community Choice Aggregator,2022
+60759,Silicon Valley Clean Energy Authority,CA,residential,151419.9,1353155.0,246179,Community Choice Aggregator,2022
+60868,Redwood Coast Energy Authority,CA,residential,33003.3,300405.0,52855,Community Choice Aggregator,2022
+61083,Pico Rivera Innovative Municipal Energy,CA,residential,9675.2,94572.0,15168,Community Choice Aggregator,2022
+61431,Pioneer Community Energy,CA,residential,103221.8,942829.0,125052,Community Choice Aggregator,2022
+61432,Central Coast Community Energy,CA,residential,171867.2,1757498.0,379108,Community Choice Aggregator,2022
+61433,San Jacinto Power,CA,residential,11519.0,110088.0,12893,Community Choice Aggregator,2022
+61462,Valley Clean Energy Alliance,CA,residential,35784.0,301363.0,54358,Community Choice Aggregator,2022
+61471,Rancho Mirage Energy Authority,CA,residential,15224.0,144440.0,12379,Community Choice Aggregator,2022
+61475,East Bay Community Energy,CA,residential,305853.0,2651484.0,579289,Community Choice Aggregator,2022
+61526,Clean Power Alliance of Southern Califor,CA,residential,496706.0,5336999.0,719234,Community Choice Aggregator,2022
+61570,King City Community Power,CA,residential,1138.0,10929.0,2822,Community Choice Aggregator,2022
+61858,San Jose Clean Energy,CA,residential,215409.9,1638449.0,328267,Community Choice Aggregator,2022
+63724,BPROUD,CA,residential,1317.4,15534.0,15032,Community Choice Aggregator,2022
+63725,Pomona Choice Energy (PCE),CA,residential,24659.4,231169.0,35355,Community Choice Aggregator,2022
+64195,Desert Community Energy,CA,residential,31233.7,229831.0,28528,Community Choice Aggregator,2022
+64289,San Diego Community Power,CA,residential,261309.0,1612544.0,378763,Community Choice Aggregator,2022
+64425,Clean Energy Alliance,CA,residential,26356.3,231058.0,51875,Community Choice Aggregator,2022
+64555,Santa Barbara Clean Energy,CA,residential,14485.0,141977.0,32325,Community Choice Aggregator,2022
+64928,Orange County Power Authority,CA,residential,16585.4,145601.0,123658,Community Choice Aggregator,2022
+65259,Energy for Palmdale's Independent Choice,CA,residential,3993.1,36798.0,25069,Community Choice Aggregator,2022
+3989,City of Colorado Springs - (CO),CO,residential,239161.0,1583420.0,209601,Municipal,2022
+5086,Delta Montrose Electric Assn,CO,residential,41777.1,282943.0,31618,Cooperative,2022
+5862,"Empire Electric Assn, Inc",CO,residential,15866.1,105840.0,12536,Cooperative,2022
+6604,City of Fort Collins - (CO),CO,residential,64506.8,538944.0,69552,Municipal,2022
+6610,City of Fort Morgan,CO,residential,3868.3,54929.0,5870,Municipal,2022
+6638,City of Fountain,CO,residential,19399.0,155081.0,16795,Municipal,2022
+7563,Grand Valley Power,CO,residential,25144.0,168748.0,16683,Cooperative,2022
+8570,Highline Electric Assn,CO,residential,7405.6,57610.0,5045,Cooperative,2022
+8773,"Holy Cross Electric Assn, Inc",CO,residential,83033.1,688858.0,49312,Cooperative,2022
+9336,CORE Electric Cooperative,CO,residential,243062.0,1701697.0,158050,Cooperative,2022
+10066,K C Electric Association,CO,residential,5312.1,41665.0,3398,Cooperative,2022
+10539,"La Plata Electric Assn, Inc",CO,residential,50773.0,312611.0,39043,Cooperative,2022
+11187,City of Longmont,CO,residential,37432.7,337384.0,39986,Municipal,2022
+11256,City of Loveland - (CO),CO,residential,34426.4,275613.0,34917,Municipal,2022
+12860,Morgan County Rural Elec Assn,CO,residential,9931.8,73654.0,5743,Cooperative,2022
+12866,Moon Lake Electric Assn Inc,CO,residential,1377.4,16349.0,1552,Cooperative,2022
+13050,"Mountain Parks Electric, Inc",CO,residential,23806.0,163681.0,18260,Cooperative,2022
+13058,"Mountain View Elec Assn, Inc",CO,residential,88750.8,609384.0,56320,Cooperative,2022
+15257,"Poudre Valley REA, Inc",CO,residential,60032.1,510902.0,45837,Cooperative,2022
+15466,Public Service Co of Colorado,CO,residential,1391226.9,9847574.0,1328979,Investor Owned,2022
+16603,"San Luis Valley R E C, Inc",CO,residential,12063.0,71218.0,8921,Cooperative,2022
+16616,"San Isabel Electric Assn, Inc",CO,residential,30008.8,183552.0,22826,Cooperative,2022
+16622,"San Miguel Power Assn, Inc",CO,residential,18152.3,114968.0,11741,Cooperative,2022
+17592,Southeast Colorado Power Assn,CO,residential,12103.0,72404.0,7989,Cooperative,2022
+17715,Southwestern Electric Coop Inc - (NM),CO,residential,18.2,88.0,5,Cooperative,2022
+19160,"Tri-County Electric Coop, Inc (OK)",CO,residential,8.6,48.0,9,Cooperative,2022
+19499,"United Power, Inc",CO,residential,126699.1,946371.0,95049,Cooperative,2022
+20510,"Wheatland Electric Coop, Inc",CO,residential,31.1,181.0,29,Cooperative,2022
+20576,"White River Electric Assn, Inc",CO,residential,2963.7,21678.0,2623,Cooperative,2022
+21075,Y-W Electric Assn Inc,CO,residential,7210.0,48207.0,4887,Cooperative,2022
+21081,Yampa Valley Electric Assn Inc,CO,residential,36660.4,247810.0,22692,Cooperative,2022
+27058,"High West Energy, Inc",CO,residential,1024.0,6895.0,674,Cooperative,2022
+56146,"Black Hills Colorado Electric, LLC",CO,residential,123042.0,634576.0,88112,Investor Owned,2022
+2089,Bozrah Light & Power Company,CT,residential,4652.0,24006.0,2417,Municipal,2022
+4176,Connecticut Light & Power Co,CT,residential,2444054.3,8907476.0,1035056,Investor Owned,2022
+7716,Groton Dept of Utilities - (CT),CT,residential,18710.1,105850.0,12244,Municipal,2022
+13374,"Constellation NewEnergy, Inc",CT,residential,54728.0,563997.0,61127,Retail Power Marketer,2022
+13831,City of Norwich - (CT),CT,residential,31526.8,138218.0,18657,Municipal,2022
+17710,"Spark Energy, LP",CT,residential,45.0,307.0,52,Retail Power Marketer,2022
+19497,United Illuminating Co,CT,residential,475525.3,1797627.0,270343,Investor Owned,2022
+20038,Town of Wallingford - (CT),CT,residential,34746.1,219811.0,21543,Municipal,2022
+54820,Direct Energy Services,CT,residential,23254.6,224406.0,25239,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",CT,residential,857.0,6977.0,1352,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",CT,residential,13685.0,140789.0,17258,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,CT,residential,405.0,3303.0,262,Retail Power Marketer,2022
+56504,Major Energy Electric Services,CT,residential,6024.0,51467.0,5124,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,CT,residential,1484.0,11247.0,1350,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",CT,residential,158.2,1722.0,183,Retail Power Marketer,2022
+57487,"XOOM Energy Connecticut, LLC",CT,residential,3818.3,40257.0,5074,Retail Power Marketer,2022
+58119,Public Power LLC (CT),CT,residential,5380.0,52376.0,7490,Retail Power Marketer,2022
+58161,Viridian Energy LLC,CT,residential,942.0,6968.0,1281,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",CT,residential,9328.0,70397.0,8349,Retail Power Marketer,2022
+58683,Everyday Energy LLC,CT,residential,240.1,2007.0,364,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,CT,residential,5.1,56.0,46,Retail Power Marketer,2022
+59055,"Choice Energy, LLC",CT,residential,320.0,2128.0,1085,Retail Power Marketer,2022
+59059,Town Square Energy,CT,residential,14605.9,149460.0,15874,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",CT,residential,280.4,3227.0,1177,Retail Power Marketer,2022
+59620,Verde Energy USA,CT,residential,8188.0,57359.0,7606,Retail Power Marketer,2022
+59794,"Starion Energy, Inc.",CT,residential,2.3,29.0,20,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),CT,residential,1865.4,16179.0,3137,Retail Power Marketer,2022
+63232,"National Gas & Electric, LLC",CT,residential,13.8,163.0,18,Retail Power Marketer,2022
+65310,Energywell LLC,CT,residential,16.6,146.0,108,Retail Power Marketer,2022
+7279,"NextEra Energy Services, LLC",DC,residential,94.1,1011.0,84,Retail Power Marketer,2022
+13374,"Constellation NewEnergy, Inc",DC,residential,1600.4,15977.0,1886,Retail Power Marketer,2022
+15270,Potomac Electric Power Co,DC,residential,284248.0,2061710.0,267819,Investor Owned,2022
+20659,"WGL Energy Services, Inc.",DC,residential,3689.0,34789.0,4319,Retail Power Marketer,2022
+54820,Direct Energy Services,DC,residential,1421.5,12220.0,784,Retail Power Marketer,2022
+55781,Liberty Power Corp.,DC,residential,0.6,6.0,18,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",DC,residential,1937.2,12551.0,1340,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",DC,residential,327.0,2219.0,282,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",DC,residential,326.0,2987.0,350,Retail Power Marketer,2022
+56504,Major Energy Electric Services,DC,residential,746.0,4956.0,449,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,DC,residential,457.0,3145.0,389,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",DC,residential,32.8,430.0,43,Retail Power Marketer,2022
+58119,Public Power LLC (CT),DC,residential,1283.0,10170.0,701,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,DC,residential,132.6,904.0,97,Retail Power Marketer,2022
+58476,"Stream Energy Columbia, LLC",DC,residential,454.8,3093.0,387,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",DC,residential,13188.0,66960.0,9124,Retail Power Marketer,2022
+58953,"Star Energy Partners, LLC",DC,residential,973.1,7606.0,1611,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",DC,residential,5375.2,28137.0,3861,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",DC,residential,40.4,281.0,28,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,DC,residential,702.7,3990.0,476,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",DC,residential,324.1,1724.0,210,Retail Power Marketer,2022
+59062,"Horizon Power and Light, LLC",DC,residential,223.2,1510.0,183,Retail Power Marketer,2022
+59065,Titan Gas LLC,DC,residential,551.5,3837.0,357,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",DC,residential,315.1,2519.0,317,Retail Power Marketer,2022
+59312,"XOOM Energy Washington DC, LLC",DC,residential,1290.0,8847.0,1129,Retail Power Marketer,2022
+59795,"Starion Energy PA, Inc.",DC,residential,0.1,2.0,2,Retail Power Marketer,2022
+59797,Park Power LLC,DC,residential,591.5,4310.0,528,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",DC,residential,75.1,805.0,23,Retail Power Marketer,2022
+60218,MPower Energy NJ LLC,DC,residential,2243.3,13781.0,1819,Retail Power Marketer,2022
+61059,"Renaissance Power & Gas, Inc.",DC,residential,228.0,1654.0,213,Retail Power Marketer,2022
+61283,"Palmco Power DC, LLC",DC,residential,1301.2,4981.0,715,Retail Power Marketer,2022
+61972,"SunSea Energy, LLC",DC,residential,2221.0,8532.0,1446,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",DC,residential,201.0,1128.0,142,Retail Power Marketer,2022
+65310,Energywell LLC,DC,residential,0.4,2.0,2,Retail Power Marketer,2022
+4100,"Commerce Energy, Inc.",DE,residential,2831.1,23001.0,1980,Retail Power Marketer,2022
+5027,Delmarva Power,DE,residential,413263.1,2959985.0,268944,Investor Owned,2022
+5070,Delaware Electric Cooperative,DE,residential,165587.0,1277790.0,100127,Cooperative,2022
+5335,City of Dover - (DE),DE,residential,30791.0,216310.0,21281,Municipal,2022
+7279,"NextEra Energy Services, LLC",DE,residential,435.2,2816.0,240,Retail Power Marketer,2022
+12478,Town of Middletown - (DE),DE,residential,13511.7,97381.0,8867,Municipal,2022
+12540,City of Milford - (DE),DE,residential,10258.8,78254.0,6879,Municipal,2022
+13374,"Constellation NewEnergy, Inc",DE,residential,814.9,9611.0,831,Retail Power Marketer,2022
+13519,City of Newark - (DE),DE,residential,17014.2,100064.0,11725,Municipal,2022
+17710,"Spark Energy, LP",DE,residential,288.0,2466.0,183,Retail Power Marketer,2022
+20659,"WGL Energy Services, Inc.",DE,residential,2128.0,22823.0,2371,Retail Power Marketer,2022
+54820,Direct Energy Services,DE,residential,5685.6,53496.0,4800,Retail Power Marketer,2022
+55781,Liberty Power Corp.,DE,residential,3.2,31.0,127,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",DE,residential,435.0,4708.0,404,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,DE,residential,2385.0,17377.0,1607,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",DE,residential,22.5,120.0,15,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,DE,residential,313.2,2309.0,200,Retail Power Marketer,2022
+58632,"XOOM Energy Delaware, LLC",DE,residential,768.0,5193.0,471,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",DE,residential,5228.9,29995.0,3316,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",DE,residential,4304.0,23030.0,2322,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,DE,residential,991.0,5373.0,591,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",DE,residential,2220.0,21860.0,2244,Retail Power Marketer,2022
+59793,"First Point Power, LLC",DE,residential,75.5,457.0,37,Retail Power Marketer,2022
+59797,Park Power LLC,DE,residential,526.8,4240.0,435,Retail Power Marketer,2022
+59807,"Rushmore Energy, LLC",DE,residential,2721.3,26820.0,3023,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",DE,residential,1294.7,8383.0,935,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,DE,residential,17.0,108.0,14,Retail Power Marketer,2022
+59848,"ResCom Energy, LLC",DE,residential,0.1,1.0,5,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",DE,residential,92.7,1640.0,92,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),DE,residential,281.5,1796.0,185,Retail Power Marketer,2022
+61201,"Stream Energy Delaware, LLC",DE,residential,452.6,3523.0,331,Retail Power Marketer,2022
+61349,"Palmco Power DE, LLC",DE,residential,914.3,3569.0,382,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",DE,residential,266.0,1545.0,176,Retail Power Marketer,2022
+65310,Energywell LLC,DE,residential,3.3,17.0,22,Retail Power Marketer,2022
+1300,City of Bartow - (FL),FL,residential,20810.1,151095.0,10918,Municipal,2022
+3245,"Central Florida Elec Coop, Inc",FL,residential,57488.0,393696.0,31784,Cooperative,2022
+3502,"Choctawhatche Elec Coop, Inc",FL,residential,96115.9,761103.0,52816,Cooperative,2022
+3757,"Clay Electric Cooperative, Inc",FL,residential,331749.1,2366748.0,165066,Cooperative,2022
+6443,"Florida Keys El Coop Assn, Inc",FL,residential,65700.0,458435.0,28179,Cooperative,2022
+6452,Florida Power & Light Co,FL,residential,9349311.5,69473785.0,5079787,Investor Owned,2022
+6455,"Duke Energy Florida, LLC",FL,residential,3335666.2,21507943.0,1730814,Investor Owned,2022
+6457,Florida Public Utilities Co,FL,residential,44727.0,305593.0,25516,Investor Owned,2022
+6616,Fort Pierce Utilities Authority,FL,residential,39171.0,253034.0,23862,Municipal,2022
+6909,Gainesville Regional Utilities,FL,residential,148603.9,839871.0,89751,Municipal,2022
+7264,"Glades Electric Coop, Inc",FL,residential,30724.0,175967.0,13636,Cooperative,2022
+7785,"Gulf Coast Electric Coop, Inc",FL,residential,39979.0,284511.0,20280,Cooperative,2022
+8795,City of Homestead - (FL),FL,residential,46411.5,385270.0,28797,Municipal,2022
+9616,Beaches Energy Services,FL,residential,53954.1,440699.0,30525,Municipal,2022
+9617,JEA,FL,residential,810916.0,5723164.0,447308,Municipal,2022
+10226,"Utility Board of the City of Key West, F",FL,residential,69977.0,388297.0,26831,Municipal,2022
+10376,Kissimmee Utility Authority,FL,residential,141220.4,1016798.0,74568,Municipal,2022
+10620,City of Lake Worth Beach - (FL),FL,residential,38966.0,282450.0,24432,Municipal,2022
+10623,City of Lakeland - (FL),FL,residential,205750.6,1689706.0,116907,Municipal,2022
+10857,"Lee County Electric Coop, Inc",FL,residential,424855.2,3162353.0,215106,Cooperative,2022
+10868,City of Leesburg - (FL),FL,residential,41272.4,278088.0,23558,Municipal,2022
+13485,New Smyrna Beach City of,FL,residential,33835.0,312973.0,27014,Municipal,2022
+13955,City of Ocala,FL,residential,58541.9,550520.0,44316,Municipal,2022
+14606,"Peace River Electric Coop, Inc",FL,residential,94869.8,673803.0,47390,Cooperative,2022
+14610,Orlando Utilities Comm,FL,residential,392464.8,2790761.0,236057,Municipal,2022
+15776,Reedy Creek Improvement Dist,FL,residential,12.0,111.0,9,Municipal,2022
+18304,"Sumter Electric Coop, Inc",FL,residential,378745.0,2581354.0,210291,Cooperative,2022
+18360,Suwannee Valley Elec Coop Inc,FL,residential,47805.0,325922.0,25154,Cooperative,2022
+18445,City of Tallahassee - (FL),FL,residential,141823.0,1148688.0,106720,Municipal,2022
+18449,"Talquin Electric Coop, Inc",FL,residential,98423.0,697590.0,52931,Cooperative,2022
+18454,Tampa Electric Co,FL,residential,1380689.9,10109074.0,729334,Investor Owned,2022
+19161,"Tri-County Electric Coop, Inc (FL)",FL,residential,28774.4,183448.0,18012,Cooperative,2022
+20371,"West Florida El Coop Assn, Inc",FL,residential,49452.0,321035.0,25718,Cooperative,2022
+20885,Withlacoochee River Elec Coop,FL,residential,410353.6,3093524.0,213311,Cooperative,2022
+31833,Okefenoke Rural El Member Corp,FL,residential,22037.3,164475.0,10695,Cooperative,2022
+58124,City of Winter Park - (FL),FL,residential,27428.8,191118.0,12304,Municipal,2022
+230,Albany Utility Board,GA,residential,37417.3,339594.0,29062,Municipal,2022
+407,Altamaha Electric Member Corp,GA,residential,34611.0,244092.0,19261,Cooperative,2022
+562,Amicalola Electric Member Corp,GA,residential,83740.6,699415.0,47836,Cooperative,2022
+1891,Blue Ridge Mountain EMC - (GA),GA,residential,45159.0,295721.0,29685,Cooperative,2022
+2487,City of Buford,GA,residential,4894.8,37659.0,2925,Municipal,2022
+2812,City of Calhoun - (GA),GA,residential,6483.1,47653.0,4392,Municipal,2022
+2903,Canoochee Electric Member Corp,GA,residential,39565.7,316720.0,22664,Cooperative,2022
+3081,Carroll Electric Member Corp - (GA),GA,residential,94360.0,729989.0,51513,Cooperative,2022
+3108,City of Cartersville - (GA),GA,residential,10439.0,83025.0,6532,Municipal,2022
+3248,Central Georgia El Member Corp,GA,residential,105164.0,895626.0,58255,Cooperative,2022
+3408,City of Chattanooga - (TN),GA,residential,17202.0,141918.0,9815,Municipal,2022
+3475,City of Chickamauga,GA,residential,1428.0,10914.0,834,Municipal,2022
+3843,Coastal Electric Member Corp,GA,residential,40356.1,288254.0,19423,Cooperative,2022
+3916,Cobb Electric Membership Corp,GA,residential,312727.8,2630027.0,196155,Cooperative,2022
+3939,City of College Park - (GA),GA,residential,10118.8,71648.0,7498,Municipal,2022
+4432,Coweta-Fayette El Member Corp,GA,residential,145755.9,1170511.0,80242,Cooperative,2022
+4433,City of Covington - (GA),GA,residential,16944.5,146826.0,11289,Municipal,2022
+4538,Crisp County Power Comm,GA,residential,18305.0,145576.0,9213,Political Subdivision,2022
+4744,Dalton Utilities,GA,residential,18065.0,155218.0,12734,Municipal,2022
+5325,City of Douglas,GA,residential,5865.3,56408.0,4091,Municipal,2022
+5582,City of East Point - (GA),GA,residential,19228.7,160296.0,16114,Municipal,2022
+5905,Excelsior Electric Member Corp,GA,residential,42090.0,327084.0,22763,Cooperative,2022
+6411,Flint Electric Membership Corp,GA,residential,161300.7,1215797.0,79918,Cooperative,2022
+7090,GreyStone Power Corporation,GA,residential,204914.0,1876572.0,131489,Cooperative,2022
+7140,Georgia Power Co,GA,residential,4415254.4,29085636.0,2366818,Investor Owned,2022
+7450,Grady Electric Membership Corp,GA,residential,37625.0,248393.0,19032,Cooperative,2022
+7679,City of Griffin - (GA),GA,residential,20976.0,160493.0,13786,Municipal,2022
+7887,Habersham Electric Membership Corp,GA,residential,56869.0,438518.0,33899,Cooperative,2022
+8210,Hart Electric Member Corp,GA,residential,57504.0,410046.0,29326,Cooperative,2022
+8333,Haywood Electric Member Corp,GA,residential,583.0,3612.0,421,Cooperative,2022
+9431,Irwin Electric Membership Corp,GA,residential,20398.0,133760.0,10863,Cooperative,2022
+9601,Jackson Electric Member Corp - (GA),GA,residential,404591.4,3327794.0,225116,Cooperative,2022
+9689,Jefferson Electric Member Corp,GA,residential,58000.0,459678.0,34057,Cooperative,2022
+10585,City of La Grange - (GA),GA,residential,16627.0,137140.0,11803,Municipal,2022
+10624,Southern Rivers Energy,GA,residential,44102.0,298542.0,19704,Cooperative,2022
+10800,City of Lawrenceville - (GA),GA,residential,14123.1,108057.0,11670,Municipal,2022
+11646,City of Marietta - (GA),GA,residential,41150.0,351879.0,35618,Municipal,2022
+12706,Mitchell Electric Member Corp,GA,residential,45401.7,289178.0,21178,Cooperative,2022
+13547,"Newnan Wtr, Sewer & Light Comm",GA,residential,11229.0,94285.0,8720,Municipal,2022
+13716,North Georgia Elec Member Corp,GA,residential,171649.0,1435545.0,88361,Cooperative,2022
+13962,Oconee Electric Member Corp,GA,residential,20352.2,144165.0,10561,Cooperative,2022
+14649,Planters Electric Member Corp,GA,residential,30491.1,225872.0,16152,Cooperative,2022
+15700,Rayle Electric Membership Corp,GA,residential,30158.0,214462.0,16117,Cooperative,2022
+16674,Satilla Rural Elec Member Corporation,GA,residential,99461.5,739023.0,52861,Cooperative,2022
+16865,Sawnee Electric Membership Corporation,GA,residential,297589.0,2469224.0,174430,Cooperative,2022
+17832,Snapping Shoals El Member Corp,GA,residential,188790.9,1574270.0,101592,Cooperative,2022
+18305,Sumter Electric Member Corp,GA,residential,30436.9,227101.0,14921,Cooperative,2022
+18397,City of Sylvania - (GA),GA,residential,2890.1,21324.0,1934,Municipal,2022
+18499,Three Notch Elec Member Corp,GA,residential,21772.0,146333.0,13881,Cooperative,2022
+18848,City of Thomasville - (GA),GA,residential,22330.7,187490.0,13668,Municipal,2022
+18956,Tri-County Elec Member Corp (GA),GA,residential,42135.6,289840.0,20665,Cooperative,2022
+19154,Tri-State Electric Member Corp,GA,residential,21465.0,156534.0,12740,Cooperative,2022
+19219,Diverse Power Incorporated,GA,residential,75999.4,446648.0,30728,Cooperative,2022
+20065,Walton Electric Member Corp,GA,residential,242083.3,1932954.0,127193,Cooperative,2022
+20146,Washington Elec Member Corp,GA,residential,27226.0,187259.0,14981,Cooperative,2022
+31833,Okefenoke Rural El Member Corp,GA,residential,50079.0,367000.0,26394,Cooperative,2022
+40212,Colquitt Electric Membership Corp,GA,residential,115976.1,884946.0,64493,Cooperative,2022
+8287,Hawaii Electric Light Co Inc,HI,residential,208195.4,434187.0,76932,Investor Owned,2022
+10071,Kauai Island Utility Cooperative,HI,residential,75466.0,191955.0,29936,Cooperative,2022
+11843,Maui Electric Co Ltd,HI,residential,174149.3,397618.0,63133,Investor Owned,2022
+19547,Hawaiian Electric Co Inc,HI,residential,687629.3,1583392.0,274845,Investor Owned,2022
+471,Amana Society Service Co,IA,residential,1088.0,7253.0,709,Investor Owned,2022
+554,City of Ames - (IA),IA,residential,21208.0,180795.0,24889,Municipal,2022
+2652,Butler County Rural Elec Coop - (IA),IA,residential,9754.0,71266.0,3890,Cooperative,2022
+3203,Cedar Falls Utilities,IA,residential,20765.8,177578.0,17555,Municipal,2022
+5588,East-Central Iowa Rural Elec Coop,IA,residential,15989.0,139574.0,8000,Cooperative,2022
+5605,Eastern Iowa Light & Power Coop,IA,residential,40294.9,301356.0,20955,Cooperative,2022
+6258,Federated Rural Electric Assn,IA,residential,102.0,946.0,53,Cooperative,2022
+6782,Freeborn Mower Electric Cooperative,IA,residential,16.0,120.0,6,Cooperative,2022
+8319,Heartland Power Coop,IA,residential,10741.1,87884.0,4339,Cooperative,2022
+9230,City of Independence - (IA),IA,residential,3164.3,23119.0,2719,Municipal,2022
+9417,Interstate Power and Light Co,IA,residential,673265.0,3792663.0,412497,Investor Owned,2022
+9425,Iowa Lakes Electric Coop,IA,residential,22558.9,184628.0,9592,Cooperative,2022
+11053,Linn County REC,IA,residential,40007.0,314181.0,28721,Cooperative,2022
+11611,City of Maquoketa - (IA),IA,residential,3243.5,24941.0,2807,Municipal,2022
+11788,Consumers Energy,IA,residential,12935.0,88579.0,6615,Cooperative,2022
+12341,MidAmerican Energy Co,IA,residential,692489.1,6292473.0,618886,Investor Owned,2022
+12450,Midland Power Coop,IA,residential,27457.0,217984.0,11683,Cooperative,2022
+12642,Maquoketa Valley Rrl Elec Coop,IA,residential,18401.9,146956.0,10807,Cooperative,2022
+13143,Board of Water Electric & Communications,IA,residential,12281.1,101809.0,10131,Municipal,2022
+15291,Prairie Energy Coop,IA,residential,7538.3,58489.0,3468,Cooperative,2022
+15349,City of Preston,IA,residential,570.8,3832.0,507,Municipal,2022
+16611,Access Energy Coop,IA,residential,15534.8,119218.0,8806,Cooperative,2022
+17260,North West Rural Electric Coop,IA,residential,22798.8,267162.0,9262,Cooperative,2022
+19157,MiEnergy Cooperative,IA,residential,11862.7,76032.0,5970,Cooperative,2022
+6169,Fall River Rural Elec Coop Inc,ID,residential,20446.0,207988.0,14225,Cooperative,2022
+8699,Inland Power & Light Company,ID,residential,3079.6,36398.0,2035,Cooperative,2022
+9187,City of Idaho Falls - (ID),ID,residential,26390.0,323413.0,26559,Municipal,2022
+9191,Idaho Power Co,ID,residential,626554.7,5854670.0,498920,Investor Owned,2022
+10454,Kootenai Electric Cooperative,ID,residential,43150.4,406138.0,28426,Cooperative,2022
+11273,Lower Valley Energy Inc,ID,residential,1450.0,20455.0,1533,Cooperative,2022
+12692,"Missoula Electric Coop, Inc",ID,residential,60.5,605.0,43,Cooperative,2022
+13758,"Northern Lights, Inc",ID,residential,26959.0,238766.0,17343,Cooperative,2022
+14354,PacifiCorp,ID,residential,88399.5,821083.0,71033,Investor Owned,2022
+16565,Salmon River Electric Coop Inc,ID,residential,3430.0,37401.0,2317,Cooperative,2022
+19502,"United Electric Co-op, Inc - (ID)",ID,residential,7459.0,106600.0,4863,Cooperative,2022
+20169,Avista Corp,ID,residential,137048.0,1388385.0,123965,Investor Owned,2022
+22814,Raft Rural Elec Coop Inc,ID,residential,2312.0,26037.0,1356,Cooperative,2022
+970,Homefield Energy,IL,residential,169969.7,3675986.0,333852,Retail Power Marketer,2022
+1325,City of Batavia - (IL),IL,residential,12467.0,88588.0,9893,Municipal,2022
+3931,Coles-Moultrie Electric Coop,IL,residential,18607.0,121359.0,8461,Cooperative,2022
+4100,"Commerce Energy, Inc.",IL,residential,32868.0,332907.0,34727,Retail Power Marketer,2022
+4110,Commonwealth Edison Co,IL,residential,4007919.1,22049120.0,3006833,Investor Owned,2022
+4362,Corn Belt Energy Corporation,IL,residential,57157.0,404431.0,34425,Cooperative,2022
+5535,Egyptian Electric Coop Assn,IL,residential,28658.5,203273.0,13682,Cooperative,2022
+5585,Eastern Illinois Elec Coop,IL,residential,26923.0,177443.0,11167,Cooperative,2022
+6458,Energy Harbor Corp.,IL,residential,48283.6,806553.0,90824,Retail Power Marketer,2022
+7096,City of Geneva- (IL),IL,residential,8924.0,78871.0,9032,Municipal,2022
+7554,Green Mountain Energy Company,IL,residential,9229.2,66548.0,9647,Retail Power Marketer,2022
+9750,"Jo-Carroll Energy, Inc",IL,residential,28710.6,160356.0,17473,Cooperative,2022
+12341,MidAmerican Energy Co,IL,residential,68442.7,654994.0,73704,Investor Owned,2022
+12395,Menard Electric Coop,IL,residential,18644.6,117813.0,9088,Cooperative,2022
+13032,Mt Carmel Public Utility Co,IL,residential,7942.0,47349.0,4349,Investor Owned,2022
+13208,City of Naperville - (IL),IL,residential,67323.8,517337.0,55329,Municipal,2022
+13292,Norris Electric Coop,IL,residential,32714.0,256543.0,18004,Cooperative,2022
+13374,"Constellation NewEnergy, Inc",IL,residential,61725.4,746309.0,82289,Retail Power Marketer,2022
+14840,City of Peru - (IL),IL,residential,4415.0,37655.0,4728,Municipal,2022
+16179,Rochelle Municipal Utilities,IL,residential,6218.0,73802.0,5906,Municipal,2022
+16196,Rock Energy Cooperative,IL,residential,12236.0,85884.0,9347,Cooperative,2022
+16740,Scenic Rivers Energy Coop,IL,residential,21.3,163.0,12,Cooperative,2022
+17040,"Shelby Electric Coop, Inc",IL,residential,21817.6,129163.0,9755,Cooperative,2022
+17585,"Southeastern IL Elec Coop, Inc",IL,residential,41705.0,340450.0,22500,Cooperative,2022
+17697,Southwestern Electric Coop Inc - (IL),IL,residential,44328.6,341559.0,23557,Cooperative,2022
+17710,"Spark Energy, LP",IL,residential,27745.0,157258.0,21472,Retail Power Marketer,2022
+17828,City of Springfield - (IL),IL,residential,75071.4,630517.0,60222,Municipal,2022
+17860,City of St Charles - (IL),IL,residential,17672.2,120352.0,13985,Municipal,2022
+18955,"Tri-County Electric Coop, Inc (IL)",IL,residential,34306.1,242745.0,16159,Cooperative,2022
+20222,Wayne-White Counties Elec Coop,IL,residential,23115.2,154764.0,11989,Cooperative,2022
+54820,Direct Energy Services,IL,residential,47351.7,404693.0,49478,Retail Power Marketer,2022
+55722,AEP Energy,IL,residential,18188.2,281451.0,27541,Retail Power Marketer,2022
+55781,Liberty Power Corp.,IL,residential,1230.5,10199.0,4270,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",IL,residential,4149.3,24745.0,4303,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",IL,residential,18459.0,162367.0,21314,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",IL,residential,36031.0,388276.0,39958,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,IL,residential,8949.0,63837.0,7788,Retail Power Marketer,2022
+56286,"Frontier Utilities, LLC",IL,residential,1217.5,8473.0,1282,Retail Power Marketer,2022
+56379,"MC Squared Energy Services, LLC",IL,residential,61135.0,681440.0,66987,Retail Power Marketer,2022
+56504,Major Energy Electric Services,IL,residential,591.0,3639.0,661,Retail Power Marketer,2022
+56697,Ameren Illinois Company,IL,residential,1324693.0,6055726.0,531572,Investor Owned,2022
+57037,Reliant Energy Northeast LLC,IL,residential,120007.0,964712.0,114251,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",IL,residential,1586.0,9048.0,1637,Retail Power Marketer,2022
+57307,ENGIE Power & Gas LLC,IL,residential,590.0,3229.0,493,Retail Power Marketer,2022
+57488,"XOOM Energy Illinois, LLC",IL,residential,13811.0,110825.0,14276,Retail Power Marketer,2022
+58119,Public Power LLC (CT),IL,residential,826.0,7894.0,819,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,IL,residential,4713.3,33584.0,3945,Retail Power Marketer,2022
+58314,"Palmco Power IL, LLC",IL,residential,16428.7,133667.0,28826,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",IL,residential,2216.0,14160.0,1916,Retail Power Marketer,2022
+58683,Everyday Energy LLC,IL,residential,335.1,2603.0,317,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",IL,residential,22250.2,131119.0,19370,Retail Power Marketer,2022
+58952,Tomorow Energy Corp.,IL,residential,4177.9,17803.0,2589,Retail Power Marketer,2022
+58953,"Star Energy Partners, LLC",IL,residential,7241.0,64487.0,10480,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",IL,residential,25950.5,191307.0,26788,Retail Power Marketer,2022
+58957,"Interstate Gas Supply, Inc.",IL,residential,19533.0,156809.0,20189,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",IL,residential,4057.0,30541.0,4923,Retail Power Marketer,2022
+58972,"Realgy, LLC",IL,residential,16729.9,140119.0,14466,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,IL,residential,17321.1,114423.0,13061,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",IL,residential,24575.3,292573.0,38981,Retail Power Marketer,2022
+59064,"Great American Power, LLC",IL,residential,2205.5,21429.0,3226,Retail Power Marketer,2022
+59065,Titan Gas LLC,IL,residential,21.1,257.0,14,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",IL,residential,10131.1,63430.0,6942,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",IL,residential,9493.0,84539.0,10478,Retail Power Marketer,2022
+59385,"Dynegy Energy Services, LLC",IL,residential,39167.6,622630.0,59147,Retail Power Marketer,2022
+59795,"Starion Energy PA, Inc.",IL,residential,0.9,9.0,20,Retail Power Marketer,2022
+59797,Park Power LLC,IL,residential,901.7,7058.0,1023,Retail Power Marketer,2022
+59799,American Power & Gas,IL,residential,974.6,8361.0,940,Retail Power Marketer,2022
+59807,"Rushmore Energy, LLC",IL,residential,4040.9,43665.0,6347,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",IL,residential,25281.0,192581.0,24431,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,IL,residential,454.8,3341.0,525,Retail Power Marketer,2022
+59811,Santanna Energy Services,IL,residential,7939.8,66435.0,7395,Retail Power Marketer,2022
+59848,"ResCom Energy, LLC",IL,residential,33.2,313.0,118,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",IL,residential,196.4,3071.0,283,Retail Power Marketer,2022
+59958,"Mega Energy of Illinois, LLC",IL,residential,6716.0,46276.0,7320,Retail Power Marketer,2022
+60218,MPower Energy NJ LLC,IL,residential,359.4,2474.0,469,Retail Power Marketer,2022
+60696,"Vista Energy Marketing, L.P.",IL,residential,8548.4,59500.0,8783,Retail Power Marketer,2022
+61092,"Stream Energy Illinois, LLC",IL,residential,3727.3,35554.0,4867,Retail Power Marketer,2022
+61367,South Bay Energy Corp.,IL,residential,157.0,1049.0,164,Retail Power Marketer,2022
+61922,"Pure Energy USA, LLC",IL,residential,3010.0,15376.0,2443,Retail Power Marketer,2022
+62094,"SFE Energy Illinois, Inc.",IL,residential,426.0,4960.0,584,Retail Power Marketer,2022
+63029,Josco Energy IL LLC,IL,residential,116.3,757.0,170,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",IL,residential,11129.0,63127.0,10616,Retail Power Marketer,2022
+64543,StateWise Energy Illinois LLC,IL,residential,61.0,1452.0,167,Retail Power Marketer,2022
+65310,Energywell LLC,IL,residential,221.9,1157.0,1967,Retail Power Marketer,2022
+636,City of Anderson - (IN),IN,residential,37186.3,312486.0,30442,Municipal,2022
+994,City of Auburn - (IN),IN,residential,6950.4,65823.0,6753,Municipal,2022
+1283,Bartholomew County Rural E M C,IN,residential,22519.7,159466.0,11262,Cooperative,2022
+1896,City of Bluffton - (IN),IN,residential,4757.0,49705.0,4900,Municipal,2022
+4508,"Crawfordsville Elec, Lgt & Pwr",IN,residential,10614.1,86697.0,8546,Municipal,2022
+4848,Daviess Martin County R E M C,IN,residential,16964.0,123628.0,7824,Cooperative,2022
+4960,Decatur County Rural E M C,IN,residential,16734.0,117739.0,7960,Cooperative,2022
+5394,Dubois Rural Electric Coop Inc,IN,residential,21281.0,169439.0,13210,Cooperative,2022
+6707,City of Frankfort - (IN),IN,residential,8303.0,75864.0,7750,Municipal,2022
+7627,City of Greenfield - (IN),IN,residential,11990.0,104619.0,11114,Municipal,2022
+8000,NineStar Connect,IN,residential,37319.0,254074.0,16478,Cooperative,2022
+8179,Harrison County Rural E M C,IN,residential,44473.4,366291.0,22696,Cooperative,2022
+8447,Hendricks County Rural E M C,IN,residential,66214.7,520225.0,35657,Cooperative,2022
+9273,Indianapolis Power & Light Co,IN,residential,688487.0,5305095.0,458585,Investor Owned,2022
+9324,Indiana Michigan Power Co,IN,residential,683180.0,4331864.0,416618,Investor Owned,2022
+9576,Jackson County Rural E M C - (IN),IN,residential,51653.0,387596.0,23939,Cooperative,2022
+9613,City of Lebanon - (IN),IN,residential,8833.8,79015.0,7816,Municipal,2022
+9665,Jasper County Rural E M C,IN,residential,14675.6,104193.0,7618,Cooperative,2022
+9667,City of Jasper - (IN),IN,residential,7430.9,72285.0,6346,Municipal,2022
+9778,Johnson County Rural E M C,IN,residential,46983.2,363058.0,27200,Cooperative,2022
+9999,Kankakee Valley Rural E M C,IN,residential,30241.2,220883.0,18821,Cooperative,2022
+10448,Kosciusko County Rural E M C,IN,residential,23628.5,194129.0,17347,Cooperative,2022
+11142,City of Logansport - (IN),IN,residential,10661.2,104225.0,11271,Municipal,2022
+12377,Midwest Energy Cooperative,IN,residential,720.5,4031.0,308,Cooperative,2022
+12674,City of Mishawaka,IN,residential,19290.1,184922.0,24832,Municipal,2022
+12929,South Central Indiana REMC,IN,residential,70666.0,462724.0,34203,Cooperative,2022
+13647,Noble County R E M C,IN,residential,17640.8,139612.0,10896,Cooperative,2022
+13756,Northern Indiana Pub Serv Co,IN,residential,592426.1,3482939.0,424735,Investor Owned,2022
+14599,"Paulding-Putman Elec Coop, Inc",IN,residential,6194.2,41311.0,3624,Cooperative,2022
+14839,City of Peru - (IN),IN,residential,10297.0,91278.0,8867,Municipal,2022
+15470,"Duke Energy Indiana, LLC",IN,residential,1429517.1,9437169.0,770371,Investor Owned,2022
+15989,City of Richmond - (IN),IN,residential,21580.7,187915.0,16261,Municipal,2022
+17038,RushShelby Energy,IN,residential,30701.0,209145.0,14622,Cooperative,2022
+17599,Southeastern Indiana R E M C,IN,residential,53066.0,369795.0,25783,Cooperative,2022
+17633,Southern Indiana Gas & Elec Co,IN,residential,242159.8,1398173.0,131706,Investor Owned,2022
+18940,Tipmont Rural Elec Member Corp,IN,residential,49662.6,333992.0,27354,Cooperative,2022
+19445,"Southern Indiana R E C, Inc",IN,residential,15121.0,111213.0,8852,Cooperative,2022
+19667,Utilities Dist-Western IN REMC,IN,residential,37025.8,251643.0,18666,Cooperative,2022
+20216,Whitewater Valley Rural EMC,IN,residential,23102.0,171945.0,11936,Cooperative,2022
+20603,Northeastern Rural E M C,IN,residential,51360.1,360480.0,28628,Cooperative,2022
+22822,Clark County Rural E M C - (IN),IN,residential,52283.1,386273.0,25826,Cooperative,2022
+24753,Boone County Rural EMC,IN,residential,38261.0,254646.0,16710,Cooperative,2022
+25295,Western Indiana Energy REMC,IN,residential,26995.7,221418.0,14941,Cooperative,2022
+27599,Carroll-White REMC,IN,residential,27923.0,196425.0,14648,Cooperative,2022
+59505,Heartland REMC,IN,residential,36863.0,269107.0,17777,Cooperative,2022
+296,"Alfalfa Electric Coop, Inc",KS,residential,461.0,3889.0,216,Cooperative,2022
+2774,CMS Electric Coop Inc,KS,residential,5412.4,27581.0,3187,Cooperative,2022
+3355,City of Chanute,KS,residential,5354.0,45837.0,4583,Municipal,2022
+3892,City of Coffeyville - (KS),KS,residential,6352.4,52025.0,4769,Municipal,2022
+5860,Empire District Electric Co,KS,residential,16391.6,114286.0,8249,Investor Owned,2022
+6941,City of Garden City,KS,residential,12100.0,86000.0,10300,Municipal,2022
+9996,City of Kansas City - (KS),KS,residential,85000.0,598338.0,59859,Municipal,2022
+10000,Evergy Metro,KS,residential,385528.5,2967054.0,239597,Investor Owned,2022
+10005,"Evergy Kansas South, Inc",KS,residential,469849.7,3330071.0,295902,Investor Owned,2022
+10019,FreeState Electric Coop,KS,residential,36401.0,231179.0,17263,Cooperative,2022
+12208,City of McPherson - (KS),KS,residential,8638.3,95777.0,7405,Municipal,2022
+12524,Midwest Energy Inc,KS,residential,39737.5,328352.0,29822,Cooperative,2022
+13799,Prairie Land Electric Coop Inc,KS,residential,20310.8,139236.0,13399,Cooperative,2022
+15073,"Pioneer Electric Coop, Inc - (KS)",KS,residential,8292.0,65859.0,5033,Cooperative,2022
+19160,"Tri-County Electric Coop, Inc (OK)",KS,residential,1519.9,8964.0,1052,Cooperative,2022
+19820,Victory Electric Coop Assn Inc,KS,residential,20216.0,150422.0,13986,Cooperative,2022
+20476,Western Coop Electric Assn Inc,KS,residential,9412.1,63685.0,5766,Cooperative,2022
+20510,"Wheatland Electric Coop, Inc",KS,residential,30796.3,220824.0,20323,Cooperative,2022
+20813,City of Winfield - (KS),KS,residential,11344.8,61160.0,6499,Municipal,2022
+22500,"Evergy Kansas Central, Inc",KS,residential,513197.3,3623878.0,338432,Investor Owned,2022
+60839,Southern Pioneer Electric Company,KS,residential,21518.0,122688.0,12529,Cooperative,2022
+690,City of Bardstown - (KY),KY,residential,4461.0,42524.0,3426,Municipal,2022
+1582,City of Benton - (KY),KY,residential,3257.0,23894.0,1854,Municipal,2022
+1708,Big Sandy Rural Elec Coop Corp,KY,residential,22501.0,164357.0,11712,Cooperative,2022
+1886,Blue Grass Energy Coop Corp,KY,residential,109313.0,875129.0,58839,Cooperative,2022
+2056,City of Bowling Green - (KY),KY,residential,34055.0,287022.0,26291,Municipal,2022
+3687,Clark Energy Coop Inc - (KY),KY,residential,45636.0,337704.0,25633,Cooperative,2022
+4622,"Cumberland Valley Electric, Inc.",KY,residential,39615.0,309274.0,22303,Cooperative,2022
+6194,Farmers Rural Electric Coop Corp - (KY),KY,residential,41695.0,327573.0,24599,Cooperative,2022
+6442,Fleming-Mason Energy Coop Inc,KY,residential,38034.0,300658.0,23667,Cooperative,2022
+6708,City of Frankfort - (KY),KY,residential,22005.0,209154.0,16708,Municipal,2022
+6718,City of Franklin - (KY),KY,residential,7152.0,53996.0,4371,Municipal,2022
+6840,City of Fulton - (KY),KY,residential,1952.0,14570.0,1201,Municipal,2022
+7174,Gibson Electric Members Corp,KY,residential,4841.0,36798.0,2541,Cooperative,2022
+7270,City of Glasgow - (KY),KY,residential,9157.0,66503.0,5663,Municipal,2022
+7558,Grayson Rural Electric Coop Corp,KY,residential,28108.0,172197.0,14329,Cooperative,2022
+8449,Henderson City Utility Comm,KY,residential,10237.3,121179.0,10280,Municipal,2022
+8548,City of Hickman,KY,residential,1451.0,9122.0,842,Municipal,2022
+8846,City of Hopkinsville,KY,residential,14835.0,121019.0,9879,Municipal,2022
+9292,Inter County Energy Coop Corp,KY,residential,51078.0,358189.0,26404,Cooperative,2022
+9575,Jackson Energy Coop Corp - (KY),KY,residential,98170.4,705969.0,48954,Cooperative,2022
+9605,Jackson Purchase Energy Corporation,KY,residential,55981.6,367449.0,25574,Cooperative,2022
+9697,City of Jellico,KY,residential,2965.0,24093.0,1772,Municipal,2022
+9964,Kenergy Corp,KY,residential,103117.0,707928.0,47119,Cooperative,2022
+10171,Kentucky Utilities Co,KY,residential,752019.4,6169015.0,443576,Investor Owned,2022
+11011,Licking Valley Rural E C C,KY,residential,27743.0,191769.0,16505,Cooperative,2022
+11249,Louisville Gas & Electric Co,KY,residential,522265.0,4230691.0,378001,Investor Owned,2022
+11488,Madisonville Municipal Utils,KY,residential,8191.0,63582.0,6914,Municipal,2022
+11871,City of Mayfield Plant Board,KY,residential,6008.0,45026.0,4245,Municipal,2022
+12243,Meade County Rural E C C,KY,residential,50767.2,355117.0,28813,Cooperative,2022
+13138,City of Murray - (KY),KY,residential,8889.0,65664.0,6137,Municipal,2022
+13651,Nolin Rural Electric Coop Corp,KY,residential,65724.0,500681.0,34725,Cooperative,2022
+14251,Owen Electric Coop Inc,KY,residential,109240.0,849522.0,62542,Cooperative,2022
+14268,City of Owensboro - (KY),KY,residential,28304.3,219311.0,23057,Municipal,2022
+14371,City of Paducah - (KY),KY,residential,32973.7,209944.0,18862,Municipal,2022
+14724,Pennyrile Rural Electric Coop,KY,residential,78939.0,608998.0,40062,Cooperative,2022
+16459,City of Russellville - (KY),KY,residential,4705.0,39244.0,3292,Municipal,2022
+16587,Salt River Electric Coop Corp,KY,residential,87207.0,780339.0,52081,Cooperative,2022
+17044,"Shelby Energy Co-op, Inc",KY,residential,33031.0,253093.0,16866,Cooperative,2022
+17564,South Kentucky Rural E C C,KY,residential,103745.6,805936.0,64149,Cooperative,2022
+18498,Taylor County Rural E C C,KY,residential,36951.0,311990.0,24578,Cooperative,2022
+19162,Tri-County Elec Member Corp (TN),KY,residential,36202.0,290829.0,20298,Cooperative,2022
+19446,Duke Energy Kentucky,KY,residential,200134.4,1518206.0,134068,Investor Owned,2022
+20130,Warren Rural Elec Coop Corp,KY,residential,110018.0,918414.0,58877,Cooperative,2022
+20377,West Kentucky Rural E C C,KY,residential,59802.0,449480.0,30899,Cooperative,2022
+22053,Kentucky Power Co,KY,residential,315955.0,1968490.0,132619,Investor Owned,2022
+49998,City of Berea Municipal Utility,KY,residential,5318.3,59255.0,4710,Municipal,2022
+298,City of Alexandria - (LA),LA,residential,34803.0,293739.0,20046,Municipal,2022
+1458,"Beauregard Electric Coop, Inc",LA,residential,78874.0,634745.0,39678,Cooperative,2022
+3265,Cleco Power LLC,LA,residential,558247.0,3787257.0,249860,Investor Owned,2022
+3641,"Claiborne Electric Coop, Inc",LA,residential,35149.0,313742.0,21626,Cooperative,2022
+4153,"Concordia Electric Coop, Inc",LA,residential,17210.0,141146.0,11884,Cooperative,2022
+5202,Dixie Electric Membership Corp,LA,residential,243146.3,1685368.0,107079,Cooperative,2022
+8884,Terrebonne Parish Consol Gov't,LA,residential,22053.7,167412.0,10716,Municipal,2022
+9096,City of Lafayette - (LA),LA,residential,102150.0,851520.0,58774,Municipal,2022
+9682,"Jefferson Davis Elec Coop, Inc",LA,residential,18578.0,132052.0,8718,Cooperative,2022
+11241,Entergy Louisiana LLC,LA,residential,1775551.6,13986531.0,949440,Investor Owned,2022
+13228,City of Natchitoches,LA,residential,10705.4,93276.0,7280,Municipal,2022
+13478,"Entergy New Orleans, LLC",LA,residential,328757.4,2364348.0,187760,Investor Owned,2022
+13783,Northeast Louisiana Power Coop Inc.,LA,residential,22117.0,199995.0,11583,Cooperative,2022
+14424,"Panola-Harrison Elec Coop, Inc",LA,residential,18099.8,135848.0,8503,Cooperative,2022
+15175,Pointe Coupee Elec Member Corp,LA,residential,15136.0,121626.0,8250,Cooperative,2022
+16463,City of Ruston - (LA),LA,residential,4866.0,110804.0,9608,Municipal,2022
+17565,South Louisiana Elec Coop Assn,LA,residential,29415.6,264727.0,17132,Cooperative,2022
+17684,Southwest Louisiana E M C,LA,residential,199492.7,1819805.0,105517,Cooperative,2022
+17698,Southwestern Electric Power Co,LA,residential,402137.7,3029121.0,207487,Investor Owned,2022
+21567,"Washington-St Tammany E C, Inc",LA,residential,89766.3,811765.0,50076,Cooperative,2022
+2144,Town of Braintree - (MA),MA,residential,17572.0,119243.0,14006,Municipal,2022
+3477,City of Chicopee - (MA),MA,residential,32445.4,201694.0,23207,Municipal,2022
+5480,Town of Danvers,MA,residential,15814.3,96531.0,11486,Municipal,2022
+6374,Fitchburg Gas & Elec Light Co,MA,residential,43757.0,116212.0,18525,Investor Owned,2022
+7279,"NextEra Energy Services, LLC",MA,residential,132047.0,1112685.0,113978,Retail Power Marketer,2022
+7554,Green Mountain Energy Company,MA,residential,2013.8,11094.0,1797,Retail Power Marketer,2022
+8774,City of Holyoke - (MA),MA,residential,15360.0,110165.0,14976,Municipal,2022
+8973,Town of Hudson - (MA),MA,residential,12928.3,105020.0,11396,Municipal,2022
+9949,Just Energy,MA,residential,4775.3,28143.0,5122,Retail Power Marketer,2022
+11085,Town of Littleton - (MA),MA,residential,9471.3,69774.0,6684,Municipal,2022
+11586,Town of Mansfield - (MA),MA,residential,12396.8,84148.0,9381,Municipal,2022
+11804,Massachusetts Electric Co,MA,residential,1697538.7,4008052.0,611277,Investor Owned,2022
+12473,Town of Middleborough - (MA),MA,residential,19957.0,138299.0,15165,Municipal,2022
+13206,Nantucket Electric Co,MA,residential,21027.9,18578.0,2033,Investor Owned,2022
+13374,"Constellation NewEnergy, Inc",MA,residential,337656.9,3052519.0,453240,Retail Power Marketer,2022
+13679,Town of North Attleborough - (MA),MA,residential,17709.3,114521.0,12530,Municipal,2022
+13839,City of Norwood - (MA),MA,residential,15681.0,90880.0,13791,Municipal,2022
+14605,City of Peabody - (MA),MA,residential,24709.3,196321.0,22203,Municipal,2022
+15748,Town of Reading - (MA),MA,residential,43930.0,259411.0,28410,Municipal,2022
+17127,Town of Shrewsbury - (MA),MA,residential,18659.0,137976.0,15044,Municipal,2022
+18087,Town of Sterling - (MA),MA,residential,5516.0,32639.0,3567,Municipal,2022
+18488,City of Taunton,MA,residential,49193.0,285649.0,34401,Municipal,2022
+20310,Town of Wellesley - (MA),MA,residential,16356.2,108115.0,9323,Municipal,2022
+20481,City of Westfield - (MA),MA,residential,23139.3,133275.0,16170,Municipal,2022
+54820,Direct Energy Services,MA,residential,236839.2,1984141.0,243537,Retail Power Marketer,2022
+54913,NSTAR Electric Company,MA,residential,1579716.0,2446486.0,432255,Investor Owned,2022
+55781,Liberty Power Corp.,MA,residential,199.3,992.0,1047,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",MA,residential,5369.0,30364.0,5045,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",MA,residential,16109.0,88384.0,11550,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,MA,residential,1827.0,10495.0,1571,Retail Power Marketer,2022
+56504,Major Energy Electric Services,MA,residential,4452.0,19553.0,3213,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,MA,residential,49859.0,267755.0,38687,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",MA,residential,5144.3,26075.0,3494,Retail Power Marketer,2022
+57489,"XOOM Energy Massachusetts, LLC",MA,residential,4256.0,27107.0,3891,Retail Power Marketer,2022
+58119,Public Power LLC (CT),MA,residential,789.0,5505.0,684,Retail Power Marketer,2022
+58161,Viridian Energy LLC,MA,residential,13576.4,82920.0,11427,Retail Power Marketer,2022
+58683,Everyday Energy LLC,MA,residential,100.3,663.0,117,Retail Power Marketer,2022
+58747,"Provider Power MASS, LLC",MA,residential,20597.0,117359.0,15935,Retail Power Marketer,2022
+58799,"Mega Energy of New England, LLC",MA,residential,2468.0,10296.0,1476,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",MA,residential,51328.7,200111.0,34703,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",MA,residential,15840.8,75660.0,13971,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",MA,residential,4452.4,19553.0,3213,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,MA,residential,17578.6,89080.0,10715,Retail Power Marketer,2022
+59052,Astral Energy LLC,MA,residential,13.1,120.0,13,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",MA,residential,10200.9,47605.0,7584,Retail Power Marketer,2022
+59059,Town Square Energy,MA,residential,11130.3,63034.0,8497,Retail Power Marketer,2022
+59065,Titan Gas LLC,MA,residential,9953.3,75450.0,7685,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",MA,residential,4513.0,21847.0,4547,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",MA,residential,117.6,611.0,286,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",MA,residential,60803.4,411908.0,57931,Retail Power Marketer,2022
+59313,"Palmco Power MA, LLC",MA,residential,9665.7,36862.0,6591,Retail Power Marketer,2022
+59385,"Dynegy Energy Services, LLC",MA,residential,132511.8,1277042.0,165707,Retail Power Marketer,2022
+59620,Verde Energy USA,MA,residential,11339.0,44506.0,7052,Retail Power Marketer,2022
+59734,"SFE Energy Massachusetts, Inc.",MA,residential,11409.0,59636.0,9852,Retail Power Marketer,2022
+59793,"First Point Power, LLC",MA,residential,43397.8,373668.0,43038,Retail Power Marketer,2022
+59794,"Starion Energy, Inc.",MA,residential,11.1,98.0,69,Retail Power Marketer,2022
+59799,American Power & Gas,MA,residential,3.5,16.0,2,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",MA,residential,35328.2,225289.0,34584,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",MA,residential,5.4,48.0,7,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),MA,residential,9115.6,41550.0,6785,Retail Power Marketer,2022
+61059,"Renaissance Power & Gas, Inc.",MA,residential,1371.0,6880.0,1273,Retail Power Marketer,2022
+61200,"Summer Energy Northeast, LLC",MA,residential,845.0,3877.0,563,Retail Power Marketer,2022
+63232,"National Gas & Electric, LLC",MA,residential,7683.3,35442.0,5779,Retail Power Marketer,2022
+65310,Energywell LLC,MA,residential,626.8,3611.0,3193,Retail Power Marketer,2022
+84,A & N Electric Coop,MD,residential,301.4,2337.0,261,Cooperative,2022
+113,"Agway Energy Services, LLC",MD,residential,11.7,71.0,8,Retail Power Marketer,2022
+1167,Baltimore Gas & Electric Co,MD,residential,1561122.8,10474761.0,965223,Investor Owned,2022
+3503,"Choptank Electric Cooperative, Inc",MD,residential,107786.0,694080.0,50069,Cooperative,2022
+4100,"Commerce Energy, Inc.",MD,residential,19222.6,162885.0,15517,Retail Power Marketer,2022
+5027,Delmarva Power,MD,residential,332816.9,1970953.0,164904,Investor Owned,2022
+5625,Easton Utilities Comm,MD,residential,14409.5,108615.0,8578,Municipal,2022
+6458,Energy Harbor Corp.,MD,residential,2649.2,31820.0,2321,Retail Power Marketer,2022
+7279,"NextEra Energy Services, LLC",MD,residential,127.1,1378.0,96,Retail Power Marketer,2022
+7554,Green Mountain Energy Company,MD,residential,4315.8,27854.0,2682,Retail Power Marketer,2022
+7908,Hagerstown Light Department,MD,residential,12736.3,165334.0,14914,Municipal,2022
+13374,"Constellation NewEnergy, Inc",MD,residential,129991.2,1445166.0,80612,Retail Power Marketer,2022
+15263,The Potomac Edison Company,MD,residential,335889.1,3125996.0,228961,Investor Owned,2022
+15270,Potomac Electric Power Co,MD,residential,797844.6,4769046.0,458433,Investor Owned,2022
+17637,Southern Maryland Elec Coop Inc,MD,residential,336551.6,2189282.0,153234,Cooperative,2022
+17710,"Spark Energy, LP",MD,residential,3691.0,22096.0,2279,Retail Power Marketer,2022
+20659,"WGL Energy Services, Inc.",MD,residential,34094.0,342508.0,33842,Retail Power Marketer,2022
+54820,Direct Energy Services,MD,residential,30712.1,260803.0,23382,Retail Power Marketer,2022
+55722,AEP Energy,MD,residential,2464.0,27236.0,1855,Retail Power Marketer,2022
+55781,Liberty Power Corp.,MD,residential,5.2,46.0,119,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",MD,residential,7854.1,45015.0,5364,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",MD,residential,11224.0,76224.0,7714,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",MD,residential,10078.0,98614.0,8199,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,MD,residential,3277.0,22319.0,2022,Retail Power Marketer,2022
+56504,Major Energy Electric Services,MD,residential,5143.0,35181.0,3252,Retail Power Marketer,2022
+56571,AP Holdings LLC,MD,residential,460.9,3097.0,302,Retail Power Marketer,2022
+56876,"Stream Energy Maryland, LLC",MD,residential,7434.3,48330.0,4152,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,MD,residential,34958.0,248267.0,21601,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",MD,residential,691.1,3934.0,391,Retail Power Marketer,2022
+57185,"Palmco Power MD, LLC",MD,residential,6282.0,26298.0,3932,Retail Power Marketer,2022
+57307,ENGIE Power & Gas LLC,MD,residential,371.6,1865.0,187,Retail Power Marketer,2022
+57490,"XOOM Energy Maryland, LLC",MD,residential,15162.0,104343.0,9573,Retail Power Marketer,2022
+58116,"Public Power & Utility of Maryland, LLC",MD,residential,7041.0,61151.0,2870,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,MD,residential,3367.9,21715.0,1985,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",MD,residential,3299.0,21810.0,1725,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",MD,residential,47138.2,248960.0,27191,Retail Power Marketer,2022
+58952,Tomorow Energy Corp.,MD,residential,8678.3,51686.0,4907,Retail Power Marketer,2022
+58953,"Star Energy Partners, LLC",MD,residential,2553.4,22064.0,3189,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",MD,residential,9765.6,57929.0,5848,Retail Power Marketer,2022
+58957,"Interstate Gas Supply, Inc.",MD,residential,1943.0,14727.0,1696,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",MD,residential,1672.3,12859.0,1587,Retail Power Marketer,2022
+58973,"Town Square Energy East, LLC",MD,residential,159.2,903.0,82,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,MD,residential,6932.6,44327.0,3817,Retail Power Marketer,2022
+59052,Astral Energy LLC,MD,residential,16.4,221.0,9,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",MD,residential,4599.2,26304.0,2309,Retail Power Marketer,2022
+59062,"Horizon Power and Light, LLC",MD,residential,1463.0,12300.0,803,Retail Power Marketer,2022
+59064,"Great American Power, LLC",MD,residential,1537.9,14801.0,1471,Retail Power Marketer,2022
+59065,Titan Gas LLC,MD,residential,9712.7,81095.0,6575,Retail Power Marketer,2022
+59084,"SFE Energy Maryland, Inc.",MD,residential,11860.0,100610.0,10640,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",MD,residential,527.2,3202.0,478,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",MD,residential,45574.0,363618.0,34958,Retail Power Marketer,2022
+59410,"Shipley Choice, LLC",MD,residential,501.1,3919.0,305,Retail Power Marketer,2022
+59793,"First Point Power, LLC",MD,residential,6.5,38.0,1,Retail Power Marketer,2022
+59795,"Starion Energy PA, Inc.",MD,residential,0.9,14.0,24,Retail Power Marketer,2022
+59797,Park Power LLC,MD,residential,2202.4,15570.0,2046,Retail Power Marketer,2022
+59799,American Power & Gas,MD,residential,2117.2,12065.0,888,Retail Power Marketer,2022
+59807,"Rushmore Energy, LLC",MD,residential,2393.5,21547.0,2242,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,MD,residential,5503.0,34811.0,3496,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",MD,residential,569.4,7942.0,489,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),MD,residential,1158.9,6628.0,614,Retail Power Marketer,2022
+60041,Planet Energy,MD,residential,89.3,1302.0,179,Retail Power Marketer,2022
+60124,Spring Energy RRH LLC,MD,residential,2384.0,12914.0,1352,Retail Power Marketer,2022
+60218,MPower Energy NJ LLC,MD,residential,5357.4,31242.0,5029,Retail Power Marketer,2022
+61972,"SunSea Energy, LLC",MD,residential,979.0,3941.0,861,Retail Power Marketer,2022
+62154,StateWise Energy Maryland LLC,MD,residential,4423.0,37062.0,3751,Retail Power Marketer,2022
+63028,Josco Energy USA LLC,MD,residential,1522.8,9248.0,1309,Retail Power Marketer,2022
+63168,Median Energy Corp.,MD,residential,277.8,1784.0,380,Retail Power Marketer,2022
+63232,"National Gas & Electric, LLC",MD,residential,2313.1,13512.0,1272,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",MD,residential,3022.0,15302.0,2261,Retail Power Marketer,2022
+65310,Energywell LLC,MD,residential,108.6,564.0,548,Retail Power Marketer,2022
+1179,Versant Power,ME,residential,201118.1,837572.0,129433,Investor Owned,2022
+3266,Central Maine Power Co,ME,residential,855039.0,3643493.0,512210,Investor Owned,2022
+5609,Eastern Maine Electric Coop,ME,residential,10528.8,62784.0,10667,Cooperative,2022
+8883,Houlton Water Company,ME,residential,3787.0,33699.0,3907,Municipal,2022
+11477,Town of Madison - (ME),ME,residential,2961.0,19376.0,2350,Municipal,2022
+13374,"Constellation NewEnergy, Inc",ME,residential,541.1,7469.0,741,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",ME,residential,5000.0,40449.0,5314,Retail Power Marketer,2022
+56504,Major Energy Electric Services,ME,residential,128.7,642.0,217,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",ME,residential,1727.7,12504.0,1792,Retail Power Marketer,2022
+58085,"Electricity Maine, LLC",ME,residential,24052.0,171601.0,26067,Retail Power Marketer,2022
+58158,FairPoint Energy LLC,ME,residential,3819.1,24293.0,4756,Retail Power Marketer,2022
+58196,"C. N. Brown Electricity, LLC",ME,residential,3191.0,32948.0,4301,Retail Power Marketer,2022
+58630,"XOOM Energy Maine, LLC",ME,residential,814.0,4977.0,740,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",ME,residential,2540.0,17480.0,2509,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",ME,residential,13718.3,84458.0,10986,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,ME,residential,971.0,5046.0,1116,Retail Power Marketer,2022
+59057,"Mega Energy of Maine, LLC",ME,residential,139.0,851.0,122,Retail Power Marketer,2022
+59059,Town Square Energy,ME,residential,1576.4,8823.0,1435,Retail Power Marketer,2022
+59793,"First Point Power, LLC",ME,residential,168.3,2005.0,264,Retail Power Marketer,2022
+65310,Energywell LLC,ME,residential,258.0,1938.0,1740,Retail Power Marketer,2022
+305,Alger-Delta Coop Electric Assn,MI,residential,11015.9,53250.0,9741,Cooperative,2022
+392,Alpena Power Co,MI,residential,12855.2,89727.0,13740,Investor Owned,2022
+1196,Village of Baraga - (MI),MI,residential,402.5,2811.0,551,Municipal,2022
+1366,City of Bay City - (MI),MI,residential,20821.3,130071.0,17936,Municipal,2022
+3436,Cherryland Electric Coop Inc,MI,residential,43603.5,291679.0,34190,Cooperative,2022
+3828,Cloverland Electric Co-op,MI,residential,39897.7,298461.0,35684,Cooperative,2022
+3915,Coldwater Board of Public Util,MI,residential,5923.0,43605.0,5973,Municipal,2022
+4254,Consumers Energy Co,MI,residential,2349950.0,12976844.0,1645580,Investor Owned,2022
+4604,City of Crystal Falls,MI,residential,1298.0,8017.0,1296,Municipal,2022
+5109,DTE Electric Company,MI,residential,2910770.0,15844478.0,2047944,Investor Owned,2022
+7265,City of Gladstone,MI,residential,2341.3,16860.0,2535,Municipal,2022
+7483,City of Grand Haven - (MI),MI,residential,12577.5,89722.0,12991,Municipal,2022
+8723,City of Holland,MI,residential,21340.0,188945.0,25580,Municipal,2022
+9324,Indiana Michigan Power Co,MI,residential,189196.0,1175727.0,111731,Investor Owned,2022
+10508,Village of L'Anse - (MI),MI,residential,869.7,5045.0,966,Municipal,2022
+10704,City of Lansing - (MI),MI,residential,91932.0,578323.0,86675,Municipal,2022
+11701,City of Marquette - (MI),MI,residential,18070.2,98790.0,14912,Municipal,2022
+12377,Midwest Energy Cooperative,MI,residential,63591.7,346588.0,29123,Cooperative,2022
+13352,City of Negaunee,MI,residential,2160.1,11479.0,1962,Municipal,2022
+13780,Northern States Power Co,MI,residential,8847.8,60287.0,7605,Investor Owned,2022
+13826,City of Norway,MI,residential,2230.5,14084.0,1853,Municipal,2022
+15340,Presque Isle Elec & Gas Coop,MI,residential,32236.5,184933.0,32009,Cooperative,2022
+18252,City of Sturgis,MI,residential,6254.7,49802.0,6060,Municipal,2022
+19125,City of Traverse City - (MI),MI,residential,7028.0,62600.0,8914,Municipal,2022
+19396,Tri-County Electric Coop (MI),MI,residential,38550.9,228865.0,22837,Cooperative,2022
+19578,Upper Peninsula Power Company,MI,residential,57249.5,248531.0,47281,Investor Owned,2022
+21048,Wyandotte Municipal Serv Comm,MI,residential,11521.1,80731.0,11624,Municipal,2022
+21158,City of Zeeland - (MI),MI,residential,4838.3,49880.0,5960,Municipal,2022
+38084,Great Lakes Energy Coop,MI,residential,157935.1,929559.0,118922,Cooperative,2022
+60631,Upper Michigan Energy Resources Corp.,MI,residential,42413.5,238994.0,33078,Investor Owned,2022
+155,Agralite Electric Coop,MN,residential,10193.4,82914.0,4416,Cooperative,2022
+295,City of Alexandria - (MN),MN,residential,8562.8,82711.0,8577,Municipal,2022
+689,Connexus Energy,MN,residential,175334.4,1270824.0,130048,Cooperative,2022
+691,City of Anoka,MN,residential,12227.0,77875.0,11462,Municipal,2022
+1009,City of Austin - (MN),MN,residential,10928.0,79141.0,10643,Municipal,2022
+1529,"Beltrami Electric Coop, Inc",MN,residential,40901.0,301298.0,20383,Cooperative,2022
+1884,BENCO Electric Cooperative,MN,residential,32678.0,220025.0,17999,Cooperative,2022
+3400,City of Chaska - (MN),MN,residential,14406.1,84490.0,9907,Municipal,2022
+4577,Crow Wing Cooperative Power & Light Comp,MN,residential,59482.3,464803.0,43694,Cooperative,2022
+5574,East Central Energy,MN,residential,86308.5,552857.0,52366,Cooperative,2022
+5773,City of Elk River,MN,residential,15890.0,105883.0,11295,Municipal,2022
+6258,Federated Rural Electric Assn,MN,residential,9626.0,88524.0,5642,Cooperative,2022
+6782,Freeborn Mower Electric Cooperative,MN,residential,28206.0,192699.0,17799,Cooperative,2022
+8319,Heartland Power Coop,MN,residential,122.1,1030.0,37,Cooperative,2022
+9130,Hutchinson Utilities Comm,MN,residential,6129.0,56403.0,6613,Municipal,2022
+9475,Itasca-Mantrap Co-op Electrical Assn,MN,residential,17452.9,137676.0,10997,Cooperative,2022
+10596,City of Lake Crystal - (MN),MN,residential,1631.3,8286.0,1060,Municipal,2022
+10618,Lake Region Electric Cooperative - (MN),MN,residential,41570.0,354738.0,26691,Cooperative,2022
+10697,Lake Country Power,MN,residential,80800.8,516106.0,46658,Cooperative,2022
+11731,City of Marshall - (MN),MN,residential,6101.1,65503.0,5797,Municipal,2022
+12227,Meeker Coop Light & Power Assn,MN,residential,18143.3,149027.0,8518,Cooperative,2022
+12546,Mille Lacs Energy Cooperative,MN,residential,20169.5,132457.0,14414,Cooperative,2022
+12647,"ALLETE, Inc.",MN,residential,145676.9,1053658.0,125243,Investor Owned,2022
+12651,Minnesota Valley Electric Coop,MN,residential,69808.0,512490.0,41967,Cooperative,2022
+12894,City of Moorhead - (MN),MN,residential,20173.6,188707.0,18126,Municipal,2022
+13781,Northern States Power Co - Minnesota,MN,residential,1419019.4,9095482.0,1199122,Investor Owned,2022
+13815,Northwestern Wisconsin Elec Co,MN,residential,79.5,525.0,85,Investor Owned,2022
+14232,Otter Tail Power Co,MN,residential,65179.0,560184.0,49840,Investor Owned,2022
+14246,City of Owatonna - (MN),MN,residential,11129.1,85940.0,11038,Municipal,2022
+14468,People's Cooperative Services,MN,residential,36721.4,232061.0,21355,Cooperative,2022
+16181,Rochester Public Utilities,MN,residential,58727.9,376838.0,53047,Municipal,2022
+16368,Runestone Electric Assn,MN,residential,26549.0,209829.0,14021,Cooperative,2022
+16971,Shakopee Public Utilities Comm,MN,residential,21419.0,144192.0,17034,Municipal,2022
+17267,Sioux Valley SW Elec Coop,MN,residential,10269.6,85766.0,3361,Cooperative,2022
+17550,South Central Electric Assn,MN,residential,10677.0,81108.0,4690,Cooperative,2022
+18019,Stearns Cooperative Elec Assn,MN,residential,46988.3,405358.0,25735,Cooperative,2022
+18047,Steele-Waseca Cooperative Electric,MN,residential,18360.5,126574.0,10571,Cooperative,2022
+19157,MiEnergy Cooperative,MN,residential,28007.6,182332.0,15085,Cooperative,2022
+20639,"Wild Rice Electric Coop, Inc",MN,residential,28366.8,218733.0,13816,Cooperative,2022
+20737,Willmar Municipal Utilities,MN,residential,8081.0,70118.0,8476,Municipal,2022
+20996,Wright-Hennepin Coop Elec Assn,MN,residential,82538.3,605549.0,51517,Cooperative,2022
+21013,City of Worthington - (MN),MN,residential,4282.6,36483.0,4646,Municipal,2022
+25177,Dakota Electric Association,MN,residential,128561.0,951865.0,105223,Cooperative,2022
+40304,Minnesota Valley Coop L&P Assn,MN,residential,14443.5,131615.0,4947,Cooperative,2022
+1775,Black River Electric Coop - (MO),MO,residential,33071.0,300506.0,21299,Cooperative,2022
+2001,Boone Electric Coop,MO,residential,52258.0,448656.0,32968,Cooperative,2022
+3093,Carroll Electric Coop Corp - (AR),MO,residential,16557.0,134521.0,11797,Cooperative,2022
+3113,City of Carthage - (MO),MO,residential,10811.0,82493.0,6917,Municipal,2022
+3268,Central Missouri Elec Coop Inc,MO,residential,21416.4,192543.0,10909,Cooperative,2022
+3600,Citizens Electric Corporation - (MO),MO,residential,43454.0,311918.0,25027,Cooperative,2022
+3712,Clay County Electric Coop Corp,MO,residential,81.0,517.0,47,Cooperative,2022
+4045,City of Columbia - (MO),MO,residential,53774.0,450623.0,45169,Municipal,2022
+4063,Co-Mo Electric Coop Inc,MO,residential,51850.0,423306.0,30444,Cooperative,2022
+4160,Callaway Electric Cooperative,MO,residential,26015.0,185817.0,12462,Cooperative,2022
+4237,Consolidated Electric Coop,MO,residential,13870.3,126534.0,7602,Cooperative,2022
+4524,"Crawford Electric Coop, Inc",MO,residential,32557.3,278209.0,19417,Cooperative,2022
+4675,Cuivre River Electric Coop Inc,MO,residential,108538.1,1134645.0,69629,Cooperative,2022
+5860,Empire District Electric Co,MO,residential,279761.9,1840893.0,136488,Investor Owned,2022
+6181,"Farmers Electric Coop, Inc - (MO)",MO,residential,21560.5,170031.0,12261,Cooperative,2022
+6205,City of Farmington - (MO),MO,residential,9228.9,90967.0,6790,Municipal,2022
+7024,Gascosage Electric Coop,MO,residential,15131.0,146466.0,9134,Cooperative,2022
+8055,City of Hannibal - (MO),MO,residential,9184.9,80652.0,7537,Municipal,2022
+8934,"Howell-Oregon Elec Coop, Inc",MO,residential,36376.1,323867.0,22666,Cooperative,2022
+9231,City of Independence - (MO),MO,residential,76111.9,538039.0,53424,Municipal,2022
+9331,Intercounty Electric Coop Assn,MO,residential,52004.4,451739.0,29201,Cooperative,2022
+10000,Evergy Metro,MO,residential,358687.9,2765392.0,269157,Investor Owned,2022
+10370,City of Kirkwood - (MO),MO,residential,11327.1,98735.0,8910,Municipal,2022
+10603,"Laclede Electric Coop, Inc",MO,residential,57420.0,560451.0,34525,Cooperative,2022
+10832,City of Lebanon - (MO),MO,residential,7876.0,84843.0,5909,Municipal,2022
+11463,Macon Electric Coop,MO,residential,16289.5,131036.0,9893,Cooperative,2022
+12698,Evergy Missouri West,MO,residential,447318.8,3807533.0,299085,Investor Owned,2022
+12700,Missouri Rural Electric Coop,MO,residential,7969.0,70346.0,4956,Cooperative,2022
+12782,City of Monett - (MO),MO,residential,5691.7,48071.0,4018,Municipal,2022
+13520,"New-Mac Electric Coop, Inc",MO,residential,37106.0,315220.0,18769,Cooperative,2022
+14192,Osage Valley Elec Coop Assn,MO,residential,34534.0,268403.0,16628,Cooperative,2022
+14285,Ozark Border Electric Coop,MO,residential,55794.0,544277.0,33187,Cooperative,2022
+14288,Ozark Electric Coop Inc - (MO),MO,residential,51640.1,449267.0,31204,Cooperative,2022
+15138,"Platte-Clay Electric Coop, Inc",MO,residential,41296.0,370204.0,22885,Cooperative,2022
+15229,City of Poplar Bluff - (MO),MO,residential,11596.0,125633.0,7696,Municipal,2022
+16259,City of Rolla - (MO),MO,residential,10647.0,105916.0,8059,Municipal,2022
+16751,Three Rivers Electric Coop,MO,residential,35406.0,319057.0,22064,Cooperative,2022
+16805,SEMO Electric Cooperative,MO,residential,20093.0,179894.0,10716,Cooperative,2022
+17177,City of Sikeston - (MO),MO,residential,11813.0,119975.0,7044,Municipal,2022
+17833,City Utilities of Springfield - (MO),MO,residential,117799.0,1108601.0,103139,Municipal,2022
+19436,Union Electric Co - (MO),MO,residential,1575282.2,13885428.0,1082243,Investor Owned,2022
+20318,Webster Electric Coop,MO,residential,27268.0,314947.0,18294,Cooperative,2022
+20363,West Central Electric Coop Inc - (MO),MO,residential,30840.0,272287.0,14738,Cooperative,2022
+20574,White River Valley El Coop Inc,MO,residential,68038.0,519546.0,38403,Cooperative,2022
+27238,"Southwest Electric Coop, Inc",MO,residential,59810.0,556060.0,40312,Cooperative,2022
+55,City of Aberdeen - (MS),MS,residential,4345.0,34383.0,2588,Municipal,2022
+276,Alcorn County Elec Power Assn,MS,residential,27579.0,216127.0,14803,Cooperative,2022
+571,City of Amory,MS,residential,4646.0,38463.0,2877,Municipal,2022
+2849,Central Electric Power Assn - (MS),MS,residential,57416.0,464465.0,30520,Cooperative,2022
+3841,Coast Electric Power Assn,MS,residential,147523.0,1196321.0,80125,Cooperative,2022
+4068,City of Columbus - (MS),MS,residential,15103.0,121624.0,8970,Municipal,2022
+5175,Dixie Electric Power Assn,MS,residential,66909.1,541455.0,37127,Cooperative,2022
+5578,East Mississippi Elec Pwr Assn,MS,residential,18018.0,127026.0,9815,Cooperative,2022
+6641,4-County Electric Power Assn,MS,residential,75010.0,586361.0,39894,Cooperative,2022
+7651,Greenwood Utilities Comm,MS,residential,12216.2,96788.0,7537,Municipal,2022
+8748,City of Holly Springs,MS,residential,16937.0,135703.0,9182,Municipal,2022
+11247,Louisville Electric System,MS,residential,3389.0,30299.0,2460,Municipal,2022
+11458,City of Macon - (MS),MS,residential,1528.0,11689.0,918,Municipal,2022
+11519,Magnolia Electric Power Assn,MS,residential,53427.0,409548.0,30691,Cooperative,2022
+12685,Entergy Mississippi LLC,MS,residential,651455.1,5608027.0,383643,Investor Owned,2022
+12686,Mississippi Power Co,MS,residential,299311.0,2133666.0,156725,Investor Owned,2022
+13227,Natchez Trace Elec Power Assn,MS,residential,21832.0,170454.0,12533,Cooperative,2022
+13412,City of New Albany - (MS),MS,residential,13944.0,114314.0,8022,Municipal,2022
+13735,Northcentral Mississippi E P A,MS,residential,59830.0,481774.0,28283,Cooperative,2022
+14078,City of Okolona,MS,residential,7536.0,60350.0,4225,Municipal,2022
+14275,City of Oxford - (MS),MS,residential,11153.0,93049.0,8183,Municipal,2022
+14563,Pearl River Valley El Pwr Assn,MS,residential,98629.0,736935.0,50838,Cooperative,2022
+14947,City of Philadelphia - (MS),MS,residential,4321.0,33657.0,2693,Municipal,2022
+15211,Pontotoc Electric Power Assn,MS,residential,30492.0,237445.0,16004,Cooperative,2022
+15334,Prentiss County Elec Pwr Assn,MS,residential,17090.0,158165.0,10972,Cooperative,2022
+17252,Singing River Elec Cooperative,MS,residential,121709.3,1040578.0,70297,Cooperative,2022
+17647,Southern Pine Electric Cooperative,MS,residential,113860.3,904081.0,64372,Cooperative,2022
+17683,Southwest Mississippi E P A,MS,residential,39413.1,287841.0,23292,Cooperative,2022
+18006,City of Starkville,MS,residential,15816.0,130154.0,12478,Municipal,2022
+18447,Tallahatchie Valley E P A,MS,residential,37158.0,298738.0,21477,Cooperative,2022
+18943,Tippah Electric Power Assn,MS,residential,17323.0,143735.0,11701,Cooperative,2022
+18951,Tishomingo County E P A,MS,residential,18453.0,148291.0,11049,Cooperative,2022
+19007,Tombigbee Electric Power Assn,MS,residential,69058.0,570989.0,36797,Cooperative,2022
+19273,City of Tupelo - (MS),MS,residential,15475.0,139313.0,10552,Municipal,2022
+20176,City of Water Valley - (MS),MS,residential,2566.0,20447.0,1527,Municipal,2022
+20394,City of West Point - (MS),MS,residential,4381.0,34345.0,2994,Municipal,2022
+21114,Yazoo Valley Elec Power Assn,MS,residential,18528.0,122299.0,9495,Cooperative,2022
+22815,Delta Electric Power Assn,MS,residential,32443.6,253259.0,21178,Cooperative,2022
+40302,North East Mississippi EPA,MS,residential,47059.0,355154.0,25119,Cooperative,2022
+40303,Monroe County Elec Power Assn,MS,residential,20462.0,163134.0,10016,Cooperative,2022
+6169,Fall River Rural Elec Coop Inc,MT,residential,2077.0,20772.0,1480,Cooperative,2022
+6395,Flathead Electric Coop Inc,MT,residential,85136.0,899004.0,60335,Cooperative,2022
+11272,"Lower Yellowstone R E A, Inc",MT,residential,4619.0,53932.0,3449,Cooperative,2022
+12087,McKenzie Electric Coop Inc,MT,residential,39.0,469.0,26,Cooperative,2022
+12199,Montana-Dakota Utilities Co,MT,residential,21772.0,193296.0,19658,Investor Owned,2022
+12692,"Missoula Electric Coop, Inc",MT,residential,18913.9,192094.0,14292,Cooperative,2022
+12825,NorthWestern Energy LLC - (MT),MT,residential,356172.1,2865830.0,316799,Investor Owned,2022
+13758,"Northern Lights, Inc",MT,residential,6571.0,53113.0,4611,Cooperative,2022
+19156,Powder River Energy Corp,MT,residential,62.4,484.0,51,Cooperative,2022
+19545,"Black Hills Power, Inc.",MT,residential,11.0,163.0,13,Investor Owned,2022
+19603,USBIA-Mission Valley Power,MT,residential,18529.0,266491.0,15830,Federal,2022
+20169,Avista Corp,MT,residential,19.0,223.0,9,Investor Owned,2022
+20997,Yellowstone Valley Elec Co-op,MT,residential,29320.0,236911.0,20354,Cooperative,2022
+21513,"Fergus Electric Coop, Inc",MT,residential,10565.0,69465.0,6388,Cooperative,2022
+232,City of Albemarle - (NC),NC,residential,15770.9,132005.0,10396,Municipal,2022
+240,Albemarle Electric Member Corp,NC,residential,25950.0,190321.0,12370,Cooperative,2022
+719,Town of Apex- (NC),NC,residential,29873.9,251133.0,25332,Municipal,2022
+1889,Blue Ridge Elec Member Corp - (NC),NC,residential,100803.0,770827.0,70401,Cooperative,2022
+1891,Blue Ridge Mountain EMC - (GA),NC,residential,23317.0,155063.0,15230,Cooperative,2022
+2212,"Broad River Electric Coop, Inc",NC,residential,873.5,6284.0,473,Cooperative,2022
+3046,Duke Energy Progress - (NC),NC,residential,2057449.1,16894870.0,1292259,Investor Owned,2022
+3107,Carteret-Craven El Member Corp,NC,residential,52996.0,468116.0,37956,Cooperative,2022
+3250,Central Electric Membership Corp. - (NC),NC,residential,45108.9,336453.0,21493,Cooperative,2022
+4150,City of Concord - (NC),NC,residential,41274.5,351273.0,28391,Municipal,2022
+5416,"Duke Energy Carolinas, LLC",NC,residential,2403248.7,23015861.0,1837991,Investor Owned,2022
+5656,Edgecombe-Martin County E M C,NC,residential,20867.0,146716.0,10571,Cooperative,2022
+5760,City of Elizabeth City - (NC),NC,residential,18559.0,150239.0,11077,Municipal,2022
+6235,Fayetteville Public Works Commission,NC,residential,101075.0,914826.0,74878,Municipal,2022
+6640,Four County Elec Member Corp,NC,residential,57615.0,449517.0,29864,Cooperative,2022
+6784,French Broad Elec Member Corp,NC,residential,46041.3,333401.0,35438,Cooperative,2022
+7027,City of Gastonia - (NC),NC,residential,36820.3,287465.0,25777,Municipal,2022
+7639,Greenville Utilities Comm,NC,residential,92623.5,844243.0,63863,Municipal,2022
+8333,Haywood Electric Member Corp,NC,residential,43924.2,276206.0,27518,Cooperative,2022
+8571,Town of High Point,NC,residential,46241.7,395074.0,37111,Municipal,2022
+9087,Town of Huntersville - (NC),NC,residential,10135.0,80340.0,7332,Municipal,2022
+9837,Jones-Onslow Elec Member Corp,NC,residential,122639.3,1026566.0,76223,Cooperative,2022
+10345,City of Kinston - (NC),NC,residential,16692.4,127732.0,9927,Municipal,2022
+10966,City of Lexington - (NC),NC,residential,27631.6,228562.0,17377,Municipal,2022
+11291,Lumbee River Elec Member Corp,NC,residential,116175.7,999059.0,62298,Cooperative,2022
+11318,City of Lumberton - (NC),NC,residential,12872.5,95044.0,9438,Municipal,2022
+12260,Mecklenburg Electric Cooperative,NC,residential,246.8,1775.0,131,Cooperative,2022
+12801,City of Monroe - (NC),NC,residential,14195.3,108304.0,9438,Municipal,2022
+12944,City of Morganton - (NC),NC,residential,8098.8,72626.0,6868,Municipal,2022
+13027,"Mountain Electric Coop, Inc",NC,residential,21145.0,175858.0,15525,Cooperative,2022
+13416,City of New Bern - (NC),NC,residential,30299.4,248292.0,20249,Municipal,2022
+13482,New River Light & Power Co,NC,residential,8637.7,62698.0,7166,State,2022
+14717,Pee Dee Electric Member Corp,NC,residential,35653.3,270296.0,19285,Cooperative,2022
+15023,Piedmont Electric Member Corp,NC,residential,57119.2,425478.0,29709,Cooperative,2022
+15671,Randolph Electric Member Corp,NC,residential,55279.0,386851.0,30679,Cooperative,2022
+16101,Roanoke Electric Member Corp,NC,residential,27215.0,168037.0,12097,Cooperative,2022
+16226,City of Rocky Mount - (NC),NC,residential,37729.0,313889.0,25018,Municipal,2022
+16496,Rutherford Elec Member Corp,NC,residential,110697.0,937088.0,69210,Cooperative,2022
+17572,South River Elec Member Corp,NC,residential,87954.7,695898.0,44604,Cooperative,2022
+18022,City of Statesville - (NC),NC,residential,13412.7,124591.0,11598,Municipal,2022
+18339,Surry-Yadkin Elec Member Corp,NC,residential,51602.4,353422.0,27585,Cooperative,2022
+18466,Town of Tarboro - (NC),NC,residential,7746.0,61735.0,5363,Municipal,2022
+18957,Tri-County Elec Member Corp (NC),NC,residential,39859.5,346214.0,21918,Cooperative,2022
+19108,Tideland Electric Member Corp,NC,residential,37460.0,236551.0,20944,Cooperative,2022
+19154,Tri-State Electric Member Corp,NC,residential,2049.0,14332.0,1475,Cooperative,2022
+19435,Union Electric Membership Corp - (NC),NC,residential,144955.0,1188766.0,81656,Cooperative,2022
+19876,Virginia Electric & Power Co,NC,residential,191274.5,1641664.0,106473,Investor Owned,2022
+19981,Wake Electric Membership Corp,NC,residential,84065.0,658742.0,50141,Cooperative,2022
+20142,City of Washington - (NC),NC,residential,17719.1,136514.0,11410,Municipal,2022
+20785,City of Wilson,NC,residential,48161.0,418161.0,31187,Municipal,2022
+21002,York Electric Coop Inc,NC,residential,26.0,215.0,14,Cooperative,2022
+21632,EnergyUnited Elec Member Corp,NC,residential,189737.0,1746587.0,117713,Cooperative,2022
+24889,Brunswick Electric Member Corp,NC,residential,156151.5,1124002.0,93375,Cooperative,2022
+40441,Town of Murphy - (NC),NC,residential,6071.0,46346.0,3605,Municipal,2022
+2394,Burke-Divide Electric Coop Inc,ND,residential,3785.0,45376.0,2244,Cooperative,2022
+2985,"Capital Electric Coop, Inc",ND,residential,25310.5,244286.0,18921,Cooperative,2022
+4717,Dakota Valley Elec Coop Inc,ND,residential,13807.5,131542.0,5623,Cooperative,2022
+11272,"Lower Yellowstone R E A, Inc",ND,residential,1178.0,13410.0,787,Cooperative,2022
+12087,McKenzie Electric Coop Inc,ND,residential,8905.8,121532.0,5334,Cooperative,2022
+12090,"McLean Electric Coop, Inc",ND,residential,7307.0,56930.0,3661,Cooperative,2022
+12199,Montana-Dakota Utilities Co,ND,residential,88062.0,808839.0,79183,Investor Owned,2022
+12301,Nodak Electric Coop Inc,ND,residential,45974.0,391508.0,20244,Cooperative,2022
+13196,Northern Plains Electric Coop,ND,residential,24095.0,237668.0,10251,Cooperative,2022
+13694,"North Central Elec Coop, Inc",ND,residential,13745.5,144481.0,6131,Cooperative,2022
+13781,Northern States Power Co - Minnesota,ND,residential,100518.6,796023.0,82122,Investor Owned,2022
+14232,Otter Tail Power Co,ND,residential,65293.9,627151.0,45565,Investor Owned,2022
+17261,Slope Electric Coop Inc,ND,residential,5750.0,46843.0,3184,Cooperative,2022
+19790,Verendrye Electric Coop Inc,ND,residential,24007.4,237100.0,14207,Cooperative,2022
+20413,Mountrail-Williams Elec Coop,ND,residential,14994.6,208158.0,11188,Cooperative,2022
+24949,Cass County Elec Coop Inc,ND,residential,76949.0,651336.0,49333,Cooperative,2022
+55959,Roughrider Electric Cooperativ,ND,residential,17530.0,176716.0,11037,Cooperative,2022
+3205,Cedar-Knox Public Power Dist,NE,residential,7948.0,99420.0,5531,Political Subdivision,2022
+4373,Cornhusker Public Power Dist,NE,residential,14017.8,137065.0,7294,Political Subdivision,2022
+4911,Dawson Power District,NE,residential,28982.5,257777.0,15939,Political Subdivision,2022
+5780,Elkhorn Rural Public Pwr Dist,NE,residential,10439.0,110654.0,6099,Political Subdivision,2022
+6779,City of Fremont - (NE),NE,residential,16983.5,149433.0,13618,Municipal,2022
+8245,City of Hastings - (NE),NE,residential,11647.0,113538.0,11354,Municipal,2022
+8570,Highline Electric Assn,NE,residential,1123.0,8700.0,757,Cooperative,2022
+10967,City of Lexington - (NE),NE,residential,5562.0,56603.0,3645,Municipal,2022
+11018,Lincoln Electric System,NE,residential,130690.8,1345068.0,130067,Municipal,2022
+11251,Loup River Public Power Dist,NE,residential,25251.1,254288.0,16047,Political Subdivision,2022
+12539,Midwest Electric Member Corp,NE,residential,4070.8,37161.0,2334,Cooperative,2022
+13337,Nebraska Public Power District,NE,residential,90586.0,881833.0,72743,Political Subdivision,2022
+13664,Norris Public Power District,NE,residential,29430.9,345897.0,16877,Political Subdivision,2022
+13725,City of North Platte,NE,residential,13054.0,123326.0,11682,Municipal,2022
+13739,Northeast Power,NE,residential,10752.0,118755.0,6754,Political Subdivision,2022
+14127,Omaha Public Power District,NE,residential,465262.0,3983478.0,351712,Political Subdivision,2022
+17577,City of South Sioux City,NE,residential,6362.6,50268.0,4999,Municipal,2022
+17642,Southern Public Power District,NE,residential,22996.5,250862.0,15216,Political Subdivision,2022
+17692,Southwest Public Power Dist,NE,residential,3653.3,36929.0,2177,Political Subdivision,2022
+21111,Perennial Public Power Dist,NE,residential,7876.0,73980.0,3514,Political Subdivision,2022
+27058,"High West Energy, Inc",NE,residential,2837.0,19903.0,1760,Cooperative,2022
+40606,City of Grand Island - (NE),NE,residential,21921.0,225320.0,21994,Municipal,2022
+13374,"Constellation NewEnergy, Inc",NH,residential,1231.4,15899.0,815,Retail Power Marketer,2022
+13441,New Hampshire Elec Coop Inc,NH,residential,131296.3,510825.0,72547,Cooperative,2022
+15472,Public Service Co of NH,NH,residential,797142.9,2812800.0,380922,Investor Owned,2022
+24590,Unitil Energy Systems,NH,residential,116712.0,463039.0,62313,Investor Owned,2022
+26510,Liberty Utilities (Granite State Electri,NH,residential,77038.3,285392.0,35789,Investor Owned,2022
+54820,Direct Energy Services,NH,residential,27517.0,231701.0,30634,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",NH,residential,3283.0,21108.0,2660,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",NH,residential,443.5,3794.0,618,Retail Power Marketer,2022
+58086,"Electricity NH, LLC",NH,residential,16971.0,121155.0,17769,Retail Power Marketer,2022
+58158,FairPoint Energy LLC,NH,residential,3626.0,22923.0,3418,Retail Power Marketer,2022
+58633,"XOOM Energy New Hampshire, LLC",NH,residential,1237.0,10248.0,1328,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",NH,residential,18334.0,124106.0,16640,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",NH,residential,6383.6,37132.0,5847,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,NH,residential,1659.2,7079.0,1351,Retail Power Marketer,2022
+59012,"Mega Energy of New Hampshire, LLC",NH,residential,600.0,2656.0,410,Retail Power Marketer,2022
+59059,Town Square Energy,NH,residential,5460.9,31103.0,4733,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",NH,residential,17.8,199.0,112,Retail Power Marketer,2022
+59793,"First Point Power, LLC",NH,residential,1600.7,16339.0,1634,Retail Power Marketer,2022
+61200,"Summer Energy Northeast, LLC",NH,residential,91.0,538.0,63,Retail Power Marketer,2022
+65310,Energywell LLC,NH,residential,292.4,1726.0,1414,Retail Power Marketer,2022
+963,Atlantic City Electric Co,NJ,residential,763396.0,3769220.0,458134,Investor Owned,2022
+4100,"Commerce Energy, Inc.",NJ,residential,2248.6,13654.0,1444,Retail Power Marketer,2022
+6458,Energy Harbor Corp.,NJ,residential,45823.0,438912.0,40294,Retail Power Marketer,2022
+7279,"NextEra Energy Services, LLC",NJ,residential,753.2,4942.0,425,Retail Power Marketer,2022
+7554,Green Mountain Energy Company,NJ,residential,943.8,5970.0,737,Retail Power Marketer,2022
+9726,Jersey Central Power & Lt Co,NJ,residential,1251994.5,8840013.0,919604,Investor Owned,2022
+13374,"Constellation NewEnergy, Inc",NJ,residential,13828.4,129631.0,6769,Retail Power Marketer,2022
+15477,Public Service Elec & Gas Co,NJ,residential,2332508.9,13171809.0,1901659,Investor Owned,2022
+16213,Rockland Electric Co,NJ,residential,126367.1,697562.0,62028,Investor Owned,2022
+17710,"Spark Energy, LP",NJ,residential,54.0,304.0,45,Retail Power Marketer,2022
+19126,"TriEagle Energy, L.P.",NJ,residential,1004.0,9167.0,691,Retail Power Marketer,2022
+19856,City of Vineland - (NJ),NJ,residential,34548.8,207666.0,22696,Municipal,2022
+54820,Direct Energy Services,NJ,residential,24170.0,174543.0,22919,Retail Power Marketer,2022
+55722,AEP Energy,NJ,residential,355.7,3640.0,293,Retail Power Marketer,2022
+55781,Liberty Power Corp.,NJ,residential,41.0,291.0,198,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",NJ,residential,6669.1,35338.0,5127,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",NJ,residential,2791.0,17845.0,2775,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",NJ,residential,12562.0,97788.0,9513,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,NJ,residential,7125.0,42833.0,4686,Retail Power Marketer,2022
+56286,"Frontier Utilities, LLC",NJ,residential,2594.3,15634.0,1300,Retail Power Marketer,2022
+56501,"Palmco Power NJ, LLC",NJ,residential,6187.0,21623.0,5496,Retail Power Marketer,2022
+56571,AP Holdings LLC,NJ,residential,410.2,2124.0,322,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,NJ,residential,20657.0,136703.0,13704,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",NJ,residential,199.9,1771.0,273,Retail Power Marketer,2022
+57074,"Stream Energy New Jersey, LLC",NJ,residential,12736.2,79991.0,8651,Retail Power Marketer,2022
+57307,ENGIE Power & Gas LLC,NJ,residential,1297.0,6855.0,677,Retail Power Marketer,2022
+57491,"XOOM Energy New Jersey, LLC",NJ,residential,5042.0,28990.0,3305,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,NJ,residential,14308.9,85705.0,9100,Retail Power Marketer,2022
+58663,Respond Power LLC,NJ,residential,2716.0,15682.0,1939,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",NJ,residential,10007.0,61678.0,6008,Retail Power Marketer,2022
+58683,Everyday Energy LLC,NJ,residential,323.9,2109.0,269,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",NJ,residential,15762.0,69561.0,9780,Retail Power Marketer,2022
+58952,Tomorow Energy Corp.,NJ,residential,4036.6,17527.0,2472,Retail Power Marketer,2022
+58953,"Star Energy Partners, LLC",NJ,residential,2951.4,15443.0,3388,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",NJ,residential,21380.2,100143.0,17558,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",NJ,residential,1799.2,12214.0,1488,Retail Power Marketer,2022
+58966,Marathon Power LLC,NJ,residential,687.3,5715.0,374,Retail Power Marketer,2022
+58973,"Town Square Energy East, LLC",NJ,residential,405.7,2244.0,290,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,NJ,residential,7215.2,36302.0,3623,Retail Power Marketer,2022
+58978,"Harborside Energy, LLC",NJ,residential,745.2,3232.0,468,Retail Power Marketer,2022
+59052,Astral Energy LLC,NJ,residential,1087.6,4875.0,520,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",NJ,residential,1090.9,6517.0,613,Retail Power Marketer,2022
+59055,"Choice Energy, LLC",NJ,residential,1127.0,8219.0,1053,Retail Power Marketer,2022
+59065,Titan Gas LLC,NJ,residential,1219.1,10202.0,1038,Retail Power Marketer,2022
+59085,"SFE Energy NJ, Inc.",NJ,residential,4807.0,35705.0,4654,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",NJ,residential,102.1,591.0,71,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",NJ,residential,22.5,190.0,43,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",NJ,residential,44771.3,277577.0,32234,Retail Power Marketer,2022
+59620,Verde Energy USA,NJ,residential,17259.0,81468.0,10453,Retail Power Marketer,2022
+59793,"First Point Power, LLC",NJ,residential,10.1,62.0,4,Retail Power Marketer,2022
+59795,"Starion Energy PA, Inc.",NJ,residential,8.6,70.0,55,Retail Power Marketer,2022
+59797,Park Power LLC,NJ,residential,206.7,1322.0,183,Retail Power Marketer,2022
+59799,American Power & Gas,NJ,residential,3870.3,19719.0,1954,Retail Power Marketer,2022
+59807,"Rushmore Energy, LLC",NJ,residential,1691.5,11793.0,1746,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",NJ,residential,2692.0,13831.0,2013,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,NJ,residential,530.0,2668.0,481,Retail Power Marketer,2022
+59848,"ResCom Energy, LLC",NJ,residential,8.9,50.0,14,Retail Power Marketer,2022
+59933,"Texpo Power, L.P.",NJ,residential,165.9,987.0,80,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),NJ,residential,1414.3,7230.0,1067,Retail Power Marketer,2022
+60124,Spring Energy RRH LLC,NJ,residential,1349.0,6249.0,795,Retail Power Marketer,2022
+60218,MPower Energy NJ LLC,NJ,residential,4578.8,26263.0,5083,Retail Power Marketer,2022
+60696,"Vista Energy Marketing, L.P.",NJ,residential,196.0,889.0,179,Retail Power Marketer,2022
+61367,South Bay Energy Corp.,NJ,residential,1104.0,5594.0,787,Retail Power Marketer,2022
+61920,"All American Power and Gas, LLC",NJ,residential,1056.5,3463.0,438,Retail Power Marketer,2022
+61922,"Pure Energy USA, LLC",NJ,residential,5707.0,18544.0,2591,Retail Power Marketer,2022
+61972,"SunSea Energy, LLC",NJ,residential,3438.0,9918.0,1724,Retail Power Marketer,2022
+62156,"Power UP Energy, LLC",NJ,residential,616.0,2013.0,124,Retail Power Marketer,2022
+63028,Josco Energy USA LLC,NJ,residential,1266.4,6175.0,1582,Retail Power Marketer,2022
+63122,"Approved Energy II, LLC",NJ,residential,0.9,6.0,1,Retail Power Marketer,2022
+63168,Median Energy Corp.,NJ,residential,876.7,4796.0,781,Retail Power Marketer,2022
+63232,"National Gas & Electric, LLC",NJ,residential,321.2,2720.0,246,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",NJ,residential,1647.0,6920.0,1406,Retail Power Marketer,2022
+64544,"Mega Energy of New Jersey, LLC",NJ,residential,168.0,848.0,193,Retail Power Marketer,2022
+65310,Energywell LLC,NJ,residential,24.4,221.0,258,Retail Power Marketer,2022
+3273,"Central New Mexico El Coop, Inc",NM,residential,20762.0,125471.0,16895,Cooperative,2022
+3287,"Central Valley Elec Coop, Inc",NM,residential,10156.7,86950.0,5884,Cooperative,2022
+4265,Continental Divide El Coop Inc,NM,residential,21371.0,147715.0,20585,Cooperative,2022
+5701,El Paso Electric Co,NM,residential,98489.0,798370.0,93609,Investor Owned,2022
+6198,"Farmers Electric Coop, Inc - (NM)",NM,residential,14151.8,104617.0,10122,Cooperative,2022
+6204,City of Farmington - (NM),NM,residential,32944.0,283807.0,35988,Municipal,2022
+9699,"Jemez Mountains Elec Coop, Inc",NM,residential,25903.3,191936.0,28006,Cooperative,2022
+10378,"Kit Carson Electric Coop, Inc",NM,residential,25477.8,160486.0,25650,Cooperative,2022
+10817,"Lea County Electric Coop, Inc",NM,residential,11200.0,96036.0,7165,Cooperative,2022
+11204,Los Alamos County,NM,residential,7329.4,59591.0,7887,Municipal,2022
+13314,Navajo Tribal Utility Authority,NM,residential,10393.0,66279.0,9988,State,2022
+13318,"Navopache Electric Coop, Inc",NM,residential,1245.0,7632.0,1473,Cooperative,2022
+14224,Otero County Electric Coop Inc,NM,residential,21100.8,116579.0,16372,Cooperative,2022
+15473,Public Service Co of NM,NM,residential,484699.0,3367993.0,484071,Investor Owned,2022
+16057,"Rio Grande Electric Coop, Inc",NM,residential,306.3,1822.0,239,Cooperative,2022
+17715,Southwestern Electric Coop Inc - (NM),NM,residential,2409.2,9946.0,1446,Cooperative,2022
+17718,Southwestern Public Service Co,NM,residential,154498.5,1216818.0,99338,Investor Owned,2022
+17826,"Springer Electric Coop, Inc",NM,residential,2722.0,15142.0,2456,Cooperative,2022
+19160,"Tri-County Electric Coop, Inc (OK)",NM,residential,2.3,8.0,3,Cooperative,2022
+22690,Roosevelt County Elec Coop Inc,NM,residential,6256.0,52571.0,3901,Cooperative,2022
+2008,City of Boulder City - (NV),NV,residential,9909.0,98691.0,7122,Municipal,2022
+13073,"Mt Wheeler Power, Inc",NV,residential,7037.4,86355.0,5163,Cooperative,2022
+13407,Nevada Power Co,NV,residential,1454954.0,10299680.0,886142,Investor Owned,2022
+14245,Overton Power District No 5,NV,residential,22524.0,213897.0,14714,Political Subdivision,2022
+17166,Sierra Pacific Power Co,NV,residential,365490.3,2747233.0,321309,Investor Owned,2022
+18260,Surprise Valley Electrification,NV,residential,5.4,53.0,4,Cooperative,2022
+19840,"Valley Electric Assn, Inc",NV,residential,46443.1,323652.0,21626,Cooperative,2022
+20332,Wells Rural Electric Co,NV,residential,5980.8,60134.0,4599,Cooperative,2022
+22814,Raft Rural Elec Coop Inc,NV,residential,1746.0,17965.0,1521,Cooperative,2022
+113,"Agway Energy Services, LLC",NY,residential,16996.2,125646.0,16583,Retail Power Marketer,2022
+3249,Central Hudson Gas & Elec Corp,NY,residential,515078.0,2122918.0,233720,Investor Owned,2022
+4226,Consolidated Edison Co-NY Inc,NY,residential,3810232.0,11875490.0,2609391,Investor Owned,2022
+5880,"Energy Coop of New York, Inc",NY,residential,17841.0,216636.0,4153,Retail Power Marketer,2022
+5930,Village of Fairport - (NY),NY,residential,14700.7,247895.0,16283,Municipal,2022
+6369,Fishers Island Utility Co Inc,NY,residential,1825.1,4763.0,646,Investor Owned,2022
+6775,Village of Freeport - (NY),NY,residential,17052.0,121595.0,13288,Municipal,2022
+7554,Green Mountain Energy Company,NY,residential,53198.0,329098.0,66210,Retail Power Marketer,2022
+9645,Jamestown Board of Public Util,NY,residential,13181.6,160593.0,16150,Municipal,2022
+11171,Long Island Power Authority,NY,residential,2368255.9,9390851.0,1026687,State,2022
+11811,Town of Massena - (NY),NY,residential,7502.0,120600.0,8198,Municipal,2022
+13374,"Constellation NewEnergy, Inc",NY,residential,117976.5,1576283.0,192516,Retail Power Marketer,2022
+13511,New York State Elec & Gas Corp,NY,residential,1032482.6,6188500.0,700370,Investor Owned,2022
+13573,Niagara Mohawk Power Corp.,NY,residential,2104981.6,10679796.0,1379221,Investor Owned,2022
+14154,Orange & Rockland Utils Inc,NY,residential,353961.2,1218224.0,152372,Investor Owned,2022
+14711,Pennsylvania Electric Co,NY,residential,4056.5,31501.0,3304,Investor Owned,2022
+15145,City of Plattsburgh - (NY),NY,residential,8341.1,163353.0,8806,Municipal,2022
+16177,"Robison Energy, LLC",NY,residential,7670.1,61375.0,2199,Retail Power Marketer,2022
+16183,Rochester Gas & Electric Corp,NY,residential,411807.3,2276305.0,276292,Investor Owned,2022
+17512,Village of Solvay - (NY),NY,residential,3846.0,60000.0,4706,Municipal,2022
+49922,U.S. Energy Partners LLC,NY,residential,938.0,11313.0,955,Retail Power Marketer,2022
+54820,Direct Energy Services,NY,residential,45572.4,377483.0,47918,Retail Power Marketer,2022
+54893,NOCO Electric,NY,residential,8680.0,116850.0,9716,Retail Power Marketer,2022
+55781,Liberty Power Corp.,NY,residential,4.8,44.0,64,Retail Power Marketer,2022
+55814,"Columbia Utilities Power, LLC",NY,residential,9296.6,121250.0,15323,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",NY,residential,23783.3,116525.0,22241,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",NY,residential,11961.0,96868.0,13860,Retail Power Marketer,2022
+55878,Hudson Energy Services,NY,residential,259.7,2366.0,59,Retail Power Marketer,2022
+56196,Just Energy New York Corp.,NY,residential,9917.8,109715.0,15136,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",NY,residential,49634.0,564078.0,64689,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,NY,residential,7892.0,52485.0,9315,Retail Power Marketer,2022
+56504,Major Energy Electric Services,NY,residential,7230.0,75104.0,9488,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,NY,residential,15210.0,133307.0,15565,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",NY,residential,27.5,369.0,40,Retail Power Marketer,2022
+57307,ENGIE Power & Gas LLC,NY,residential,60.5,330.0,69,Retail Power Marketer,2022
+58119,Public Power LLC (CT),NY,residential,3461.0,36875.0,4686,Retail Power Marketer,2022
+58160,Viridian Energy NY LLC,NY,residential,7806.2,67713.0,8405,Retail Power Marketer,2022
+58181,"Stream Energy New York, LLC",NY,residential,2739.0,35335.0,4862,Retail Power Marketer,2022
+58248,"EnergyMark, LLC",NY,residential,1574.9,23951.0,3702,Retail Power Marketer,2022
+58367,"XOOM Energy New York, LLC",NY,residential,15642.0,100780.0,15771,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",NY,residential,1734.0,11829.0,1463,Retail Power Marketer,2022
+58853,Kiwi Energy NY LLC,NY,residential,14835.0,85801.0,14926,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",NY,residential,59108.3,233145.0,43991,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",NY,residential,2820.1,35210.0,6281,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",NY,residential,7789.4,64011.0,9502,Retail Power Marketer,2022
+58966,Marathon Power LLC,NY,residential,5003.1,58707.0,1835,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,NY,residential,3683.0,35915.0,4442,Retail Power Marketer,2022
+59052,Astral Energy LLC,NY,residential,693.9,5078.0,721,Retail Power Marketer,2022
+59053,"Abest Power & Gas, LLC",NY,residential,3530.0,19069.0,3450,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",NY,residential,14309.0,91905.0,12929,Retail Power Marketer,2022
+59082,"Family Energy, Inc. New York",NY,residential,14040.0,151347.0,26685,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",NY,residential,178.6,1543.0,152,Retail Power Marketer,2022
+59128,MPower Energy LLC,NY,residential,22315.7,121334.0,31674,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",NY,residential,11765.0,112702.0,16649,Retail Power Marketer,2022
+59620,Verde Energy USA,NY,residential,3795.0,40794.0,5865,Retail Power Marketer,2022
+59796,"Starion Energy NY, Inc.",NY,residential,6.2,92.0,162,Retail Power Marketer,2022
+59799,American Power & Gas,NY,residential,17583.4,111004.0,11742,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",NY,residential,4297.7,20990.0,3921,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,NY,residential,3089.0,18307.0,3179,Retail Power Marketer,2022
+59812,New Wave Energy Corporation,NY,residential,6002.3,58491.0,3586,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",NY,residential,300.8,3338.0,70,Retail Power Marketer,2022
+60583,Atlantic Energy LLC,NY,residential,1873.2,11418.0,1839,Retail Power Marketer,2022
+61059,"Renaissance Power & Gas, Inc.",NY,residential,2564.0,14362.0,2631,Retail Power Marketer,2022
+61367,South Bay Energy Corp.,NY,residential,1971.0,8955.0,2118,Retail Power Marketer,2022
+61920,"All American Power and Gas, LLC",NY,residential,1234.0,3938.0,734,Retail Power Marketer,2022
+61922,"Pure Energy USA, LLC",NY,residential,7004.0,24079.0,4917,Retail Power Marketer,2022
+61972,"SunSea Energy, LLC",NY,residential,4363.0,18449.0,3577,Retail Power Marketer,2022
+62156,"Power UP Energy, LLC",NY,residential,14.0,47.0,8,Retail Power Marketer,2022
+63007,First Choice Energy LLC,NY,residential,1012.8,7815.0,207,Retail Power Marketer,2022
+63027,Josco Energy Corp-  NY,NY,residential,5339.9,30325.0,7999,Retail Power Marketer,2022
+63122,"Approved Energy II, LLC",NY,residential,41.8,387.0,56,Retail Power Marketer,2022
+63168,Median Energy Corp.,NY,residential,2532.9,14376.0,3407,Retail Power Marketer,2022
+63364,"Mirabito Power & Gas, LLC",NY,residential,302.0,3874.0,223,Retail Power Marketer,2022
+63570,"Chief Energy Power, LLC",NY,residential,2166.0,16109.0,1277,Retail Power Marketer,2022
+64326,"Phoenix Energy Group, LLC",NY,residential,63.9,420.0,76,Retail Power Marketer,2022
+65310,Energywell LLC,NY,residential,1.3,19.0,11,Retail Power Marketer,2022
+65335,Pay Less Energy LLC,NY,residential,0.1,1.0,2,Retail Power Marketer,2022
+2054,City of Bowling Green - (OH),OH,residential,15348.0,100232.0,12901,Municipal,2022
+2502,"Buckeye Rural Elec Coop, Inc",OH,residential,39156.9,227265.0,17767,Cooperative,2022
+2651,Butler Rural Electric Coop Inc - (OH),OH,residential,32224.0,186043.0,11244,Cooperative,2022
+3216,City of Celina - (OH),OH,residential,9892.0,88920.0,7110,Municipal,2022
+3542,Duke Energy Ohio Inc,OH,residential,661557.1,3392162.0,307110,Investor Owned,2022
+3755,Cleveland Electric Illum Co,OH,residential,506401.0,1795431.0,252788,Investor Owned,2022
+3762,City of Cleveland - (OH),OH,residential,56111.9,393878.0,64594,Municipal,2022
+3824,Clyde Light & Power,OH,residential,2992.0,25139.0,2760,Municipal,2022
+4065,City of Columbus - (OH),OH,residential,10854.3,92846.0,13640,Municipal,2022
+4100,"Commerce Energy, Inc.",OH,residential,27259.9,323353.0,29481,Retail Power Marketer,2022
+4683,City of Cuyahoga Falls - (OH),OH,residential,22350.9,177389.0,23961,Municipal,2022
+4922,Dayton Power & Light Co,OH,residential,467318.0,2945538.0,259056,Investor Owned,2022
+5336,City of Dover - (OH),OH,residential,7946.0,53893.0,5836,Municipal,2022
+6458,Energy Harbor Corp.,OH,residential,339761.3,6632187.0,631990,Retail Power Marketer,2022
+7891,Guernsey-Muskingum El Coop Inc,OH,residential,27293.4,174081.0,15155,Cooperative,2022
+7977,City of Hamilton - (OH),OH,residential,39694.0,249108.0,26707,Municipal,2022
+8034,Hancock-Wood Electric Coop Inc,OH,residential,23664.3,151458.0,11176,Cooperative,2022
+8761,Holmes-Wayne Electric Coop Inc,OH,residential,26771.7,180296.0,14530,Cooperative,2022
+10668,Licking Rural Electric Inc,OH,residential,51351.0,324961.0,25376,Cooperative,2022
+10830,City of Lebanon - (OH),OH,residential,10526.0,87959.0,8648,Municipal,2022
+11200,"Lorain-Medina R E C, Inc",OH,residential,35246.2,217941.0,15130,Cooperative,2022
+12377,Midwest Energy Cooperative,OH,residential,1975.9,10898.0,868,Cooperative,2022
+12515,"Midwest Electric, Inc",OH,residential,23106.9,175832.0,10736,Cooperative,2022
+12990,Consolidated Cooperative,OH,residential,39585.0,254743.0,16461,Cooperative,2022
+13374,"Constellation NewEnergy, Inc",OH,residential,46195.2,785894.0,60717,Retail Power Marketer,2022
+13602,City of Niles - (OH),OH,residential,7387.7,91770.0,12119,Municipal,2022
+13693,"North Central Elec Coop, Inc",OH,residential,19029.4,123659.0,8426,Cooperative,2022
+13998,Ohio Edison Co,OH,residential,852023.9,3507845.0,356619,Investor Owned,2022
+14006,Ohio Power Co,OH,residential,1806578.0,8442418.0,738395,Investor Owned,2022
+14194,City of Orrville - (OH),OH,residential,8250.5,75188.0,6301,Municipal,2022
+14381,City of Painesville,OH,residential,12259.7,86236.0,10782,Municipal,2022
+14599,"Paulding-Putman Elec Coop, Inc",OH,residential,19651.9,138799.0,9123,Cooperative,2022
+15054,"Pioneer Rural Elec Coop, Inc - (OH)",OH,residential,38748.6,255354.0,16010,Cooperative,2022
+15095,City of Piqua - (OH),OH,residential,10910.6,88345.0,9744,Municipal,2022
+17891,City of St Marys - (OH),OH,residential,4802.6,36973.0,3755,Municipal,2022
+18085,South Central Power Company,OH,residential,209920.9,1543256.0,114593,Cooperative,2022
+18997,The Toledo Edison Co,OH,residential,238419.6,844563.0,88868,Investor Owned,2022
+19501,"Union Rural Electric Coop, Inc",OH,residential,23192.4,157340.0,11009,Cooperative,2022
+19951,City of Wadsworth - (OH),OH,residential,12874.0,111877.0,12105,Municipal,2022
+20077,City of Wapakoneta - (OH),OH,residential,5484.0,48349.0,4926,Municipal,2022
+20477,City of Westerville - (OH),OH,residential,22353.0,168392.0,15691,Municipal,2022
+54820,Direct Energy Services,OH,residential,45495.5,510795.0,54863,Retail Power Marketer,2022
+55722,AEP Energy,OH,residential,221674.1,3317271.0,328952,Retail Power Marketer,2022
+55781,Liberty Power Corp.,OH,residential,92.6,1062.0,688,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",OH,residential,5267.5,38085.0,5076,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",OH,residential,3615.0,32941.0,3499,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",OH,residential,2535.0,32612.0,2959,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,OH,residential,260.0,2101.0,214,Retail Power Marketer,2022
+56286,"Frontier Utilities, LLC",OH,residential,1471.1,11267.0,1393,Retail Power Marketer,2022
+56504,Major Energy Electric Services,OH,residential,522.0,4026.0,540,Retail Power Marketer,2022
+56571,AP Holdings LLC,OH,residential,2349.0,16141.0,1584,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,OH,residential,95205.0,905943.0,85370,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",OH,residential,1231.6,8042.0,1111,Retail Power Marketer,2022
+57307,ENGIE Power & Gas LLC,OH,residential,315.0,2007.0,267,Retail Power Marketer,2022
+58119,Public Power LLC (CT),OH,residential,3068.0,38381.0,3312,Retail Power Marketer,2022
+58142,Viridian Energy Ohio LLC,OH,residential,13437.9,129063.0,11083,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,OH,residential,74.7,679.0,63,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",OH,residential,4061.0,34703.0,3285,Retail Power Marketer,2022
+58683,Everyday Energy LLC,OH,residential,243.6,2046.0,243,Retail Power Marketer,2022
+58853,Kiwi Energy NY LLC,OH,residential,2288.0,14992.0,2124,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",OH,residential,21864.4,151660.0,19142,Retail Power Marketer,2022
+58952,Tomorow Energy Corp.,OH,residential,6617.1,37228.0,4631,Retail Power Marketer,2022
+58953,"Star Energy Partners, LLC",OH,residential,3074.8,33504.0,4852,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",OH,residential,30863.9,205375.0,25749,Retail Power Marketer,2022
+58957,"Interstate Gas Supply, Inc.",OH,residential,182871.0,1802839.0,193588,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",OH,residential,932.5,9740.0,907,Retail Power Marketer,2022
+58972,"Realgy, LLC",OH,residential,3336.4,30210.0,3196,Retail Power Marketer,2022
+58973,"Town Square Energy East, LLC",OH,residential,889.8,5921.0,649,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,OH,residential,1847.7,15781.0,1914,Retail Power Marketer,2022
+59052,Astral Energy LLC,OH,residential,3.2,43.0,5,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",OH,residential,10789.0,85322.0,7550,Retail Power Marketer,2022
+59055,"Choice Energy, LLC",OH,residential,599.0,5320.0,580,Retail Power Marketer,2022
+59064,"Great American Power, LLC",OH,residential,401.7,5371.0,471,Retail Power Marketer,2022
+59065,Titan Gas LLC,OH,residential,10692.6,81378.0,7735,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",OH,residential,5263.6,39536.0,6062,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",OH,residential,40.3,743.0,155,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",OH,residential,38895.3,371367.0,41635,Retail Power Marketer,2022
+59311,"XOOM Energy Ohio, LLC",OH,residential,10888.0,101466.0,10088,Retail Power Marketer,2022
+59385,"Dynegy Energy Services, LLC",OH,residential,194937.0,3720279.0,330707,Retail Power Marketer,2022
+59410,"Shipley Choice, LLC",OH,residential,1699.5,25089.0,2014,Retail Power Marketer,2022
+59620,Verde Energy USA,OH,residential,9598.0,48790.0,5867,Retail Power Marketer,2022
+59795,"Starion Energy PA, Inc.",OH,residential,3.0,37.0,77,Retail Power Marketer,2022
+59797,Park Power LLC,OH,residential,2683.3,18219.0,2072,Retail Power Marketer,2022
+59799,American Power & Gas,OH,residential,9580.1,70493.0,5710,Retail Power Marketer,2022
+59807,"Rushmore Energy, LLC",OH,residential,4055.8,41670.0,4583,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",OH,residential,3577.0,31107.0,3575,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,OH,residential,168.0,1245.0,171,Retail Power Marketer,2022
+59811,Santanna Energy Services,OH,residential,6094.4,73203.0,7790,Retail Power Marketer,2022
+59812,New Wave Energy Corporation,OH,residential,1343.3,14425.0,1144,Retail Power Marketer,2022
+59848,"ResCom Energy, LLC",OH,residential,3.3,52.0,56,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",OH,residential,174.2,2931.0,445,Retail Power Marketer,2022
+59932,Switch Energy,OH,residential,0.1,2.0,6,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),OH,residential,929.5,6556.0,661,Retail Power Marketer,2022
+60041,Planet Energy,OH,residential,311.2,5202.0,1037,Retail Power Marketer,2022
+60218,MPower Energy NJ LLC,OH,residential,3366.6,23742.0,3290,Retail Power Marketer,2022
+60579,"SFE Energy Ohio, Inc.",OH,residential,2917.0,32698.0,4236,Retail Power Marketer,2022
+60696,"Vista Energy Marketing, L.P.",OH,residential,4322.0,26742.0,3921,Retail Power Marketer,2022
+60914,Current Power & Gas Inc.,OH,residential,9.2,186.0,28,Retail Power Marketer,2022
+60977,StateWise Energy Ohio LLC,OH,residential,6147.0,63690.0,7097,Retail Power Marketer,2022
+61059,"Renaissance Power & Gas, Inc.",OH,residential,310.0,2339.0,262,Retail Power Marketer,2022
+61367,South Bay Energy Corp.,OH,residential,300.0,2177.0,226,Retail Power Marketer,2022
+61479,"Stream Ohio Gas & Electric, LLC",OH,residential,2364.3,23318.0,2037,Retail Power Marketer,2022
+61920,"All American Power and Gas, LLC",OH,residential,71.5,367.0,44,Retail Power Marketer,2022
+61922,"Pure Energy USA, LLC",OH,residential,893.0,4472.0,469,Retail Power Marketer,2022
+61972,"SunSea Energy, LLC",OH,residential,1165.0,6459.0,701,Retail Power Marketer,2022
+62148,Powervine Energy,OH,residential,1900.7,32746.0,2115,Retail Power Marketer,2022
+62790,"Summer Energy Midwest, LLC",OH,residential,2.0,24.0,1,Retail Power Marketer,2022
+63028,Josco Energy USA LLC,OH,residential,413.8,3728.0,661,Retail Power Marketer,2022
+63168,Median Energy Corp.,OH,residential,587.4,4911.0,685,Retail Power Marketer,2022
+63232,"National Gas & Electric, LLC",OH,residential,2118.1,15928.0,1637,Retail Power Marketer,2022
+63546,"Provision Power & Gas, LLC",OH,residential,8864.2,62793.0,7822,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",OH,residential,1949.0,15225.0,2050,Retail Power Marketer,2022
+64601,LE Energy,OH,residential,14787.2,111091.0,11677,Retail Power Marketer,2022
+64705,"NTHERM, LLC",OH,residential,2966.9,20261.0,2298,Retail Power Marketer,2022
+64975,Mega Energy of Ohio,OH,residential,452.0,3000.0,397,Retail Power Marketer,2022
+65262,"Archer Energy, LLC",OH,residential,7.4,115.0,135,Retail Power Marketer,2022
+65310,Energywell LLC,OH,residential,165.2,1001.0,1639,Retail Power Marketer,2022
+296,"Alfalfa Electric Coop, Inc",OK,residential,6054.0,52125.0,2674,Cooperative,2022
+817,Arkansas Valley Elec Coop Corp,OK,residential,8064.8,61494.0,4187,Cooperative,2022
+2911,"Canadian Valley Elec Coop, Inc",OK,residential,47538.7,390468.0,23658,Cooperative,2022
+3226,"Central Rural Electric Cooperative, Inc",OK,residential,36612.5,369204.0,18770,Cooperative,2022
+3478,Cimarron Electric Coop,OK,residential,23663.8,179737.0,14653,Cooperative,2022
+3527,Choctaw Electric Coop Inc,OK,residential,43329.3,298265.0,20623,Cooperative,2022
+3647,City of Claremore,OK,residential,20114.0,128614.0,11453,Municipal,2022
+4296,"Cookson Hills Elec Coop, Inc",OK,residential,30983.3,258906.0,17208,Cooperative,2022
+4401,"Cotton Electric Coop, Inc",OK,residential,42107.8,323758.0,19241,Cooperative,2022
+5598,East Central Oklahoma Elec Coop Inc,OK,residential,49906.0,459486.0,32388,Cooperative,2022
+5661,City of Edmond - (OK),OK,residential,60524.8,549830.0,37596,Municipal,2022
+5860,Empire District Electric Co,OK,residential,6695.6,53985.0,3807,Investor Owned,2022
+9246,"Indian Electric Coop, Inc",OK,residential,26638.7,244593.0,14558,Cooperative,2022
+10012,Kay Electric Coop,OK,residential,7725.0,56241.0,4323,Cooperative,2022
+10170,"Kiamichi Electric Coop, Inc",OK,residential,37419.0,284161.0,20657,Cooperative,2022
+10599,"Lake Region Electric Coop, Inc - (OK)",OK,residential,37316.0,360143.0,24212,Cooperative,2022
+13734,Northeast Oklahoma Electric Co,OK,residential,60455.0,530179.0,36982,Cooperative,2022
+13807,Northwestern Electric Coop Inc - (OK),OK,residential,18672.0,112941.0,9608,Cooperative,2022
+14062,Oklahoma Electric Coop Inc,OK,residential,118535.0,909175.0,56267,Cooperative,2022
+14063,Oklahoma Gas & Electric Co,OK,residential,1215869.7,9617975.0,696033,Investor Owned,2022
+14289,Ozarks Electric Coop Corp - (AR),OK,residential,17683.4,149952.0,11593,Cooperative,2022
+14775,People's Electric Cooperative,OK,residential,31727.5,244864.0,14293,Cooperative,2022
+15202,City of Ponca City - (OK),OK,residential,21974.0,145904.0,13837,Municipal,2022
+15474,Public Service Co of Oklahoma,OK,residential,815819.9,6618175.0,491335,Investor Owned,2022
+15746,Red River Valley Rrl Elec Assn,OK,residential,26336.0,220878.0,15458,Cooperative,2022
+16382,"Rural Electric Coop, Inc",OK,residential,16077.5,128954.0,8885,Cooperative,2022
+17603,Southeastern Electric Coop Inc - (OK),OK,residential,28433.0,224036.0,15164,Cooperative,2022
+17671,Southwest Arkansas E C C,OK,residential,361.6,2727.0,222,Cooperative,2022
+17715,Southwestern Electric Coop Inc - (NM),OK,residential,9.1,45.0,3,Cooperative,2022
+18125,Stillwater Utilities Authority,OK,residential,29079.0,216838.0,19487,Municipal,2022
+19160,"Tri-County Electric Coop, Inc (OK)",OK,residential,22705.3,136703.0,13466,Cooperative,2022
+19785,Verdigris Valley Elec Coop Inc,OK,residential,61793.0,607491.0,34312,Cooperative,2022
+60482,CKenergy Electric Cooperative,OK,residential,40557.0,273451.0,22044,Cooperative,2022
+3240,Central Electric Coop Inc - (OR),OR,residential,51698.0,567055.0,33025,Cooperative,2022
+3264,Central Lincoln People's Ut Dt,OR,residential,45316.0,447398.0,35228,Political Subdivision,2022
+4041,"Columbia Rural Elec Assn, Inc",OR,residential,101.0,829.0,44,Cooperative,2022
+4317,"Coos-Curry Electric Coop, Inc",OR,residential,23954.9,189536.0,15763,Cooperative,2022
+4743,"Consumers Power, Inc",OR,residential,30731.7,271227.0,18459,Cooperative,2022
+6022,City of Eugene - (OR),OR,residential,115118.0,984714.0,87450,Municipal,2022
+6582,City of Forest Grove,OR,residential,11163.0,123936.0,10162,Municipal,2022
+9191,Idaho Power Co,OR,residential,20619.5,201454.0,13883,Investor Owned,2022
+10681,Lane Electric Coop Inc,OR,residential,22859.9,195722.0,12229,Cooperative,2022
+12187,City of McMinnville - (OR),OR,residential,15217.0,211286.0,15357,Municipal,2022
+12439,"Midstate Electric Coop, Inc",OR,residential,26470.0,291747.0,18088,Cooperative,2022
+13788,Northern Wasco County PUD,OR,residential,10994.6,150359.0,9717,Political Subdivision,2022
+14109,"Oregon Trail El Cons Coop, Inc",OR,residential,32604.3,324238.0,25769,Cooperative,2022
+14354,PacifiCorp,OR,residential,607094.4,6125175.0,535721,Investor Owned,2022
+15248,Portland General Electric Co,OR,residential,1103143.0,8088473.0,809603,Investor Owned,2022
+16555,Salem Electric - (OR),OR,residential,20616.0,200294.0,18229,Cooperative,2022
+17839,City of Springfield - (OR),OR,residential,28814.0,384696.0,29050,Municipal,2022
+18260,Surprise Valley Electrification,OR,residential,1744.5,17763.0,1192,Cooperative,2022
+18917,Tillamook Peoples Utility Dist,OR,residential,28032.0,264338.0,19739,Political Subdivision,2022
+19325,Umatilla Electric Coop Assn,OR,residential,17120.4,188578.0,12302,Cooperative,2022
+28541,Clatskanie Peoples Util Dist,OR,residential,5566.9,77719.0,3750,Political Subdivision,2022
+40437,Emerald People's Utility Dist,OR,residential,32179.1,314923.0,19814,Political Subdivision,2022
+40438,Columbia River Peoples Ut Dist,OR,residential,21020.2,240481.0,16100,Political Subdivision,2022
+65352,Umpqua Indian Utility Cooperative,OR,residential,45.0,457.0,48,Cooperative,2022
+113,"Agway Energy Services, LLC",PA,residential,1708.7,11237.0,1202,Retail Power Marketer,2022
+3329,Borough of Chambersburg,PA,residential,9662.0,97239.0,9681,Municipal,2022
+3597,Citizens Electric Co - (PA),PA,residential,11069.0,89685.0,5905,Investor Owned,2022
+4100,"Commerce Energy, Inc.",PA,residential,5540.0,50930.0,5942,Retail Power Marketer,2022
+5487,Duquesne Light Co,PA,residential,700771.8,3235882.0,433718,Investor Owned,2022
+5880,"Energy Coop of New York, Inc",PA,residential,725.0,6526.0,483,Retail Power Marketer,2022
+6458,Energy Harbor Corp.,PA,residential,100647.5,926401.0,81002,Retail Power Marketer,2022
+7279,"NextEra Energy Services, LLC",PA,residential,26759.2,228275.0,20361,Retail Power Marketer,2022
+7554,Green Mountain Energy Company,PA,residential,52481.3,425367.0,42731,Retail Power Marketer,2022
+9949,Just Energy,PA,residential,20608.5,202603.0,17066,Retail Power Marketer,2022
+12390,Metropolitan Edison Co,PA,residential,755924.5,4738436.0,410569,Investor Owned,2022
+13374,"Constellation NewEnergy, Inc",PA,residential,59037.7,675049.0,47584,Retail Power Marketer,2022
+14711,Pennsylvania Electric Co,PA,residential,658253.6,3592913.0,407157,Investor Owned,2022
+14715,PPL Electric Utilities Corp,PA,residential,1903409.2,9402551.0,844001,Investor Owned,2022
+14716,Pennsylvania Power Co,PA,residential,227090.1,1393132.0,122902,Investor Owned,2022
+14940,PECO Energy Co,PA,residential,1835483.3,10859290.0,1175420,Investor Owned,2022
+15045,Pike County Light & Power Co,PA,residential,6729.3,27414.0,3455,Investor Owned,2022
+17710,"Spark Energy, LP",PA,residential,34.0,398.0,37,Retail Power Marketer,2022
+19126,"TriEagle Energy, L.P.",PA,residential,6486.0,69728.0,5607,Retail Power Marketer,2022
+19390,"UGI Utilities, Inc",PA,residential,98477.5,572988.0,55190,Investor Owned,2022
+20334,Wellsborough Electric Co,PA,residential,7231.0,43939.0,5135,Investor Owned,2022
+20387,West Penn Power Company,PA,residential,811304.7,6049297.0,522835,Investor Owned,2022
+20659,"WGL Energy Services, Inc.",PA,residential,6928.0,75857.0,7815,Retail Power Marketer,2022
+40167,"Somerset Rural Elec Coop, Inc",PA,residential,15543.0,129164.0,12348,Cooperative,2022
+40220,Adams Electric Cooperative Inc,PA,residential,56037.0,452512.0,31489,Cooperative,2022
+40221,"Bedford Rural Elec Coop, Inc",PA,residential,13005.0,105071.0,8789,Cooperative,2022
+40222,Valley Rural Electric Coop Inc,PA,residential,28663.0,219190.0,20172,Cooperative,2022
+40224,"Central Electric Coop, Inc - (PA)",PA,residential,32627.0,224059.0,23574,Cooperative,2022
+40289,Claverack Rural Elec Coop Inc,PA,residential,24886.0,179265.0,17257,Cooperative,2022
+40290,Tri-County Rural Elec Coop Inc (PA),PA,residential,20621.0,124900.0,18146,Cooperative,2022
+40292,REA Energy Coop Inc,PA,residential,30149.0,239155.0,20902,Cooperative,2022
+40293,"Northwestern Rural E C A, Inc - (PA)",PA,residential,27091.0,198769.0,18131,Cooperative,2022
+49746,The Energy Coop,PA,residential,3471.7,19419.0,2435,Cooperative,2022
+54820,Direct Energy Services,PA,residential,67955.1,699368.0,60251,Retail Power Marketer,2022
+55722,AEP Energy,PA,residential,50991.9,562936.0,44924,Retail Power Marketer,2022
+55781,Liberty Power Corp.,PA,residential,33.3,284.0,83,Retail Power Marketer,2022
+55815,"IDT Energy, Inc.",PA,residential,14167.2,85854.0,10069,Retail Power Marketer,2022
+55874,"Energy Services Providers, Inc",PA,residential,18452.0,142707.0,17925,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",PA,residential,41926.0,438885.0,36012,Retail Power Marketer,2022
+56220,Anthracite Power & Light,PA,residential,866.7,8642.0,718,Retail Power Marketer,2022
+56265,Energy Plus Holdings LLC,PA,residential,30922.0,272313.0,24563,Retail Power Marketer,2022
+56286,"Frontier Utilities, LLC",PA,residential,20223.6,200068.0,16968,Retail Power Marketer,2022
+56408,"UGI Energy Services, LLC",PA,residential,286.1,3372.0,287,Retail Power Marketer,2022
+56571,AP Holdings LLC,PA,residential,9379.9,64198.0,6066,Retail Power Marketer,2022
+56573,"Palmco Power PA, LLC",PA,residential,8058.0,38577.0,5117,Retail Power Marketer,2022
+56737,"Stream Energy Pennsylvania, LLC",PA,residential,46948.3,409811.0,36918,Retail Power Marketer,2022
+57037,Reliant Energy Northeast LLC,PA,residential,205772.0,1653613.0,155700,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",PA,residential,7469.0,50849.0,6087,Retail Power Marketer,2022
+57307,ENGIE Power & Gas LLC,PA,residential,614.0,3166.0,329,Retail Power Marketer,2022
+58118,Public Power LLC (PA),PA,residential,11184.0,137673.0,4942,Retail Power Marketer,2022
+58162,Viridian Energy PA LLC,PA,residential,2139.9,16222.0,1888,Retail Power Marketer,2022
+58339,"XOOM Energy Pennsylvania, LLC",PA,residential,15108.0,122412.0,11323,Retail Power Marketer,2022
+58663,Respond Power LLC,PA,residential,14403.0,121113.0,10794,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",PA,residential,15226.0,121343.0,11538,Retail Power Marketer,2022
+58683,Everyday Energy LLC,PA,residential,1271.2,10063.0,1024,Retail Power Marketer,2022
+58951,"CleanChoice Energy, Inc.",PA,residential,67370.5,430077.0,54133,Retail Power Marketer,2022
+58952,Tomorow Energy Corp.,PA,residential,37369.1,281330.0,27606,Retail Power Marketer,2022
+58953,"Star Energy Partners, LLC",PA,residential,3695.3,35559.0,5211,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",PA,residential,45947.8,268535.0,35459,Retail Power Marketer,2022
+58957,"Interstate Gas Supply, Inc.",PA,residential,66848.0,495792.0,45322,Retail Power Marketer,2022
+58964,"Alpha Gas and Electric, LLC",PA,residential,1732.7,15807.0,1398,Retail Power Marketer,2022
+58966,Marathon Power LLC,PA,residential,68.4,743.0,39,Retail Power Marketer,2022
+58973,"Town Square Energy East, LLC",PA,residential,5732.5,49854.0,4075,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,PA,residential,15749.6,110948.0,10483,Retail Power Marketer,2022
+59052,Astral Energy LLC,PA,residential,821.6,6915.0,518,Retail Power Marketer,2022
+59054,"Eligo Energy, LLC",PA,residential,17272.9,135967.0,11941,Retail Power Marketer,2022
+59055,"Choice Energy, LLC",PA,residential,6907.0,54859.0,6365,Retail Power Marketer,2022
+59064,"Great American Power, LLC",PA,residential,9540.8,101939.0,9232,Retail Power Marketer,2022
+59065,Titan Gas LLC,PA,residential,43042.5,379482.0,31762,Retail Power Marketer,2022
+59083,"SFE Energy Pennsylvania, Inc.",PA,residential,16088.0,159396.0,20602,Retail Power Marketer,2022
+59088,"Nordic Energy Services, LLC",PA,residential,3390.0,28158.0,2756,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",PA,residential,141.6,1091.0,185,Retail Power Marketer,2022
+59310,"Inspire Energy Holdings, LLC",PA,residential,86978.3,789946.0,77465,Retail Power Marketer,2022
+59385,"Dynegy Energy Services, LLC",PA,residential,39540.0,505848.0,36812,Retail Power Marketer,2022
+59410,"Shipley Choice, LLC",PA,residential,14931.5,127836.0,11513,Retail Power Marketer,2022
+59620,Verde Energy USA,PA,residential,40960.0,312689.0,28174,Retail Power Marketer,2022
+59793,"First Point Power, LLC",PA,residential,31.6,195.0,20,Retail Power Marketer,2022
+59795,"Starion Energy PA, Inc.",PA,residential,6.4,99.0,89,Retail Power Marketer,2022
+59797,Park Power LLC,PA,residential,14293.4,117040.0,12519,Retail Power Marketer,2022
+59799,American Power & Gas,PA,residential,29435.1,192079.0,16674,Retail Power Marketer,2022
+59801,CEI,PA,residential,338.7,2828.0,430,Retail Power Marketer,2022
+59807,"Rushmore Energy, LLC",PA,residential,3676.6,32436.0,4051,Retail Power Marketer,2022
+59809,"Residents Energy, LLC",PA,residential,11077.2,74347.0,9242,Retail Power Marketer,2022
+59810,Greenlight Energy Inc.,PA,residential,3067.0,19563.0,2431,Retail Power Marketer,2022
+59811,Santanna Energy Services,PA,residential,2205.6,28047.0,1236,Retail Power Marketer,2022
+59812,New Wave Energy Corporation,PA,residential,5784.3,56623.0,3407,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",PA,residential,218.7,2767.0,298,Retail Power Marketer,2022
+59933,"Texpo Power, L.P.",PA,residential,3061.8,20698.0,1972,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),PA,residential,6614.1,40673.0,4975,Retail Power Marketer,2022
+60041,Planet Energy,PA,residential,2544.1,32464.0,2389,Retail Power Marketer,2022
+60124,Spring Energy RRH LLC,PA,residential,2667.0,16085.0,1484,Retail Power Marketer,2022
+60218,MPower Energy NJ LLC,PA,residential,5688.0,38693.0,5712,Retail Power Marketer,2022
+60696,"Vista Energy Marketing, L.P.",PA,residential,3171.0,24368.0,3356,Retail Power Marketer,2022
+61367,South Bay Energy Corp.,PA,residential,3189.0,20075.0,2452,Retail Power Marketer,2022
+61920,"All American Power and Gas, LLC",PA,residential,948.0,4216.0,486,Retail Power Marketer,2022
+61922,"Pure Energy USA, LLC",PA,residential,13785.0,58743.0,6993,Retail Power Marketer,2022
+62148,Powervine Energy,PA,residential,4644.3,56481.0,4058,Retail Power Marketer,2022
+62156,"Power UP Energy, LLC",PA,residential,1.0,4.0,1,Retail Power Marketer,2022
+62790,"Summer Energy Midwest, LLC",PA,residential,9.0,118.0,24,Retail Power Marketer,2022
+62914,StateWise Energy Pennsylvania LLC,PA,residential,1631.0,22423.0,2565,Retail Power Marketer,2022
+63028,Josco Energy USA LLC,PA,residential,871.0,6258.0,830,Retail Power Marketer,2022
+63169,Median Energy PA LLC,PA,residential,366.4,2352.0,325,Retail Power Marketer,2022
+63232,"National Gas & Electric, LLC",PA,residential,4229.3,27993.0,3306,Retail Power Marketer,2022
+63695,"RPA Energy, Inc.",PA,residential,4579.0,23791.0,3488,Retail Power Marketer,2022
+63870,Click Energy LLC,PA,residential,2306.4,26627.0,1966,Retail Power Marketer,2022
+64705,"NTHERM, LLC",PA,residential,9767.3,55960.0,5777,Retail Power Marketer,2022
+64923,Capital Energy PA LLC,PA,residential,78.6,1066.0,628,Retail Power Marketer,2022
+65310,Energywell LLC,PA,residential,1005.7,6521.0,5524,Retail Power Marketer,2022
+1857,Block Island Utility District,RI,residential,2591.0,7108.0,1610,Political Subdivision,2022
+13214,The Narragansett Electric Co,RI,residential,689009.4,2890589.0,408910,Investor Owned,2022
+13374,"Constellation NewEnergy, Inc",RI,residential,458.9,5874.0,540,Retail Power Marketer,2022
+14537,Pascoag Utility District,RI,residential,5708.0,35344.0,4346,Municipal,2022
+54820,Direct Energy Services,RI,residential,3113.5,30798.0,4061,Retail Power Marketer,2022
+55781,Liberty Power Corp.,RI,residential,18.5,145.0,299,Retail Power Marketer,2022
+56212,"Ambit Energy Holdings, LLC",RI,residential,1988.0,15591.0,1919,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",RI,residential,188.4,1873.0,354,Retail Power Marketer,2022
+58119,Public Power LLC (CT),RI,residential,59.0,474.0,44,Retail Power Marketer,2022
+58161,Viridian Energy LLC,RI,residential,562.0,3514.0,469,Retail Power Marketer,2022
+58631,"XOOM Energy Rhode Island, LLC",RI,residential,336.0,2319.0,325,Retail Power Marketer,2022
+58667,"North American Power and Gas, LLC",RI,residential,3990.0,24291.0,3296,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",RI,residential,7005.9,40095.0,6696,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,RI,residential,8114.4,43750.0,7633,Retail Power Marketer,2022
+59059,Town Square Energy,RI,residential,4422.8,21613.0,4137,Retail Power Marketer,2022
+59127,"Sunwave Gas & Power Connecticut, Inc.",RI,residential,22.1,229.0,108,Retail Power Marketer,2022
+59793,"First Point Power, LLC",RI,residential,773.8,6395.0,1088,Retail Power Marketer,2022
+59993,Discount Power Inc - (CT),RI,residential,863.1,4910.0,947,Retail Power Marketer,2022
+65262,"Archer Energy, LLC",RI,residential,127.9,1327.0,1268,Retail Power Marketer,2022
+65310,Energywell LLC,RI,residential,36.1,319.0,358,Retail Power Marketer,2022
+162,Aiken Electric Coop Inc,SC,residential,93692.6,641275.0,47697,Cooperative,2022
+1613,Berkeley Electric Coop Inc,SC,residential,200359.0,1494448.0,104645,Cooperative,2022
+1763,"Black River Electric Coop, Inc - (SC)",SC,residential,56343.6,469454.0,29778,Cooperative,2022
+1890,Blue Ridge Electric Coop Inc - (SC),SC,residential,132556.3,782340.0,64859,Cooperative,2022
+2212,"Broad River Electric Coop, Inc",SC,residential,43020.9,290157.0,22208,Cooperative,2022
+3046,Duke Energy Progress - (NC),SC,residential,259560.0,2122011.0,142492,Investor Owned,2022
+5416,"Duke Energy Carolinas, LLC",SC,residential,823796.2,7134506.0,540420,Investor Owned,2022
+5644,"Edisto Electric Coop, Inc",SC,residential,34453.7,221858.0,15299,Cooperative,2022
+5929,"Fairfield Electric Coop, Inc",SC,residential,56415.0,422724.0,30475,Cooperative,2022
+6709,Easley Combined Utility System,SC,residential,21890.7,170974.0,14726,Municipal,2022
+6894,City of Gaffney - (SC),SC,residential,8356.0,72037.0,6212,Municipal,2022
+7646,Greenwood CPW,SC,residential,12713.0,114910.0,11597,Municipal,2022
+7654,Greer Commission of Public Wks,SC,residential,27766.0,221591.0,20363,Municipal,2022
+8333,Haywood Electric Member Corp,SC,residential,10.0,61.0,9,Cooperative,2022
+8786,Horry Electric Coop Inc,SC,residential,138810.0,1070438.0,78610,Cooperative,2022
+10768,"Laurens Electric Coop, Inc",SC,residential,100715.0,727009.0,56048,Cooperative,2022
+11118,Lockhart Power Co,SC,residential,8682.5,63552.0,4933,Investor Owned,2022
+11355,"Lynches River Elec Coop, Inc",SC,residential,39824.0,265746.0,20743,Cooperative,2022
+11693,"Marlboro Electric Coop, Inc",SC,residential,8261.0,82058.0,5410,Cooperative,2022
+12462,Mid-Carolina Electric Coop Inc,SC,residential,110698.7,780548.0,55110,Cooperative,2022
+13523,City of Newberry - (SC),SC,residential,6935.2,46163.0,4434,Municipal,2022
+13524,"Newberry Electric Coop, Inc",SC,residential,23068.0,152965.0,12767,Cooperative,2022
+14164,City of Orangeburg - (SC),SC,residential,34902.3,282477.0,20692,Municipal,2022
+14175,"Tri-County Electric Coop, Inc (SC)",SC,residential,37575.4,238719.0,17559,Cooperative,2022
+14398,Palmetto Electric Coop Inc,SC,residential,112632.0,946716.0,65970,Cooperative,2022
+14557,"Pee Dee Electric Coop, Inc",SC,residential,45098.0,409610.0,28478,Cooperative,2022
+16195,City of Rock Hill - (SC),SC,residential,45106.0,359960.0,36588,Municipal,2022
+16606,"Santee Electric Coop, Inc",SC,residential,75788.8,526089.0,34803,Cooperative,2022
+17539,"Dominion Energy South Carolina, Inc",SC,residential,1376181.0,8485890.0,673453,Investor Owned,2022
+17543,South Carolina Public Service Authority,SC,residential,224245.0,1979376.0,170536,State,2022
+21002,York Electric Coop Inc,SC,residential,98114.0,812434.0,62814,Cooperative,2022
+1769,"Black Hills Electric Coop, Inc",SD,residential,17766.0,127438.0,8966,Cooperative,2022
+2285,City of Brookings - (SD),SD,residential,11591.0,105369.0,10033,Municipal,2022
+3236,"Central Electric Coop, Inc - (SD)",SD,residential,14962.6,125026.0,6428,Cooperative,2022
+4720,Dakota Energy Coop Inc,SD,residential,9163.9,63585.0,3287,Cooperative,2022
+11475,City of Madison - (SD),SD,residential,4144.0,36677.0,2828,Municipal,2022
+12199,Montana-Dakota Utilities Co,SD,residential,8550.0,69892.0,6384,Investor Owned,2022
+12341,MidAmerican Energy Co,SD,residential,4613.9,58799.0,4208,Investor Owned,2022
+13337,Nebraska Public Power District,SD,residential,1626.0,17372.0,1083,Political Subdivision,2022
+13750,"Northern Electric Coop, Inc",SD,residential,15002.7,150112.0,5466,Cooperative,2022
+13781,Northern States Power Co - Minnesota,SD,residential,109777.0,830054.0,87577,Investor Owned,2022
+13809,NorthWestern Energy - (SD),SD,residential,69809.0,596376.0,51069,Investor Owned,2022
+14232,Otter Tail Power Co,SD,residential,13472.0,121912.0,8972,Investor Owned,2022
+15040,City of Pierre - (SD),SD,residential,6861.5,68590.0,6166,Municipal,2022
+16286,Rosebud Electric Coop Inc,SD,residential,6826.0,68750.0,4823,Cooperative,2022
+17267,Sioux Valley SW Elec Coop,SD,residential,40404.8,334258.0,21147,Cooperative,2022
+19293,Southeastern Electric Coop Inc - (SD),SD,residential,30928.8,275404.0,18412,Cooperative,2022
+19545,"Black Hills Power, Inc.",SD,residential,79824.0,573621.0,58892,Investor Owned,2022
+19896,City of Volga - (SD),SD,residential,1492.3,11680.0,1042,Municipal,2022
+20187,Watertown Municipal Utilities,SD,residential,11407.0,126454.0,11075,Municipal,2022
+20401,West River Electric Assn Inc,SD,residential,26298.0,199131.0,17214,Cooperative,2022
+577,City of Alcoa Utilities,TN,residential,48520.0,398629.0,27010,Municipal,2022
+727,Appalachian Electric Coop,TN,residential,80669.0,629092.0,42362,Cooperative,2022
+814,Entergy Arkansas LLC,TN,residential,3.7,32.0,1,Investor Owned,2022
+947,Athens Utility Board,TN,residential,18246.0,157477.0,11335,Municipal,2022
+1578,Benton County,TN,residential,15832.0,116769.0,8590,Municipal,2022
+1936,Bolivar Energy Authority,TN,residential,17385.0,129049.0,8911,Municipal,2022
+2247,City of Bristol - (TN),TN,residential,48844.0,453136.0,29321,Municipal,2022
+2411,City of Brownsville,TN,residential,6028.0,53372.0,4145,Municipal,2022
+2960,"Caney Fork Electric Coop, Inc",TN,residential,52148.0,407481.0,28584,Cooperative,2022
+3075,Carroll County - (TN),TN,residential,21328.0,179426.0,12250,Municipal,2022
+3408,City of Chattanooga - (TN),TN,residential,260604.0,2132922.0,157845,Municipal,2022
+3704,City of Clarksville - (TN),TN,residential,125499.0,1004434.0,71291,Municipal,2022
+3758,City of Cleveland - (TN),TN,residential,48382.0,378146.0,28178,Municipal,2022
+3812,City of Clinton - (TN),TN,residential,47785.0,376279.0,25878,Municipal,2022
+3855,Columbia Power System,TN,residential,47111.0,388627.0,28917,Municipal,2022
+4294,City of Cookeville - (TN),TN,residential,21005.0,182345.0,15354,Municipal,2022
+4437,City of Covington - (TN),TN,residential,5576.0,49608.0,3700,Municipal,2022
+4622,"Cumberland Valley Electric, Inc.",TN,residential,109.0,773.0,73,Cooperative,2022
+4624,Cumberland Elec Member Corp,TN,residential,210781.0,1657350.0,95827,Cooperative,2022
+4920,City of Dayton - (TN),TN,residential,13871.0,114735.0,8892,Municipal,2022
+5148,City of Dickson,TN,residential,52453.0,452285.0,29806,Municipal,2022
+5399,Duck River Elec Member Corp,TN,residential,138964.0,1127298.0,68879,Cooperative,2022
+5509,City of Dyersburg,TN,residential,15369.0,133654.0,9470,Municipal,2022
+5763,City of Elizabethton - (TN),TN,residential,37816.0,313413.0,23138,Municipal,2022
+5961,Town of Erwin - (TN),TN,residential,11382.0,92538.0,7614,Municipal,2022
+6008,City of Etowah,TN,residential,8343.0,59745.0,4399,Municipal,2022
+6234,City of Fayetteville,TN,residential,30648.0,252307.0,16438,Municipal,2022
+6608,Fort Loudoun Electric Coop,TN,residential,57849.0,473530.0,29554,Cooperative,2022
+6784,French Broad Elec Member Corp,TN,residential,1225.1,8813.0,985,Cooperative,2022
+6923,City of Gallatin - (TN),TN,residential,31276.0,271267.0,21016,Municipal,2022
+7174,Gibson Electric Members Corp,TN,residential,59781.0,466240.0,29141,Cooperative,2022
+7625,City of Greeneville - (TN),TN,residential,55375.0,467935.0,31905,Municipal,2022
+8147,City of Harriman - (TN),TN,residential,17280.0,125544.0,9244,Municipal,2022
+8764,"Holston Electric Coop, Inc",TN,residential,45699.0,358970.0,25447,Cooperative,2022
+9023,City of Humboldt,TN,residential,5101.0,43840.0,3531,Municipal,2022
+9612,City of Jackson - (TN),TN,residential,49859.0,406789.0,30595,Municipal,2022
+9697,City of Jellico,TN,residential,2795.0,22768.0,1623,Municipal,2022
+9777,Johnson City - (TN),TN,residential,125354.0,990987.0,70347,Municipal,2022
+10331,Kingsport Power Co,TN,residential,71373.0,655536.0,42525,Investor Owned,2022
+10421,Knoxville Utilities Board,TN,residential,308133.0,2523550.0,187716,Municipal,2022
+10579,City of LaFollette,TN,residential,34550.0,258098.0,19676,Municipal,2022
+10799,City of Lawrenceburg,TN,residential,31597.0,263511.0,17767,Municipal,2022
+10906,City of Lenoir - (TN),TN,residential,108199.0,890976.0,59579,Municipal,2022
+10960,City of Lewisburg - (TN),TN,residential,7648.0,67100.0,4860,Municipal,2022
+10968,City of Lexington - (TN),TN,residential,28584.0,232727.0,17829,Municipal,2022
+11222,Loudon Utilities Board,TN,residential,20615.0,177745.0,11976,Municipal,2022
+11789,Maryville Utilities,TN,residential,30236.0,264827.0,19686,Municipal,2022
+12186,McMinnville Electric System,TN,residential,9116.0,80281.0,6499,Municipal,2022
+12293,City of Memphis - (TN),TN,residential,633309.8,5291762.0,376067,Municipal,2022
+12330,Meriwether Lewis Electric Coop,TN,residential,56871.0,430729.0,29893,Cooperative,2022
+12470,Middle Tennessee E M C,TN,residential,515304.0,4515007.0,289722,Cooperative,2022
+12532,City of Milan,TN,residential,12385.0,103850.0,6825,Municipal,2022
+12988,City of Morristown - (TN),TN,residential,21128.0,165346.0,12922,Municipal,2022
+13027,"Mountain Electric Coop, Inc",TN,residential,18111.0,151575.0,12576,Cooperative,2022
+13039,City of Mt Pleasant - (TN),TN,residential,6793.0,51222.0,3471,Municipal,2022
+13216,Nashville Electric Service,TN,residential,669494.0,5090661.0,391807,Municipal,2022
+13437,City of Newbern,TN,residential,2184.0,20311.0,1498,Municipal,2022
+13550,City of Newport,TN,residential,34289.0,254087.0,19526,Municipal,2022
+13933,City of Oak Ridge,TN,residential,21473.0,166834.0,14919,Municipal,2022
+14455,City of Paris - (TN),TN,residential,26058.0,221536.0,16015,Municipal,2022
+15016,Pickwick Electric Coop,TN,residential,31208.0,248167.0,16511,Cooperative,2022
+15141,Plateau Electric Cooperative,TN,residential,21487.0,163989.0,13967,Cooperative,2022
+15293,Powell Valley Electric Coop,TN,residential,29892.0,260502.0,20755,Cooperative,2022
+15507,City of Pulaski - (TN),TN,residential,23422.0,177532.0,12299,Municipal,2022
+16223,City of Rockwood - (TN),TN,residential,22391.0,172004.0,11929,Municipal,2022
+16930,Sequachee Valley Electric Coop,TN,residential,57705.0,451751.0,32079,Cooperative,2022
+16949,Sevier County Electric System,TN,residential,55588.0,488454.0,34944,Municipal,2022
+17047,City of Shelbyville - (TN),TN,residential,14726.0,128554.0,9281,Municipal,2022
+17452,City of Smithville - (TN),TN,residential,3221.0,25785.0,2337,Municipal,2022
+17564,South Kentucky Rural E C C,TN,residential,202.2,1491.0,155,Cooperative,2022
+17694,Southwest Tennessee E M C,TN,residential,88343.0,688033.0,43337,Cooperative,2022
+17740,City of Sparta,TN,residential,3160.0,25579.0,2236,Municipal,2022
+17829,City of Springfield - (TN),TN,residential,11241.0,99453.0,7408,Municipal,2022
+18384,City of Sweetwater,TN,residential,13490.0,113413.0,7385,Municipal,2022
+18643,Tennessee Valley Electric Coop,TN,residential,28244.0,221078.0,16487,Cooperative,2022
+19149,City of Trenton - (TN),TN,residential,3022.0,23966.0,1946,Municipal,2022
+19154,Tri-State Electric Member Corp,TN,residential,4613.0,33690.0,2726,Cooperative,2022
+19162,Tri-County Elec Member Corp (TN),TN,residential,45845.0,372644.0,24085,Cooperative,2022
+19266,Tullahoma Board-Public Utils,TN,residential,14401.0,128577.0,9132,Municipal,2022
+19430,City of Union City,TN,residential,7675.0,65645.0,5178,Municipal,2022
+19574,Upper Cumberland E M C,TN,residential,79601.0,646089.0,44328,Cooperative,2022
+19898,Volunteer Electric Coop,TN,residential,176557.0,1468539.0,101929,Cooperative,2022
+20228,Weakley County Mun Elec Sys,TN,residential,27859.0,245507.0,15476,Municipal,2022
+20793,City of Winchester - (TN),TN,residential,8467.0,70763.0,5176,Municipal,2022
+27222,City of Ripley - (TN),TN,residential,8489.0,70235.0,5203,Municipal,2022
+40166,"Chickasaw Electric Coop, Inc",TN,residential,35968.0,318556.0,18796,Cooperative,2022
+40236,"Forked Deer Electric Coop, Inc",TN,residential,18931.0,139115.0,8356,Cooperative,2022
+1015,Austin Energy,TX,residential,612163.9,5166372.0,479353,Municipal,2022
+1169,Bailey County Elec Coop Assn,TX,residential,4025.0,26442.0,3346,Cooperative,2022
+1175,"Bandera Electric Coop, Inc",TX,residential,57431.0,533938.0,33706,Cooperative,2022
+1273,"Bartlett Electric Coop, Inc",TX,residential,27884.1,183823.0,9854,Cooperative,2022
+1591,"Big Country Electric Coop, Inc",TX,residential,15149.0,95450.0,9301,Cooperative,2022
+1892,"Bluebonnet Electric Coop, Inc",TX,residential,182258.5,1641037.0,102759,Cooperative,2022
+2049,"Bowie-Cass Electric Coop, Inc",TX,residential,76861.8,494631.0,34383,Cooperative,2022
+2194,City of Brenham - (TX),TX,residential,7914.5,81350.0,5915,Municipal,2022
+2409,Brownsville Public Utilities Board,TX,residential,83438.0,641945.0,46999,Municipal,2022
+2442,City of Bryan - (TX),TX,residential,85785.4,804509.0,54231,Municipal,2022
+3282,"Central Texas Elec Coop, Inc",TX,residential,53454.4,525207.0,37428,Cooperative,2022
+3470,Cherokee County Elec Coop Assn,TX,residential,41662.0,317440.0,20888,Cooperative,2022
+3940,City of College Station - (TX),TX,residential,69438.0,522203.0,40982,Municipal,2022
+4146,Concho Valley Elec Coop Inc,TX,residential,22146.5,136754.0,11747,Cooperative,2022
+4262,Cooke County Elec Coop Assn,TX,residential,34761.0,225799.0,15208,Cooperative,2022
+4295,Comanche County Elec Coop Assn,TX,residential,17504.0,110793.0,6870,Cooperative,2022
+4939,"Deaf Smith Electric Coop, Inc",TX,residential,6505.4,56929.0,5317,Cooperative,2022
+4975,Deep East Texas Elec Coop Inc,TX,residential,78461.0,598430.0,40359,Cooperative,2022
+5063,City of Denton - (TX),TX,residential,74200.0,701389.0,54079,Municipal,2022
+5078,"Denton County Elec Coop, Inc",TX,residential,586745.8,4209528.0,271804,Cooperative,2022
+5701,El Paso Electric Co,TX,residential,386497.0,2519058.0,310263,Investor Owned,2022
+6182,"Farmers Electric Coop, Inc - (TX)",TX,residential,156693.0,1174967.0,73951,Cooperative,2022
+6183,"Fayette Electric Coop, Inc",TX,residential,19986.0,170775.0,13668,Cooperative,2022
+6427,City of Floresville,TX,residential,31774.3,261081.0,15294,Municipal,2022
+6958,City of Garland - (TX),TX,residential,104155.0,958598.0,67369,Municipal,2022
+7129,City of Georgetown - (TX),TX,residential,42424.5,308527.0,28194,Municipal,2022
+7554,Green Mountain Energy Company,TX,residential,582093.5,3913777.0,324902,Retail Power Marketer,2022
+7559,"Grayson-Collin Elec Coop, Inc",TX,residential,161140.0,1096322.0,71028,Cooperative,2022
+7561,"Greenbelt Electric Coop, Inc",TX,residential,5652.0,28723.0,3836,Cooperative,2022
+7634,City of Greenville - (TX),TX,residential,23088.0,185867.0,13862,Municipal,2022
+7752,Guadalupe Valley Elec Coop Inc,TX,residential,165641.7,1324704.0,85406,Cooperative,2022
+7979,Hamilton County Elec Coop Assn,TX,residential,36006.6,246999.0,18884,Cooperative,2022
+8620,"HILCO Electric Cooperative, Inc.",TX,residential,72668.0,478196.0,24773,Cooperative,2022
+8898,Houston County Elec Coop Inc,TX,residential,36592.7,234901.0,21070,Cooperative,2022
+9590,"Jackson Electric Coop, Inc - (TX)",TX,residential,22174.0,175070.0,15390,Cooperative,2022
+9668,"Jasper-Newton Elec Coop, Inc",TX,residential,38824.0,282990.0,20918,Cooperative,2022
+9949,Just Energy,TX,residential,558316.0,4113360.0,276235,Retail Power Marketer,2022
+10009,Karnes Electric Coop Inc,TX,residential,30816.0,273006.0,13383,Cooperative,2022
+10625,"Lamb County Electric Coop, Inc",TX,residential,4808.0,36919.0,2814,Cooperative,2022
+10649,Lamar County Elec Coop Assn,TX,residential,18444.0,167341.0,12397,Cooperative,2022
+10817,"Lea County Electric Coop, Inc",TX,residential,2628.0,29828.0,1855,Cooperative,2022
+11014,"Lighthouse Electric Coop, Inc",TX,residential,4663.6,28361.0,3854,Cooperative,2022
+11292,City of Lubbock - (TX),TX,residential,148773.0,1075052.0,94358,Municipal,2022
+11364,"Lyntegar Electric Coop, Inc",TX,residential,14429.0,114269.0,8792,Cooperative,2022
+11501,Magic Valley Electric Coop Inc,TX,residential,216525.9,1903292.0,117744,Cooperative,2022
+12268,"Medina Electric Coop, Inc",TX,residential,53340.4,401959.0,29067,Cooperative,2022
+12452,Mid-South Electric Coop Assn,TX,residential,80759.8,523306.0,32607,Cooperative,2022
+13332,"Navarro County Elec Coop, Inc",TX,residential,40933.0,276906.0,17419,Cooperative,2022
+13374,"Constellation NewEnergy, Inc",TX,residential,423808.8,2990968.0,187010,Retail Power Marketer,2022
+13418,City of New Braunfels - (TX),TX,residential,89363.9,659650.0,45582,Municipal,2022
+13757,North Plains Electric Coop Inc,TX,residential,4919.0,36223.0,3088,Cooperative,2022
+13830,Nueces Electric Cooperative,TX,residential,81838.0,658025.0,41720,Cooperative,2022
+14424,"Panola-Harrison Elec Coop, Inc",TX,residential,18618.8,136764.0,9340,Cooperative,2022
+14626,"Pedernales Electric Coop, Inc",TX,residential,639424.1,5660723.0,370868,Cooperative,2022
+15847,Reliant Energy Retail Services,TX,residential,3242101.8,21460140.0,1562777,Retail Power Marketer,2022
+16057,"Rio Grande Electric Coop, Inc",TX,residential,18026.1,102744.0,9023,Cooperative,2022
+16063,"Rita Blanca Electric Coop, Inc",TX,residential,4323.0,38282.0,1233,Cooperative,2022
+16146,"Navasota Valley Elec Coop, Inc",TX,residential,34709.8,235720.0,19020,Cooperative,2022
+16461,"Rusk County Electric Coop, Inc",TX,residential,43528.7,297675.0,18087,Cooperative,2022
+16604,City of San Antonio - (TX),TX,residential,1377763.0,11276203.0,823105,Municipal,2022
+16613,Sam Houston Electric Coop Inc,TX,residential,173559.0,1161745.0,80134,Cooperative,2022
+16627,San Patricio Electric Coop Inc,TX,residential,19697.6,135855.0,9702,Cooperative,2022
+16638,"San Bernard Electric Coop, Inc",TX,residential,69320.1,472275.0,30756,Cooperative,2022
+16900,City of Seguin - (TX),TX,residential,10843.0,100814.0,7659,Municipal,2022
+17561,South Plains Electric Coop Inc,TX,residential,91287.8,675407.0,50571,Cooperative,2022
+17671,Southwest Arkansas E C C,TX,residential,2549.8,21129.0,1060,Cooperative,2022
+17693,"Southwest Texas Elec Coop, Inc",TX,residential,6243.0,40256.0,5783,Cooperative,2022
+17698,Southwestern Electric Power Co,TX,residential,294361.7,2293022.0,154733,Investor Owned,2022
+17710,"Spark Energy, LP",TX,residential,84781.0,649826.0,38182,Retail Power Marketer,2022
+17715,Southwestern Electric Coop Inc - (NM),TX,residential,18.4,77.0,10,Cooperative,2022
+17718,Southwestern Public Service Co,TX,residential,353165.8,2627405.0,219033,Investor Owned,2022
+18476,"Tara Energy, LLC",TX,residential,57353.0,432369.0,30953,Retail Power Marketer,2022
+18976,Trinity Valley Elec Coop Inc,TX,residential,172466.3,1219909.0,75267,Cooperative,2022
+19126,"TriEagle Energy, L.P.",TX,residential,259373.0,2035030.0,127457,Retail Power Marketer,2022
+19159,"Tri-County Electric Coop, Inc (TX)",TX,residential,288562.0,2096613.0,110971,Cooperative,2022
+19160,"Tri-County Electric Coop, Inc (OK)",TX,residential,384.4,2364.0,205,Cooperative,2022
+19327,"TXU Energy Retail Co, LLC",TX,residential,3183061.6,19973789.0,1409602,Retail Power Marketer,2022
+19490,United Electric Coop Service Inc - (TX),TX,residential,194701.7,1426347.0,82957,Cooperative,2022
+19579,Upshur Rural Elec Coop Corp,TX,residential,92251.0,669302.0,43181,Cooperative,2022
+19806,"Victoria Electric Coop, Inc",TX,residential,39756.7,325299.0,21005,Cooperative,2022
+20230,Weatherford Mun Utility System,TX,residential,24173.0,210494.0,13840,Municipal,2022
+20472,"Wharton County Elec Coop, Inc",TX,residential,10510.0,78905.0,5481,Cooperative,2022
+20927,"Wood County Electric Coop, Inc",TX,residential,68936.0,481978.0,34575,Cooperative,2022
+20948,Wise Electric Coop Inc,TX,residential,49339.0,356540.0,19152,Cooperative,2022
+27369,Taylor Electric Coop Inc - (TX),TX,residential,43568.8,240809.0,17008,Cooperative,2022
+28604,Kerrville Public Utility Board,TX,residential,26342.4,294877.0,19905,Municipal,2022
+28978,City of San Marcos - (TX),TX,residential,26875.0,264227.0,21873,Municipal,2022
+49818,"Alliance Power Company, LLC.",TX,residential,8440.9,85952.0,5196,Retail Power Marketer,2022
+49853,Amigo Energy,TX,residential,218165.4,1635646.0,114676,Retail Power Marketer,2022
+49952,3000 Energy Corp,TX,residential,3997.3,23982.0,1979,Retail Power Marketer,2022
+50041,"Stream SPE, LTD",TX,residential,438184.5,3136239.0,200184,Retail Power Marketer,2022
+50156,AmeriPower LLC,TX,residential,196.1,1730.0,1947,Retail Power Marketer,2022
+54820,Direct Energy Services,TX,residential,581881.9,4504883.0,304884,Retail Power Marketer,2022
+54862,Champion Energy Services,TX,residential,216111.0,2510023.0,157939,Retail Power Marketer,2022
+54872,"Accent Energy Holdings, LLC",TX,residential,11083.0,74013.0,4803,Retail Power Marketer,2022
+55781,Liberty Power Corp.,TX,residential,78.7,328.0,138,Retail Power Marketer,2022
+55878,Hudson Energy Services,TX,residential,8723.0,82649.0,4662,Retail Power Marketer,2022
+55937,Entergy Texas Inc.,TX,residential,895687.3,6678156.0,433077,Investor Owned,2022
+55982,Heart of Texas Electric Coop,TX,residential,45748.6,361752.0,17771,Cooperative,2022
+56212,"Ambit Energy Holdings, LLC",TX,residential,737961.0,4789626.0,374951,Retail Power Marketer,2022
+56248,"Young Energy, LLC",TX,residential,92471.5,450355.0,38452,Retail Power Marketer,2022
+56286,"Frontier Utilities, LLC",TX,residential,269358.9,1758093.0,119604,Retail Power Marketer,2022
+56571,AP Holdings LLC,TX,residential,30109.5,390187.0,20706,Retail Power Marketer,2022
+56734,Smart Prepaid Electric,TX,residential,240.7,1510.0,149,Retail Power Marketer,2022
+57067,"ENGIE Retail, LLC",TX,residential,18881.7,151900.0,10731,Retail Power Marketer,2022
+57132,"US Retailers, LLC",TX,residential,660182.0,5251001.0,319021,Retail Power Marketer,2022
+57350,Summer Energy LLC,TX,residential,59247.0,395476.0,27921,Retail Power Marketer,2022
+57394,Value Based Brands LLC,TX,residential,388937.0,2742120.0,183858,Retail Power Marketer,2022
+57459,"Wolverine Alternative Investments, LLC",TX,residential,311.3,2920.0,121,Retail Power Marketer,2022
+57486,"XOOM Energy Texas, LLC",TX,residential,90381.6,622402.0,41382,Retail Power Marketer,2022
+58263,V247 Power Corporation,TX,residential,10597.3,99994.0,23736,Retail Power Marketer,2022
+58952,Tomorow Energy Corp.,TX,residential,6320.7,50129.0,3321,Retail Power Marketer,2022
+58956,"SmartEnergy Holdings, LLC",TX,residential,7.5,51.0,3,Retail Power Marketer,2022
+58963,Brooklet Energy Distribution,TX,residential,16442.0,139426.0,11474,Retail Power Marketer,2022
+58974,Clearview Electric Inc.,TX,residential,990.7,6166.0,590,Retail Power Marketer,2022
+59314,Infuse Energy LLC,TX,residential,12487.1,109622.0,16667,Retail Power Marketer,2022
+59808,MP2 Energy LLC,TX,residential,71241.0,503541.0,40934,Retail Power Marketer,2022
+59931,"MidAmerican Energy Services, LLC",TX,residential,8352.2,71413.0,4228,Retail Power Marketer,2022
+59933,"Texpo Power, L.P.",TX,residential,76475.1,1107216.0,57915,Retail Power Marketer,2022
+61264,Heritage Power LLC,TX,residential,10376.9,101126.0,6259,Retail Power Marketer,2022
+61265,Pogo Energy LLC,TX,residential,24902.0,163468.0,13733,Retail Power Marketer,2022
+61439,Windrose Power & Gas LLC,TX,residential,2870.9,47849.0,10586,Retail Power Marketer,2022
+61855,"Pulse Power, LLC",TX,residential,351740.5,2591318.0,160940,Retail Power Marketer,2022
+62862,Chariot Energy,TX,residential,56906.0,453235.0,26904,Retail Power Marketer,2022
+62952,"Southern Federal Power, LLC",TX,residential,13070.0,184417.0,10710,Retail Power Marketer,2022
+62987,Octopus Energy LLC,TX,residential,29024.3,272559.0,14798,Retail Power Marketer,2022
+63112,Bulb US LLC,TX,residential,9248.8,65905.0,5431,Retail Power Marketer,2022
+63422,Varsity Energy,TX,residential,12693.4,98258.0,7146,Retail Power Marketer,2022
+64011,Rhythm Ops LLC,TX,residential,94952.8,527299.0,52770,Retail Power Marketer,2022
+64312,"JP Energy Resources, LLC",TX,residential,39013.9,289643.0,28662,Retail Power Marketer,2022
+64521,Ironhorse Power Services LLC,TX,residential,26079.6,339420.0,17658,Retail Power Marketer,2022
+64554,OhmConnect Texas LLC,TX,residential,3415.4,28081.0,1921,Retail Power Marketer,2022
+64653,Declaration Energy LLC,TX,residential,101421.0,789929.0,37550,Retail Power Marketer,2022
+64682,"Gexa Energy, LP",TX,residential,608972.5,3384935.0,228027,Retail Power Marketer,2022
+64727,Branch Energy Texas LLC,TX,residential,5024.5,44193.0,2925,Retail Power Marketer,2022
+64906,Mothership,TX,residential,8612.0,47203.0,3164,Retail Power Marketer,2022
+64923,Capital Energy PA LLC,TX,residential,26143.1,210424.0,14162,Retail Power Marketer,2022
+64929,"Good Charlie & Co., LLC",TX,residential,4935.7,31576.0,2654,Retail Power Marketer,2022
+64977,Revolution Energy LLC,TX,residential,141.0,925.0,83,Retail Power Marketer,2022
+65310,Energywell LLC,TX,residential,802.2,7917.0,7110,Retail Power Marketer,2022
+65314,"BKV-BPP Retail, LLC",TX,residential,0.2,1.0,6,Retail Power Marketer,2022
+65353,Arrow Energy TX LLC,TX,residential,5.0,36.0,40,Retail Power Marketer,2022
+65413,Tesla Energy Ventures,TX,residential,4.0,117.0,24,Retail Power Marketer,2022
+2010,City of Bountiful,UT,residential,17392.0,160800.0,15616,Municipal,2022
+5862,"Empire Electric Assn, Inc",UT,residential,1199.0,7611.0,924,Cooperative,2022
+6957,"Garkane Energy Coop, Inc",UT,residential,13150.8,123329.0,11121,Cooperative,2022
+10879,Lehi City Corporation,UT,residential,21281.0,237384.0,25016,Municipal,2022
+11135,City of Logan - (UT),UT,residential,13086.0,116731.0,17682,Municipal,2022
+12866,Moon Lake Electric Assn Inc,UT,residential,13049.6,156804.0,13000,Cooperative,2022
+13073,"Mt Wheeler Power, Inc",UT,residential,202.5,2143.0,219,Cooperative,2022
+13137,City of Murray - (UT),UT,residential,11615.0,125462.0,16371,Municipal,2022
+13314,Navajo Tribal Utility Authority,UT,residential,1617.0,12507.0,1793,State,2022
+14354,PacifiCorp,UT,residential,922879.8,8291943.0,901864,Investor Owned,2022
+15444,Provo City Corp,UT,residential,27920.9,256678.0,35091,Municipal,2022
+17732,Spanish Fork City Corporation,UT,residential,12408.0,123455.0,12613,Municipal,2022
+17845,City of Springville - (UT),UT,residential,11330.2,101148.0,10596,Municipal,2022
+17874,City of St George,UT,residential,32749.8,323873.0,27496,Municipal,2022
+18206,Strawberry Electric Serv Dist,UT,residential,6247.7,50647.0,3611,Political Subdivision,2022
+20332,Wells Rural Electric Co,UT,residential,597.3,5739.0,507,Cooperative,2022
+22814,Raft Rural Elec Coop Inc,UT,residential,487.0,5127.0,370,Cooperative,2022
+40165,"Dixie Escalante R E A, Inc",UT,residential,29574.8,388819.0,23595,Cooperative,2022
+84,A & N Electric Coop,VA,residential,47388.3,376851.0,32415,Cooperative,2022
+733,Appalachian Power Co,VA,residential,814405.0,6252210.0,460456,Investor Owned,2022
+1456,Town of Bedford - (VA),VA,residential,10797.0,84268.0,5911,Municipal,2022
+2248,Bristol Virginia Utilities,VA,residential,21848.0,198193.0,13571,Municipal,2022
+3291,Central Virginia Electric Coop,VA,residential,71521.0,512105.0,34060,Cooperative,2022
+4794,City of Danville - (VA),VA,residential,69717.4,454015.0,37176,Municipal,2022
+8198,City of Harrisonburg - (VA),VA,residential,23708.0,208840.0,17990,Municipal,2022
+10171,Kentucky Utilities Co,VA,residential,47546.4,348798.0,22864,Investor Owned,2022
+11560,City of Manassas - (VA),VA,residential,19923.0,169568.0,14008,Municipal,2022
+12260,Mecklenburg Electric Cooperative,VA,residential,52599.6,363278.0,29816,Cooperative,2022
+13640,Northern Virginia Elec Coop,VA,residential,301154.0,2267589.0,164645,Cooperative,2022
+13762,"Northern Neck Elec Coop, Inc",VA,residential,35058.0,245104.0,17376,Cooperative,2022
+15293,Powell Valley Electric Coop,VA,residential,10160.0,89356.0,6578,Cooperative,2022
+15410,Prince George Electric Coop,VA,residential,23005.0,177513.0,10793,Cooperative,2022
+16558,City of Salem - (VA),VA,residential,15953.9,128984.0,11252,Municipal,2022
+17066,Shenandoah Valley Elec Coop,VA,residential,152182.4,1223045.0,84189,Cooperative,2022
+19876,Virginia Electric & Power Co,VA,residential,3968614.8,29595057.0,2332881,Investor Owned,2022
+19882,Virginia Tech Electric Service,VA,residential,6759.4,54899.0,5590,State,2022
+21244,"Southside Electric Coop, Inc",VA,residential,113196.0,760129.0,55919,Cooperative,2022
+40228,Rappahannock Electric Coop,VA,residential,320782.7,2404396.0,162816,Cooperative,2022
+2548,City of Burlington Electric - (VT),VT,residential,15253.1,88628.0,17550,Municipal,2022
+7601,Green Mountain Power Corp,VT,residential,319345.0,1567812.0,225059,Investor Owned,2022
+19791,"Vermont Electric Cooperative, Inc",VT,residential,47034.9,236476.0,35640,Cooperative,2022
+20151,Washington Electric Coop - (VT),VT,residential,15539.0,63556.0,11231,Cooperative,2022
+1579,PUD No 1 of Benton County,WA,residential,68016.0,781760.0,49045,Political Subdivision,2022
+1625,Benton Rural Electric Assn,WA,residential,20708.1,238963.0,12744,Cooperative,2022
+1723,"Big Bend Electric Coop, Inc",WA,residential,10033.5,121553.0,5279,Cooperative,2022
+3295,City of Centralia - (WA),WA,residential,12493.9,127889.0,8964,Municipal,2022
+3413,PUD No 1 of Chelan County,WA,residential,33073.0,973990.0,40899,Political Subdivision,2022
+3644,PUD No 1 of Clallam County,WA,residential,55223.6,487507.0,30088,Political Subdivision,2022
+3660,PUD No 1 of Clark County - (WA),WA,residential,248189.0,2691577.0,210225,Political Subdivision,2022
+4041,"Columbia Rural Elec Assn, Inc",WA,residential,7995.4,61544.0,4182,Cooperative,2022
+4442,PUD No 1 of Cowlitz County,WA,residential,67710.0,784589.0,46816,Political Subdivision,2022
+5326,PUD No 1 of Douglas County,WA,residential,14526.0,473999.0,16211,Political Subdivision,2022
+5832,Elmhurst Mutual Power & Light Co,WA,residential,16416.5,236548.0,15043,Cooperative,2022
+6149,City of Ellensburg - (WA),WA,residential,9238.0,88172.0,8877,Municipal,2022
+6716,PUD No 1 of Franklin County,WA,residential,39405.0,413738.0,26909,Political Subdivision,2022
+7548,PUD No 1 of Grays Harbor County,WA,residential,63918.9,518242.0,39099,Political Subdivision,2022
+8699,Inland Power & Light Company,WA,residential,62173.1,736037.0,39738,Cooperative,2022
+10393,PUD No 1 of Klickitat County,WA,residential,18452.0,162260.0,11625,Political Subdivision,2022
+10454,Kootenai Electric Cooperative,WA,residential,241.5,2590.0,93,Cooperative,2022
+10627,Lakeview Light & Power,WA,residential,11064.0,114144.0,8223,Cooperative,2022
+10944,PUD No 1 of Lewis County,WA,residential,45488.8,502037.0,29313,Political Subdivision,2022
+12744,Modern Electric Water Company,WA,residential,7009.8,104534.0,8753,Cooperative,2022
+13758,"Northern Lights, Inc",WA,residential,19.0,153.0,17,Cooperative,2022
+14055,PUD No 1 of Okanogan County,WA,residential,30727.7,332676.0,17909,Political Subdivision,2022
+14170,Orcas Power & Light Coop,WA,residential,26566.0,165868.0,13743,Cooperative,2022
+14324,PUD No 2 of Pacific County,WA,residential,18246.0,204587.0,16224,Political Subdivision,2022
+14354,PacifiCorp,WA,residential,164308.5,1736586.0,113137,Investor Owned,2022
+14624,PUD No 2 of Grant County,WA,residential,51018.0,917714.0,41052,Political Subdivision,2022
+14653,PUD No 1 of Pend Oreille County,WA,residential,14160.0,167179.0,9013,Political Subdivision,2022
+14668,Peninsula Light Company,WA,residential,54718.3,530637.0,34949,Cooperative,2022
+15231,City of Port Angeles - (WA),WA,residential,12134.0,136391.0,9947,Municipal,2022
+15419,PUD No 3 of Mason County,WA,residential,56515.0,479072.0,33131,Political Subdivision,2022
+15500,Puget Sound Energy Inc,WA,residential,1381833.4,11753057.0,1065508,Investor Owned,2022
+15979,City of Richland - (WA),WA,residential,38419.0,389130.0,25006,Municipal,2022
+16868,City of Seattle - (WA),WA,residential,405555.6,3346665.0,441926,Municipal,2022
+17470,PUD 1 of Snohomish County,WA,residential,403054.0,3955205.0,338081,Political Subdivision,2022
+18429,City of Tacoma - (WA),WA,residential,204838.0,2041309.0,171948,Municipal,2022
+19784,Vera Irrigation District #15,WA,residential,13491.0,161672.0,11957,Political Subdivision,2022
+20169,Avista Corp,WA,residential,277755.0,2765089.0,239958,Investor Owned,2022
+59013,PUD No 1 of Jefferson County,WA,residential,27669.0,229986.0,18047,Political Subdivision,2022
+108,Adams-Columbia Electric Coop,WI,residential,48027.2,279312.0,35333,Cooperative,2022
+307,Algoma Utility Comm,WI,residential,1529.2,11137.0,1668,Municipal,2022
+1251,Barron Electric Coop,WI,residential,28148.0,206748.0,18917,Cooperative,2022
+1776,City of Black River Falls,WI,residential,2888.0,19399.0,2227,Municipal,2022
+1997,City of Boscobel - (WI),WI,residential,1371.8,11921.0,1425,Municipal,2022
+2273,Brodhead Water & Lighting Comm,WI,residential,1783.9,13094.0,1534,Municipal,2022
+3208,Cedarburg Light & Water Comm,WI,residential,6073.7,46152.0,5824,Municipal,2022
+4073,City of Columbus - (WI),WI,residential,2529.2,19316.0,2454,Municipal,2022
+4247,Consolidated Water Power Co,WI,residential,85.7,677.0,70,Investor Owned,2022
+4607,City of Cuba City,WI,residential,975.3,7674.0,977,Municipal,2022
+4715,Dahlberg Light & Power Co,WI,residential,10185.0,75859.0,10770,Investor Owned,2022
+5417,Dunn County Electric Coop,WI,residential,16490.0,114202.0,9311,Cooperative,2022
+5551,City of Eagle River - (WI),WI,residential,900.3,6337.0,1038,Municipal,2022
+5574,East Central Energy,WI,residential,7437.1,50212.0,5116,Cooperative,2022
+6043,City of Evansville,WI,residential,3993.0,30340.0,3925,Municipal,2022
+6424,Florence Utility Comm,WI,residential,1229.3,7552.0,1376,Municipal,2022
+8212,Hartford Electric,WI,residential,6568.2,52499.0,6927,Municipal,2022
+9124,Hustisford Utilities,WI,residential,1667.7,11403.0,1313,Municipal,2022
+9690,Jefferson Utilities,WI,residential,3801.9,30503.0,3602,Municipal,2022
+9936,Juneau Utility Comm,WI,residential,977.2,7868.0,934,Municipal,2022
+10056,City of Kaukauna,WI,residential,15557.0,125970.0,14047,Municipal,2022
+10605,Lake Mills Light & Water,WI,residential,4262.9,29326.0,4003,Municipal,2022
+11125,City of Lodi - (WI),WI,residential,1604.7,11635.0,1486,Municipal,2022
+11479,Madison Gas & Electric Co,WI,residential,160995.0,884476.0,141386,Investor Owned,2022
+11571,Manitowoc Public Utilities,WI,residential,10797.8,109629.0,16103,Municipal,2022
+11740,City of Marshfield - (WI),WI,residential,11232.0,100861.0,11931,Municipal,2022
+12298,City of Menasha - (WI),WI,residential,8283.9,62166.0,8427,Municipal,2022
+13036,Village of Mt. Horeb - (WI),WI,residential,3663.0,29372.0,3653,Municipal,2022
+13145,Village of Muscoda - (WI),WI,residential,895.6,7439.0,914,Municipal,2022
+13438,Village of New Glarus - (WI),WI,residential,1160.2,8416.0,1076,Municipal,2022
+13448,City of New Holstein - (WI),WI,residential,2746.6,19517.0,2229,Municipal,2022
+13467,New London Electric&Water Util,WI,residential,3473.0,26657.0,3460,Municipal,2022
+13481,City of New Richmond,WI,residential,4835.1,40298.0,4682,Municipal,2022
+13697,North Central Power Co Inc,WI,residential,4289.9,26683.0,4908,Investor Owned,2022
+13780,Northern States Power Co,WI,residential,292748.4,1940578.0,216875,Investor Owned,2022
+13815,Northwestern Wisconsin Elec Co,WI,residential,13213.4,88467.0,12869,Investor Owned,2022
+13936,Oakdale Electric Coop,WI,residential,22290.0,151358.0,16739,Cooperative,2022
+13963,Oconomowoc Utilities,WI,residential,10759.9,79392.0,9335,Municipal,2022
+13965,Oconto Falls Water & Light Comm,WI,residential,1445.4,9998.0,1367,Municipal,2022
+15086,Pioneer Power and Light Co,WI,residential,2171.5,13050.0,2013,Investor Owned,2022
+15159,City of Plymouth - (WI),WI,residential,7893.0,63208.0,7197,Municipal,2022
+15312,Village of Prairie Du Sac - (WI),WI,residential,1891.6,15213.0,1903,Municipal,2022
+15344,Polk-Burnett Electric Coop,WI,residential,28974.0,197505.0,19898,Cooperative,2022
+15804,Reedsburg Utility Comm,WI,residential,5095.8,39218.0,4669,Municipal,2022
+15978,City of Richland Center - (WI),WI,residential,2142.6,17112.0,2447,Municipal,2022
+16060,Riverland Energy Cooperative,WI,residential,34419.6,241191.0,17964,Cooperative,2022
+16082,City of River Falls,WI,residential,7401.9,52202.0,6454,Municipal,2022
+16196,Rock Energy Cooperative,WI,residential,11566.0,84546.0,7211,Cooperative,2022
+16740,Scenic Rivers Energy Coop,WI,residential,27120.8,189567.0,13427,Cooperative,2022
+17011,Shawano Municipal Utilities,WI,residential,4050.9,34393.0,4809,Municipal,2022
+17324,Slinger Utilities,WI,residential,2706.1,20512.0,2454,Municipal,2022
+18181,City of Stoughton - (WI),WI,residential,8439.4,66004.0,8013,Municipal,2022
+18249,City of Sturgeon Bay - (WI),WI,residential,7247.7,55263.0,7477,Municipal,2022
+18312,Sun Prairie Utilities,WI,residential,14401.5,116611.0,15605,Municipal,2022
+18336,Superior Water and Light Co,WI,residential,13388.8,94322.0,12916,Investor Owned,2022
+19324,Two Rivers Water & Light,WI,residential,4616.6,34042.0,5585,Municipal,2022
+20182,Waterloo Light & Water Comm,WI,residential,1778.2,13024.0,1503,Municipal,2022
+20211,Village of Waunakee - (WI),WI,residential,6942.2,55117.0,6149,Municipal,2022
+20213,Waupun Utilities,WI,residential,4031.0,32381.0,3887,Municipal,2022
+20434,City of Westby,WI,residential,1067.2,8622.0,1023,Municipal,2022
+20583,Whitehall Electric Utility,WI,residential,864.1,6710.0,779,Municipal,2022
+20847,Wisconsin Electric Power Co,WI,residential,1371741.9,8099798.0,1028813,Investor Owned,2022
+20856,Wisconsin Power & Light Co,WI,residential,559649.0,3686150.0,429581,Investor Owned,2022
+20860,Wisconsin Public Service Corp,WI,residential,457282.0,3033821.0,403558,Investor Owned,2022
+20862,Wisconsin Rapids W W & L Comm,WI,residential,11780.0,97997.0,12174,Municipal,2022
+40036,Westfield Electric Company,WI,residential,868.1,4747.0,588,Investor Owned,2022
+733,Appalachian Power Co,WV,residential,751225.0,4907186.0,351800,Investor Owned,2022
+1764,Black Diamond Power Co,WV,residential,4554.7,34512.0,3469,Investor Owned,2022
+12796,Monongahela Power Co,WV,residential,428034.6,3700797.0,334385,Investor Owned,2022
+15263,The Potomac Edison Company,WV,residential,213403.4,2018265.0,130196,Investor Owned,2022
+20521,Wheeling Power Co,WV,residential,61828.0,387427.0,34707,Investor Owned,2022
+3461,Cheyenne Light Fuel & Power,WY,residential,41162.0,284205.0,39137,Investor Owned,2022
+6169,Fall River Rural Elec Coop Inc,WY,residential,747.0,7591.0,312,Cooperative,2022
+7222,City of Gillette - (WY),WY,residential,16627.0,143673.0,13243,Municipal,2022
+8566,High Plains Power Inc,WY,residential,20287.0,148726.0,12571,Cooperative,2022
+11273,Lower Valley Energy Inc,WY,residential,34428.0,541803.0,21951,Cooperative,2022
+12199,Montana-Dakota Utilities Co,WY,residential,17027.0,154374.0,14173,Investor Owned,2022
+12825,NorthWestern Energy LLC - (MT),WY,residential,177.0,1412.0,167,Investor Owned,2022
+14354,PacifiCorp,WY,residential,114637.3,1057690.0,117245,Investor Owned,2022
+19156,Powder River Energy Corp,WY,residential,26681.2,230244.0,15737,Cooperative,2022
+19545,"Black Hills Power, Inc.",WY,residential,2612.0,20528.0,2024,Investor Owned,2022
+21081,Yampa Valley Electric Assn Inc,WY,residential,885.7,5713.0,566,Cooperative,2022
+27058,"High West Energy, Inc",WY,residential,9866.0,69734.0,5527,Cooperative,2022
 213,Alaska Electric Light & Power Co.,AK,residential,20419.0,161849.0,15159,Investor Owned,2023
 219,Alaska Power and Telephone Co,AK,residential,10301.0,27163.0,5685,Investor Owned,2023
 221,"Alaska Village Elec Coop, Inc",AK,residential,28721.1,44582.0,7742,Cooperative,2023

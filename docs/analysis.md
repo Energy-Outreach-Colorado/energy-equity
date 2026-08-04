@@ -83,13 +83,14 @@ quantity the rest of the analysis needs:
 - **Annual energy cost.** Monthly electricity (`ELEP`) and gas (`GASP`) are annualized
   (× 12) and added to annual other-fuel cost (`FULP`) → `energy_cost_annual`. ACS
   "special codes" (0–3, meaning *not used* / *included in rent* / etc.) are resolved first.
-- **Optional EIA-861 normalization.** When `calibration.electric` is configured, the
-  service-weighted average annual electric bill implied by PUMS (bill-paying households
-  only) is compared to the utility's EIA-861 administrative average; with `apply: true`
-  each paying household's electric cost is rescaled by `target / observed` before burden
-  is computed, anchoring the cost level to utility-reported data while preserving the
+- **Optional bill normalization.** When `calibration.electric` or `calibration.gas` is
+  configured, the service-weighted average annual bill implied by PUMS for that fuel
+  (among households that pay for it) is compared to the administrative average from
+  EIA-861 (electric, per utility) or EIA-176 (gas, per company); with `apply: true`
+  each paying household's cost is rescaled by `target / observed` before burden is
+  computed, anchoring the cost level to utility-reported data while preserving the
   PUMS distribution (the DOE LEAD approach). See
-  [eia861_normalization.md](eia861_normalization.md).
+  [bill_normalization.md](bill_normalization.md).
 - **Energy burden** = `energy_cost_annual / income_adjusted`, with flags at the 6% and 10%
   thresholds. Households with non-positive income are excluded by default (NaN burden).
 - **Rent burden** = annualized gross rent (`GRNTP` × 12) / income, flagged at 30% / 50%,
@@ -165,7 +166,7 @@ Interpretation notes: households with non-positive income are excluded (no meani
 payment target exists), including under `nonpos_income_rule: treat_as_high`; and because
 gaps are denominated in self-reported dollars, they inherit the cost level bias that
 EIA-861 normalization measures and corrects — run the calibration before publishing gap
-totals ([eia861_normalization.md](eia861_normalization.md)).
+totals ([bill_normalization.md](bill_normalization.md)).
 
 ### 3.4c Multi-year trends
 
@@ -188,6 +189,12 @@ Comparability rules the pipeline and its outputs follow:
 - **Hold thresholds constant.** Use the same HUD AMI fiscal year and SMI vintage for
   every year in the comparison so eligibility populations do not drift for program
   reasons rather than economic ones. Disclose the held-constant vintage.
+- **Calibrate all years or none.** Bill normalization
+  ([bill_normalization.md](bill_normalization.md)) is a level correction; applying it
+  to some years but not others manufactures a fake trend out of the correction itself.
+  The trend tables record each year's basis in the `electric_calibration` and
+  `gas_calibration` columns and the pipeline warns when they are mixed. Self-report
+  bias varies by year, so calibrated runs are the preferred basis for trend exhibits.
 - **Stay on one PUMA boundary set.** The 2010 to 2020 PUMA boundary change lands
   between the 2021 and 2022 vintages. Years 2022 onward compare cleanly; mixing
   boundary eras keeps each year internally valid but breaks PUMA-level comparisons.
