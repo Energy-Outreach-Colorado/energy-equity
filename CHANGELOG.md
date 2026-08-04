@@ -35,6 +35,28 @@ All notable changes to this project will be documented here. Format follows
   bands, and per-PUMA choropleths, written to `<output_dir>/figures/`. Controlled by
   `pipelines.reporting.figures`; requires the `viz` extra (skips with a warning otherwise).
 - Documentation pages: `docs/cli.md` (CLI reference) and `docs/outputs.md` (tables + figures).
+- **Utility bill normalization** (`calibration.electric` / `calibration.gas`): LEAD-style
+  calibration of PUMS self-reported energy costs against administrative averages, per
+  electric utility (EIA-861) and per gas company (EIA-176). Diagnostic-first
+  (`calibration_electric.csv` / `calibration_gas.csv` report observed vs target average
+  bills); opt-in `apply: true` rescales paying households' costs before burden is
+  thresholded. Packaged residential data for every US electric utility and gas company,
+  2022 through 2024, ships with provenance files, rebuild scripts, and data-integrity
+  tests (`data/eia861`, `data/eia176`). See `docs/bill_normalization.md`.
+- **Affordability-gap sizing** in the eligibility pipeline: `affordability_gap.csv`
+  (segment by population by threshold, with replicate-weight 90% MOEs) and
+  `affordability_gap_by_puma.csv` size the annual dollars needed to bring every
+  household's energy burden down to a threshold. Thresholds via
+  `pipelines.eligibility_analysis.gap_thresholds`.
+- **Multi-year trend analysis** (`ee run trends`): compares completed per-year runs into
+  `trends_affordability_gap.csv`, `trends_energy_burden.csv`, and `trends_deltas.csv`
+  (year-over-year changes with root-sum-of-squares MOEs, valid for independent 1-year
+  PUMS samples), plus trend-line figures with shaded 90% MOE bands. Trend tables record
+  each run's bill-normalization basis per fuel and the pipeline warns when years mix
+  calibrated and uncalibrated runs.
+- `service_allocation.build_service_puma_shares`: the geography-only PUMA share builder,
+  factored out so the CLI computes shares once and reuses them for calibration and
+  allocation.
 
 ### Changed
 - SMI uses HHS's official FFY thresholds with no inflation adjustment (documented), one IM
