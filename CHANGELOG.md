@@ -23,6 +23,10 @@ All notable changes to this project will be documented here. Format follows
 - `ee run all` reported blank MOEs for every service-area total and rate. The in-memory
   replicate hand-off from `puma_table` uses bare metric names (`hh_total`) while the allocator
   looked up `_w` column names (`hh_total_w`). The allocator now accepts both spellings.
+- Building a wheel failed with "A second file is being added to the wheel archive", so the
+  package could not be installed from git or an sdist. The `force-include` table added
+  `src/energy_equity/data` a second time on top of `packages`, which already ships it. The
+  table is removed and the wheel still carries every packaged data file.
 
 ## [0.2.0] - 2026-08-04
 
