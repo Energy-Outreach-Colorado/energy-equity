@@ -6,7 +6,23 @@ All notable changes to this project will be documented here. Format follows
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+- `geo.allocation.puma_shares_from_units` builds household-weighted PUMA shares from overlap
+  fractions at any resolution that nests in PUMAs (tract, block group, or block), so callers
+  such as a web map can apportion PUMA estimates to an arbitrary polygon.
+- `allocate_puma_counts_to_service` accepts `rate_definitions`, which defaults to the
+  previous hard-coded list (now exported as `DEFAULT_RATE_DEFINITIONS`).
+- `tables.metrics.ENERGY_BURDEN_BAND_COUNT_METRICS` gives weighted household counts in the
+  burden bands 0–2%, 2–4%, 4–6%, 6–10%, 10–20% and 20% or more. The bands partition
+  `hh_burden_valid` and can be apportioned like any other count.
+- `tables.metrics.ENERGY_COST_TOTAL_METRICS` gives weighted totals of annual energy cost and
+  income over valid-burden households, from which average cost and aggregate burden follow for
+  any apportioned area.
+
+### Fixed
+- `ee run all` reported blank MOEs for every service-area total and rate. The in-memory
+  replicate hand-off from `puma_table` uses bare metric names (`hh_total`) while the allocator
+  looked up `_w` column names (`hh_total_w`). The allocator now accepts both spellings.
 
 ## [0.2.0] - 2026-08-04
 

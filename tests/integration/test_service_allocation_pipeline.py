@@ -175,3 +175,39 @@ def test_service_allocation_moe_nonnegative(cfg_with_geo) -> None:
         finite = totals[col].dropna()
         if len(finite):
             assert (finite >= 0).all()
+
+
+def test_in_memory_replicate_handoff_produces_moes(cfg_with_geo) -> None:
+    """Regression for `ee run all`, which passes `build_table`'s bare-name replicate keys.
+
+    Before the fix every service MOE came back NaN on this path, because the allocator
+    looked replicates up by the `_w` column name only.
+    """
+    cfg, geo = cfg_with_geo
+    md = prepare_household_microdata(cfg, ami80_by_puma=synthesize_ami80_by_puma())
+    pt = puma_table.run(cfg, microdata=md, write_demographics=False)
+    in_memory = service_allocation.run(
+        cfg,
+        puma_overall=pt["puma_overall"],
+        replicates=pt["puma_overall_replicates"],  # type: ignore[arg-type]
+        tract_households=make_tract_households(),
+        service_label="in_memory",
+    )
+    totals = in_memory["totals"]
+    all_row = totals.loc[totals["segment"] == "all"].iloc[0]
+    assert np.isfinite(all_row["hh_total_w_in_service_moe90"])
+    assert np.isfinite(all_row["hh_eb_w_in_service_moe90"])
+    rates = in_memory["rates"]
+    assert rates["moe90"].notna().any()
+
+    from_csv = service_allocation.run(
+        cfg,
+        tract_households=make_tract_households(),
+        service_label="from_csv",
+    )
+    moe_cols = [c for c in totals.columns if c.endswith("_moe90")]
+    np.testing.assert_allclose(
+        totals[moe_cols].to_numpy(dtype=float),
+        from_csv["totals"][moe_cols].to_numpy(dtype=float),
+        rtol=1e-6,
+    )
