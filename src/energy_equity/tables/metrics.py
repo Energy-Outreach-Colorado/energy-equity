@@ -140,3 +140,64 @@ BASELINE_RATIO_METRICS: tuple[RatioMetric, ...] = (
     RatioMetric("pct_rent_burdened_among_le80", "hh_rent_burdened_le80", "hh_le80"),
     RatioMetric("pct_rent_burdened_among_le60_smi", "hh_rent_burdened_le60_smi", "hh_le60_smi"),
 )
+
+
+ENERGY_BURDEN_BAND_EDGES: tuple[float, ...] = (0.0, 0.02, 0.04, 0.06, 0.10, 0.20, float("inf"))
+"""Lower and upper edges of the energy burden bands, as fractions of income.
+
+Bands are half-open, `[lower, upper)`. The last band is open-ended and also holds the
+`inf` burdens that the `treat_as_high` non-positive income rule produces.
+"""
+
+
+def energy_burden_band_name(lower: float, upper: float) -> str:
+    """Metric name for the band `[lower, upper)`, e.g. `hh_eb_band_06_10` or `hh_eb_band_20_plus`."""
+    lo = f"{round(lower * 100):02d}"
+    hi = "plus" if np.isinf(upper) else f"{round(upper * 100):02d}"
+    return f"hh_eb_band_{lo}_{hi}"
+
+
+def _burden_band_mask(lower: float, upper: float):
+    """Build a mask function selecting valid-burden households with burden in `[lower, upper)`."""
+
+    def mask(df: pd.DataFrame) -> np.ndarray:
+        if "energy_burden" not in df.columns:
+            return np.zeros(len(df), dtype=float)
+        burden = df["energy_burden"].astype(float).to_numpy()
+        valid = _bool_col(df, "burden_valid") > 0
+        with np.errstate(invalid="ignore"):
+            inside = (burden >= lower) & ((burden < upper) | np.isinf(upper))
+        return (valid & inside).astype(float)
+
+    return mask
+
+
+ENERGY_BURDEN_BAND_COUNT_METRICS: tuple[CountMetric, ...] = tuple(
+    CountMetric(energy_burden_band_name(lo, hi), _burden_band_mask(lo, hi))
+    for lo, hi in zip(ENERGY_BURDEN_BAND_EDGES[:-1], ENERGY_BURDEN_BAND_EDGES[1:], strict=True)
+)
+"""Weighted household counts by energy burden band.
+
+The bands partition `hh_burden_valid`, so they sum to it. Because they are counts, they
+can be apportioned to an arbitrary area the same way as the baseline counts, which lets
+a caller show a burden distribution (and approximate a median) for a drawn shape.
+"""
+
+
+ENERGY_COST_TOTAL_METRICS: tuple[CountMetric, ...] = (
+    CountMetric(
+        "usd_energy_cost_valid",
+        lambda df: _float_col(df, "annual_energy_cost_adj") * _bool_col(df, "burden_valid"),
+    ),
+    CountMetric(
+        "usd_income_valid",
+        lambda df: _float_col(df, "income_adjusted") * _bool_col(df, "burden_valid"),
+    ),
+)
+"""Weighted dollar totals of annual energy cost and income over valid-burden households.
+
+These are weighted sums rather than household counts, so `usd_energy_cost_valid_w`
+divided by `hh_burden_valid_w` is the average annual energy cost, and
+`usd_energy_cost_valid_w` divided by `usd_income_valid_w` is the aggregate energy burden.
+Like the counts, both apportion linearly to an arbitrary area, and replicate MOEs follow.
+"""

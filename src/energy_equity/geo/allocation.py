@@ -39,6 +39,87 @@ from shapely.ops import unary_union
 from ..io.geo import CRS_EQUAL_AREA, get_first_existing_col, read_geofile
 from ..weights.sdr import PUMS_REPLICATE_COUNT, Z_90, sdr_moe
 
+DEFAULT_RATE_DEFINITIONS: tuple[tuple[str, str, str], ...] = (
+    ("pct_le80_of_total", "hh_le80_w", "hh_total_w"),
+    ("pct_energy_burdened_of_valid", "hh_eb_w", "hh_burden_valid_w"),
+    ("pct_high_energy_burdened_of_valid", "hh_heb_w", "hh_burden_valid_w"),
+    ("pct_energy_burdened_among_le80", "hh_eb_le80_w", "hh_le80_w"),
+    ("pct_high_energy_burdened_among_le80", "hh_heb_le80_w", "hh_le80_w"),
+    ("pct_le60_smi_of_total", "hh_le60_smi_w", "hh_total_w"),
+    ("pct_energy_burdened_among_le60_smi", "hh_eb_le60_smi_w", "hh_le60_smi_w"),
+    ("pct_rent_burdened_of_rent_valid", "hh_rent_burdened_w", "hh_rent_valid_w"),
+    ("pct_rent_burdened_among_le80", "hh_rent_burdened_le80_w", "hh_le80_w"),
+)
+
+
+def _replicate_matrix(replicates: dict[str, np.ndarray] | None, metric: str) -> np.ndarray | None:
+    """Return the replicate matrix for `metric`, accepting keys with or without `_w`.
+
+    `build_table` keys its in-memory replicates by bare metric name (`"hh_total"`), while
+    the CSV loader in `pipelines.service_allocation` keys them by column name
+    (`"hh_total_w"`). Looking up both spellings lets either hand-off produce MOEs.
+    """
+    if replicates is None:
+        return None
+    if metric in replicates:
+        return replicates[metric]
+    if metric.endswith("_w") and metric[:-2] in replicates:
+        return replicates[metric[:-2]]
+    return None
+
+
+def puma_shares_from_units(
+    units: pd.DataFrame,
+    *,
+    puma_col: str = "PUMA",
+    households_col: str = "households",
+    share_col: str = "share_in_area",
+) -> pd.DataFrame:
+    """Aggregate small-geography household overlaps into household-weighted PUMA shares.
+
+    `units` has one row per small geography that nests inside a PUMA (a tract, block
+    group, or block), with its PUMA code, its household count, and the fraction of those
+    households that fall inside the area of interest. Every unit in each PUMA of
+    interest must be present, including units with a zero share, because the PUMA's
+    household total is the sum over its units.
+
+    This is the same household-weighted rule `compute_household_weighted_puma_shares`
+    applies to tracts, generalised so a caller can supply overlap fractions computed
+    at any resolution (for example block-population-weighted H3 cells). The output has
+    the column layout `allocate_puma_counts_to_service` expects, with the urban split
+    left as NaN.
+
+    Output columns are PUMA, households_total, households_in_service,
+    share_households_in_service, urban_share_within_service, households_in_service_urban
+    and households_in_service_rural.
+    """
+    for col in (puma_col, households_col, share_col):
+        if col not in units.columns:
+            raise ValueError(f"units is missing required column {col!r}")
+
+    u = pd.DataFrame(
+        {
+            "PUMA": units[puma_col].astype("string").str.zfill(5),
+            "households": pd.to_numeric(units[households_col], errors="coerce").fillna(0.0),
+            "share": pd.to_numeric(units[share_col], errors="coerce").fillna(0.0).clip(0, 1),
+        }
+    )
+    u["households_in_service"] = u["households"] * u["share"]
+
+    by_puma = u.groupby("PUMA", as_index=False, dropna=True).agg(
+        households_total=("households", "sum"),
+        households_in_service=("households_in_service", "sum"),
+    )
+    by_puma["share_households_in_service"] = np.where(
+        by_puma["households_total"] > 0,
+        (by_puma["households_in_service"] / by_puma["households_total"]).clip(0, 1),
+        0.0,
+    )
+    by_puma["urban_share_within_service"] = np.nan
+    by_puma["households_in_service_urban"] = np.nan
+    by_puma["households_in_service_rural"] = np.nan
+    return by_puma
+
 
 def assign_puma_to_tracts(tracts: gpd.GeoDataFrame, pumas: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     """Assign each tract a PUMA code via representative-point spatial join.
@@ -191,6 +272,7 @@ def allocate_puma_counts_to_service(
     replicates: dict[str, np.ndarray] | None = None,
     compute_moe: bool = True,
     replicate_count: int = PUMS_REPLICATE_COUNT,
+    rate_definitions: Sequence[tuple[str, str, str]] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Allocate PUMA-level metrics into a service territory.
 
@@ -201,11 +283,17 @@ def allocate_puma_counts_to_service(
       rates: long-form table of selected rates (point + MOE).
 
     `metrics` lists the columns in `puma_overall` to allocate (e.g.,
-    `["hh_total_w", "hh_eb_w", "hh_le80_w", ...]`). `replicates` is the dict returned by
-    `puma_table.run` keyed by metric name without the `_w` suffix (e.g. `"hh_total"`)
-    mapping to (n_puma, replicate_count) arrays of replicate estimates per PUMA in the
-    same row order as `puma_overall`. When provided, MOEs are computed via the SDR
-    formula on the replicate-aggregated service totals.
+    `["hh_total_w", "hh_eb_w", "hh_le80_w", ...]`). `replicates` maps each metric to a
+    (n_puma, replicate_count) array of replicate estimates per PUMA in the same row order
+    as `puma_overall`. Keys may carry the `_w` suffix (as loaded from
+    `puma_overall_replicates.csv.gz`) or omit it (as returned in memory by `build_table`
+    and `puma_table.run`); both spellings are accepted. When provided, MOEs are computed
+    via the SDR formula on the replicate-aggregated service totals.
+
+    `rate_definitions` is a sequence of `(rate_name, numerator_metric,
+    denominator_metric)` triples using the same `_w` column names as `metrics`. It
+    defaults to `DEFAULT_RATE_DEFINITIONS`. A rate is skipped when either side is not in
+    `metrics`.
     """
     df = puma_overall.copy()
     df["PUMA"] = df["PUMA"].astype(str).str.zfill(5)
@@ -274,8 +362,8 @@ def allocate_puma_counts_to_service(
             )
             point = float(np.dot(w, base_val))
             row[f"{metric}_in_service"] = point
-            if compute_moe and replicates is not None and metric in replicates:
-                mat = replicates[metric]  # (n_puma, R) in row order of `out`
+            mat = _replicate_matrix(replicates, metric)
+            if compute_moe and mat is not None:
                 if mat.shape != (len(out), replicate_count):
                     raise ValueError(
                         f"Replicate matrix for {metric!r} has shape {mat.shape}, "
@@ -292,17 +380,7 @@ def allocate_puma_counts_to_service(
     totals = pd.DataFrame(totals_rows)
 
     # Rates (selected). Numerator and denominator must both be in `metrics`.
-    rate_defs = [
-        ("pct_le80_of_total", "hh_le80_w", "hh_total_w"),
-        ("pct_energy_burdened_of_valid", "hh_eb_w", "hh_burden_valid_w"),
-        ("pct_high_energy_burdened_of_valid", "hh_heb_w", "hh_burden_valid_w"),
-        ("pct_energy_burdened_among_le80", "hh_eb_le80_w", "hh_le80_w"),
-        ("pct_high_energy_burdened_among_le80", "hh_heb_le80_w", "hh_le80_w"),
-        ("pct_le60_smi_of_total", "hh_le60_smi_w", "hh_total_w"),
-        ("pct_energy_burdened_among_le60_smi", "hh_eb_le60_smi_w", "hh_le60_smi_w"),
-        ("pct_rent_burdened_of_rent_valid", "hh_rent_burdened_w", "hh_rent_valid_w"),
-        ("pct_rent_burdened_among_le80", "hh_rent_burdened_le80_w", "hh_le80_w"),
-    ]
+    rate_defs = DEFAULT_RATE_DEFINITIONS if rate_definitions is None else rate_definitions
     rate_rows = []
     for seg_name in ("all", "urban", "rural"):
         w = seg_weights[seg_name]
@@ -318,9 +396,11 @@ def allocate_puma_counts_to_service(
             est = (num_point / den_point) if den_point > 0 else float("nan")
 
             moe = float("nan")
-            if compute_moe and replicates is not None and num in replicates and den in replicates:
-                num_reps = w @ replicates[num]  # (R,)
-                den_reps = w @ replicates[den]  # (R,)
+            num_mat = _replicate_matrix(replicates, num)
+            den_mat = _replicate_matrix(replicates, den)
+            if compute_moe and num_mat is not None and den_mat is not None:
+                num_reps = w @ num_mat  # (R,)
+                den_reps = w @ den_mat  # (R,)
                 with np.errstate(divide="ignore", invalid="ignore"):
                     rep_ratio = np.where(den_reps > 0, num_reps / den_reps, np.nan)
                 finite = np.isfinite(rep_ratio)
