@@ -130,6 +130,47 @@ others manufactures a fake trend out of the correction itself. The trends pipeli
 records each run's basis in `electric_calibration` and `gas_calibration` columns
 (`calibrated`, `diagnostic`, or `uncalibrated`) and warns loudly when they are mixed.
 
+## Calibrating every utility at once
+
+The configuration above calibrates one service area to one utility. A statewide product
+such as a map needs every utility at the same time, and PUMS locates a household only to
+its PUMA, which several utilities may serve. `energy_equity.territory_calibration`
+handles that case.
+
+1. **One factor per utility.** Each territory's observed average weights paying
+   households by `WGTP` times its PUMA share, exactly as the single-territory
+   diagnostic does, and its own factor is target over observed.
+2. **Pooling small territories.** A PUMA holds about 100,000 people, so a small
+   utility's weighted households are mostly its neighbours' customers. A territory whose
+   overlap (the household-weighted mean of its PUMA shares) is below 0.35 takes the
+   pooled factor of the reliable territories in its EIA ownership class, and falls back
+   to all reliable territories when its class has none. Cooperatives and municipal
+   utilities behave differently enough in Colorado (reliable cooperatives' own electric
+   factors mostly ran 0.69 to 0.91 in 2024, municipal utilities' 0.58 to 0.68) that a
+   single statewide pool would over-correct rural households.
+3. **Blending by PUMA.** Each PUMA applies the share-weighted mean of the factors of the
+   territories that touch it. A PUMA no territory touches keeps its reported costs.
+4. **Combined bills.** Some utilities, Xcel Energy among them, bill gas and electricity
+   together, and PUMS records such households with `GASFP = 2` and the whole bill in
+   `ELEP`. In the 2024 Colorado 1-year file they are 25.9% of weighted electric payers.
+   They are left out of the electric average and calibrated against the combined target,
+   the utility's electric average plus the blended gas average over its territory.
+
+Pass territories to `prepare_household_microdata(cfg, electric_territories=...,
+gas_territories=...)`, which cannot be combined with the `calibration` config blocks. The
+result's `territory_calibration` holds the per-utility tables and the factor applied in
+each PUMA. `build_territories` builds territories from a polygon layer and a crosswalk
+of polygon names to EIA identifiers, reading targets and ownership classes from the
+packaged tables.
+
+On the 2024 Colorado file this moved the statewide share of households above 6% burden
+from 13.8% to 9.3% and above 10% from 7.7% to 5.1% (checked 2026-09-27). Xcel's own
+electric factor is 0.64 once combined-bill households are separated, against 0.59 with
+them included, and those households' combined factor is 0.85.
+
+The single-territory path still treats combined-bill households as ordinary electric
+payers.
+
 ## Limitations (disclose when publishing calibrated numbers)
 
 - **Customers are meters, not households.** A master-metered multifamily building is

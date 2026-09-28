@@ -73,7 +73,8 @@ def load_eia861_average_bill(
     row must remain — multi-state utilities and multi-year tables need the extra filters.
     Returns a dict with `target_annual_bill`
     (= revenue_thousand_dollars * 1000 / customers), the matched utility identifiers,
-    and `avg_rate_per_kwh` when sales_mwh is available.
+    `avg_rate_per_kwh` when sales_mwh is available, and `ownership` (the EIA ownership
+    class) when the table has that column.
     """
     if utility_number is None and utility_name is None:
         raise ValueError("Provide utility_number and/or utility_name to select a utility.")
@@ -137,6 +138,9 @@ def load_eia861_average_bill(
         "customers": customers,
         "year": int(row["year"]) if "year" in rows.columns and pd.notna(row.get("year")) else None,
     }
+    ownership = row.get("ownership")
+    if ownership is not None and pd.notna(ownership):
+        result["ownership"] = str(ownership)
     sales = row.get("sales_mwh")
     if sales is not None and pd.notna(sales) and float(sales) > 0:
         result["avg_rate_per_kwh"] = revenue * 1000.0 / (float(sales) * 1000.0)
@@ -163,8 +167,8 @@ def load_eia176_average_bill(
     row must remain. EIA-176 company identifiers are unrelated to EIA-861 utility
     numbers and names are often abbreviated, so check the packaged table for the exact
     spelling. Returns a dict with `target_annual_bill`
-    (= revenue_thousand_dollars * 1000 / customers) and, when volume is available,
-    `avg_price_per_mcf`.
+    (= revenue_thousand_dollars * 1000 / customers), `avg_price_per_mcf` when volume is
+    available, and `ownership` when the table has that column.
     """
     if company_id is None and company_name is None:
         raise ValueError("Provide company_id and/or company_name to select a company.")
@@ -228,6 +232,9 @@ def load_eia176_average_bill(
         "customers": customers,
         "year": int(row["year"]) if "year" in rows.columns and pd.notna(row.get("year")) else None,
     }
+    ownership = row.get("ownership")
+    if ownership is not None and pd.notna(ownership):
+        result["ownership"] = str(ownership)
     volume = row.get("volume_mcf")
     if volume is not None and pd.notna(volume) and float(volume) > 0:
         result["avg_price_per_mcf"] = revenue * 1000.0 / float(volume)

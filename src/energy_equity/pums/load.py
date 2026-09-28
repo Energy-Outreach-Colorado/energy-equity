@@ -7,6 +7,9 @@ PUMS column conventions:
 - ADJHSG: housing adjustment factor (divide by 1_000_000 to get a multiplier).
 - ELEP, GASP, FULP: monthly electric, monthly gas, annual other-fuel cost (with ACS
   special codes 0..3 indicating N/A, included-in-rent, no-charge, no-fuel-used).
+- GASFP: gas cost flag (2 = gas included in the electricity payment), loaded when the
+  file has it (every 1-year file from 2022 on) so bill calibration can separate combined
+  gas and electric bills.
 - HHL: broad household language category (1=English only, 2=Spanish, 3=Other Indo-European,
   4=Asian & Pacific Island, 5=Other).
 - LANP: detailed language code for the householder (~1000 entries).
@@ -20,7 +23,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from ..io.pums import coerce_numeric, read_pums_csv_from_zip, replicate_cols, zfill_str
+from ..io.pums import (
+    coerce_numeric,
+    read_pums_csv_from_zip,
+    read_pums_csv_header,
+    replicate_cols,
+    zfill_str,
+)
 from ..weights.sdr import PUMS_REPLICATE_COUNT
 
 HOUSING_BASE_COLS: tuple[str, ...] = (
@@ -40,6 +49,8 @@ HOUSING_BASE_COLS: tuple[str, ...] = (
     "GRPIP",
     "SMOCP",
 )
+
+OPTIONAL_HOUSING_COLS: tuple[str, ...] = ("GASFP",)
 
 PERSON_BASE_COLS: tuple[str, ...] = (
     "SERIALNO",
@@ -66,9 +77,12 @@ def load_pums_households(
     Drops rows with zero/missing weight or zero household size and zero-pads PUMA to 5
     digits. Replicate weights (WGTP1..WGTPn) are included by default for MOE computation.
     Caller may pass `extra_cols` to request additional PUMS variables (for example, for
-    finer demographic slicing).
+    finer demographic slicing). Columns in `OPTIONAL_HOUSING_COLS` are loaded when the
+    file has them and skipped otherwise.
     """
+    header = read_pums_csv_header(housing_zip)
     cols = list(HOUSING_BASE_COLS)
+    cols += [c for c in OPTIONAL_HOUSING_COLS if c in header]
     if include_replicate_weights:
         cols += replicate_cols("WGTP", replicate_count)
     if extra_cols:

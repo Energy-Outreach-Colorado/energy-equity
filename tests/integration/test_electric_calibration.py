@@ -203,3 +203,39 @@ def test_both_fuels_applied_land_on_targets(tmp_path: Path) -> None:
         + df["annual_other_fuel_cost_adj"]
     )
     assert np.allclose(df["annual_energy_cost_adj"], resummed)
+
+
+def test_territory_calibration_single_full_territory_lands_on_target(tmp_path: Path) -> None:
+    from energy_equity.territory_calibration import Territory
+
+    cfg = make_cfg(tmp_path)
+    full = pd.DataFrame({"PUMA": ["00800", "00900"], "share_households_in_service": [1.0, 1.0]})
+    md = prepare_household_microdata(
+        cfg,
+        ami80_by_puma=synthesize_ami80_by_puma(),
+        electric_territories=[Territory(1, "All", "Investor Owned", 1000.0, full)],
+    )
+    df = md.df
+    payers = df["ELEP"].notna()
+    observed = (df.loc[payers, "annual_electric_cost_adj"] * df.loc[payers, "WGTP"]).sum() / df.loc[
+        payers, "WGTP"
+    ].sum()
+    assert observed == pytest.approx(1000.0)
+    assert md.territory_calibration is not None
+    assert md.territory_calibration.electric.loc[0, "factor_source"] == "own"
+    burden = df["annual_energy_cost_adj"] / df["income_adjusted"]
+    valid = df["burden_valid"].astype(bool)
+    assert np.allclose(df.loc[valid, "energy_burden"], burden[valid])
+
+
+def test_territory_calibration_rejects_config_blocks(tmp_path: Path) -> None:
+    from energy_equity.territory_calibration import Territory
+
+    cfg = make_cfg(tmp_path, calibration={"electric": {"target_annual_bill": 1000.0}})
+    full = pd.DataFrame({"PUMA": ["00800"], "share_households_in_service": [1.0]})
+    with pytest.raises(ValueError, match="mutually exclusive"):
+        prepare_household_microdata(
+            cfg,
+            ami80_by_puma=synthesize_ami80_by_puma(),
+            electric_territories=[Territory(1, "All", "Investor Owned", 1000.0, full)],
+        )

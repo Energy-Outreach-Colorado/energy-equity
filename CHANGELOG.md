@@ -18,6 +18,17 @@ All notable changes to this project will be documented here. Format follows
 - `tables.metrics.ENERGY_COST_TOTAL_METRICS` gives weighted totals of annual energy cost and
   income over valid-burden households, from which average cost and aggregate burden follow for
   any apportioned area.
+- `territory_calibration` calibrates self-reported electric and gas costs against every
+  utility territory in a state at once. Each utility gets its own factor from its
+  service-weighted observed average and its EIA target, utilities that overlap their PUMAs
+  too little take the pooled factor of their EIA ownership class, and each PUMA applies the
+  share-weighted blend of its utilities' factors. Households that report gas in their
+  electricity payment (PUMS `GASFP = 2`) are left out of the electric average and calibrated
+  against the combined electric plus gas target. `prepare_household_microdata` takes
+  `electric_territories` and `gas_territories`, and `build_territories` turns territory
+  polygons and a name-to-EIA crosswalk into territories. See `docs/bill_normalization.md`.
+- `load_pums_households` loads `GASFP` when the housing file has it.
+- `load_eia861_average_bill` and `load_eia176_average_bill` return the EIA `ownership` class.
 
 ### Fixed
 - `ee run all` reported blank MOEs for every service-area total and rate. The in-memory
