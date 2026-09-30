@@ -6,6 +6,10 @@ All notable changes to this project will be documented here. Format follows
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.3.0] - 2026-09-30
+
 ### Added
 - `geo.allocation.puma_shares_from_units` builds household-weighted PUMA shares from overlap
   fractions at any resolution that nests in PUMAs (tract, block group, or block), so callers

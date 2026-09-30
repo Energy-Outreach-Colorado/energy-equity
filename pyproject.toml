@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "energy-equity"
-version = "0.2.0"
+version = "0.3.0"
 description = "Energy burden and utility affordability analysis from ACS PUMS microdata for any US service territory."
 readme = "README.md"
 requires-python = ">=3.10"

@@ -54,7 +54,7 @@ package builds:
 
 ## Status
 
-v0.2.0. See [CHANGELOG.md](CHANGELOG.md) for release history.
+v0.3.0. See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## Authors
 - [@e-baumer](https://github.com/e-baumer)
