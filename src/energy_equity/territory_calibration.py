@@ -50,12 +50,14 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from importlib.resources import files
 
 import numpy as np
 import pandas as pd
 from loguru import logger
 
 DEFAULT_MIN_OVERLAP = 0.35
+PACKAGED_CROSSWALK_DIR = files("energy_equity").joinpath("data/utilities")
 COMBINED_BILL_GASFP = 2
 
 FACTOR_COLUMNS = (
@@ -343,6 +345,25 @@ def build_territories(
     return territories
 
 
+def load_packaged_crosswalk(fuel: str, state: str) -> pd.DataFrame:
+    """The packaged crosswalk of territory names to EIA identifiers for one fuel and state.
+
+    Reads `data/utilities/<state>_<fuel>_crosswalk.csv`, for example
+    `co_electric_crosswalk.csv`, with columns `territory_name` and `eia_id`. Raises when
+    no crosswalk is packaged for the state. See that folder's README for how the
+    identifiers were chosen.
+    """
+    if fuel not in ("electric", "gas"):
+        raise ValueError(f"fuel must be 'electric' or 'gas', got {fuel!r}")
+    resource = PACKAGED_CROSSWALK_DIR.joinpath(f"{state.strip().lower()}_{fuel}_crosswalk.csv")
+    if not resource.is_file():
+        raise ValueError(
+            f"no packaged {fuel} crosswalk for state {state!r}; pass a crosswalk file instead"
+        )
+    with resource.open("r", encoding="utf-8") as fh:
+        return pd.read_csv(fh)
+
+
 def territories_from_config(
     cfg,
     *,
@@ -355,7 +376,8 @@ def territories_from_config(
     household counts from the ACS cache or Census API, unless either is passed in. The
     EIA year is `calibration.territories.eia_year`, defaulting to `vintages.pums_year`,
     and `data_sources.eia861_csv` or `eia176_csv` replaces the packaged table when set.
-    A fuel without territories in the block returns an empty list.
+    A fuel without a crosswalk file uses the packaged crosswalk for
+    `geography.state_abbr`, and a fuel without territories returns an empty list.
     """
     import geopandas as gpd
 
@@ -387,7 +409,7 @@ def territories_from_config(
     if settings.electric_territories is not None:
         electric = build_territories(
             gpd.read_file(settings.electric_territories),
-            pd.read_csv(settings.electric_crosswalk),
+            _crosswalk(settings.electric_crosswalk, "electric", cfg.geography.state_abbr),
             fuel="electric",
             eia_csv=cfg.data_sources.eia861_csv,
             **common,
@@ -396,13 +418,17 @@ def territories_from_config(
     if settings.gas_territories is not None:
         gas = build_territories(
             gpd.read_file(settings.gas_territories),
-            pd.read_csv(settings.gas_crosswalk),
+            _crosswalk(settings.gas_crosswalk, "gas", cfg.geography.state_abbr),
             fuel="gas",
             eia_csv=cfg.data_sources.eia176_csv,
             **common,
         )
     logger.info("calibration territories: {} electric, {} gas", len(electric), len(gas))
     return electric, gas
+
+
+def _crosswalk(path, fuel: str, state: str) -> pd.DataFrame:
+    return pd.read_csv(path) if path is not None else load_packaged_crosswalk(fuel, state)
 
 
 def _log_factors(table: pd.DataFrame) -> None:

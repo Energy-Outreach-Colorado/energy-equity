@@ -25,9 +25,7 @@ data_sources:
 calibration:
   territories:
     electric_territories: /data/eoc/geospatial/utilities/utility_electric.shp
-    electric_crosswalk: examples/colorado_calibrated_2024/electric_crosswalk.csv
     gas_territories: /data/eoc/geospatial/utilities/atmos_gas.shp
-    gas_crosswalk: examples/colorado_calibrated_2024/gas_crosswalk.csv
 
 weights:
   compute_moe: true

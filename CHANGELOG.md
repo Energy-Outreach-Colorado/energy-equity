@@ -30,7 +30,12 @@ All notable changes to this project will be documented here. Format follows
 - The `calibration.territories` config block turns on per-utility calibration from the CLI
   and `prepare_household_microdata`, and runs write `calibration_territories.csv` and
   `calibration_puma_factors.csv`. `examples/colorado_calibrated_2024/` configures it for
-  Colorado with the utility crosswalks.
+  Colorado.
+- Packaged utility crosswalks in `data/utilities/` (Colorado electric and gas) map
+  territory polygon names to EIA identifiers, read with `load_packaged_crosswalk`. The
+  territories config block uses them when it names no crosswalk file, and the energy burden
+  map reads them too, so every product pinned to a library commit calibrates against the
+  same utilities.
 - `load_pums_households` loads `GASFP` when the housing file has it.
 - `load_eia861_average_bill` and `load_eia176_average_bill` return the EIA `ownership` class.
 

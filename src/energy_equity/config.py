@@ -257,7 +257,8 @@ class TerritoryCalibrationConfig(_StrictModel):
         default=None,
         description=(
             "CSV with territory_name and eia_id columns mapping electric territory names "
-            "to EIA-861 utility numbers."
+            "to EIA-861 utility numbers. Null uses the packaged crosswalk for "
+            "geography.state_abbr."
         ),
     )
     gas_territories: Path | None = Field(
@@ -267,7 +268,8 @@ class TerritoryCalibrationConfig(_StrictModel):
         default=None,
         description=(
             "CSV with territory_name and eia_id columns mapping gas territory names to "
-            "EIA-176 company identifiers."
+            "EIA-176 company identifiers. Null uses the packaged crosswalk for "
+            "geography.state_abbr."
         ),
     )
     name_column: str = Field(
@@ -292,15 +294,12 @@ class TerritoryCalibrationConfig(_StrictModel):
         for fuel in ("electric", "gas"):
             has_polygons = getattr(self, f"{fuel}_territories") is not None
             has_crosswalk = getattr(self, f"{fuel}_crosswalk") is not None
-            if has_polygons != has_crosswalk:
+            if has_crosswalk and not has_polygons:
                 raise ValueError(
-                    f"calibration.territories needs both {fuel}_territories and "
-                    f"{fuel}_crosswalk, or neither"
+                    f"calibration.territories has {fuel}_crosswalk without {fuel}_territories"
                 )
         if self.electric_territories is None and self.gas_territories is None:
-            raise ValueError(
-                "calibration.territories needs electric or gas territories and crosswalks"
-            )
+            raise ValueError("calibration.territories needs electric or gas territories")
         return self
 
 

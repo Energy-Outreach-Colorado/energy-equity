@@ -163,14 +163,17 @@ The simplest way in is the `calibration.territories` config block, which the CLI
 calibration:
   territories:
     electric_territories: /data/eoc/geospatial/utilities/utility_electric.shp
-    electric_crosswalk: examples/colorado_calibrated_2024/electric_crosswalk.csv
     gas_territories: /data/eoc/geospatial/utilities/atmos_gas.shp
-    gas_crosswalk: examples/colorado_calibrated_2024/gas_crosswalk.csv
 ```
 
-Each crosswalk is a CSV with `territory_name` and `eia_id` columns, mapping the polygon
-names in `name_column` (`Name` by default) to EIA-861 utility numbers or EIA-176
-company identifiers. Either fuel may be left out. `eia_year` defaults to
+A crosswalk maps the polygon names in `name_column` (`Name` by default) to EIA-861
+utility numbers or EIA-176 company identifiers. The library packages one per fuel and
+state in `src/energy_equity/data/utilities/` (Colorado so far), and a fuel without
+`electric_crosswalk` or `gas_crosswalk` uses the packaged one for
+`geography.state_abbr`. The energy burden map reads the same packaged files, so the
+map and a config run agree on the utilities whenever they use the same library commit.
+Set a crosswalk path, a CSV with `territory_name` and `eia_id` columns, only for other
+polygon files. Either fuel may be left out. `eia_year` defaults to
 `vintages.pums_year` and `min_overlap` to 0.35, and `data_sources.eia861_csv` and
 `eia176_csv` replace the packaged tables when set. The block cannot be combined with
 the `electric` and `gas` blocks. A run writes `calibration_territories.csv`, one row per
@@ -181,8 +184,9 @@ applied, and `calibration_puma_factors.csv`, the blended factor in each PUMA.
 From Python, pass territories to `prepare_household_microdata(cfg,
 electric_territories=..., gas_territories=...)` instead. The result's
 `territory_calibration` holds the per-utility tables and the factor applied in each
-PUMA. `build_territories` builds territories from a polygon layer and a crosswalk, and
-`territories_from_config` does the same from a config block.
+PUMA. `build_territories` builds territories from a polygon layer and a crosswalk,
+`load_packaged_crosswalk` reads a packaged crosswalk, and `territories_from_config` does
+the whole job from a config block.
 
 On the 2024 Colorado file this moved the statewide share of households above 6% burden
 from 13.8% to 9.3% and above 10% from 7.7% to 5.1% (checked 2026-09-27). Xcel's own

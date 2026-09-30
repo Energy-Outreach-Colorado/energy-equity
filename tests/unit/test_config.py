@@ -270,8 +270,15 @@ def test_territory_calibration_one_fuel_ok() -> None:
 @pytest.mark.parametrize(
     ("territories", "message"),
     [
-        ({"electric_territories": "./e.shp"}, "both electric_territories"),
-        ({"gas_crosswalk": "./g.csv"}, "both gas_territories"),
+        ({"gas_crosswalk": "./g.csv"}, "gas_crosswalk without gas_territories"),
+        (
+            {
+                "electric_territories": "./e.shp",
+                "electric_crosswalk": "./e.csv",
+                "gas_crosswalk": "./g.csv",
+            },
+            "gas_crosswalk without",
+        ),
         ({"min_overlap": 0.5}, "needs electric or gas"),
     ],
 )
@@ -290,3 +297,11 @@ def test_territory_calibration_excludes_single_territory_blocks() -> None:
     }
     with pytest.raises(ValueError, match="cannot be combined"):
         Config.from_mapping(payload)
+
+
+def test_territory_calibration_crosswalks_optional() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"territories": {"electric_territories": "./e.shp"}}
+    settings = Config.from_mapping(payload).calibration.territories
+    assert settings.electric_crosswalk is None
+    assert settings.gas_territories is None

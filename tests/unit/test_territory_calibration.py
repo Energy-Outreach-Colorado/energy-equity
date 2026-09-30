@@ -268,7 +268,7 @@ def test_build_territories_from_polygons(tmp_path: Path) -> None:
         )
 
 
-def test_territories_from_config(tmp_path: Path) -> None:
+def test_territories_from_config(tmp_path: Path, monkeypatch) -> None:
     import geopandas as gpd
     from shapely.geometry import box
 
@@ -332,6 +332,23 @@ def test_territories_from_config(tmp_path: Path) -> None:
     )
 
     electric, gas = territories_from_config(cfg, tract_households=make_tract_households())
+
+    import energy_equity.territory_calibration as module
+
+    requested = []
+
+    def packaged(fuel: str, state: str) -> pd.DataFrame:
+        requested.append((fuel, state))
+        return pd.read_csv(crosswalk_path)
+
+    monkeypatch.setattr(module, "load_packaged_crosswalk", packaged)
+    packaged_cfg = cfg.model_copy(deep=True)
+    packaged_cfg.calibration.territories.electric_crosswalk = None
+    from_package, _ = territories_from_config(
+        packaged_cfg, tract_households=make_tract_households()
+    )
+    assert requested == [("electric", "CO")]
+    assert from_package[0].utility_id == 15466
 
     assert gas == []
     assert len(electric) == 1
