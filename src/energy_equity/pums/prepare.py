@@ -10,6 +10,7 @@ DataFrame travels through 20 builder calls.
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -19,6 +20,13 @@ from loguru import logger
 
 from ..config import Config
 from ..io.pums import replicate_cols
+from ..territory_calibration import (
+    DEFAULT_MIN_OVERLAP,
+    Territory,
+    TerritoryCalibrationResult,
+    apply_territory_calibration,
+    territories_from_config,
+)
 from .energy_cost import (
     apply_energy_cost_adjustment,
     apply_income_adjustment,
@@ -40,6 +48,7 @@ class HouseholdMicrodata:
     puma_lookup: pd.DataFrame | None = None
     electric_calibration: dict | None = None
     gas_calibration: dict | None = None
+    territory_calibration: TerritoryCalibrationResult | None = None
 
     def __len__(self) -> int:
         return len(self.df)
@@ -190,12 +199,34 @@ def prepare_household_microdata(
     smi_table: pd.DataFrame | None = None,
     puma_lookup: pd.DataFrame | None = None,
     service_shares: pd.DataFrame | None = None,
+    electric_territories: Sequence[Territory] | None = None,
+    gas_territories: Sequence[Territory] | None = None,
+    territory_min_overlap: float = DEFAULT_MIN_OVERLAP,
 ) -> HouseholdMicrodata:
     """End-to-end household preparation: load, label, compute burden, attach AMI/SMI.
 
     Most arguments are optional and read from disk based on `cfg` when not provided. Tests
     and notebooks pre-load DataFrames and pass them through to avoid disk I/O.
+
+    `electric_territories` and `gas_territories` switch on multi-territory calibration
+    (`territory_calibration.apply_territory_calibration`), which rescales costs with a
+    blended factor per PUMA before burden is computed and records the factors on the
+    result. It cannot be combined with the single-territory `cfg.calibration` blocks.
+    When neither is passed and the config has a `calibration.territories` block, the
+    territories are built from it with `territory_calibration.territories_from_config`.
     """
+    use_territories = bool(electric_territories) or bool(gas_territories)
+    if use_territories and (
+        cfg.calibration.electric is not None or cfg.calibration.gas is not None
+    ):
+        raise ValueError(
+            "territory calibration and cfg.calibration are mutually exclusive; "
+            "remove the calibration blocks from the config"
+        )
+    if not use_territories and cfg.calibration.territories is not None:
+        electric_territories, gas_territories = territories_from_config(cfg)
+        territory_min_overlap = cfg.calibration.territories.min_overlap
+        use_territories = bool(electric_territories) or bool(gas_territories)
     # Late imports to avoid circular dependency between thresholds.ami and pums.prepare.
     from ..thresholds.ami import attach_ami_blended_threshold
     from ..thresholds.smi import attach_smi_statewide_threshold
@@ -230,6 +261,14 @@ def prepare_household_microdata(
     apply_energy_cost_adjustment(df, missing_cost_rule=cfg.thresholds.missing_cost_rule)
     electric_calibration = _run_electric_calibration(cfg, df, service_shares)
     gas_calibration = _run_gas_calibration(cfg, df, service_shares)
+    territory_calibration = None
+    if use_territories:
+        territory_calibration = apply_territory_calibration(
+            df,
+            electric=electric_territories or (),
+            gas=gas_territories or (),
+            min_overlap=territory_min_overlap,
+        )
     compute_energy_burden_pums(
         df,
         threshold=cfg.thresholds.energy_burden_threshold,
@@ -294,6 +333,7 @@ def prepare_household_microdata(
         puma_lookup=puma_lookup,
         electric_calibration=electric_calibration,
         gas_calibration=gas_calibration,
+        territory_calibration=territory_calibration,
     )
 
 

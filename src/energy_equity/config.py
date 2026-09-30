@@ -245,6 +245,64 @@ class GasCalibrationConfig(_StrictModel):
     )
 
 
+class TerritoryCalibrationConfig(_StrictModel):
+    electric_territories: Path | None = Field(
+        default=None,
+        description=(
+            "Polygon file of electric utility service territories, one or more features "
+            "per utility named by name_column."
+        ),
+    )
+    electric_crosswalk: Path | None = Field(
+        default=None,
+        description=(
+            "CSV with territory_name and eia_id columns mapping electric territory names "
+            "to EIA-861 utility numbers. Null uses the packaged crosswalk for "
+            "geography.state_abbr."
+        ),
+    )
+    gas_territories: Path | None = Field(
+        default=None, description="Polygon file of gas utility service territories."
+    )
+    gas_crosswalk: Path | None = Field(
+        default=None,
+        description=(
+            "CSV with territory_name and eia_id columns mapping gas territory names to "
+            "EIA-176 company identifiers. Null uses the packaged crosswalk for "
+            "geography.state_abbr."
+        ),
+    )
+    name_column: str = Field(
+        default="Name", description="Column of the territory files that names the utility."
+    )
+    eia_year: int | None = Field(
+        default=None,
+        description="EIA data year for the targets. Null defaults to vintages.pums_year.",
+    )
+    min_overlap: float = Field(
+        default=0.35,
+        ge=0.0,
+        le=1.0,
+        description=(
+            "Territories whose PUMA overlap is below this take the pooled factor of their "
+            "EIA ownership class instead of their own."
+        ),
+    )
+
+    @model_validator(mode="after")
+    def _check_pairs(self) -> TerritoryCalibrationConfig:
+        for fuel in ("electric", "gas"):
+            has_polygons = getattr(self, f"{fuel}_territories") is not None
+            has_crosswalk = getattr(self, f"{fuel}_crosswalk") is not None
+            if has_crosswalk and not has_polygons:
+                raise ValueError(
+                    f"calibration.territories has {fuel}_crosswalk without {fuel}_territories"
+                )
+        if self.electric_territories is None and self.gas_territories is None:
+            raise ValueError("calibration.territories needs electric or gas territories")
+        return self
+
+
 class CalibrationConfig(_StrictModel):
     electric: ElectricCalibrationConfig | None = Field(
         default=None,
@@ -258,6 +316,14 @@ class CalibrationConfig(_StrictModel):
         description=(
             "EIA-176 natural gas bill normalization. Omit the block to disable entirely; "
             "see docs/bill_normalization.md."
+        ),
+    )
+    territories: TerritoryCalibrationConfig | None = Field(
+        default=None,
+        description=(
+            "Calibrate against every utility territory at once with "
+            "territory_calibration, applying a blended factor per PUMA. Cannot be "
+            "combined with the electric or gas blocks; see docs/bill_normalization.md."
         ),
     )
 
@@ -435,6 +501,11 @@ class Config(_StrictModel):
             raise ValueError(
                 "calibration.gas requires target_annual_bill, or company_id/"
                 "company_name to look up the EIA-176 average bill"
+            )
+        if self.calibration.territories is not None and (electric is not None or gas is not None):
+            raise ValueError(
+                "calibration.territories cannot be combined with calibration.electric or "
+                "calibration.gas"
             )
         return self
 

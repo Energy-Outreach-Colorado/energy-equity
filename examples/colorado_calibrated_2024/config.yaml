@@ -1,0 +1,32 @@
+project:
+  name: colorado_calibrated_2024
+  output_dir: ./out/colorado_calibrated_2024
+  cache_dir: null
+
+geography:
+  state_fips: "08"
+  state_abbr: CO
+  service_area:
+    shapefile: /data/eoc/geospatial/xcel/XcelColoradoServiceArea_Poly_ExportFeatures2026_5082203440863968596/XcelColoradoServiceArea_Poly_ExportFeatures.shp
+
+vintages:
+  acs_year: 2024
+  pums_year: 2024
+  hud_ami_fy: 2025
+  tiger_year: 2024
+
+data_sources:
+  hud_ami_csv: examples/co-income-limits-80-ami-2025.csv
+  pums_housing_zip: /data/eoc/census/pums/pums_2024_1yr/csv_hco.zip
+  pums_person_zip: /data/eoc/census/pums/pums_2024_1yr/csv_pco.zip
+  tiger_puma_zip: /data/eoc/census/pums/pums_2024_1yr/tl_2024_08_puma20.zip
+  tiger_tract_zip: /data/eoc/census/pums/pums_2024_1yr/tl_2024_08_tract.zip
+
+calibration:
+  territories:
+    electric_territories: /data/eoc/geospatial/utilities/utility_electric.shp
+    gas_territories: /data/eoc/geospatial/utilities/atmos_gas.shp
+
+weights:
+  compute_moe: true
+  replicate_count: 80

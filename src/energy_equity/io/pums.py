@@ -48,6 +48,13 @@ def read_pums_csv_from_zip(
         )
 
 
+def read_pums_csv_header(zip_path: str | Path) -> list[str]:
+    """Column names of the single CSV inside a PUMS ZIP, read without loading any rows."""
+    member = find_single_csv_in_zip(zip_path)
+    with zipfile.ZipFile(zip_path) as zf, zf.open(member) as fh:
+        return list(pd.read_csv(fh, nrows=0).columns)
+
+
 def coerce_numeric(df: pd.DataFrame, cols: Iterable[str]) -> pd.DataFrame:
     """Coerce the given columns to numeric in place, turning unparseable values into NaN.
 
