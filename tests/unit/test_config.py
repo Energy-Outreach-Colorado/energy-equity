@@ -234,3 +234,59 @@ def test_both_fuel_blocks_accepted() -> None:
     cfg = Config.from_mapping(payload)
     assert cfg.calibration.electric is not None
     assert cfg.calibration.gas is not None
+
+
+TERRITORIES = {
+    "electric_territories": "./utility_electric.shp",
+    "electric_crosswalk": "./electric_crosswalk.csv",
+    "gas_territories": "./gas.shp",
+    "gas_crosswalk": "./gas_crosswalk.csv",
+}
+
+
+def test_territory_calibration_block_loads() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"territories": dict(TERRITORIES)}
+    cfg = Config.from_mapping(payload)
+    settings = cfg.calibration.territories
+    assert settings is not None
+    assert settings.electric_crosswalk == Path("./electric_crosswalk.csv")
+    assert settings.min_overlap == pytest.approx(0.35)
+    assert settings.eia_year is None
+    assert settings.name_column == "Name"
+
+
+def test_territory_calibration_one_fuel_ok() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {
+        "territories": {
+            "gas_territories": TERRITORIES["gas_territories"],
+            "gas_crosswalk": TERRITORIES["gas_crosswalk"],
+        }
+    }
+    assert Config.from_mapping(payload).calibration.territories.electric_territories is None
+
+
+@pytest.mark.parametrize(
+    ("territories", "message"),
+    [
+        ({"electric_territories": "./e.shp"}, "both electric_territories"),
+        ({"gas_crosswalk": "./g.csv"}, "both gas_territories"),
+        ({"min_overlap": 0.5}, "needs electric or gas"),
+    ],
+)
+def test_territory_calibration_rejects_incomplete_blocks(territories: dict, message: str) -> None:
+    payload = _base_payload()
+    payload["calibration"] = {"territories": territories}
+    with pytest.raises(ValueError, match=message):
+        Config.from_mapping(payload)
+
+
+def test_territory_calibration_excludes_single_territory_blocks() -> None:
+    payload = _base_payload()
+    payload["calibration"] = {
+        "territories": dict(TERRITORIES),
+        "electric": {"target_annual_bill": 1000.0},
+    }
+    with pytest.raises(ValueError, match="cannot be combined"):
+        Config.from_mapping(payload)

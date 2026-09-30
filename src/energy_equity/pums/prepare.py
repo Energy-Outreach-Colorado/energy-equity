@@ -25,6 +25,7 @@ from ..territory_calibration import (
     Territory,
     TerritoryCalibrationResult,
     apply_territory_calibration,
+    territories_from_config,
 )
 from .energy_cost import (
     apply_energy_cost_adjustment,
@@ -211,6 +212,8 @@ def prepare_household_microdata(
     (`territory_calibration.apply_territory_calibration`), which rescales costs with a
     blended factor per PUMA before burden is computed and records the factors on the
     result. It cannot be combined with the single-territory `cfg.calibration` blocks.
+    When neither is passed and the config has a `calibration.territories` block, the
+    territories are built from it with `territory_calibration.territories_from_config`.
     """
     use_territories = bool(electric_territories) or bool(gas_territories)
     if use_territories and (
@@ -220,6 +223,10 @@ def prepare_household_microdata(
             "territory calibration and cfg.calibration are mutually exclusive; "
             "remove the calibration blocks from the config"
         )
+    if not use_territories and cfg.calibration.territories is not None:
+        electric_territories, gas_territories = territories_from_config(cfg)
+        territory_min_overlap = cfg.calibration.territories.min_overlap
+        use_territories = bool(electric_territories) or bool(gas_territories)
     # Late imports to avoid circular dependency between thresholds.ami and pums.prepare.
     from ..thresholds.ami import attach_ami_blended_threshold
     from ..thresholds.smi import attach_smi_statewide_threshold

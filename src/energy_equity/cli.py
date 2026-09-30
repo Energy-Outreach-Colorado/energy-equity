@@ -74,6 +74,10 @@ def _load_cfg(path: Path) -> Config:
 def _prepare_microdata(cfg: Config):
     """Prepare household microdata, running bill calibration when configured.
 
+    A `calibration.territories` block writes `calibration_territories.csv` (one row per
+    fuel and utility) and `calibration_puma_factors.csv` (the factor applied per PUMA)
+    to the output directory.
+
     Calibration needs the service-area PUMA shares before burden is computed, so the
     geography-only share builder runs first; the shares are returned for reuse by
     `service_allocation.run` to avoid recomputing them. Returns (microdata, shares).
@@ -97,6 +101,18 @@ def _prepare_microdata(cfg: Config):
             out_path = ensure_dir(cfg.project.output_dir) / f"calibration_{fuel}.csv"
             pd.DataFrame([diagnostic]).to_csv(out_path, index=False)
             logger.info("wrote {}", out_path.resolve())
+    territory = md.territory_calibration
+    if territory is not None:
+        out_dir = ensure_dir(cfg.project.output_dir)
+        tables = [
+            t for t in (territory.electric, territory.gas, territory.combined) if t is not None
+        ]
+        for name, frame in (
+            ("calibration_territories.csv", pd.concat(tables, ignore_index=True)),
+            ("calibration_puma_factors.csv", territory.puma_factors),
+        ):
+            frame.to_csv(out_dir / name, index=False)
+            logger.info("wrote {}", (out_dir / name).resolve())
     return md, shares
 
 

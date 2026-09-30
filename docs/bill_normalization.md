@@ -156,12 +156,33 @@ handles that case.
    They are left out of the electric average and calibrated against the combined target,
    the utility's electric average plus the blended gas average over its territory.
 
-Pass territories to `prepare_household_microdata(cfg, electric_territories=...,
-gas_territories=...)`, which cannot be combined with the `calibration` config blocks. The
-result's `territory_calibration` holds the per-utility tables and the factor applied in
-each PUMA. `build_territories` builds territories from a polygon layer and a crosswalk
-of polygon names to EIA identifiers, reading targets and ownership classes from the
-packaged tables.
+The simplest way in is the `calibration.territories` config block, which the CLI and
+`prepare_household_microdata` pick up on their own.
+
+```yaml
+calibration:
+  territories:
+    electric_territories: /data/eoc/geospatial/utilities/utility_electric.shp
+    electric_crosswalk: examples/colorado_calibrated_2024/electric_crosswalk.csv
+    gas_territories: /data/eoc/geospatial/utilities/atmos_gas.shp
+    gas_crosswalk: examples/colorado_calibrated_2024/gas_crosswalk.csv
+```
+
+Each crosswalk is a CSV with `territory_name` and `eia_id` columns, mapping the polygon
+names in `name_column` (`Name` by default) to EIA-861 utility numbers or EIA-176
+company identifiers. Either fuel may be left out. `eia_year` defaults to
+`vintages.pums_year` and `min_overlap` to 0.35, and `data_sources.eia861_csv` and
+`eia176_csv` replace the packaged tables when set. The block cannot be combined with
+the `electric` and `gas` blocks. A run writes `calibration_territories.csv`, one row per
+fuel and utility with its observed and target bills, own factor, overlap and the factor
+applied, and `calibration_puma_factors.csv`, the blended factor in each PUMA.
+`examples/colorado_calibrated_2024/` is the complete Colorado configuration.
+
+From Python, pass territories to `prepare_household_microdata(cfg,
+electric_territories=..., gas_territories=...)` instead. The result's
+`territory_calibration` holds the per-utility tables and the factor applied in each
+PUMA. `build_territories` builds territories from a polygon layer and a crosswalk, and
+`territories_from_config` does the same from a config block.
 
 On the 2024 Colorado file this moved the statewide share of households above 6% burden
 from 13.8% to 9.3% and above 10% from 7.7% to 5.1% (checked 2026-09-27). Xcel's own

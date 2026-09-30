@@ -27,6 +27,10 @@ All notable changes to this project will be documented here. Format follows
   against the combined electric plus gas target. `prepare_household_microdata` takes
   `electric_territories` and `gas_territories`, and `build_territories` turns territory
   polygons and a name-to-EIA crosswalk into territories. See `docs/bill_normalization.md`.
+- The `calibration.territories` config block turns on per-utility calibration from the CLI
+  and `prepare_household_microdata`, and runs write `calibration_territories.csv` and
+  `calibration_puma_factors.csv`. `examples/colorado_calibrated_2024/` configures it for
+  Colorado with the utility crosswalks.
 - `load_pums_households` loads `GASFP` when the housing file has it.
 - `load_eia861_average_bill` and `load_eia176_average_bill` return the EIA `ownership` class.
 

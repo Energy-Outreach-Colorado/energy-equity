@@ -266,3 +266,76 @@ def test_build_territories_from_polygons(tmp_path: Path) -> None:
             year=2024,
             eia_csv=str(eia_csv),
         )
+
+
+def test_territories_from_config(tmp_path: Path) -> None:
+    import geopandas as gpd
+    from shapely.geometry import box
+
+    from energy_equity.config import Config
+    from energy_equity.territory_calibration import territories_from_config
+    from tests.fixtures.synthetic_geo import make_geo_fixtures, make_tract_households
+
+    geo = make_geo_fixtures(tmp_path)
+    polygons_path = tmp_path / "electric.gpkg"
+    gpd.GeoDataFrame(
+        {"Utility": ["Service area"]}, geometry=[box(1.5, 0, 2.5, 1)], crs="EPSG:5070"
+    ).to_file(polygons_path, driver="GPKG")
+    crosswalk_path = tmp_path / "electric_crosswalk.csv"
+    pd.DataFrame({"territory_name": ["Service area"], "eia_id": [15466]}).to_csv(
+        crosswalk_path, index=False
+    )
+    eia_csv = tmp_path / "eia861.csv"
+    pd.DataFrame(
+        [
+            {
+                "utility_number": 15466,
+                "utility_name": "Public Service Co of Colorado",
+                "state": "CO",
+                "customer_class": "residential",
+                "revenue_thousand_dollars": 1500.0,
+                "customers": 1000,
+                "ownership": "Investor Owned",
+                "year": 2023,
+            }
+        ]
+    ).to_csv(eia_csv, index=False)
+    cfg = Config.from_mapping(
+        {
+            "project": {"name": "t", "output_dir": str(tmp_path / "out")},
+            "geography": {
+                "state_fips": "08",
+                "state_abbr": "CO",
+                "service_area": {"shapefile": str(tmp_path / "x.shp")},
+            },
+            "vintages": {
+                "acs_year": 2024,
+                "pums_year": 2024,
+                "hud_ami_fy": 2025,
+                "tiger_year": 2024,
+            },
+            "data_sources": {
+                "hud_ami_csv": str(tmp_path / "hud.csv"),
+                "tiger_tract_zip": str(geo["tract_zip"]),
+                "tiger_puma_zip": str(geo["puma_zip"]),
+                "eia861_csv": str(eia_csv),
+            },
+            "calibration": {
+                "territories": {
+                    "electric_territories": str(polygons_path),
+                    "electric_crosswalk": str(crosswalk_path),
+                    "name_column": "Utility",
+                    "eia_year": 2023,
+                }
+            },
+        }
+    )
+
+    electric, gas = territories_from_config(cfg, tract_households=make_tract_households())
+
+    assert gas == []
+    assert len(electric) == 1
+    assert electric[0].target_annual_bill == pytest.approx(1500.0)
+    shares = electric[0].shares.set_index("PUMA")["share_households_in_service"]
+    assert shares["00800"] == pytest.approx(0.25)
+    assert shares["00900"] == pytest.approx(0.25)

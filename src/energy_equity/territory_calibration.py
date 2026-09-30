@@ -343,6 +343,68 @@ def build_territories(
     return territories
 
 
+def territories_from_config(
+    cfg,
+    *,
+    tracts_with_puma=None,
+    tract_households: pd.DataFrame | None = None,
+) -> tuple[list[Territory], list[Territory]]:
+    """Electric and gas territories from a config's `calibration.territories` block.
+
+    Tracts come from `data_sources.tiger_tract_zip` and `tiger_puma_zip`, and tract
+    household counts from the ACS cache or Census API, unless either is passed in. The
+    EIA year is `calibration.territories.eia_year`, defaulting to `vintages.pums_year`,
+    and `data_sources.eia861_csv` or `eia176_csv` replaces the packaged table when set.
+    A fuel without territories in the block returns an empty list.
+    """
+    import geopandas as gpd
+
+    settings = cfg.calibration.territories
+    if settings is None:
+        raise ValueError("config has no calibration.territories block")
+    if tracts_with_puma is None:
+        from .geo.allocation import assign_puma_to_tracts
+        from .io.geo import read_tiger_zip
+
+        tracts_with_puma = assign_puma_to_tracts(
+            read_tiger_zip(cfg.data_sources.tiger_tract_zip),
+            read_tiger_zip(cfg.data_sources.tiger_puma_zip),
+        )
+    if tract_households is None:
+        from .census.api import resolve_tract_households
+        from .paths import resolve_cache_dir
+
+        tract_households = resolve_tract_households(cfg, resolve_cache_dir(cfg.project.cache_dir))
+    year = settings.eia_year if settings.eia_year is not None else cfg.vintages.pums_year
+    common = {
+        "tracts_with_puma": tracts_with_puma,
+        "tract_households": tract_households,
+        "state": cfg.geography.state_abbr,
+        "year": year,
+        "name_col": settings.name_column,
+    }
+    electric: list[Territory] = []
+    if settings.electric_territories is not None:
+        electric = build_territories(
+            gpd.read_file(settings.electric_territories),
+            pd.read_csv(settings.electric_crosswalk),
+            fuel="electric",
+            eia_csv=cfg.data_sources.eia861_csv,
+            **common,
+        )
+    gas: list[Territory] = []
+    if settings.gas_territories is not None:
+        gas = build_territories(
+            gpd.read_file(settings.gas_territories),
+            pd.read_csv(settings.gas_crosswalk),
+            fuel="gas",
+            eia_csv=cfg.data_sources.eia176_csv,
+            **common,
+        )
+    logger.info("calibration territories: {} electric, {} gas", len(electric), len(gas))
+    return electric, gas
+
+
 def _log_factors(table: pd.DataFrame) -> None:
     for row in table.itertuples(index=False):
         logger.info(
