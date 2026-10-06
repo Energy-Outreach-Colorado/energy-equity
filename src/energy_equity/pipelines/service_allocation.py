@@ -33,6 +33,7 @@ from ..geo.allocation import (
     compute_household_weighted_puma_shares,
     dissolve_service_area,
 )
+from ..io.census_inputs import resolve_tiger_zip
 from ..io.download import ensure_urban_areas_zip
 from ..io.geo import read_tiger_zip
 from ..paths import ensure_dir, resolve_cache_dir
@@ -108,15 +109,8 @@ def build_service_puma_shares(
     if tract_households is None:
         tract_households = resolve_tract_households(cfg, cache_dir)
 
-    tract_zip = cfg.data_sources.tiger_tract_zip
-    puma_zip = cfg.data_sources.tiger_puma_zip
-    if tract_zip is None or not Path(tract_zip).exists():
-        raise FileNotFoundError(f"TIGER tract ZIP required: {tract_zip}")
-    if puma_zip is None or not Path(puma_zip).exists():
-        raise FileNotFoundError(f"TIGER PUMA ZIP required: {puma_zip}")
-
-    tracts = read_tiger_zip(tract_zip)
-    pumas = read_tiger_zip(puma_zip)
+    tracts = read_tiger_zip(resolve_tiger_zip(cfg, "tract"))
+    pumas = read_tiger_zip(resolve_tiger_zip(cfg, "puma"))
     tracts_with_puma = assign_puma_to_tracts(tracts, pumas)
 
     service_union = dissolve_service_area(cfg.geography.service_area.shapefile)

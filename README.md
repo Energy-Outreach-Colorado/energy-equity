@@ -77,9 +77,15 @@ development and CI.
 
 ```sh
 uv run ee config init --state CO --state-fips 08 --output config.yaml
-$EDITOR config.yaml                       # set paths to your service shapefile, PUMS, AMI
+$EDITOR config.yaml                       # set your service-area shapefile and HUD AMI CSV
+uv run ee data fetch --config config.yaml # download the Census inputs into the cache
 uv run ee run all --config config.yaml
 ```
+
+The PUMS and TIGER paths in the starter config are null, so the package downloads the
+files for your state and vintages from www2.census.gov into its cache. `ee data fetch` does
+that up front and reports each input. A run with null paths fetches anything missing on
+its own.
 
 (Without uv, replace `uv run ee` with `ee` after activating your venv.)
 
@@ -89,8 +95,8 @@ output table/figure means is documented in full under [Documentation](#documenta
 
 ## Documentation
 
-- **[docs/cli.md](docs/cli.md)** — every CLI command and option (`ee run …`, `ee cache …`,
-  `ee config …`), the global verbosity flags, and pipeline prerequisites.
+- **[docs/cli.md](docs/cli.md)** — every CLI command and option (`ee run …`, `ee data …`,
+  `ee cache …`, `ee config …`), the global verbosity flags, and pipeline prerequisites.
 - **[docs/outputs.md](docs/outputs.md)** — a column-naming key plus a description of every
   output table and figure the analysis produces.
 - **[docs/analysis.md](docs/analysis.md)** — the analysis methodology: what each metric
@@ -154,8 +160,6 @@ from energy_equity.pipelines import puma_table
 ## Data you need to provide
 
 - A service-territory polygon (`.shp`, `.geojson`, or `.gpkg`)
-- ACS PUMS housing + person ZIPs for your state (Census)
-- TIGER PUMA + tract shapefile ZIPs for your state (Census)
 - A county-level HUD 80% AMI limits CSV for the FY you want - Colorado's HUD 80% AMI limits is already included in the repository
 - A free Census API key in the `CENSUS_API_KEY` environment variable
 
@@ -165,14 +169,19 @@ Set `CENSUS_API_KEY` in your shell, or copy `.env.example` to `.env` and fill it
 `ee` CLI auto-loads a `.env` from the current directory (searching upward) at startup.
 Real shell variables take precedence over `.env`. `.env` is gitignored; never commit a key.
 
+The ACS PUMS housing and person ZIPs and the TIGER PUMA and tract shapefile ZIPs are
+downloaded automatically when their `data_sources` paths are null. Set a path only to
+use a file you already have.
+
 **Data Sources**
-- 2024 PUMS 1-year data - https://www2.census.gov/programs-surveys/acs/data/pums/2024/1-Year/
+- PUMS microdata (downloaded automatically) - https://www2.census.gov/programs-surveys/acs/data/pums/
 - Obtain Census API key - https://api.census.gov/data/key_signup.html
-- TIGER PUMA + trac shapefile - https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
+- TIGER/Line shapefiles (downloaded automatically) - https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 - Colorado 80% AMI Income Limits (CHFA) - https://www.chfainfo.com/rental-housing/asset-management/rent-income-limits
 - An example CSV file for Colorado 80% AMI thresholds (2025) is provided in examples/
 
-The CLI prints concrete download URLs and Census API endpoints if a required file is missing.
+When a file cannot be downloaded, for example a year Census has not released yet, the
+error lists the URLs tried and why the file may be missing.
 
 ## License
 

@@ -50,24 +50,56 @@ prerequisites already exist in `output_dir`.
 | `ee run trends -c …` | Compares completed per-year runs (`pipelines.trends.runs`) into trend tables and figures with 90% MOE bands. | each listed run's `affordability_gap.csv`, `<service>_totals.csv`, `<service>_rates.csv` | `trends_affordability_gap`, `trends_energy_burden`, `trends_deltas`, `figures/trend_*.png` |
 | `ee run all -c …` | Runs the five core pipelines in dependency order (`trends` is separate; it needs completed runs first). | all of the above | all of the above |
 
+## `ee data` — download Census inputs
+
+| Command | Purpose |
+|---|---|
+| `ee data fetch -c …` | Download every Census input the config needs into the cache and print one line per input with its status, size and path. Exits 1 when any input failed. |
+
+| Option | Meaning |
+|---|---|
+| `--config`, `-c` | Path to the YAML config (required). |
+| `--dry-run` | List each file's destination and source URLs without downloading. |
+| `--force` | Download the files again even when cached. Census API responses stay cached. |
+| `--skip-api` | Skip the Census API calls (county list, tract households, B19001 incomes). |
+
+It fetches the PUMS housing and person ZIPs and the TIGER tract and PUMA ZIPs (unless
+`data_sources` points at local files), the national TIGER urban-area ZIP when the
+urban/rural split is on, the 2020 tract→PUMA relationship file, and the ACS tables a run
+requests from the Census API, which need `CENSUS_API_KEY`. Each status is `configured`
+(a local file from the config), `cached`, `downloaded`, `planned` (dry run), `skipped` or
+`failed`. Pipelines download anything missing on first use as well, so the command is
+optional, but it makes a later run work offline and shows every missing input at once.
+
+PUMA boundaries must use the same decennial definitions as the PUMS codes, so config
+validation rejects a `vintages.tiger_year` whose PUMA layer differs from the microdata's
+(PUMS 2022 and later, and 5-year files ending 2023 or later, use 2020 PUMAs). The
+2018-2022 5-year PUMS file is rejected because it has no single `PUMA` column.
+
+```sh
+uv run ee data fetch --config config.yaml --dry-run
+uv run ee data fetch --config config.yaml
+```
+
 ## `ee cache` — on-disk cache
 
-The cache holds downloaded Census responses, the tract→PUMA relationship file, TIGER
-urban-area shapefiles, and the built AMI bridge. Its location is resolved as: config
+The cache holds downloaded PUMS and TIGER files, Census API responses, the tract→PUMA
+relationship file, TIGER urban-area shapefiles, and the built AMI bridge. PUMS ZIPs sit
+under `pums/<year>_<span>yr/` and TIGER ZIPs under `tiger/<year>/`. Its location is resolved as: config
 `project.cache_dir` → `EE_CACHE_DIR` env var → platformdirs default
 (`~/.cache/energy-equity` on Linux).
 
 | Command | Purpose |
 |---|---|
-| `ee cache info` | Print the cache directory and its total size. |
-| `ee cache clear --what {census\|pums\|tiger\|all}` | Delete a cache subset (default `all`). Prompts for confirmation unless `--yes/-y` is given. |
+| `ee cache info [-c config.yaml]` | Print the cache directory and its total size. With `--config`, the cache that config uses. |
+| `ee cache clear --what {census\|pums\|tiger\|all} [-c config.yaml]` | Delete a cache subset (default `all`). Prompts for confirmation unless `--yes/-y` is given. |
 
 ## `ee config` — validate / scaffold
 
 | Command | Purpose |
 |---|---|
 | `ee config validate <path.yaml>` | Parse and validate a config; prints the project name and state on success, or the validation error. |
-| `ee config init …` | Write a starter `config.yaml` with placeholder paths to fill in. |
+| `ee config init …` | Write a starter `config.yaml`. The PUMS and TIGER paths are null so they download automatically; the service-area shapefile and HUD AMI CSV are placeholders to fill in. |
 
 ### `ee config init`
 
@@ -80,7 +112,8 @@ urban-area shapefiles, and the built AMI bridge. Its location is resolved as: co
 
 ```sh
 uv run ee config init --state CO --state-fips 08 --output config.yaml
-$EDITOR config.yaml          # fill in data paths + service-area shapefile
+$EDITOR config.yaml          # set the service-area shapefile and HUD AMI CSV
 uv run ee config validate config.yaml
+uv run ee data fetch --config config.yaml
 uv run ee run all --config config.yaml
 ```

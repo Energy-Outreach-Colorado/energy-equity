@@ -13,6 +13,7 @@ Examples:
     ee run fixed-charge         --config config.yaml
     ee run reporting            --config config.yaml
     ee run all                  --config config.yaml
+    ee data fetch               --config config.yaml
     ee cache info
     ee cache clear --what census
 """
@@ -39,7 +40,9 @@ app = typer.Typer(
 run_app = typer.Typer(no_args_is_help=True, help="Run an analysis pipeline.")
 cache_app = typer.Typer(no_args_is_help=True, help="Inspect or clear the on-disk cache.")
 config_app = typer.Typer(no_args_is_help=True, help="Validate or scaffold a YAML config.")
+data_app = typer.Typer(no_args_is_help=True, help="Download the Census inputs a run needs.")
 app.add_typer(run_app, name="run")
+app.add_typer(data_app, name="data")
 app.add_typer(cache_app, name="cache")
 app.add_typer(config_app, name="config")
 
@@ -201,9 +204,18 @@ def run_all(config: Path = typer.Option(..., "--config", "-c")) -> None:
 # ----- `cache` subcommands ---------------------------------------------------
 
 
+def _cache_dir_for(config: Path | None) -> Path:
+    """The cache a config uses, or the environment and platform default without one."""
+    return resolve_cache_dir(_load_cfg(config).project.cache_dir if config else None)
+
+
 @cache_app.command("info")
-def cache_info() -> None:
-    path = resolve_cache_dir(None)
+def cache_info(
+    config: Path = typer.Option(
+        None, "--config", "-c", help="Report on the cache this config uses (project.cache_dir)."
+    ),
+) -> None:
+    path = _cache_dir_for(config)
     total_bytes = sum(p.stat().st_size for p in path.rglob("*") if p.is_file())
     typer.echo(f"Cache directory: {path}")
     typer.echo(f"Total size:      {total_bytes / (1 << 20):.2f} MB")
@@ -214,8 +226,11 @@ def cache_info() -> None:
 def cache_clear(
     what: str = typer.Option("all", help="Which subset to clear: census|pums|tiger|all."),
     yes: bool = typer.Option(False, "--yes", "-y", help="Skip the confirmation prompt."),
+    config: Path = typer.Option(
+        None, "--config", "-c", help="Clear the cache this config uses (project.cache_dir)."
+    ),
 ) -> None:
-    path = resolve_cache_dir(None)
+    path = _cache_dir_for(config)
     target = path if what == "all" else path / what
     if not target.exists():
         typer.echo(f"Nothing to clear at {target}.")
@@ -224,6 +239,40 @@ def cache_clear(
         typer.confirm(f"Delete {target}?", abort=True)
     shutil.rmtree(target)
     typer.echo(f"Cleared {target}.")
+
+
+@data_app.command(
+    "fetch",
+    help=(
+        "Download every Census input the config needs into the cache and report on each. "
+        "PUMS and TIGER files come from www2.census.gov unless the config points at local "
+        "files, and the ACS tables come from the Census API, which needs a free key. Exits "
+        "with status 1 when any input failed."
+    ),
+)
+def data_fetch(
+    config: Path = typer.Option(..., "--config", "-c", help="Path to YAML config."),
+    force: bool = typer.Option(False, "--force", help="Download files again even if cached."),
+    dry_run: bool = typer.Option(
+        False, "--dry-run", help="List what would be downloaded without downloading."
+    ),
+    skip_api: bool = typer.Option(False, "--skip-api", help="Skip the Census API calls."),
+) -> None:
+    """Run `bootstrap.fetch_inputs` and print one line per input."""
+    from .bootstrap import fetch_inputs
+
+    cfg = _load_cfg(config)
+    results = fetch_inputs(cfg, force=force, dry_run=dry_run, include_api=not skip_api)
+    width = max(len(r.name) for r in results)
+    for r in results:
+        size = f"{r.size_bytes / (1 << 20):8.1f} MB" if r.size_bytes is not None else " " * 11
+        where = str(r.path) if r.path is not None else ""
+        typer.echo(f"{r.status:<10}  {r.name:<{width}}  {size}  {where}")
+        if r.detail:
+            typer.echo(f"{'':<10}  {'':<{width}}  {'':<11}  {r.detail}")
+    typer.echo(f"Cache directory: {resolve_cache_dir(cfg.project.cache_dir)}")
+    if any(r.status == "failed" for r in results):
+        raise typer.Exit(code=1)
 
 
 # ----- `config` subcommands --------------------------------------------------
@@ -244,13 +293,20 @@ def config_init(
     ),
     overwrite: bool = typer.Option(False, "--overwrite", help="Overwrite an existing file."),
 ) -> None:
-    """Scaffold a starter config.yaml. Paths inside are placeholders for the user to fill in."""
+    """Scaffold a starter config.yaml.
+
+    The PUMS and TIGER paths are null, so a run downloads them into the cache. Only the
+    service-area shapefile and the HUD AMI CSV are placeholders to fill in.
+    """
     if output.exists() and not overwrite:
         typer.echo(f"{output} exists; pass --overwrite to replace.", err=True)
         raise typer.Exit(code=2)
     template = _STARTER_TEMPLATE.format(state_fips=state_fips, state_abbr=state.upper())
     output.write_text(template, encoding="utf-8")
-    typer.echo(f"Wrote {output}. Edit the paths and re-run `ee config validate {output}`.")
+    typer.echo(
+        f"Wrote {output}. Set the service-area shapefile and HUD AMI CSV, then run "
+        f"`ee config validate {output}` and `ee data fetch --config {output}`."
+    )
 
 
 _STARTER_TEMPLATE = """\
@@ -270,10 +326,10 @@ vintages:
   tiger_year: 2024
 data_sources:
   hud_ami_csv: ./data/hud_ami.csv
-  pums_housing_zip: ./data/csv_hco.zip
-  pums_person_zip: ./data/csv_pco.zip
-  tiger_puma_zip: ./data/tl_puma.zip
-  tiger_tract_zip: ./data/tl_tract.zip
+  pums_housing_zip: null
+  pums_person_zip: null
+  tiger_puma_zip: null
+  tiger_tract_zip: null
 weights:
   compute_moe: true
   replicate_count: 80

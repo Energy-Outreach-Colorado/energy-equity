@@ -6,7 +6,27 @@ All notable changes to this project will be documented here. Format follows
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+- Census inputs download automatically. Null `data_sources.pums_housing_zip`,
+  `pums_person_zip`, `tiger_puma_zip` and `tiger_tract_zip` resolve to cached downloads from
+  www2.census.gov (`io.census_inputs`), so a new state needs only a config, a HUD AMI CSV
+  and a free Census API key. TIGER PUMA layers are tried under both the `PUMA20/` and
+  `PUMA/` folders, which Census switched between in 2024. A configured path that does not
+  exist is still an error.
+- `ee data fetch --config ...` pre-warms the cache with every Census input a run needs and
+  reports each one as configured, cached, downloaded, planned, skipped or failed, with
+  `--dry-run`, `--force` and `--skip-api`.
+- Config validation rejects a `tiger_year` whose PUMA boundaries use different decennial
+  definitions from the PUMS microdata, and the 2018-2022 5-year PUMS file, which has no
+  single `PUMA` column.
+- `ee cache info` and `ee cache clear` take `--config` to act on that config's cache.
+
+### Changed
+- `ee config init` writes null PUMS and TIGER paths.
+- `download_if_needed` raises `DownloadError` (a `RuntimeError`) carrying the HTTP status,
+  does not retry 4xx answers, and removes partial files after a failed attempt.
+- The test suite now blocks network connections for unmarked tests instead of only
+  setting a placeholder API key.
 
 ## [0.3.0] - 2026-09-30
 
