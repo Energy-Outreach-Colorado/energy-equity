@@ -25,6 +25,8 @@ from ..census.api import CensusClient
 from ..census.cache import CensusCache
 from ..config import Config
 from ..geo.allocation import dissolve_service_area
+from ..io.census_inputs import CensusInputError, resolve_tiger_zip
+from ..io.download import DownloadError
 from ..io.geo import CRS_EQUAL_AREA, read_tiger_zip
 from ..paths import ensure_dir, resolve_cache_dir
 from ..reporting.income import (
@@ -91,10 +93,7 @@ def run(
         )
 
     if tract_service_shares is None:
-        tract_zip = cfg.data_sources.tiger_tract_zip
-        if tract_zip is None or not Path(tract_zip).exists():
-            raise FileNotFoundError(f"TIGER tract ZIP required: {tract_zip}")
-        tracts = read_tiger_zip(tract_zip)
+        tracts = read_tiger_zip(resolve_tiger_zip(cfg, "tract"))
         service_union = dissolve_service_area(cfg.geography.service_area.shapefile)
         tract_service_shares = _build_tract_service_share(tracts, service_union)
 
@@ -251,12 +250,13 @@ def _render_choropleths(cfg: Config, fig_dir: Path, output_dir: Path, *, emit) -
     from ..reporting import figures as F
 
     puma_summary_path = output_dir / "puma_summary.csv"
-    puma_zip = cfg.data_sources.tiger_puma_zip
     if not puma_summary_path.exists():
         logger.warning("skipping choropleths: puma_summary.csv not found (run eligibility)")
         return
-    if puma_zip is None or not Path(puma_zip).exists():
-        logger.warning("skipping choropleths: TIGER PUMA zip not configured/found")
+    try:
+        puma_zip = resolve_tiger_zip(cfg, "puma")
+    except (CensusInputError, DownloadError) as exc:
+        logger.warning("skipping choropleths: no TIGER PUMA layer ({})", exc)
         return
 
     puma_gdf = read_tiger_zip(puma_zip)

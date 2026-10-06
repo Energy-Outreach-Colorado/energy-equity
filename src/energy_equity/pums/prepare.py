@@ -12,13 +12,13 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import dataclass, field
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from loguru import logger
 
 from ..config import Config
+from ..io.census_inputs import resolve_pums_zip
 from ..io.pums import replicate_cols
 from ..territory_calibration import (
     DEFAULT_MIN_OVERLAP,
@@ -206,7 +206,9 @@ def prepare_household_microdata(
     """End-to-end household preparation: load, label, compute burden, attach AMI/SMI.
 
     Most arguments are optional and read from disk based on `cfg` when not provided. Tests
-    and notebooks pre-load DataFrames and pass them through to avoid disk I/O.
+    and notebooks pre-load DataFrames and pass them through to avoid disk I/O. A null
+    PUMS path in the config downloads the state's file into the cache on first use
+    (`io.census_inputs.resolve_pums_zip`).
 
     `electric_territories` and `gas_territories` switch on multi-territory calibration
     (`territory_calibration.apply_territory_calibration`), which rescales costs with a
@@ -231,22 +233,15 @@ def prepare_household_microdata(
     from ..thresholds.ami import attach_ami_blended_threshold
     from ..thresholds.smi import attach_smi_statewide_threshold
 
-    housing_zip = cfg.data_sources.pums_housing_zip
-    person_zip = cfg.data_sources.pums_person_zip
-
     if pums_housing_df is None:
-        if housing_zip is None or not Path(housing_zip).exists():
-            raise FileNotFoundError(f"PUMS housing ZIP not found: {housing_zip}")
         pums_housing_df = load_pums_households(
-            housing_zip,
+            resolve_pums_zip(cfg, "housing"),
             include_replicate_weights=cfg.weights.compute_moe,
             replicate_count=cfg.weights.replicate_count,
         )
 
     if pums_person_df is None:
-        if person_zip is None or not Path(person_zip).exists():
-            raise FileNotFoundError(f"PUMS person ZIP not found: {person_zip}")
-        pums_person_df = load_head_demographics(person_zip)
+        pums_person_df = load_head_demographics(resolve_pums_zip(cfg, "person"))
 
     df = pums_housing_df.merge(pums_person_df, on="SERIALNO", how="left", validate="one_to_one")
 

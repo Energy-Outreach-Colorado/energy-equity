@@ -25,6 +25,8 @@ from typing import Any, Literal
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from .io.census_inputs import check_puma_vintages
+
 
 class _StrictModel(BaseModel):
     """Reject unknown keys to surface typos in YAML configs immediately."""
@@ -97,10 +99,28 @@ class DataSourcesConfig(_StrictModel):
             "IM or additional geographies without a code change."
         ),
     )
-    pums_housing_zip: Path | None = Field(default=None, description="ACS PUMS housing ZIP.")
-    pums_person_zip: Path | None = Field(default=None, description="ACS PUMS person ZIP.")
-    tiger_puma_zip: Path | None = Field(default=None, description="TIGER PUMA shapefile ZIP.")
-    tiger_tract_zip: Path | None = Field(default=None, description="TIGER tract shapefile ZIP.")
+    pums_housing_zip: Path | None = Field(
+        default=None,
+        description=(
+            "ACS PUMS housing ZIP. Null downloads the state's file for vintages.pums_year "
+            "and pums_span into the cache on first use."
+        ),
+    )
+    pums_person_zip: Path | None = Field(
+        default=None,
+        description="ACS PUMS person ZIP. Null downloads it into the cache on first use.",
+    )
+    tiger_puma_zip: Path | None = Field(
+        default=None,
+        description=(
+            "TIGER PUMA shapefile ZIP. Null downloads the state's layer for "
+            "vintages.tiger_year into the cache on first use."
+        ),
+    )
+    tiger_tract_zip: Path | None = Field(
+        default=None,
+        description="TIGER tract shapefile ZIP. Null downloads it into the cache on first use.",
+    )
     eia861_csv: Path | None = Field(
         default=None,
         description=(
@@ -477,6 +497,13 @@ class Config(_StrictModel):
     weights: WeightsConfig = Field(default_factory=WeightsConfig)
     calibration: CalibrationConfig = Field(default_factory=CalibrationConfig)
     pipelines: PipelinesConfig = Field(default_factory=PipelinesConfig)
+
+    @model_validator(mode="after")
+    def _check_puma_vintages(self) -> Config:
+        check_puma_vintages(
+            self.vintages.pums_year, self.vintages.pums_span, self.vintages.tiger_year
+        )
+        return self
 
     @model_validator(mode="after")
     def _check_calibration_targets(self) -> Config:

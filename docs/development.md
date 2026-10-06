@@ -46,8 +46,13 @@ and `ami80_by_puma.csv` from that directory so they don't require a Census API k
 
 ### `conftest.py` blocks live network by default
 
-`tests/conftest.py` sets `CENSUS_API_KEY=TEST-KEY-NOT-REAL` for any test not marked
-`@pytest.mark.network`. To run a live-network test intentionally:
+For any test not marked `@pytest.mark.network`, `tests/conftest.py` replaces
+`socket.socket.connect` and `socket.getaddrinfo` so connections and name lookups for any
+host other than this machine raise `NetworkBlockedError`, naming the test. It also sets
+`CENSUS_API_KEY=TEST-KEY-NOT-REAL`. Pipelines download missing Census files on their own,
+so a test that forgets a mock fails here instead of reaching census.gov. Mock downloads
+with `tests/fixtures/fake_downloads.py`, which stands in for `download_if_needed` with
+canned answers per URL. To run a live-network test intentionally:
 
 ```sh
 uv run pytest -m network --tb=short
@@ -223,8 +228,12 @@ inside config values, not source.
 
 - `cfg.project.output_dir` is where each pipeline writes its CSVs. Created if missing.
 - `cfg.project.cache_dir` (or `EE_CACHE_DIR`, or `platformdirs.user_cache_dir("energy-equity")`
-  in that precedence) holds downloaded Census tables, TIGER urban-area shapefiles, and
-  per-request JSON caches under `census/`. Never default to a project-relative `./cache/`
+  in that precedence) holds downloaded PUMS ZIPs under `pums/<year>_<span>yr/`, TIGER
+  ZIPs under `tiger/<year>/`, TIGER urban-area shapefiles, and per-request JSON caches
+  under `census/`. Null `data_sources.pums_*_zip` and `tiger_*_zip` paths resolve through
+  `io.census_inputs.resolve_pums_zip` and `resolve_tiger_zip`; read those inputs through
+  the resolvers, never straight from the config, so a null path downloads instead of
+  failing. Never default to a project-relative `./cache/`
   — that pollutes user repos.
 
 ### Logging

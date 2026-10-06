@@ -372,7 +372,8 @@ def territories_from_config(
 ) -> tuple[list[Territory], list[Territory]]:
     """Electric and gas territories from a config's `calibration.territories` block.
 
-    Tracts come from `data_sources.tiger_tract_zip` and `tiger_puma_zip`, and tract
+    Tracts come from `data_sources.tiger_tract_zip` and `tiger_puma_zip`, downloaded into
+    the cache when null, and tract
     household counts from the ACS cache or Census API, unless either is passed in. The
     EIA year is `calibration.territories.eia_year`, defaulting to `vintages.pums_year`,
     and `data_sources.eia861_csv` or `eia176_csv` replaces the packaged table when set.
@@ -386,11 +387,12 @@ def territories_from_config(
         raise ValueError("config has no calibration.territories block")
     if tracts_with_puma is None:
         from .geo.allocation import assign_puma_to_tracts
+        from .io.census_inputs import resolve_tiger_zip
         from .io.geo import read_tiger_zip
 
         tracts_with_puma = assign_puma_to_tracts(
-            read_tiger_zip(cfg.data_sources.tiger_tract_zip),
-            read_tiger_zip(cfg.data_sources.tiger_puma_zip),
+            read_tiger_zip(resolve_tiger_zip(cfg, "tract")),
+            read_tiger_zip(resolve_tiger_zip(cfg, "puma")),
         )
     if tract_households is None:
         from .census.api import resolve_tract_households
