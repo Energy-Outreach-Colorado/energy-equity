@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "Eric Nussbaumer", email = "ebaumer@gmail.com" },
+    { name = "Eric Nussbaumer", email = "enussbaumer@energyoutreach.org" },
 ]
 keywords = [
     "energy-equity",
@@ -68,9 +68,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ebaumer/energy-equity"
-Repository = "https://github.com/ebaumer/energy-equity"
-Issues = "https://github.com/ebaumer/energy-equity/issues"
+Homepage = "https://github.com/Energy-Outreach-Colorado/energy-equity"
+Repository = "https://github.com/Energy-Outreach-Colorado/energy-equity"
+Issues = "https://github.com/Energy-Outreach-Colorado/energy-equity/issues"
 
 [project.scripts]
 ee = "energy_equity.cli:app"

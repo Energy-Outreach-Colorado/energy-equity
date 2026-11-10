@@ -18,12 +18,17 @@ from energy_equity.pipelines import puma_table, service_allocation
 from energy_equity.pums.prepare import prepare_household_microdata
 
 PARITY_DATA_ENV = "EE_PARITY_DATA"
-DEFAULT_PUMS_HOUSING = "/data/eoc/output/pums/pums_2024_1yr/csv_hco.zip"
-DEFAULT_PUMS_PERSON = "/data/eoc/output/pums/pums_2024_1yr/csv_pco.zip"
-DEFAULT_PUMA_SHAPE = "/data/eoc/output/pums/pums_2024_1yr/tl_2024_08_puma20.zip"
-DEFAULT_TRACT_SHAPE = "/data/eoc/output/pums/pums_2024_1yr/tl_2024_08_tract.zip"
-DEFAULT_HUD_AMI = "/data/eoc/output/pums/pums_2024_1yr/income-limits-80-ami.csv"
-DEFAULT_SERVICE_SHAPE = "/data/eoc/geospatial/pueblo_county_08101_shapefile/pueblo_county_08101.shp"
+PARITY_INPUTS_ENV = "EE_PARITY_INPUTS"
+PARITY_SERVICE_SHAPE_ENV = "EE_PARITY_SERVICE_SHAPE"
+PARITY_INPUTS_DIR = Path(os.environ.get(PARITY_INPUTS_ENV, "parity_inputs"))
+DEFAULT_PUMS_HOUSING = str(PARITY_INPUTS_DIR / "csv_hco.zip")
+DEFAULT_PUMS_PERSON = str(PARITY_INPUTS_DIR / "csv_pco.zip")
+DEFAULT_PUMA_SHAPE = str(PARITY_INPUTS_DIR / "tl_2024_08_puma20.zip")
+DEFAULT_TRACT_SHAPE = str(PARITY_INPUTS_DIR / "tl_2024_08_tract.zip")
+DEFAULT_HUD_AMI = str(PARITY_INPUTS_DIR / "income-limits-80-ami.csv")
+DEFAULT_SERVICE_SHAPE = os.environ.get(
+    PARITY_SERVICE_SHAPE_ENV, str(PARITY_INPUTS_DIR / "service_area.shp")
+)
 
 
 PARITY_TOTAL_COLUMNS = [

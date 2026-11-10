@@ -21,9 +21,9 @@ Both have two columns, `territory_name` and `eia_id`. Several names may map to o
 identifier when a utility's territory is drawn in pieces, as the three Black Hills gas
 pieces are, since EIA-176 reports Black Hills as one company.
 
-The polygons are not packaged. The Colorado names match the `Name` column of EOC's
-`utility_electric.shp` and `atmos_gas.shp`, kept under `/data/eoc/geospatial/utilities`
-on the development host and uploaded to the map's input bucket for production loads.
+The polygons are not packaged. The Colorado names match the `Name` column of the
+`utility_electric.shp` and `atmos_gas.shp` territory shapefiles that the Colorado runs
+and the energy burden map load.
 
 ## How the Colorado identifiers were chosen
 

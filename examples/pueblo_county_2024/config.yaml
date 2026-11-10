@@ -14,7 +14,7 @@ geography:
   state_fips: "08"
   state_abbr: CO
   service_area:
-    shapefile: /data/eoc/geospatial/pueblo_county_08101_shapefile/pueblo_county_08101.shp
+    shapefile: /path/to/geospatial/pueblo_county_08101.shp
 
 vintages:
   acs_year: 2024
@@ -23,11 +23,11 @@ vintages:
   tiger_year: 2024
 
 data_sources:
-  hud_ami_csv: /data/eoc/output/pums/pums_2024_1yr/income-limits-80-ami.csv
-  pums_housing_zip: /data/eoc/output/pums/pums_2024_1yr/csv_hco.zip
-  pums_person_zip: /data/eoc/output/pums/pums_2024_1yr/csv_pco.zip
-  tiger_puma_zip: /data/eoc/output/pums/pums_2024_1yr/tl_2024_08_puma20.zip
-  tiger_tract_zip: /data/eoc/output/pums/pums_2024_1yr/tl_2024_08_tract.zip
+  hud_ami_csv: /path/to/pums/pums_2024_1yr/income-limits-80-ami.csv
+  pums_housing_zip: /path/to/pums/pums_2024_1yr/csv_hco.zip
+  pums_person_zip: /path/to/pums/pums_2024_1yr/csv_pco.zip
+  tiger_puma_zip: /path/to/pums/pums_2024_1yr/tl_2024_08_puma20.zip
+  tiger_tract_zip: /path/to/pums/pums_2024_1yr/tl_2024_08_tract.zip
 
 thresholds:
   ami_method: blended_threshold
