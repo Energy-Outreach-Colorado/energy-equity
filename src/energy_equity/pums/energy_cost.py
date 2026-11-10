@@ -17,7 +17,21 @@ from typing import Literal
 import numpy as np
 import pandas as pd
 
+from ..territory_calibration import COMBINED_BILL_GASFP
+
 MissingCostRule = Literal["zero", "nan"]
+
+BURDEN_COST_COLUMNS = {
+    "total": "annual_energy_cost_adj",
+    "electric": "annual_electric_cost_adj",
+    "gas": "annual_gas_cost_adj",
+}
+BURDEN_PAYER_COLUMNS: dict[str, str | None] = {"total": None, "electric": "ELEP", "gas": "GASP"}
+BURDEN_COMBINED_BILL_COLUMNS: dict[str, str | None] = {
+    "total": None,
+    "electric": "GASFP",
+    "gas": None,
+}
 
 
 def apply_income_adjustment(
@@ -126,17 +140,36 @@ def compute_energy_burden_pums(
     nonpos_income_rule: Literal["exclude", "treat_as_high"] = "exclude",
     cost_col: str = "annual_energy_cost_adj",
     income_col: str = "income_adjusted",
+    payer_col: str | None = None,
+    combined_bill_col: str | None = None,
     out_burden_col: str = "energy_burden",
     out_valid_col: str = "burden_valid",
     out_flag_col: str = "energy_burdened",
     out_high_flag_col: str = "high_energy_burdened",
 ) -> pd.DataFrame:
-    """PUMS-flavored energy burden: divides adjusted cost by adjusted income and flags."""
+    """PUMS-flavored energy burden: divides adjusted cost by adjusted income and flags.
+
+    When `payer_col` is given, households with a null value in that column do not pay the
+    cost directly and their burden is left undefined rather than counted as zero. ELEP is
+    blank when electricity is included in rent or carries no charge. GASP is blank when gas
+    is included in rent or in the electricity payment, carries no charge, or is not used.
+
+    When `combined_bill_col` is given, households flagged there as paying for gas through
+    their electricity bill (GASFP = 2) are also left undefined. PUMS records the whole
+    combined bill in ELEP for them, so an electric-only burden would count their gas too.
+    """
     income = df[income_col].astype(float).to_numpy()
     cost = df[cost_col].astype(float).to_numpy()
 
     with np.errstate(divide="ignore", invalid="ignore"):
         burden = np.where(income > 0, cost / income, np.nan)
+
+    if payer_col is not None:
+        burden = np.where(pd.isna(df[payer_col].to_numpy()), np.nan, burden)
+
+    if combined_bill_col is not None:
+        combined = pd.to_numeric(df[combined_bill_col], errors="coerce") == COMBINED_BILL_GASFP
+        burden = np.where(combined.to_numpy(), np.nan, burden)
 
     nonpos = income <= 0
     if nonpos_income_rule == "exclude":

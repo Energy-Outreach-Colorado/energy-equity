@@ -7,6 +7,9 @@ import pandas as pd
 import pytest
 
 from energy_equity.pums.energy_cost import (
+    BURDEN_COMBINED_BILL_COLUMNS,
+    BURDEN_COST_COLUMNS,
+    BURDEN_PAYER_COLUMNS,
     apply_energy_cost_adjustment,
     apply_fixed_charge_scenario,
     apply_income_adjustment,
@@ -102,3 +105,85 @@ def test_post_scenario_deltas(pums_rows: pd.DataFrame) -> None:
     assert bool(pums_rows["delta_burden_ge_1_00pp"].iloc[0]) is True
     # Row 2 had no valid base burden -> no delta.
     assert np.isnan(pums_rows["delta_energy_burden"].iloc[2])
+
+
+def test_compute_energy_burden_pums_payer_exclusion() -> None:
+    rows = pd.DataFrame(
+        {
+            "HINCP": [50000.0, 50000.0],
+            "ADJINC": [1_000_000, 1_000_000],
+            "ADJHSG": [1_000_000, 1_000_000],
+            "ELEP": [100.0, np.nan],
+            "GASP": [50.0, 50.0],
+            "FULP": [0.0, 0.0],
+        }
+    )
+    apply_income_adjustment(rows)
+    apply_energy_cost_adjustment(rows, missing_cost_rule="zero")
+    compute_energy_burden_pums(
+        rows,
+        threshold=0.03,
+        high_threshold=0.06,
+        cost_col="annual_electric_cost_adj",
+        payer_col="ELEP",
+    )
+    assert rows["energy_burden"].iloc[0] == pytest.approx(1200.0 / 50000.0)
+    assert np.isnan(rows["energy_burden"].iloc[1])
+    assert not bool(rows["burden_valid"].iloc[1])
+    assert not bool(rows["energy_burdened"].iloc[1])
+
+
+def test_compute_energy_burden_pums_gas_payer_exclusion() -> None:
+    rows = pd.DataFrame(
+        {
+            "HINCP": [50000.0, 50000.0],
+            "ADJINC": [1_000_000, 1_000_000],
+            "ADJHSG": [1_000_000, 1_000_000],
+            "ELEP": [100.0, 100.0],
+            "GASP": [50.0, np.nan],
+            "FULP": [0.0, 0.0],
+        }
+    )
+    apply_income_adjustment(rows)
+    apply_energy_cost_adjustment(rows, missing_cost_rule="zero")
+    compute_energy_burden_pums(
+        rows,
+        threshold=0.03,
+        high_threshold=0.06,
+        cost_col=BURDEN_COST_COLUMNS["gas"],
+        payer_col=BURDEN_PAYER_COLUMNS["gas"],
+    )
+    assert rows["energy_burden"].iloc[0] == pytest.approx(600.0 / 50000.0)
+    assert np.isnan(rows["energy_burden"].iloc[1])
+    assert not bool(rows["burden_valid"].iloc[1])
+    assert not bool(rows["energy_burdened"].iloc[1])
+
+
+def test_compute_energy_burden_pums_combined_bill_exclusion() -> None:
+    rows = pd.DataFrame(
+        {
+            "HINCP": [50000.0, 50000.0],
+            "ADJINC": [1_000_000, 1_000_000],
+            "ADJHSG": [1_000_000, 1_000_000],
+            "ELEP": [100.0, 180.0],
+            "GASP": [50.0, np.nan],
+            "FULP": [0.0, 0.0],
+            "GASFP": [3, 2],
+        }
+    )
+    apply_income_adjustment(rows)
+    apply_energy_cost_adjustment(rows, missing_cost_rule="zero")
+    compute_energy_burden_pums(
+        rows,
+        threshold=0.03,
+        high_threshold=0.06,
+        cost_col=BURDEN_COST_COLUMNS["electric"],
+        payer_col=BURDEN_PAYER_COLUMNS["electric"],
+        combined_bill_col=BURDEN_COMBINED_BILL_COLUMNS["electric"],
+    )
+    assert rows["energy_burden"].iloc[0] == pytest.approx(1200.0 / 50000.0)
+    assert np.isnan(rows["energy_burden"].iloc[1])
+    assert not bool(rows["burden_valid"].iloc[1])
+    assert not bool(rows["energy_burdened"].iloc[1])
+    assert BURDEN_COMBINED_BILL_COLUMNS["total"] is None
+    assert BURDEN_COMBINED_BILL_COLUMNS["gas"] is None

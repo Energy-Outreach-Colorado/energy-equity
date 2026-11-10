@@ -96,7 +96,7 @@ def run(
     _write(bands, output_dir / "low_income_burden_bands.csv")
     written["low_income_burden_bands"] = bands
 
-    eb_headline = build_energy_burden_headline_summary(hh)
+    eb_headline = build_energy_burden_headline_summary(hh, cost_col=microdata.burden_cost_col)
     _write(eb_headline, output_dir / "energy_burden_headline_summary.csv")
     written["energy_burden_headline_summary"] = eb_headline
 
@@ -137,13 +137,16 @@ def run(
     gap_summary = build_affordability_gap_summary(
         hh,
         thresholds=gap_thresholds,
+        cost_col=microdata.burden_cost_col,
         replicate_weight_cols=microdata.replicate_weight_cols,
         point_weight_col=microdata.point_weight_col,
     )
     _write(gap_summary, output_dir / "affordability_gap.csv")
     written["affordability_gap"] = gap_summary
 
-    gap_by_puma = build_affordability_gap_by_puma(hh, thresholds=gap_thresholds)
+    gap_by_puma = build_affordability_gap_by_puma(
+        hh, thresholds=gap_thresholds, cost_col=microdata.burden_cost_col
+    )
     if microdata.puma_lookup is not None:
         gap_by_puma = gap_by_puma.merge(microdata.puma_lookup, on="PUMA", how="left")
     _write(gap_by_puma, output_dir / "affordability_gap_by_puma.csv")

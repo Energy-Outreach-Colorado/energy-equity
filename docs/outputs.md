@@ -126,19 +126,34 @@ Sizes a percentage-of-income plan or bill-assistance budget. Thresholds come fro
 
 ### From `ee run fixed-charge`
 
+The increase is either a fixed monthly dollar amount (`pipelines.fixed_charge.kind: fixed`)
+or a percentage of a cost component (`kind: percent`, scaling `percent_of` by
+`percent_increase` for households that report that cost). File names keep the fixed-charge
+prefix for both kinds.
+
 **`fixed_charge_headline_summary.csv`** — one row per (`segment`, `population`): baseline vs
 post-increase counts (`baseline_energy_burdened_households`, `post_energy_burdened_households`,
 `newly_energy_burdened_households`, the highly-burdened variants), `burden_valid_households`,
-average burdens, and `annual_fixed_charge_increase_total`.
+average burdens, `annual_increase_total`, `increase_applies_households`, and
+`avg_monthly_increase_among_applies` (a sanity check against the utility's stated average
+bill increase).
+
+**`near_threshold_summary.csv`** — one row per (`segment`, `population`,
+`margin_percentage_points`): households whose burden sits within that many points below the
+threshold at baseline (`baseline_in_band_households`), after the increase
+(`post_in_band_households`), and the in-band households that crossed the threshold
+(`in_band_newly_burdened_households`). Margins come from
+`pipelines.fixed_charge.near_burden_margins_pp`.
 
 **`delta_sensitivity_summary.csv`** — one row per (`segment`, `population`,
 `delta_threshold_percentage_points`): how many households see their burden rise by at least
 that many points (`households`, `denominator_households`, `rate_among_burden_valid`).
 
-**`scenario_sweep.csv`** — one row per (`segment`, `population`,
-`monthly_fixed_charge_increase`): `post_energy_burdened_households`,
-`newly_energy_burdened_households` (+ highly variants), `burden_valid_households`, and rates.
-Drives the scenario-sweep figure.
+**`scenario_sweep.csv`** — one row per (`segment`, `population`, `increase_amount`), with
+`increase_kind` naming the units (monthly dollars for `fixed`, fractions for `percent`) and
+`annual_increase_total`: `post_energy_burdened_households`, `newly_energy_burdened_households`
+(+ highly variants), `burden_valid_households`, and rates. The fixed kind also keeps the
+legacy `monthly_fixed_charge_increase` column. Drives the scenario-sweep figure.
 
 ### From `ee run reporting`
 
@@ -148,7 +163,8 @@ Drives the scenario-sweep figure.
 **`income_cutpoint_shares.csv`** — one row per income cutoff: cumulative share of households
 below it, service vs statewide, and `diff_pp`.
 
-**`regressivity_table.csv`** — one row per income bin: the annual fixed-charge increase as a
+**`regressivity_table.csv`** — one row per income bin: the annual increase (12 × the fixed
+monthly amount, or 12 × `percent_increase` × `reference_monthly_bill` for a percent increase) as a
 share of that bin's midpoint income (`increase_as_pct_of_income`) — lower-income bins carry a
 larger share, which is the regressivity story.
 

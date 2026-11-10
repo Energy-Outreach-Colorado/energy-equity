@@ -77,7 +77,7 @@ def fig_regressivity_curve(regressivity: pd.DataFrame) -> go.Figure:
         name="Increase as % of income",
     )
     fig.update_layout(
-        title="Fixed-charge increase as a share of household income",
+        title="Bill increase as a share of household income",
         xaxis_title="Household income",
         yaxis_title="Annual increase as % of income",
         yaxis_ticksuffix="%",
@@ -92,26 +92,35 @@ def fig_regressivity_curve(regressivity: pd.DataFrame) -> go.Figure:
 def fig_scenario_sweep(
     sweep: pd.DataFrame, *, segment: str = "all", population: str = "All households"
 ) -> go.Figure:
-    """Line: newly energy-burdened households vs the monthly fixed-charge increase."""
-    df = sweep[(sweep["segment"] == segment) & (sweep["population"] == population)].sort_values(
-        "monthly_fixed_charge_increase"
+    """Line: newly energy-burdened households vs the size of the increase.
+
+    Reads `increase_amount` when present (fixed dollars or percent fractions, labeled by
+    `increase_kind`) and falls back to the legacy `monthly_fixed_charge_increase` column.
+    """
+    df = sweep[(sweep["segment"] == segment) & (sweep["population"] == population)]
+    kind = (
+        str(df["increase_kind"].iloc[0]) if "increase_kind" in df.columns and len(df) else "fixed"
     )
+    xcol = "increase_amount" if "increase_amount" in df.columns else "monthly_fixed_charge_increase"
+    df = df.sort_values(xcol)
+    x = df[xcol] * 100.0 if kind == "percent" else df[xcol]
+    label = "Bill increase (%)" if kind == "percent" else "Monthly fixed-charge increase ($)"
     fig = go.Figure()
     fig.add_scatter(
-        x=df["monthly_fixed_charge_increase"],
+        x=x,
         y=df["newly_energy_burdened_households"],
         mode="lines+markers",
         name="Newly energy burdened",
     )
     fig.add_scatter(
-        x=df["monthly_fixed_charge_increase"],
+        x=x,
         y=df["newly_highly_energy_burdened_households"],
         mode="lines+markers",
         name="Newly highly energy burdened",
     )
     fig.update_layout(
-        title=f"Newly burdened households vs monthly fixed-charge increase ({population})",
-        xaxis_title="Monthly fixed-charge increase ($)",
+        title=f"Newly burdened households vs {label.lower()} ({population})",
+        xaxis_title=label,
         yaxis_title="Households",
     )
     return fig

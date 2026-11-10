@@ -112,9 +112,18 @@ def run(
 
     comparison = build_income_distribution_comparison(service, statewide)
     cutpoints = build_cutpoint_shares(service, statewide, cutoffs=cutoffs)
-    regressivity = build_regressivity_table(
-        annual_fixed_charge_increase=12.0 * float(fc.monthly_increase)
-    )
+    if fc.kind == "percent":
+        if fc.reference_monthly_bill is None:
+            logger.warning(
+                "regressivity table uses a zero increase: set fixed_charge.reference_monthly_bill "
+                "to express the percent increase in dollars"
+            )
+            annual_increase = 0.0
+        else:
+            annual_increase = 12.0 * float(fc.percent_increase) * float(fc.reference_monthly_bill)
+    else:
+        annual_increase = 12.0 * float(fc.monthly_increase)
+    regressivity = build_regressivity_table(annual_fixed_charge_increase=annual_increase)
 
     written: dict[str, pd.DataFrame] = {}
     _write(comparison, output_dir / "income_distribution_service_vs_state.csv")

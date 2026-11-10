@@ -133,3 +133,19 @@ def test_fig_trend_lines_all_nan_moe() -> None:
         y_title="Households",
     )
     assert isinstance(fig, go.Figure)
+
+
+def test_fig_scenario_sweep_percent_kind() -> None:
+    df = pd.DataFrame(
+        {
+            "segment": ["all", "all"],
+            "population": ["All households", "All households"],
+            "increase_kind": ["percent", "percent"],
+            "increase_amount": [0.0, 0.147],
+            "newly_energy_burdened_households": [0.0, 100.0],
+            "newly_highly_energy_burdened_households": [0.0, 25.0],
+        }
+    )
+    fig = F.fig_scenario_sweep(df)
+    assert isinstance(fig, go.Figure)
+    assert fig.layout.xaxis.title.text == "Bill increase (%)"

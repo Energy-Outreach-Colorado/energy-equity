@@ -305,3 +305,88 @@ def test_territory_calibration_crosswalks_optional() -> None:
     settings = Config.from_mapping(payload).calibration.territories
     assert settings.electric_crosswalk is None
     assert settings.gas_territories is None
+
+
+def _with_fixed_charge(block: str) -> str:
+    return VALID_YAML + "\n" + dedent(block)
+
+
+def test_burden_cost_basis_default_and_single_fuel(tmp_path: Path) -> None:
+    yaml_path = tmp_path / "config.yaml"
+    yaml_path.write_text(VALID_YAML)
+    assert Config.from_yaml(yaml_path).thresholds.burden_cost_basis == "total"
+    yaml_path.write_text(VALID_YAML + "\nthresholds:\n  burden_cost_basis: electric\n")
+    assert Config.from_yaml(yaml_path).thresholds.burden_cost_basis == "electric"
+    yaml_path.write_text(VALID_YAML + "\nthresholds:\n  burden_cost_basis: gas\n")
+    assert Config.from_yaml(yaml_path).thresholds.burden_cost_basis == "gas"
+    yaml_path.write_text(VALID_YAML + "\nthresholds:\n  burden_cost_basis: water\n")
+    with pytest.raises(ValueError):
+        Config.from_yaml(yaml_path)
+
+
+def test_percent_kind_requires_percent_increase(tmp_path: Path) -> None:
+    yaml_path = tmp_path / "config.yaml"
+    yaml_path.write_text(
+        _with_fixed_charge(
+            """
+            pipelines:
+              fixed_charge:
+                kind: percent
+                apply_only_if_gas_positive: false
+            """
+        )
+    )
+    with pytest.raises(ValueError, match="percent_increase"):
+        Config.from_yaml(yaml_path)
+
+
+def test_percent_kind_rejects_gas_gate_and_dollar_sweep(tmp_path: Path) -> None:
+    yaml_path = tmp_path / "config.yaml"
+    yaml_path.write_text(
+        _with_fixed_charge(
+            """
+            pipelines:
+              fixed_charge:
+                kind: percent
+                percent_increase: 0.147
+            """
+        )
+    )
+    with pytest.raises(ValueError, match="apply_only_if_gas_positive"):
+        Config.from_yaml(yaml_path)
+    yaml_path.write_text(
+        _with_fixed_charge(
+            """
+            pipelines:
+              fixed_charge:
+                kind: percent
+                percent_increase: 0.147
+                apply_only_if_gas_positive: false
+                scenario_sweep: [0, 5.47]
+            """
+        )
+    )
+    with pytest.raises(ValueError, match="scenario_sweep"):
+        Config.from_yaml(yaml_path)
+
+
+def test_percent_kind_accepted(tmp_path: Path) -> None:
+    yaml_path = tmp_path / "config.yaml"
+    yaml_path.write_text(
+        _with_fixed_charge(
+            """
+            pipelines:
+              fixed_charge:
+                kind: percent
+                percent_increase: 0.147
+                percent_of: electric
+                reference_monthly_bill: 124.18
+                apply_only_if_gas_positive: false
+                scenario_sweep: [0, 0.088, 0.147]
+            """
+        )
+    )
+    fc = Config.from_yaml(yaml_path).pipelines.fixed_charge
+    assert fc.kind == "percent"
+    assert fc.percent_increase == pytest.approx(0.147)
+    assert fc.reference_monthly_bill == pytest.approx(124.18)

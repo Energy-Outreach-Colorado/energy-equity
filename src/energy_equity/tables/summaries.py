@@ -250,8 +250,13 @@ def build_burden_band_summary(
     return out.sort_values(["segment", "burden_band"]).reset_index(drop=True)
 
 
-def build_energy_burden_headline_summary(df: pd.DataFrame) -> pd.DataFrame:
-    """Energy-burden universe summary for each segment (independent of program thresholds)."""
+def build_energy_burden_headline_summary(
+    df: pd.DataFrame, *, cost_col: str = "annual_energy_cost_adj"
+) -> pd.DataFrame:
+    """Energy-burden universe summary for each segment (independent of program thresholds).
+
+    `cost_col` is the burden-basis cost reported in the average-cost columns.
+    """
     rows = []
     for segment, wcol in SEGMENT_WEIGHTS.items():
         w = pd.to_numeric(df[wcol], errors="coerce").fillna(0.0)
@@ -313,10 +318,10 @@ def build_energy_burden_headline_summary(df: pd.DataFrame) -> pd.DataFrame:
                     df.loc[heb, "income_adjusted"], w[heb]
                 ),
                 "avg_annual_energy_cost_energy_burdened": _weighted_mean(
-                    df.loc[eb, "annual_energy_cost_adj"], w[eb]
+                    df.loc[eb, cost_col], w[eb]
                 ),
                 "avg_annual_energy_cost_highly_energy_burdened": _weighted_mean(
-                    df.loc[heb, "annual_energy_cost_adj"], w[heb]
+                    df.loc[heb, cost_col], w[heb]
                 ),
             }
         )
