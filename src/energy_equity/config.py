@@ -176,6 +176,16 @@ class ThresholdsConfig(_StrictModel):
     severe_rent_burden_threshold: float = Field(default=0.50, gt=0.0, lt=1.0)
     missing_cost_rule: Literal["zero", "nan"] = "zero"
     nonpos_income_rule: Literal["exclude", "treat_as_high"] = "exclude"
+    burden_cost_basis: Literal["total", "electric", "gas"] = Field(
+        default="total",
+        description=(
+            "Cost placed over income for energy burden. 'total' uses electric plus gas plus "
+            "other fuels; 'electric' uses the electric bill alone and excludes households "
+            "that do not pay for electricity directly or that pay for gas through their "
+            "electricity bill; 'gas' uses the gas bill alone and "
+            "excludes households that report no separate gas bill."
+        ),
+    )
     suppression_min_unweighted_n: int = Field(default=30, ge=0)
 
     @model_validator(mode="after")
@@ -398,15 +408,38 @@ class EligibilityAnalysisPipelineConfig(_StrictModel):
 
 
 class FixedChargePipelineConfig(_StrictModel):
+    kind: Literal["fixed", "percent"] = Field(
+        default="fixed",
+        description=(
+            "'fixed' adds monthly_increase dollars a month; 'percent' scales the percent_of "
+            "cost by percent_increase for households that report that cost."
+        ),
+    )
     monthly_increase: float = Field(
-        default=4.00, description="Proposed monthly fixed-charge delta in USD."
+        default=4.00, description="Proposed monthly fixed-charge delta in USD (kind: fixed)."
+    )
+    percent_increase: float | None = Field(
+        default=None,
+        description="Fractional increase applied to the percent_of cost (kind: percent).",
+    )
+    percent_of: Literal["electric", "gas", "total"] = Field(
+        default="electric", description="Cost component scaled by a percent increase."
+    )
+    reference_monthly_bill: float | None = Field(
+        default=None,
+        gt=0.0,
+        description=(
+            "Average monthly bill the percent increase is expressed against in the "
+            "regressivity table (annual increase = 12 x percent_increase x this value)."
+        ),
     )
     apply_only_if_gas_positive: bool = Field(
         default=True,
         description="If true, the increase is applied only to households with GASP>0 (gas customers).",
     )
     scenario_sweep: list[float] = Field(
-        default_factory=lambda: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 5.47, 7.5, 10.0, 15.0]
+        default_factory=lambda: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 5.47, 7.5, 10.0, 15.0],
+        description="Amounts to sweep: monthly dollars for kind fixed, fractions for kind percent.",
     )
     near_burden_margins_pp: list[float] = Field(
         default_factory=lambda: [0.25, 0.50, 1.00],
@@ -416,6 +449,22 @@ class FixedChargePipelineConfig(_StrictModel):
         default_factory=lambda: [0.25, 0.50, 1.00],
         description="Percentage-point burden-increase thresholds for the sensitivity table.",
     )
+
+    @model_validator(mode="after")
+    def _check_percent_settings(self) -> FixedChargePipelineConfig:
+        if self.kind == "percent":
+            if self.percent_increase is None:
+                raise ValueError("percent_increase is required when kind is 'percent'")
+            if not 0.0 < self.percent_increase < 1.0:
+                raise ValueError("percent_increase must be a fraction in (0, 1)")
+            if self.apply_only_if_gas_positive:
+                raise ValueError("apply_only_if_gas_positive must be false when kind is 'percent'")
+            for v in self.scenario_sweep:
+                if not 0.0 <= v < 1.0:
+                    raise ValueError(
+                        "scenario_sweep entries must be fractions in [0, 1) for kind 'percent'"
+                    )
+        return self
 
 
 class TrendRunConfig(_StrictModel):

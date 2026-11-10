@@ -28,6 +28,9 @@ from ..territory_calibration import (
     territories_from_config,
 )
 from .energy_cost import (
+    BURDEN_COMBINED_BILL_COLUMNS,
+    BURDEN_COST_COLUMNS,
+    BURDEN_PAYER_COLUMNS,
     apply_energy_cost_adjustment,
     apply_income_adjustment,
     compute_energy_burden_pums,
@@ -49,6 +52,7 @@ class HouseholdMicrodata:
     electric_calibration: dict | None = None
     gas_calibration: dict | None = None
     territory_calibration: TerritoryCalibrationResult | None = None
+    burden_cost_col: str = "annual_energy_cost_adj"
 
     def __len__(self) -> int:
         return len(self.df)
@@ -264,11 +268,25 @@ def prepare_household_microdata(
             gas=gas_territories or (),
             min_overlap=territory_min_overlap,
         )
+    burden_cost_col = BURDEN_COST_COLUMNS[cfg.thresholds.burden_cost_basis]
+    combined_bill_col = BURDEN_COMBINED_BILL_COLUMNS[cfg.thresholds.burden_cost_basis]
+    if combined_bill_col is not None and combined_bill_col not in df.columns:
+        logger.warning(
+            "burden_cost_basis '{}' cannot exclude combined gas and electric bills because "
+            "the housing data has no {} column; those households keep their combined bill "
+            "as the cost",
+            cfg.thresholds.burden_cost_basis,
+            combined_bill_col,
+        )
+        combined_bill_col = None
     compute_energy_burden_pums(
         df,
         threshold=cfg.thresholds.energy_burden_threshold,
         high_threshold=cfg.thresholds.high_energy_burden_threshold,
         nonpos_income_rule=cfg.thresholds.nonpos_income_rule,
+        cost_col=burden_cost_col,
+        payer_col=BURDEN_PAYER_COLUMNS[cfg.thresholds.burden_cost_basis],
+        combined_bill_col=combined_bill_col,
     )
     compute_rent_burden_pums(
         df,
@@ -329,6 +347,7 @@ def prepare_household_microdata(
         electric_calibration=electric_calibration,
         gas_calibration=gas_calibration,
         territory_calibration=territory_calibration,
+        burden_cost_col=burden_cost_col,
     )
 
 

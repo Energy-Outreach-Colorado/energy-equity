@@ -21,7 +21,20 @@ The core analytical questions are:
 1. **Energy burden** — what share of households spend a high fraction of their income on
    home energy (electricity, gas, and other heating fuels)? Burdened households are those
    above a configurable threshold (default ≥ 6% of income); *highly* burdened are above a
-   second threshold (default ≥ 10%).
+   second threshold (default ≥ 10%). `thresholds.burden_cost_basis: electric` places the
+   electric bill alone over income (an electric-utility case typically pairs it with 3% and
+   6% thresholds) and leaves burden undefined for households whose electricity is included
+   in rent or carries no charge, since they report no electric cost. It is also undefined
+   for households that pay for gas through their electricity bill (`GASFP = 2`), because PUMS
+   records their whole combined bill as electricity and the electric share cannot be told
+   apart. PUMS files without `GASFP` (before 2022) cannot make this exclusion, and the run
+   logs a warning.
+   `burden_cost_basis: gas` does the same with the gas bill, and leaves burden undefined for
+   households that report no separate gas bill, which covers homes that do not use gas and
+   homes whose gas is included in rent, carries no charge, or is billed together with
+   electricity. Where combined bills are common both single-fuel bases lose many
+   households (25.9% of weighted electric payers in the 2024 Colorado 1-year file), so read
+   single-fuel results as describing households with a separately reported bill.
 2. **Affordability eligibility** — how many households fall under income-based program
    thresholds: ≤ 80% of Area Median Income (HUD AMI limits) and ≤ 60% of State Median
    Income (the LIHEAP eligibility ceiling)? And among those, how many are energy-burdened?
@@ -30,8 +43,8 @@ The core analytical questions are:
    housing cost.
 4. **Service-area allocation** — what do all of the above look like *for the households
    inside a particular utility's service territory*, rather than for a whole state or PUMA?
-5. **Rate-impact (fixed-charge) scenarios** — if a utility raises its fixed monthly charge
-   by $X, how many additional households cross into energy burden, and how is that increase
+5. **Rate-impact scenarios** — if a utility raises its fixed monthly charge by $X, or raises
+   bills by Y percent, how many additional households cross into energy burden, and how is that increase
    distributed across the income spectrum (the regressivity question)?
 6. **Equity breakdowns** — every metric above can be cut by race, ethnicity, gender, age,
    tenure, and household language, to surface disparate impacts.
@@ -141,8 +154,11 @@ segment rows are deliberately omitted rather than defaulted to rural.
   thresholds within the ≤ 80% AMI (or program-defined) low-income pool, reporting how many
   households are currently eligible, would be newly added, and the percentage increase —
   overall, by segment, and by demographic dimension.
-- **`fixed_charge`** adds a scenario monthly charge to each household's energy cost,
-  recomputes burden, and counts the *newly* (and newly *highly*) energy-burdened households.
+- **`fixed_charge`** adds a scenario increase to each household's burden-basis cost, either a
+  monthly charge (`kind: fixed`) or a percentage of the electric, gas or total cost for
+  households that report it (`kind: percent`), recomputes burden, and counts the *newly* (and
+  newly *highly*) energy-burdened households, plus households within configurable margins
+  below the threshold before and after.
   It sweeps a range of dollar increases and produces a delta-sensitivity table (how many
   households see their burden rise by at least N percentage points).
 
