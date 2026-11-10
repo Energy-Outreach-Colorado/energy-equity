@@ -3,7 +3,7 @@
 The fixtures are tiny (~100 households) and intentionally not statistically meaningful;
 they exist to verify pipeline plumbing, schema, and arithmetic — not to reproduce real
 ACS distributions. For parity testing against real notebook outputs, set
-EE_PARITY_DATA to point at a directory of real /data/eoc CSVs.
+EE_PARITY_DATA to point at a directory of real notebook output CSVs.
 """
 
 from __future__ import annotations

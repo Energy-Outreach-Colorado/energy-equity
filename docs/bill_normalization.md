@@ -162,8 +162,8 @@ The simplest way in is the `calibration.territories` config block, which the CLI
 ```yaml
 calibration:
   territories:
-    electric_territories: /data/eoc/geospatial/utilities/utility_electric.shp
-    gas_territories: /data/eoc/geospatial/utilities/atmos_gas.shp
+    electric_territories: /path/to/geospatial/utilities/utility_electric.shp
+    gas_territories: /path/to/geospatial/utilities/atmos_gas.shp
 ```
 
 A crosswalk maps the polygon names in `name_column` (`Name` by default) to EIA-861

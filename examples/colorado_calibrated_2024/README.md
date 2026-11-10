@@ -16,7 +16,8 @@ The tables land in `out/colorado_calibrated_2024/`, together with
 `calibration_territories.csv` (each utility's observed and target bills and the factor
 applied) and `calibration_puma_factors.csv` (the blended factor in each PUMA).
 
-The territory polygons are EOC files under `/data/eoc/geospatial/utilities`. The config
+The territory polygons are not distributed with the repository, so point
+`calibration.territories` at your own copies. The config
 names no crosswalk files, so the run uses the packaged Colorado crosswalks in
 `src/energy_equity/data/utilities/`, which map each polygon name to an EIA identifier.
 The energy burden map reads the same packaged files, so the map and this run agree on

@@ -37,9 +37,16 @@ notebook's CSVs. They are gated by the `EE_PARITY_DATA` environment variable so 
 in CI and on machines that don't have the source data:
 
 ```sh
-EE_PARITY_DATA=/data/eoc/output/pueblo/service_area_estimates_tract_weighted \
+EE_PARITY_DATA=/path/to/notebook_outputs \
+EE_PARITY_INPUTS=/path/to/pums_2024_1yr \
+EE_PARITY_SERVICE_SHAPE=/path/to/pueblo_county_08101.shp \
     uv run pytest tests/integration -q
 ```
+
+`EE_PARITY_INPUTS` is the directory holding the 2024 Colorado inputs (`csv_hco.zip`,
+`csv_pco.zip`, `tl_2024_08_puma20.zip`, `tl_2024_08_tract.zip` and
+`income-limits-80-ami.csv`), and `EE_PARITY_SERVICE_SHAPE` is the Pueblo County service
+area shapefile. A parity test skips when an input it needs is missing.
 
 When the env var is set, these tests also pull the cached `acs_tract_households_co.csv`
 and `ami80_by_puma.csv` from that directory so they don't require a Census API key.
@@ -346,7 +353,7 @@ Dev:
 
 `.github/workflows/ci.yml` runs the matrix on Python 3.10/3.11/3.12 via
 `astral-sh/setup-uv@v3` + `uv sync --all-extras`. Lint and tests are required; parity
-tests are skipped (no `/data/eoc/...` in CI).
+tests are skipped (the source data is not available in CI).
 
 ## When adding a new state
 

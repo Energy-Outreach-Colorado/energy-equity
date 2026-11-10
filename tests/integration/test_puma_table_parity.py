@@ -3,13 +3,13 @@ against the notebook's published `puma_overall.csv`.
 
 Skipped unless the `EE_PARITY_DATA` environment variable is set, pointing at a directory
 that contains the notebook output CSVs (typically
-`/data/eoc/output/pueblo/service_area_estimates_tract_weighted`). The required inputs
+`/path/to/notebook_outputs`). The required inputs
 (PUMS ZIPs, the HUD AMI CSV, etc.) also need to be present at the paths configured
 below — adjust if your local layout differs.
 
 Run with::
 
-    EE_PARITY_DATA=/data/eoc/output/pueblo/service_area_estimates_tract_weighted \\
+    EE_PARITY_DATA=/path/to/notebook_outputs EE_PARITY_INPUTS=/path/to/pums_2024_1yr \\
     pytest tests/integration/test_puma_table_parity.py -v
 """
 
@@ -26,6 +26,8 @@ from energy_equity.pipelines import puma_table
 from energy_equity.pums.prepare import prepare_household_microdata
 
 PARITY_DATA_ENV = "EE_PARITY_DATA"
+PARITY_INPUTS_ENV = "EE_PARITY_INPUTS"
+PARITY_INPUTS_DIR = Path(os.environ.get(PARITY_INPUTS_ENV, "parity_inputs"))
 
 # Columns produced by the baseline puma_table pipeline that should round-trip with the
 # corresponding notebook column. Fixed-charge "_post" / "_new_eb_*" columns are intentionally
@@ -49,10 +51,10 @@ PARITY_COUNT_COLUMNS = [
     "hh_severe_rent_burdened_w",
 ]
 
-DEFAULT_PUMS_HOUSING = "/data/eoc/output/pums/pums_2024_1yr/csv_hco.zip"
-DEFAULT_PUMS_PERSON = "/data/eoc/output/pums/pums_2024_1yr/csv_pco.zip"
-DEFAULT_PUMA_SHAPE = "/data/eoc/output/pums/pums_2024_1yr/tl_2024_08_puma20.zip"
-DEFAULT_HUD_AMI = "/data/eoc/output/pums/pums_2024_1yr/income-limits-80-ami.csv"
+DEFAULT_PUMS_HOUSING = str(PARITY_INPUTS_DIR / "csv_hco.zip")
+DEFAULT_PUMS_PERSON = str(PARITY_INPUTS_DIR / "csv_pco.zip")
+DEFAULT_PUMA_SHAPE = str(PARITY_INPUTS_DIR / "tl_2024_08_puma20.zip")
+DEFAULT_HUD_AMI = str(PARITY_INPUTS_DIR / "income-limits-80-ami.csv")
 
 
 @pytest.mark.integration
@@ -61,7 +63,7 @@ def test_puma_overall_parity_against_notebook(tmp_path: Path) -> None:
     if not parity_dir_str:
         pytest.skip(
             f"Set {PARITY_DATA_ENV} to a directory containing the notebook's puma_overall.csv "
-            "(e.g. /data/eoc/output/pueblo/service_area_estimates_tract_weighted) to enable parity tests."
+            "(e.g. /path/to/notebook_outputs) to enable parity tests."
         )
     parity_dir = Path(parity_dir_str)
     notebook_csv = parity_dir / "puma_overall.csv"

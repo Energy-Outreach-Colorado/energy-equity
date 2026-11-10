@@ -15,7 +15,9 @@ from pathlib import Path
 
 import requests
 
-DEFAULT_USER_AGENT = "energy-equity/0.1 (+https://github.com/ebaumer/energy-equity)"
+DEFAULT_USER_AGENT = (
+    "energy-equity/0.1 (+https://github.com/Energy-Outreach-Colorado/energy-equity)"
+)
 DEFAULT_TIMEOUT_SEC = 60
 
 
